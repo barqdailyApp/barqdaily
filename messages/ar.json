@@ -1,0 +1,20 @@
+{
+  "Navbar": {
+    "Overview": {
+      "subheader": "نظرة عامة",
+      "App": {
+        "title": "التطبيق",
+        "label": "جديد",
+        "caption": "فقط الأدمن او المدير يمكنه رؤية هذا العنصر"
+      },
+      "Ecommerce": { "title": "تجاري" },
+      "Analytics": { "title": "التحليلات" },
+      "Product": {
+        "title": "المنتج",
+        "List": { "title": "القائمة" },
+        "Details": { "title": "التفاصيل" }
+      }
+    },
+    "Management": {}
+  }
+}

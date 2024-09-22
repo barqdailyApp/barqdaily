@@ -1,0 +1,20 @@
+{
+  "Navbar": {
+    "Overview": {
+      "subheader": "overview",
+      "App": {
+        "title": "app",
+        "label": "NEW",
+        "caption": "Only admin or manager can see this item."
+      },
+      "Ecommerce": { "title": "ecommerce" },
+      "Analytics": { "title": "analytics" },
+      "Product": {
+        "title": "product",
+        "List": { "title": "list" },
+        "Details": { "title": "details" }
+      }
+    },
+    "Management": {}
+  }
+}
