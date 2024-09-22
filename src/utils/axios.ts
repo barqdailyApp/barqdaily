@@ -28,16 +28,16 @@ axiosInstance.interceptors.request.use(
 );
 
 // Add a response interceptor (optional)
-axiosInstance.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    const status = error.response?.status || 500;
-    const message = getErrorMessage(error);
-    // Handle errors
-    // eslint-disable-next-line prefer-promise-reject-errors
-    return Promise.reject({ message, status });
-  }
-);
+// axiosInstance.interceptors.response.use(
+//   (response) => response,
+//   (error) => {
+//     const status = error.response?.status || 500;
+//     const message = getErrorMessage(error);
+//     // Handle errors
+//     // eslint-disable-next-line prefer-promise-reject-errors
+//     return Promise.reject({ message, status });
+//   }
+// );
 export default axiosInstance;
 // ----------------------------------------------------------------------
 

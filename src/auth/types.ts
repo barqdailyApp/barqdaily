@@ -4,6 +4,8 @@ import {
   RedirectLoginOptions,
 } from "@auth0/auth0-react";
 
+import { User, verifyOtpResponse } from "@/actions/auth-methods";
+
 // ----------------------------------------------------------------------
 
 export type ActionMapType<M extends { [index: string]: any }> = {
@@ -28,7 +30,7 @@ export type AuthStateType = {
 // ----------------------------------------------------------------------
 
 type CanRemove = {
-  login?: (email: string, password: string) => Promise<void>;
+  login?: (data: User) => Promise<void>;
   register?: (
     email: string,
     password: string,
@@ -60,13 +62,7 @@ export type JWTContextType = CanRemove & {
   loading: boolean;
   authenticated: boolean;
   unauthenticated: boolean;
-  login: (email: string, password: string) => Promise<void>;
-  register: (
-    email: string,
-    password: string,
-    firstName: string,
-    lastName: string
-  ) => Promise<void>;
+  login: (data: User) => Promise<void>;
   logout: () => Promise<void>;
 };
 

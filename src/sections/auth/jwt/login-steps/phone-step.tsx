@@ -1,44 +1,56 @@
 "use client";
 
 import * as Yup from "yup";
-import { useSnackbar } from "notistack";
+import { getCookie } from "cookies-next";
 import { useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import { Box, Checkbox, Divider, FormLabel, Link } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
 import InputAdornment from "@mui/material/InputAdornment";
-import { Box, Link, Checkbox, FormLabel, Divider } from "@mui/material";
 
-import { paths } from "@/routes/paths";
-import { useRouter } from "@/routes/hooks";
-import { RouterLink } from "@/routes/components";
-
-import { register } from "@/actions/auth-methods";
+import { COOKIES_KEYS } from "@/config-global";
+import { sendOtp } from "@/actions/auth-methods";
 
 import Iconify from "@/components/iconify";
+import { useSnackbar } from "@/components/snackbar";
 import FormProvider, { RHFTextField } from "@/components/hook-form";
 
-// ----------------------------------------------------------------------
+import { LoginSteps } from "@/types/auth";
+import { RouterLink } from "@/routes/components";
+import { paths } from "@/routes/paths";
 
-export default function JwtRegisterView() {
+export default function LoginPhoneStep({
+  handleStepChange,
+  phoneNumber,
+  handlePhone,
+}: {
+  handleStepChange: (stepVal: LoginSteps) => void;
+  phoneNumber: string;
+  handlePhone: (newNumber: string) => void;
+}) {
   const t = useTranslations();
-  const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
 
   const LoginSchema = Yup.object().shape({
-    name: Yup.string().required(t("Global.Error.name_required")),
     phoneNumber: Yup.string()
       .min(6, t("Global.Error.phone_invalid"))
       .max(6, t("Global.Error.phone_invalid"))
       .required(t("Global.Error.phone_required")),
     agree: Yup.bool().oneOf([true]).required(),
   });
+  const defaultValues = {
+    phoneNumber,
+    agree: false,
+  };
 
   const methods = useForm({
     resolver: yupResolver(LoginSchema),
+    defaultValues,
   });
 
   const {
@@ -49,34 +61,26 @@ export default function JwtRegisterView() {
   } = methods;
 
   const onSubmit = handleSubmit(async (data) => {
-    const res = await register({
-      phone: `+967${data.phoneNumber.trim()}`,
-      name: data.name,
-    });
+    const res = await sendOtp(`+967${data.phoneNumber.trim()}`);
     if ("error" in res) {
-      enqueueSnackbar(Array.isArray(res.error) ? res.error[0] : res.error, {
-        variant: "error",
-      });
+      enqueueSnackbar(res.error, { variant: "error" });
       return;
     }
-    router.push(paths.auth.jwt.login);
+    enqueueSnackbar(t("Global.Message.otp_sent"));
+    handlePhone(data.phoneNumber);
+    handleStepChange(LoginSteps.otp);
   });
 
   const renderHead = (
     <Typography variant="h4" mb={5}>
-      {t("Pages.Auth.register_title")}
+      {t("Pages.Auth.login_title")}
     </Typography>
   );
-
   return (
     <>
       {renderHead}
       <FormProvider methods={methods} onSubmit={onSubmit}>
         <Stack spacing={2.5}>
-          <Box>
-            <FormLabel>{t("Global.Label.your_name")}</FormLabel>
-            <RHFTextField name="name" placeholder={t("Global.Label.name")} />
-          </Box>
           <Box>
             <FormLabel>{t("Global.Label.phone")}</FormLabel>
             <RHFTextField
@@ -133,6 +137,7 @@ export default function JwtRegisterView() {
               })}
             </Typography>
           </Stack>
+
           <LoadingButton
             fullWidth
             color="primary"
@@ -141,16 +146,29 @@ export default function JwtRegisterView() {
             variant="contained"
             loading={isSubmitting}
           >
-            {t("Pages.Auth.register_submit")}
+            {t("Pages.Auth.login_submit")}
           </LoadingButton>
+
+          {(getCookie(COOKIES_KEYS.expiryTime) || phoneNumber) && (
+            <Button
+              size="large"
+              color="primary"
+              type="button"
+              onClick={() => {
+                handleStepChange(LoginSteps.otp);
+              }}
+            >
+              {t("Pages.Auth.otp_back_reverse")}
+            </Button>
+          )}
 
           <Divider flexItem />
 
           <Typography variant="caption" color="text.secondary">
-            {t.rich("Pages.Auth.redirect_to_login", {
+            {t.rich("Pages.Auth.redirect_to_register", {
               link: (chunks) => (
                 <Link
-                  href={paths.auth.jwt.login}
+                  href={paths.auth.jwt.register}
                   color="text.primary"
                   fontWeight="bold"
                   component={RouterLink}

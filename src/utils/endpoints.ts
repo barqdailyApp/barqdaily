@@ -1,7 +1,7 @@
 export const endpoints = {
   auth: {
-    me: "auth/me",
-    login: "auth/login",
+    sendOtp: "auth/send-otp",
+    verifyOtp: "auth/verify-otp",
     register: "auth/register",
   },
 };

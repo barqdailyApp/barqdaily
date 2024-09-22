@@ -40,7 +40,7 @@ export function useNavData() {
         items: [
           {
             title: t("Overview.App.title"),
-            path: paths.dashboard.root,
+            path: "/",
             icon: ICONS.dashboard,
             info: (
               <Label
@@ -55,13 +55,13 @@ export function useNavData() {
           },
           {
             title: t("Overview.Ecommerce.title"),
-            path: paths.dashboard.root,
+            path: "/",
             icon: ICONS.ecommerce,
             disabled: true,
           },
           {
             title: t("Overview.Analytics.title"),
-            path: paths.dashboard.root,
+            path: "/",
             icon: ICONS.analytics,
             info: <Label color="success">+32</Label>,
           },
@@ -69,16 +69,16 @@ export function useNavData() {
           // PRODUCT
           {
             title: t("Overview.Product.title"),
-            path: paths.dashboard.root,
+            path: "/",
             icon: ICONS.product,
             children: [
               {
                 title: t("Overview.Product.List.title"),
-                path: paths.dashboard.root,
+                path: "/",
               },
               {
                 title: t("Overview.Product.Details.title"),
-                path: paths.dashboard.root,
+                path: "/",
               },
             ],
           },

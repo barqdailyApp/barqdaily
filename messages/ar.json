@@ -1,4 +1,19 @@
 {
+  "Global": {
+    "Label": {
+      "your_name": "ادخل اسمك",
+      "name": "الاسم",
+      "phone": "الهاتف"
+    },
+    "Error": {
+      "name_required": "الاسم مطلوب",
+      "phone_required": "رقم الهاتف مطلوب",
+      "phone_invalid": "رقم الهاتف غير صالح"
+    },
+    "Message": {
+      "otp_sent": "تم إرسال رمز إلى هاتفك."
+    }
+  },
   "Navbar": {
     "Overview": {
       "subheader": "نظرة عامة",
@@ -16,5 +31,21 @@
       }
     },
     "Management": {}
+  },
+  "Pages": {
+    "Auth": {
+      "login_title": "تسجيل الدخول",
+      "register_title": "إنشاء حساب",
+      "otp_title": "تأكيد رقمك",
+      "otp_subtitle": "يرجى إدخال الرمز الذي أرسلناه إلى هاتفك",
+      "policies": "الموافقة على <terms>الشروط</terms> و <privacy>سياسة الخصوصية</privacy>",
+      "redirect_to_register": "ليس لدي حساب. <link>سجل الآن</link>",
+      "redirect_to_login": "لديك حساب بالفعل؟ <link>تسجيل الدخول</link>",
+      "otp_back": "تعديل الرقم",
+      "otp_back_reverse": "إلغاء تعديل الرقم",
+      "login_submit": "تسجيل الدخول",
+      "register_submit": "إنشاء حساب",
+      "otp_submit": "تأكيد الرقم"
+    }
   }
 }

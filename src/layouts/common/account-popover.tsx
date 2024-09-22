@@ -29,11 +29,11 @@ const OPTIONS = [
   },
   {
     label: "Profile",
-    linkTo: paths.dashboard.root,
+    linkTo: "/",
   },
   {
     label: "Settings",
-    linkTo: paths.dashboard.root,
+    linkTo: "/",
   },
 ];
 

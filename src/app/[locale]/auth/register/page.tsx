@@ -3,7 +3,7 @@ import { JwtRegisterView } from "@/sections/auth/jwt";
 // ----------------------------------------------------------------------
 
 export const metadata = {
-  title: "Jwt: Register",
+  title: "Barq Daily: Register",
 };
 
 export default function RegisterPage() {
