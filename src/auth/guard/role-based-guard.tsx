@@ -9,6 +9,7 @@ import { useMockedUser } from "@/hooks/use-mocked-user";
 import { ForbiddenIllustration } from "@/assets/illustrations";
 
 import { varBounce, MotionContainer } from "@/components/animate";
+import { useTranslations } from "next-intl";
 
 // ----------------------------------------------------------------------
 
@@ -30,7 +31,7 @@ export default function RoleBasedGuard({
 
   // const currentRole = 'user';
   const currentRole = user?.role; // admin;
-
+  const t= useTranslations("Pages.role-based-guard")
   if (typeof roles !== "undefined" && !roles.includes(currentRole)) {
     return hasContent ? (
       <Container
@@ -39,13 +40,13 @@ export default function RoleBasedGuard({
       >
         <m.div variants={varBounce().in}>
           <Typography variant="h3" sx={{ mb: 2 }}>
-            Permission Denied
+          {t("title")}
           </Typography>
         </m.div>
 
         <m.div variants={varBounce().in}>
           <Typography sx={{ color: "text.secondary" }}>
-            You do not have permission to access this page
+            {t("message")}
           </Typography>
         </m.div>
 
