@@ -1,25 +1,40 @@
 "use client";
 
-import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import AppBar from "@mui/material/AppBar";
+import { IconButton } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import { useTheme } from "@mui/material/styles";
 
-import { paths } from "@/routes/paths";
 import { RouterLink } from "@/routes/components";
 
 import { useOffSetTop } from "@/hooks/use-off-set-top";
 
-import { bgBlur } from "@/theme/css";
-
-import Logo from "@/components/logo";
+import Iconify from "@/components/iconify";
 
 import { HEADER } from "../config-layout";
-import HeaderShadow from "./header-shadow";
-import SettingsButton from "./settings-button";
+import LanguagePopover from "./language-popover";
 
 // ----------------------------------------------------------------------
+
+const socials = [
+  {
+    name: "facebook",
+    icon: "uil:facebook",
+    link: "#",
+  },
+  {
+    name: "x.com",
+    icon: "pajamas:twitter",
+    link: "#",
+  },
+  { name: "youtube", icon: "mdi:youtube", link: "#" },
+  {
+    name: "instagram",
+    icon: "mdi:instagram",
+    link: "#",
+  },
+];
 
 export default function HeaderSimple() {
   const theme = useTheme();
@@ -30,42 +45,37 @@ export default function HeaderSimple() {
     <AppBar>
       <Toolbar
         sx={{
+          bgcolor: theme.palette.background.default,
           justifyContent: "space-between",
-          height: {
-            xs: HEADER.H_MOBILE,
-            md: HEADER.H_DESKTOP,
-          },
-          transition: theme.transitions.create(["height"], {
+          minHeight: { xs: HEADER.H_SIMPLE },
+          transition: theme.transitions.create(["height", "transform"], {
             easing: theme.transitions.easing.easeInOut,
             duration: theme.transitions.duration.shorter,
           }),
+          borderBottom: `solid 1px ${theme.palette.divider}`,
           ...(offsetTop && {
-            ...bgBlur({
-              color: theme.palette.background.default,
-            }),
-            height: {
-              md: HEADER.H_DESKTOP_OFFSET,
-            },
+            transform: `translateY(-100%)`,
           }),
         }}
       >
-        <Logo />
+        <Stack direction="row" spacing={0.5}>
+          {socials.map((item) => (
+            <IconButton
+              key={item.name}
+              LinkComponent={RouterLink}
+              href={item.link}
+              target="_blank"
+              sx={{ color: "text.disabled", p: 0.8 }}
+            >
+              <Iconify icon={item.icon} width={20} height={20} />
+            </IconButton>
+          ))}
+        </Stack>
 
         <Stack direction="row" alignItems="center" spacing={1}>
-          <SettingsButton />
-
-          <Link
-            href={paths.minimalUI}
-            component={RouterLink}
-            color="inherit"
-            sx={{ typography: "subtitle2" }}
-          >
-            Need help?
-          </Link>
+          <LanguagePopover />
         </Stack>
       </Toolbar>
-
-      {offsetTop && <HeaderShadow />}
     </AppBar>
   );
 }

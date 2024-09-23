@@ -8,10 +8,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import { Box, Checkbox, Divider, FormLabel, Link } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
 import InputAdornment from "@mui/material/InputAdornment";
+import { Box, Link, Divider, Checkbox, FormLabel } from "@mui/material";
+
+import { paths } from "@/routes/paths";
+import { RouterLink } from "@/routes/components";
 
 import { COOKIES_KEYS } from "@/config-global";
 import { sendOtp } from "@/actions/auth-methods";
@@ -21,17 +24,19 @@ import { useSnackbar } from "@/components/snackbar";
 import FormProvider, { RHFTextField } from "@/components/hook-form";
 
 import { LoginSteps } from "@/types/auth";
-import { RouterLink } from "@/routes/components";
-import { paths } from "@/routes/paths";
 
 export default function LoginPhoneStep({
   handleStepChange,
   phoneNumber,
+  agree,
   handlePhone,
+  handleAgree,
 }: {
   handleStepChange: (stepVal: LoginSteps) => void;
   phoneNumber: string;
+  agree: boolean;
   handlePhone: (newNumber: string) => void;
+  handleAgree: (value: boolean) => void;
 }) {
   const t = useTranslations();
   const { enqueueSnackbar } = useSnackbar();
@@ -45,7 +50,7 @@ export default function LoginPhoneStep({
   });
   const defaultValues = {
     phoneNumber,
-    agree: false,
+    agree,
   };
 
   const methods = useForm({
@@ -68,11 +73,12 @@ export default function LoginPhoneStep({
     }
     enqueueSnackbar(t("Global.Message.otp_sent"));
     handlePhone(data.phoneNumber);
+    handleAgree(data.agree);
     handleStepChange(LoginSteps.otp);
   });
 
   const renderHead = (
-    <Typography variant="h4" mb={5}>
+    <Typography variant="h4" mb={2}>
       {t("Pages.Auth.login_title")}
     </Typography>
   );

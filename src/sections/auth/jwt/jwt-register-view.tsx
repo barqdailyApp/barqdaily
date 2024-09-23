@@ -10,7 +10,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
 import InputAdornment from "@mui/material/InputAdornment";
-import { Box, Link, Checkbox, FormLabel, Divider } from "@mui/material";
+import { Box, Link, Divider, Checkbox, FormLabel } from "@mui/material";
 
 import { paths } from "@/routes/paths";
 import { useRouter } from "@/routes/hooks";
@@ -63,7 +63,7 @@ export default function JwtRegisterView() {
   });
 
   const renderHead = (
-    <Typography variant="h4" mb={5}>
+    <Typography variant="h4" mb={2}>
       {t("Pages.Auth.register_title")}
     </Typography>
   );

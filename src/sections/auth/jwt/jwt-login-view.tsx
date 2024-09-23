@@ -15,6 +15,7 @@ import LoginPhoneStep from "./login-steps/phone-step";
 export default function JwtLoginView() {
   const [value, setValue] = useState(LoginSteps.phone);
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [agree, setAgree] = useState(false);
 
   const handleChange = (newValue: LoginSteps) => {
     setValue(newValue);
@@ -28,7 +29,9 @@ export default function JwtLoginView() {
         <LoginPhoneStep
           handleStepChange={handleChange}
           phoneNumber={phoneNumber}
+          agree={agree}
           handlePhone={handlePhoneNumber}
+          handleAgree={(newValue: boolean) => setAgree(newValue)}
         />
       </TabPanel>
       <TabPanel value={LoginSteps.otp} sx={{ p: 0 }}>

@@ -1,6 +1,8 @@
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 
+import Logo from "@/components/logo";
+
 import Header from "../common/header-simple";
 
 // ----------------------------------------------------------------------
@@ -19,10 +21,11 @@ export default function AuthModernCompactLayout({ children }: Props) {
         sx={{
           py: 12,
           display: "flex",
-          minHeight: "100vh",
+          // minHeight: "100vh",
           px: { xs: 2, md: 0 },
           position: "relative",
-          alignItems: "center",
+          alignItems: "start",
+          // alignItems: "center",
           justifyContent: "center",
           "&:before": {
             width: 1,
@@ -34,7 +37,7 @@ export default function AuthModernCompactLayout({ children }: Props) {
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center center",
-            backgroundImage: "url(/assets/background/overlay_4.jpg)",
+            // backgroundImage: "url(/assets/background/overlay_4.jpg)",
           },
         }}
       >
@@ -44,8 +47,12 @@ export default function AuthModernCompactLayout({ children }: Props) {
             px: 3,
             width: 540,
             maxWidth: "100%",
+            boxShadow: "none",
           }}
         >
+          <Box textAlign="center" mb={3}>
+            <Logo />
+          </Box>
           {children}
         </Card>
       </Box>

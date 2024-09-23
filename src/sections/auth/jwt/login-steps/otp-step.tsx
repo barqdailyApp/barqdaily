@@ -102,7 +102,7 @@ export default function LoginOTPStep({
   };
 
   const renderHead = (
-    <Box mb={5}>
+    <Box mb={3}>
       <Typography variant="h4">{t("Pages.Auth.otp_title")}</Typography>
       <Typography color="text.secondary">
         {t("Pages.Auth.otp_subtitle")}
