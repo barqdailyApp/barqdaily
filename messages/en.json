@@ -12,6 +12,13 @@
     },
     "Message": {
       "otp_sent": "A code has sent to your phone."
+    },
+    "Footer": {
+      "contact_title": "Contact us",
+      "download": "Download the app",
+      "download_ios": "Download from the App Store",
+      "download_android": "Download from Google Play",
+      "copyright": "Elma © Copyright 2020, Inc. All rights reserved"
     }
   },
   "Navbar": {
