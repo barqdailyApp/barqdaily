@@ -11,23 +11,24 @@ import CompactLayout from "@/layouts/compact";
 import { PageNotFoundIllustration } from "@/assets/illustrations";
 
 import { varBounce, MotionContainer } from "@/components/animate";
+import { useTranslations } from "next-intl";
 
 // ----------------------------------------------------------------------
 
 export default function NotFoundView() {
+  const t = useTranslations("Pages.Error404");
   return (
     <CompactLayout>
       <MotionContainer>
         <m.div variants={varBounce().in}>
           <Typography variant="h3" sx={{ mb: 2 }}>
-            Sorry, Page Not Found!
+            {t("title")}
           </Typography>
         </m.div>
 
         <m.div variants={varBounce().in}>
           <Typography sx={{ color: "text.secondary" }}>
-            Sorry, we couldn’t find the page you’re looking for. Perhaps you’ve
-            mistyped the URL? Be sure to check your spelling.
+            {t("message")}
           </Typography>
         </m.div>
 
@@ -46,7 +47,7 @@ export default function NotFoundView() {
           size="large"
           variant="contained"
         >
-          Go to Home
+          {t("button")}
         </Button>
       </MotionContainer>
     </CompactLayout>
