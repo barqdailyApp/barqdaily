@@ -1,6 +1,7 @@
 "use client";
 
 import { m } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -11,20 +12,18 @@ import CompactLayout from "@/layouts/compact";
 import { ForbiddenIllustration } from "@/assets/illustrations";
 
 import { varBounce, MotionContainer } from "@/components/animate";
-import { useTranslations } from "next-intl";
-
 
 // ----------------------------------------------------------------------
 
 export default function View403() {
-  const t= useTranslations("Pages.error403")
+  const t = useTranslations("Pages.Error403");
 
   return (
     <CompactLayout>
       <MotionContainer>
         <m.div variants={varBounce().in}>
           <Typography variant="h3" sx={{ mb: 2 }}>
-          {t("title")}
+            {t("title")}
           </Typography>
         </m.div>
 

@@ -16,7 +16,7 @@ import { useTranslations } from "next-intl";
 // ----------------------------------------------------------------------
 
 export default function Page500() {
-  const t =useTranslations("Pages.error500")
+  const t = useTranslations("Pages.Error500");
   return (
     <CompactLayout>
       <MotionContainer>

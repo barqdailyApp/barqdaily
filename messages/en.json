@@ -1,4 +1,26 @@
 {
+  "Global": {
+    "Label": {
+      "your_name": "Your name",
+      "name": "Name",
+      "phone": "Phone"
+    },
+    "Error": {
+      "name_required": "Name is required",
+      "phone_required": "Phone is required",
+      "phone_invalid": "Phone is invalid"
+    },
+    "Message": {
+      "otp_sent": "A code has sent to your phone."
+    },
+    "Footer": {
+      "contact_title": "Contact us",
+      "download": "Download the app",
+      "download_ios": "Download from the App Store",
+      "download_android": "Download from Google Play",
+      "copyright": "Elma © Copyright 2020, Inc. All rights reserved"
+    }
+  },
   "Navbar": {
     "Overview": {
       "subheader": "overview",
@@ -17,27 +39,40 @@
     },
     "Management": {}
   },
-  "Pages":{
-    "error404":{
-      "title":"Sorry, Page Not Found!",
-      "message":"Sorry, we couldn’t find the page you’re looking for. Perhaps you’ve mistyped the URL? Be sure to check your spelling.",
-      "button":"Go to Home"
+  "Pages": {
+    "Error404": {
+      "title": "Sorry, Page Not Found!",
+      "message": "Sorry, we couldn’t find the page you’re looking for. Perhaps you’ve mistyped the URL? Be sure to check your spelling.",
+      "button": "Go to Home"
     },
-    "error403":{
+    "Error403": {
       "title": "No permission",
-      "message1":" The page you&apos;re trying access has restricted access.",
-      "message2":"Please refer to your system administrator",
-      "button":"Go to Home"
-    } ,
-    "error500":{
-      "title":"500 Internal Server Error",
-      "message":"There was an error, please try again later.",
-      "button":"Go to Home"
+      "message1": " The page you&apos;re trying access has restricted access.",
+      "message2": "Please refer to your system administrator",
+      "button": "Go to Home"
     },
-    "role-based-guard":{
-      "title":"Permission Denied",
-       "message":"You do not have permission to access this page"
+    "Error500": {
+      "title": "500 Internal Server Error",
+      "message": "There was an error, please try again later.",
+      "button": "Go to Home"
+    },
+    "RoleBasedGuard": {
+      "title": "Permission Denied",
+      "message": "You do not have permission to access this page"
+    },
+    "Auth": {
+      "login_title": "Login",
+      "register_title": "Create an Account",
+      "otp_title": "Confirm your number",
+      "otp_subtitle": "Please enter the code we sent to your phone",
+      "policies": "Agree with our <terms>terms</terms> and <privacy>privacy policy</privacy>",
+      "redirect_to_register": "I don't have an account. <link>Register</link>",
+      "redirect_to_login": "Already have an account? <link>Sign in</link>",
+      "otp_back": "Edit number",
+      "otp_back_reverse": "Cancel edit number",
+      "login_submit": "Login",
+      "register_submit": "Create Account",
+      "otp_submit": "Confirm Number"
     }
-    
   }
 }

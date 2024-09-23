@@ -16,7 +16,7 @@ import { useTranslations } from "next-intl";
 // ----------------------------------------------------------------------
 
 export default function NotFoundView() {
-  const t= useTranslations("Pages.error404")
+  const t = useTranslations("Pages.Error404");
   return (
     <CompactLayout>
       <MotionContainer>

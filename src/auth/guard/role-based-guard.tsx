@@ -1,4 +1,5 @@
 import { m } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
@@ -9,7 +10,6 @@ import { useMockedUser } from "@/hooks/use-mocked-user";
 import { ForbiddenIllustration } from "@/assets/illustrations";
 
 import { varBounce, MotionContainer } from "@/components/animate";
-import { useTranslations } from "next-intl";
 
 // ----------------------------------------------------------------------
 
@@ -31,7 +31,7 @@ export default function RoleBasedGuard({
 
   // const currentRole = 'user';
   const currentRole = user?.role; // admin;
-  const t= useTranslations("Pages.role-based-guard")
+  const t = useTranslations("Pages.RoleBasedGuard");
   if (typeof roles !== "undefined" && !roles.includes(currentRole)) {
     return hasContent ? (
       <Container
@@ -40,7 +40,7 @@ export default function RoleBasedGuard({
       >
         <m.div variants={varBounce().in}>
           <Typography variant="h3" sx={{ mb: 2 }}>
-          {t("title")}
+            {t("title")}
           </Typography>
         </m.div>
 
