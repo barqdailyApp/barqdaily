@@ -1,8 +1,6 @@
 import { useMemo } from "react";
 import { useTranslations } from "next-intl";
 
-import { paths } from "@/routes/paths";
-
 import Label from "@/components/label";
 import Iconify from "@/components/iconify";
 import SvgColor from "@/components/svg-color";

@@ -9,5 +9,5 @@ export const paths = {
       register: `/auth/register`,
     },
   },
-  home: "/home",
+  home: "/",
 };

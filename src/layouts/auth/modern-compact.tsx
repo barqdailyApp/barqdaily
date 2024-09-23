@@ -1,9 +1,7 @@
 import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
 
 import Logo from "@/components/logo";
 
-import Header from "../common/header-simple";
 import CompactLayout from "../compact";
 
 // ----------------------------------------------------------------------

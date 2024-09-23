@@ -1,8 +1,9 @@
-import HeaderSimple from "../common/header-simple";
 import { Box } from "@mui/material";
-import { HEADER } from "../config-layout";
+
 import Footer from "../common/footer";
+import { HEADER } from "../config-layout";
 import Copyrights from "../common/copyrights";
+import HeaderSimple from "../common/header-simple";
 
 // ----------------------------------------------------------------------
 

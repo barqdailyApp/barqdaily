@@ -4,7 +4,7 @@ import {
   RedirectLoginOptions,
 } from "@auth0/auth0-react";
 
-import { User, verifyOtpResponse } from "@/actions/auth-methods";
+import { User } from "@/actions/auth-methods";
 
 // ----------------------------------------------------------------------
 

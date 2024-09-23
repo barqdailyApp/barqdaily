@@ -1,8 +1,9 @@
 "use client";
 
-import { Box, Container, Stack, Typography } from "@mui/material";
-import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
+
+import { Box, Stack, Container, Typography } from "@mui/material";
 
 export default function Footer() {
   const t = useTranslations("Global.Footer");

@@ -1,13 +1,13 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 import Stack from "@mui/material/Stack";
 import { Box, Container, IconButton, Typography } from "@mui/material";
 
 import { RouterLink } from "@/routes/components";
 
 import Iconify from "@/components/iconify";
-
-import { useTranslations } from "next-intl";
 
 // ----------------------------------------------------------------------
 

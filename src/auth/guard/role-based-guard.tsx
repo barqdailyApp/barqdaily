@@ -1,4 +1,5 @@
 import { m } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
@@ -9,7 +10,6 @@ import { useMockedUser } from "@/hooks/use-mocked-user";
 import { ForbiddenIllustration } from "@/assets/illustrations";
 
 import { varBounce, MotionContainer } from "@/components/animate";
-import { useTranslations } from "next-intl";
 
 // ----------------------------------------------------------------------
 

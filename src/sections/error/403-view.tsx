@@ -1,6 +1,7 @@
 "use client";
 
 import { m } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -11,7 +12,6 @@ import CompactLayout from "@/layouts/compact";
 import { ForbiddenIllustration } from "@/assets/illustrations";
 
 import { varBounce, MotionContainer } from "@/components/animate";
-import { useTranslations } from "next-intl";
 
 // ----------------------------------------------------------------------
 

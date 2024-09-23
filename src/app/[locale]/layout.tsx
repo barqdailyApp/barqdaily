@@ -3,6 +3,7 @@ import { getMessages, unstable_setRequestLocale } from "next-intl/server";
 
 import ThemeProvider from "@/theme";
 import { primaryFont } from "@/theme/typography";
+import { AuthProvider } from "@/auth/context/jwt";
 import LocalizationProvider from "@/i18n/localization-provider";
 import { locales, LocaleType, localesSettings } from "@/i18n/config-locale";
 
@@ -10,7 +11,6 @@ import { MotionLazy } from "@/components/animate/motion-lazy";
 import ProgressBar from "@/components/progress-bar/progress-bar";
 import SnackbarProvider from "@/components/snackbar/snackbar-provider";
 import { SettingsDrawer, SettingsProvider } from "@/components/settings";
-import { AuthProvider } from "@/auth/context/jwt";
 
 export default async function LocaleLayout({
   children,
