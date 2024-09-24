@@ -19,7 +19,6 @@ type Props = {
 
 export default function StoreLayout({ children }: Props) {
   const nav = useBoolean();
-
   return (
     <>
       <HeaderSimple />
