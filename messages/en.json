@@ -75,6 +75,12 @@
       "login_submit": "Login",
       "register_submit": "Create Account",
       "otp_submit": "Confirm Number"
+    },
+    "Home": {
+      "Product": {
+        "add_to_cart": "Add to cart",
+        "description": "Description"
+      }
     }
   }
 }

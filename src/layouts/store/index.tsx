@@ -29,7 +29,7 @@ export default function StoreLayout({ children }: Props) {
           display: "grid",
           gridTemplateRows: "1fr auto",
           gridTemplateColumns: "100%",
-          pt: `${HEADER.H_SIMPLE}px`,
+          pt: `${HEADER.H_SIMPLE + HEADER.H_MOBILE}px`,
           minHeight: "100%", // don't ask me why
           overflow: "hidden",
           width: "100%",
