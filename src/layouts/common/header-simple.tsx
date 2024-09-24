@@ -42,20 +42,24 @@ export default function HeaderSimple() {
   const offsetTop = useOffSetTop(HEADER.H_DESKTOP);
 
   return (
-    <AppBar sx={{ borderBottom: `solid 1px ${theme.palette.divider}` }}>
+    <AppBar
+      sx={{
+        borderBottom: `solid 1px ${theme.palette.divider}`,
+        transition: theme.transitions.create(["transform"], {
+          easing: theme.transitions.easing.easeInOut,
+          duration: theme.transitions.duration.shorter,
+        }),
+        ...(offsetTop && {
+          transform: `translateY(-100%)`,
+        }),
+      }}
+    >
       <Container>
         <Toolbar
           sx={{
             bgcolor: theme.palette.background.default,
             justifyContent: "space-between",
             minHeight: { xs: HEADER.H_SIMPLE },
-            transition: theme.transitions.create(["height", "transform"], {
-              easing: theme.transitions.easing.easeInOut,
-              duration: theme.transitions.duration.shorter,
-            }),
-            ...(offsetTop && {
-              transform: `translateY(-100%)`,
-            }),
           }}
         >
           <Stack direction="row" spacing={0.5}>

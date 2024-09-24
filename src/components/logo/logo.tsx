@@ -3,6 +3,7 @@ import { forwardRef } from "react";
 import Link from "@mui/material/Link";
 import Box, { BoxProps } from "@mui/material/Box";
 
+import { paths } from "@/routes/paths";
 import { RouterLink } from "@/routes/components";
 
 // ----------------------------------------------------------------------
@@ -28,7 +29,11 @@ const Logo = forwardRef<HTMLDivElement, LogoProps>(
     }
 
     return (
-      <Link component={RouterLink} href="/" sx={{ display: "contents" }}>
+      <Link
+        component={RouterLink}
+        href={paths.home}
+        sx={{ display: "contents" }}
+      >
         {logo}
       </Link>
     );

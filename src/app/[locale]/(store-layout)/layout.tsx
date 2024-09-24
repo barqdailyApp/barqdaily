@@ -1,9 +1,9 @@
-import CompactLayout from "@/layouts/compact";
+import StoreLayout from "@/layouts/store";
 
 export default async function Layout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <CompactLayout>{children}</CompactLayout>;
+  return <StoreLayout>{children}</StoreLayout>;
 }
