@@ -49,11 +49,11 @@ export const primary = {
 };
 
 export const secondary = {
-  lighter: "#fecb10",
-  light: "#fecb10",
-  main: "#fecb10",
-  dark: "#ffc800",
-  darker: "#ffc800",
+  lighter: "#EFD6FF",
+  light: "#C684FF",
+  main: "#8E33FF",
+  dark: "#5119B7",
+  darker: "#27097A",
   contrastText: "#FFFFFF",
 };
 
@@ -76,12 +76,12 @@ export const success = {
 };
 
 export const warning = {
-  lighter: "#FFF5CC",
-  light: "#FFD666",
-  main: "#FFAB00",
-  dark: "#B76E00",
-  darker: "#7A4100",
-  contrastText: grey[800],
+  lighter: "#fecb10",
+  light: "#fecb10",
+  main: "#fecb10",
+  dark: "#ffc800",
+  darker: "#ffc800",
+  contrastText: "#FFFFFF",
 };
 
 export const error = {
