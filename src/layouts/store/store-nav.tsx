@@ -13,7 +13,6 @@ import { NavSectionVertical } from "@/components/nav-section";
 
 import { NAV } from "../config-layout";
 import { useNavData } from "./config-navigation";
-import NavToggleButton from "../common/nav-toggle-button";
 
 // ----------------------------------------------------------------------
 
@@ -65,8 +64,6 @@ export default function StoreNav({ openNav, onCloseNav }: Props) {
         width: { lg: NAV.W_VERTICAL },
       }}
     >
-      <NavToggleButton />
-
       <Drawer
         open={openNav}
         onClose={onCloseNav}
