@@ -73,7 +73,7 @@ export default function StoreHeader({ onOpenNav }: Props) {
         spacing={1}
       >
         <IconButton>
-          <Badge badgeContent={4} color="secondary">
+          <Badge badgeContent={4} color="warning">
             <Iconify icon="bxs:cart-alt" />
           </Badge>
         </IconButton>
