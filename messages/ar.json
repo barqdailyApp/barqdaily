@@ -3,7 +3,8 @@
     "Label": {
       "your_name": "ادخل اسمك",
       "name": "الاسم",
-      "phone": "الهاتف"
+      "phone": "الهاتف",
+      "login": "تسجيل الدخول"
     },
     "Error": {
       "name_required": "الاسم مطلوب",

@@ -1,20 +1,17 @@
 import { useEffect } from "react";
 
 import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
 import Drawer from "@mui/material/Drawer";
 
 import { usePathname } from "@/routes/hooks";
 
-import { useResponsive } from "@/hooks/use-responsive";
-import { useMockedUser } from "@/hooks/use-mocked-user";
+import { useAuthContext } from "@/auth/hooks";
 
 import Logo from "@/components/logo";
 import Scrollbar from "@/components/scrollbar";
 import { NavSectionVertical } from "@/components/nav-section";
 
 import { NAV } from "../config-layout";
-import NavUpgrade from "../common/nav-upgrade";
 import { useNavData } from "./config-navigation";
 import NavToggleButton from "../common/nav-toggle-button";
 
@@ -25,12 +22,10 @@ type Props = {
   onCloseNav: VoidFunction;
 };
 
-export default function NavVertical({ openNav, onCloseNav }: Props) {
-  const { user } = useMockedUser();
+export default function StoreNav({ openNav, onCloseNav }: Props) {
+  const { user } = useAuthContext();
 
   const pathname = usePathname();
-
-  const lgUp = useResponsive("up", "lg");
 
   const navData = useNavData();
 
@@ -60,10 +55,6 @@ export default function NavVertical({ openNav, onCloseNav }: Props) {
           currentRole: user?.role,
         }}
       />
-
-      <Box sx={{ flexGrow: 1 }} />
-
-      <NavUpgrade />
     </Scrollbar>
   );
 
@@ -76,30 +67,17 @@ export default function NavVertical({ openNav, onCloseNav }: Props) {
     >
       <NavToggleButton />
 
-      {lgUp ? (
-        <Stack
-          sx={{
-            height: 1,
-            position: "fixed",
+      <Drawer
+        open={openNav}
+        onClose={onCloseNav}
+        PaperProps={{
+          sx: {
             width: NAV.W_VERTICAL,
-            borderRight: (theme) => `dashed 1px ${theme.palette.divider}`,
-          }}
-        >
-          {renderContent}
-        </Stack>
-      ) : (
-        <Drawer
-          open={openNav}
-          onClose={onCloseNav}
-          PaperProps={{
-            sx: {
-              width: NAV.W_VERTICAL,
-            },
-          }}
-        >
-          {renderContent}
-        </Drawer>
-      )}
+          },
+        }}
+      >
+        {renderContent}
+      </Drawer>
     </Box>
   );
 }
