@@ -65,8 +65,6 @@ export default function StoreNav({ openNav, onCloseNav }: Props) {
         width: { lg: NAV.W_VERTICAL },
       }}
     >
-      <NavToggleButton />
-
       <Drawer
         open={openNav}
         onClose={onCloseNav}
