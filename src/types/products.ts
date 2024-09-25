@@ -40,3 +40,46 @@ export interface Product {
   measurement_unit_en: string;
   cart_products: any | null;
 }
+
+export interface FullProduct {
+  product: {
+    section_id: string;
+    product_id: string;
+    product_name: string;
+    product_description: string;
+    product_is_fav: boolean;
+    is_quantity_available: boolean;
+    product_logo: string;
+    product_images: string[];
+  };
+  product_measurements: ProductMeasurement[];
+}
+export interface ProductMeasurement {
+  product_measurement_id: string;
+  conversion_factor: string;
+  is_main_unit: boolean;
+  measurement_unit: string;
+  warehouse_quantity: number;
+  min_order_quantity: number;
+  max_order_quantity: number;
+  offer: any;
+  product_category_price: ProductCategoryPrice;
+  product_additional_services: ProductAdditionalService[];
+  cart_products: any;
+}
+
+export interface ProductCategoryPrice {
+  product_category_price_id: string;
+  product_price: string;
+}
+
+export interface ProductAdditionalService {
+  product_additional_service_id: string;
+  price: string;
+  additional_service: AdditionalService;
+}
+
+export interface AdditionalService {
+  additional_service_id: string;
+  name: string;
+}

@@ -76,11 +76,11 @@ export const success = {
 };
 
 export const warning = {
-  lighter: "#fecb10",
+  lighter: "#fff9e2",
   light: "#fecb10",
   main: "#fecb10",
   dark: "#ffc800",
-  darker: "#ffc800",
+  darker: "#c49a00",
   contrastText: "#FFFFFF",
 };
 

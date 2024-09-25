@@ -4,7 +4,7 @@ import axiosInstance from "@/utils/axios";
 import { endpoints } from "@/utils/endpoints";
 
 import { ActionResponse } from "@/types/actions";
-import { Product, Category, SubCategory } from "@/types/products";
+import { Product, Category, SubCategory, FullProduct } from "@/types/products";
 
 import { getLocale } from "./common-actions";
 
@@ -62,9 +62,9 @@ export async function fetchProductsBySubCategory(
   subCategoryId: string
 ): ActionResponse<{ items: Product[]; total: number }> {
   const locale = await getLocale();
-
+  console.log(subCategoryId);
   try {
-    // if (!subCategoryId) throw new Error({ error: "subCategoryId is required" });
+    if (!subCategoryId) throw new Error("subCategoryId is required");
     const res = await axiosInstance.get(endpoints.products.products, {
       params: {
         category_sub_category_id: subCategoryId,
@@ -80,6 +80,27 @@ export async function fetchProductsBySubCategory(
       items: res?.data?.data,
       total: res?.data?.meta?.itemCount,
     };
+  } catch (err: any) {
+    return { error: err?.message };
+  }
+}
+
+export async function fetchSingleProduct(
+  productId: string
+): ActionResponse<FullProduct> {
+  const locale = await getLocale();
+
+  try {
+    const res = await axiosInstance.get(
+      `${endpoints.products.singleProduct}/${productId}`,
+      {
+        headers: {
+          "Accept-Language": locale,
+        },
+      }
+    );
+
+    return res?.data;
   } catch (err: any) {
     return { error: err?.message };
   }

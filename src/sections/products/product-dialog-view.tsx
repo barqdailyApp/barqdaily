@@ -1,35 +1,46 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { useState, useCallback } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import {
   Button,
   Dialog,
-  Typography,
   IconButton,
+  Typography,
   DialogTitle,
-  DialogContent,
   DialogActions,
+  DialogContent,
   DialogContentText,
 } from "@mui/material";
 
+import { paths } from "@/routes/paths";
+
 import { fCurrency } from "@/utils/format-number";
+
+import IncrementerButton from "@/CustomSharedComponents/product/incrementer-button";
 
 import Iconify from "@/components/iconify";
 
-import { Product } from "@/types/products";
-
-import IncrementerButton from "./incrementer-button";
+import { FullProduct } from "@/types/products";
 
 interface Props {
-  product: Product;
-  open: boolean;
-  onClose: () => void;
+  product: FullProduct;
 }
 
-export default function ProductDialog({ product, open, onClose }: Props) {
+export default function ProductDialogView({
+  product: { product, product_measurements },
+}: Props) {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const [open, setOpen] = useState(true);
+  const onClose = useCallback(() => {
+    setOpen(false);
+    router.push(`${paths.products}?${searchParams.toString()}`);
+  }, [router, searchParams]);
+
   const t = useTranslations("Pages.Home.Product");
   const [quantity, setQuantity] = useState(0);
 
@@ -63,7 +74,9 @@ export default function ProductDialog({ product, open, onClose }: Props) {
         component="p"
         suppressHydrationWarning
       >
-        {fCurrency(product.product_price)}
+        {fCurrency(
+          product_measurements[0].product_category_price.product_price
+        )}
       </Typography>
       <Typography fontWeight={700} component="p">
         {t("description")}
@@ -88,7 +101,9 @@ export default function ProductDialog({ product, open, onClose }: Props) {
           variant="contained"
           color="primary"
           startIcon={<Iconify icon="bxs:cart-alt" />}
-          onClick={() => setQuantity(product.min_order_quantity)}
+          onClick={() =>
+            setQuantity(product_measurements[0].min_order_quantity)
+          }
           sx={{ flexGrow: 1 }}
         >
           {t("add_to_cart")}
@@ -98,13 +113,15 @@ export default function ProductDialog({ product, open, onClose }: Props) {
           onIncrease={() => setQuantity((prev) => prev + 1)}
           onDecrease={() =>
             setQuantity((prev) =>
-              prev > product.min_order_quantity ? prev - 1 : 0
+              prev > product_measurements[0].min_order_quantity ? prev - 1 : 0
             )
           }
           sx={{ flexGrow: 1, position: "relative" }}
           quantity={quantity}
-          disabledIncrease={quantity >= product.max_order_quantity}
-          min={product.min_order_quantity}
+          disabledIncrease={
+            quantity >= product_measurements[0].max_order_quantity
+          }
+          min={product_measurements[0].min_order_quantity}
         />
       )}
     </DialogActions>

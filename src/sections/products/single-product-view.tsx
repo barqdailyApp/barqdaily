@@ -5,31 +5,29 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 
 import {
+  Box,
   Button,
-  Dialog,
   Typography,
-  IconButton,
-  DialogTitle,
-  DialogContent,
   DialogActions,
+  DialogContent,
   DialogContentText,
 } from "@mui/material";
 
 import { fCurrency } from "@/utils/format-number";
 
+import IncrementerButton from "@/CustomSharedComponents/product/incrementer-button";
+
 import Iconify from "@/components/iconify";
 
-import { Product } from "@/types/products";
-
-import IncrementerButton from "./incrementer-button";
+import { FullProduct } from "@/types/products";
 
 interface Props {
-  product: Product;
-  open: boolean;
-  onClose: () => void;
+  product: FullProduct;
 }
 
-export default function ProductDialog({ product, open, onClose }: Props) {
+export default function SingleProductView({
+  product: { product, product_measurements },
+}: Props) {
   const t = useTranslations("Pages.Home.Product");
   const [quantity, setQuantity] = useState(0);
 
@@ -63,7 +61,9 @@ export default function ProductDialog({ product, open, onClose }: Props) {
         component="p"
         suppressHydrationWarning
       >
-        {fCurrency(product.product_price)}
+        {fCurrency(
+          product_measurements[0].product_category_price.product_price
+        )}
       </Typography>
       <Typography fontWeight={700} component="p">
         {t("description")}
@@ -88,7 +88,9 @@ export default function ProductDialog({ product, open, onClose }: Props) {
           variant="contained"
           color="primary"
           startIcon={<Iconify icon="bxs:cart-alt" />}
-          onClick={() => setQuantity(product.min_order_quantity)}
+          onClick={() =>
+            setQuantity(product_measurements[0].min_order_quantity)
+          }
           sx={{ flexGrow: 1 }}
         >
           {t("add_to_cart")}
@@ -98,29 +100,25 @@ export default function ProductDialog({ product, open, onClose }: Props) {
           onIncrease={() => setQuantity((prev) => prev + 1)}
           onDecrease={() =>
             setQuantity((prev) =>
-              prev > product.min_order_quantity ? prev - 1 : 0
+              prev > product_measurements[0].min_order_quantity ? prev - 1 : 0
             )
           }
           sx={{ flexGrow: 1, position: "relative" }}
           quantity={quantity}
-          disabledIncrease={quantity >= product.max_order_quantity}
-          min={product.min_order_quantity}
+          disabledIncrease={
+            quantity >= product_measurements[0].max_order_quantity
+          }
+          min={product_measurements[0].min_order_quantity}
         />
       )}
     </DialogActions>
   );
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
-      <DialogTitle>
-        <IconButton onClick={onClose}>
-          <Iconify icon="heroicons:x-mark-16-solid" />
-        </IconButton>
-      </DialogTitle>
-
+    <Box>
       {renderContent}
 
       {renderActions}
-    </Dialog>
+    </Box>
   );
 }
