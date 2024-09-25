@@ -3,13 +3,12 @@
 import axiosInstance from "@/utils/axios";
 import { endpoints } from "@/utils/endpoints";
 
+import { ActionResponse } from "@/types/actions";
 import { Product, Category, SubCategory } from "@/types/products";
 
 import { getLocale } from "./common-actions";
 
-export async function fetchCategories(): Promise<
-  Category[] | { error: string }
-> {
+export async function fetchCategories(): ActionResponse<Category[]> {
   const locale = await getLocale();
 
   try {
@@ -39,7 +38,7 @@ export async function fetchCategories(): Promise<
 
 export async function fetchSubCategories(
   categoryId: string
-): Promise<SubCategory[] | { error: string }> {
+): ActionResponse<SubCategory[]> {
   const locale = await getLocale();
 
   try {
@@ -61,10 +60,11 @@ export async function fetchSubCategories(
 
 export async function fetchProductsBySubCategory(
   subCategoryId: string
-): Promise<{ items: Product[]; total: number } | { error: string }> {
+): ActionResponse<{ items: Product[]; total: number }> {
   const locale = await getLocale();
 
   try {
+    // if (!subCategoryId) throw new Error({ error: "subCategoryId is required" });
     const res = await axiosInstance.get(endpoints.products.products, {
       params: {
         category_sub_category_id: subCategoryId,

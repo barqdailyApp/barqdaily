@@ -21,7 +21,7 @@ export default async function Page({
     throw new Error(categories.error);
   }
 
-  const categoryId = searchParams.categoryId || categories[2]?.id;
+  const categoryId = searchParams.categoryId || categories[0]?.id;
 
   const subCategories = await fetchSubCategories(categoryId);
 
