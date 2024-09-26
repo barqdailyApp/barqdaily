@@ -43,8 +43,8 @@ export default function LoginPhoneStep({
 
   const LoginSchema = Yup.object().shape({
     phoneNumber: Yup.string()
-      .min(6, t("Global.Error.phone_invalid"))
-      .max(6, t("Global.Error.phone_invalid"))
+      .min(9, t("Global.Error.phone_invalid"))
+      .max(9, t("Global.Error.phone_invalid"))
       .required(t("Global.Error.phone_required")),
     agree: Yup.bool().oneOf([true]).required(),
   });
