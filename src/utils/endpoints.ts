@@ -11,5 +11,7 @@ export const endpoints = {
       `category/${categoryId}/subcategories`,
     products: "product/all-products-for-client",
     singleProduct: "product/single-product-client",
+    brands: "product/get-brands-client",
   },
+  banars: "banar/guest",
 };

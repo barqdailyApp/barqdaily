@@ -4,7 +4,13 @@ import axiosInstance from "@/utils/axios";
 import { endpoints } from "@/utils/endpoints";
 
 import { ActionResponse } from "@/types/actions";
-import { Product, Category, SubCategory, FullProduct } from "@/types/products";
+import {
+  Product,
+  Category,
+  SubCategory,
+  FullProduct,
+  Brand,
+} from "@/types/products";
 
 import { getLocale } from "./common-actions";
 
@@ -98,6 +104,22 @@ export async function fetchSingleProduct(
         },
       }
     );
+
+    return res?.data;
+  } catch (err: any) {
+    return { error: err?.message };
+  }
+}
+
+export async function fetchBrands(): ActionResponse<Brand[]> {
+  const locale = await getLocale();
+
+  try {
+    const res = await axiosInstance.get(endpoints.products.brands, {
+      headers: {
+        "Accept-Language": locale,
+      },
+    });
 
     return res?.data;
   } catch (err: any) {

@@ -83,3 +83,15 @@ export interface AdditionalService {
   additional_service_id: string;
   name: string;
 }
+
+export interface Brand {
+  id: string;
+  created_at: string;
+  updated_at: string;
+  deleted_at: any;
+  name: string;
+  name_ar: string;
+  logo: string;
+  order: number;
+  is_active: boolean;
+}

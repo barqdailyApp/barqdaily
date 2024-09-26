@@ -1,30 +1,23 @@
-"use client";
+import "swiper/css";
+import "swiper/css/pagination";
 
-import 'swiper/css';
-import 'swiper/css/pagination';
+import { fetchBanars } from "@/actions/banars-actions";
+import { fetchBrands } from "@/actions/products-actions";
 
-import maskGroup from './Maskgroup.jpg';
 import { HomeView } from "@/sections/home/view";
 
-;
+export default async function Page() {
+  const banras = await fetchBanars();
 
-const images = [
-  {
-    image: maskGroup.src,
-    caption: "Image 1",
-  },
-  {
-    image: maskGroup.src,
-    caption: "Image 2",
-  },
-  {
-    image: maskGroup.src,
-    caption: "Image 3",
-  },
-];
+  if ("error" in banras) {
+    throw new Error(banras.error);
+  }
 
-export default function Page() {
-  return(
-    <HomeView slides={images}/>
-  )
+  const brands = await fetchBrands();
+
+  if ("error" in brands) {
+    throw new Error(brands.error);
+  }
+
+  return <HomeView banars={banras} brands={brands} />;
 }
