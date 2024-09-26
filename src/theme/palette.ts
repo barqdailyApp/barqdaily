@@ -46,7 +46,7 @@ export const primary = {
   // dark: "#518336",
   // darker: "#3D6329",
   // contrastText: "#FFFFFF",
-  lighter: "#B2E596",
+  lighter: "#DFF1FF",
   light: "#42a5f5",
   main: "#1976d2",
   dark: "#1565c0",
