@@ -23,5 +23,6 @@ export default async function Page({ searchParams: { subCategoryId } }: Props) {
     return <Alert severity="warning">No products found</Alert>;
   }
 
+  await new Promise((resolve) => setTimeout(resolve, 4000));
   return <ProductsView products={products.items} />;
 }

@@ -62,7 +62,6 @@ export async function fetchProductsBySubCategory(
   subCategoryId: string
 ): ActionResponse<{ items: Product[]; total: number }> {
   const locale = await getLocale();
-  console.log(subCategoryId);
   try {
     if (!subCategoryId) throw new Error("subCategoryId is required");
     const res = await axiosInstance.get(endpoints.products.products, {

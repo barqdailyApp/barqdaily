@@ -1,7 +1,5 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
-
 import { Grid } from "@mui/material";
 
 import { paths } from "@/routes/paths";
@@ -15,9 +13,6 @@ interface Props {
 }
 
 export default function ProductsView({ products }: Props) {
-  const searchParams = useSearchParams();
-  const router = useRouter();
-
   return (
     <Grid container spacing={3}>
       {products.map((item) => (
@@ -31,11 +26,7 @@ export default function ProductsView({ products }: Props) {
         >
           <ProductCard
             product={item}
-            onClick={() =>
-              router.push(
-                `${paths.products}/${item.product_id}?${searchParams.toString()}`
-              )
-            }
+            href={`${paths.products}/${item.product_id}`}
           />
         </Grid>
       ))}

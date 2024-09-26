@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 
@@ -24,7 +25,7 @@ import IncrementerButton from "./incrementer-button";
 
 interface Props {
   product: Product;
-  onClick: () => void;
+  href: string;
 }
 
 const StyledCard = styled(Card)(({ theme }) => ({
@@ -41,17 +42,17 @@ const StyledCard = styled(Card)(({ theme }) => ({
   },
 }));
 
-export function ProductCard({ product, onClick }: Props) {
+export function ProductCard({ product, href }: Props) {
   const t = useTranslations("Pages.Home.Product");
   const [quantity, setQuantity] = useState(0);
-
   return (
     <StyledCard className={quantity > 0 ? "selected" : ""}>
       <Box
         className="card-clickable-layer"
         aria-hidden
         sx={{ position: "absolute", inset: 0, cursor: "pointer" }}
-        onClick={onClick}
+        href={href}
+        component={Link}
       />
 
       <CardMedia

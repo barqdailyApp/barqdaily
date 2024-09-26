@@ -1,11 +1,13 @@
 "use client";
 
 import Image from "next/image";
+import { useSnackbar } from "notistack";
+import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
-import { useState, useCallback } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import {
+  Box,
   Button,
   Dialog,
   IconButton,
@@ -13,13 +15,13 @@ import {
   DialogTitle,
   DialogActions,
   DialogContent,
+  LinearProgress,
   DialogContentText,
 } from "@mui/material";
 
-import { paths } from "@/routes/paths";
-
 import { fCurrency } from "@/utils/format-number";
 
+import { fetchSingleProduct } from "@/actions/products-actions";
 import IncrementerButton from "@/CustomSharedComponents/product/incrementer-button";
 
 import Iconify from "@/components/iconify";
@@ -27,20 +29,63 @@ import Iconify from "@/components/iconify";
 import { FullProduct } from "@/types/products";
 
 interface Props {
-  product: FullProduct;
+  productId: string;
 }
 
-export default function ProductDialogView({
-  product: { product, product_measurements },
-}: Props) {
-  const searchParams = useSearchParams();
+export default function ProductDialogView({ productId }: Props) {
   const router = useRouter();
-  const [open, setOpen] = useState(true);
-  const onClose = useCallback(() => {
-    setOpen(false);
-    router.push(`${paths.products}?${searchParams.toString()}`);
-  }, [router, searchParams]);
+  const { enqueueSnackbar } = useSnackbar();
+  const [product, setProduct] = useState<FullProduct>();
 
+  useEffect(() => {
+    if (product && product.product.product_id === productId) {
+      return;
+    }
+    (async () => {
+      const res = await fetchSingleProduct(productId);
+
+      if ("error" in res) {
+        enqueueSnackbar(res.error, { variant: "error" });
+        router.back();
+        return;
+      }
+      setProduct(res);
+    })();
+  }, [enqueueSnackbar, product, productId, router]);
+
+  return (
+    <Dialog open onClose={() => router.back()} maxWidth="xs" fullWidth>
+      <DialogTitle>
+        <IconButton onClick={() => router.back()}>
+          <Iconify icon="heroicons:x-mark-16-solid" />
+        </IconButton>
+      </DialogTitle>
+      {product ? (
+        <ProductDialogContent product={product} />
+      ) : (
+        <Box
+          sx={{
+            px: 5,
+            width: 1,
+            flexGrow: 1,
+            minHeight: "min(30rem, 80vh)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <LinearProgress color="inherit" sx={{ width: 1, maxWidth: 360 }} />
+        </Box>
+      )}
+    </Dialog>
+  );
+}
+
+function ProductDialogContent({
+  product: { product, product_measurements },
+}: {
+  product: FullProduct;
+}) {
   const t = useTranslations("Pages.Home.Product");
   const [quantity, setQuantity] = useState(0);
 
@@ -128,16 +173,10 @@ export default function ProductDialogView({
   );
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
-      <DialogTitle>
-        <IconButton onClick={onClose}>
-          <Iconify icon="heroicons:x-mark-16-solid" />
-        </IconButton>
-      </DialogTitle>
-
+    <>
       {renderContent}
 
       {renderActions}
-    </Dialog>
+    </>
   );
 }

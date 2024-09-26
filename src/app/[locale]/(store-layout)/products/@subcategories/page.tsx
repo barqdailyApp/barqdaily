@@ -27,6 +27,7 @@ export default async function Page({
     return <Alert severity="error">No subCategories found</Alert>;
   }
 
+  await new Promise((resolve) => setTimeout(resolve, 4000));
   return (
     <SubCategoriesFilter
       subCategories={subCategories}
