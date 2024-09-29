@@ -96,7 +96,6 @@ export default function BanarsSwiper({ banars }: Props) {
     <Box
       sx={(theme) => ({
         textAlign: "center",
-        pb: 0,
         background: theme.palette.background.neutral,
       })}
     >

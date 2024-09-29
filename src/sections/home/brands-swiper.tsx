@@ -120,7 +120,6 @@ export default function BrandsSwiper({ brands }: Props) {
     <Box
       sx={(theme) => ({
         textAlign: "center",
-        pb: 0,
       })}
     >
       <Container style={{ marginTop: 1 }}>
