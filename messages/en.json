@@ -12,7 +12,7 @@
       "phone_invalid": "Phone is invalid"
     },
     "Message": {
-      "otp_sent": "A code has sent to your phone."
+      "otp_sent": "A code has sent to your WhatsApp number."
     },
 
     "Footer": {
@@ -66,7 +66,7 @@
       "login_title": "Login",
       "register_title": "Create an Account",
       "otp_title": "Confirm your number",
-      "otp_subtitle": "Please enter the code we sent to your phone",
+      "otp_subtitle": "Please enter the code we sent to your WhatsApp number",
       "policies": "Agree with our <terms>terms</terms> and <privacy>privacy policy</privacy>",
       "redirect_to_register": "I don't have an account. <link>Register</link>",
       "redirect_to_login": "Already have an account? <link>Sign in</link>",
