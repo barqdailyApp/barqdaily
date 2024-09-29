@@ -91,6 +91,32 @@ export async function fetchProductsBySubCategory(
   }
 }
 
+export async function fetchProductsByBrand(
+  brandId: string,
+  page = 1
+): ActionResponse<{ items: Product[]; pagesCount: number }> {
+  const locale = await getLocale();
+  try {
+    const res = await axiosInstance.get(endpoints.products.products, {
+      params: {
+        brand_id: brandId,
+        page,
+        limit: 10,
+      },
+      headers: {
+        "Accept-Language": locale,
+      },
+    });
+
+    return {
+      items: res?.data?.data,
+      pagesCount: Math.ceil((res?.data?.meta?.itemCount || 0) / 10),
+    };
+  } catch (err: any) {
+    return { error: err?.message };
+  }
+}
+
 export async function fetchSingleProduct(
   productId: string
 ): ActionResponse<FullProduct> {
