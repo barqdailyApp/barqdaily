@@ -25,9 +25,9 @@ export default function CategoriesList({ categories }: Props) {
               })}
             >
               <Typography
-                variant="caption"
+                variant="body2"
                 textAlign="center"
-                py={1}
+                py={1.5}
                 display="block"
                 fontWeight={700}
               >
