@@ -81,7 +81,7 @@ export default function JwtRegisterView() {
             <FormLabel>{t("Global.Label.phone")}</FormLabel>
             <RHFTextField
               name="phoneNumber"
-              placeholder="123456"
+              placeholder="123 456 789"
               InputProps={{
                 startAdornment: (
                   <Stack
