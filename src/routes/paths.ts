@@ -10,5 +10,5 @@ export const paths = {
     },
   },
   home: "/",
-  products: "/products",
+  products: "/product",
 };

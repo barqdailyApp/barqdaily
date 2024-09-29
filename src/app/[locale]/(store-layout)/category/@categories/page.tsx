@@ -12,7 +12,6 @@ export default async function Page({ searchParams: { categoryId } }: Props) {
   if ("error" in categories) {
     throw new Error(categories.error);
   }
-  await new Promise((resolve) => setTimeout(resolve, 4000));
 
   return (
     <CategoriesFilter categories={categories} initialCategoryId={categoryId} />

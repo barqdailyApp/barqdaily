@@ -24,7 +24,13 @@ export default function SubCategoriesFilter({
   const handleChange = useCallback(
     (event: React.SyntheticEvent, newValue: string) => {
       setSubCategoryId(newValue);
-      createQueryString([{ name: "subCategoryId", value: newValue }], true);
+      createQueryString(
+        [
+          { name: "subCategoryId", value: newValue },
+          { name: "page", value: undefined },
+        ],
+        true
+      );
     },
     [createQueryString]
   );

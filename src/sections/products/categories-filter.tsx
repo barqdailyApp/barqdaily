@@ -24,7 +24,13 @@ export default function CategoriesFilter({
   const handleChange = useCallback(
     (event: React.SyntheticEvent, newValue: string) => {
       setCategoryId(newValue);
-      createQueryString([{ name: "categoryId", value: newValue }], true);
+      createQueryString(
+        [
+          { name: "categoryId", value: newValue },
+          { name: "page", value: undefined },
+        ],
+        true
+      );
     },
     [createQueryString]
   );

@@ -1,4 +1,4 @@
-import { Alert } from "@mui/material";
+import { Alert, Box, Skeleton, Stack } from "@mui/material";
 
 import { fetchSubCategories } from "@/actions/products-actions";
 
@@ -15,7 +15,22 @@ export default async function Page({
   searchParams: { categoryId, subCategoryId },
 }: Props) {
   if (!categoryId) {
-    return "loading...";
+    return (
+      <Box>
+        <Stack direction="row" spacing={2}>
+          {[...Array(5)].map((_, index) => (
+            <Skeleton
+              variant="text"
+              sx={{
+                fontSize: "36px",
+                display: "block",
+                width: "7rem",
+              }}
+            />
+          ))}
+        </Stack>
+      </Box>
+    );
   }
 
   const subCategories = await fetchSubCategories(categoryId);
@@ -27,7 +42,6 @@ export default async function Page({
     return <Alert severity="error">No subCategories found</Alert>;
   }
 
-  await new Promise((resolve) => setTimeout(resolve, 4000));
   return (
     <SubCategoriesFilter
       subCategories={subCategories}

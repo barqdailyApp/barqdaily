@@ -5,11 +5,11 @@ import { endpoints } from "@/utils/endpoints";
 
 import { ActionResponse } from "@/types/actions";
 import {
+  Brand,
   Product,
   Category,
   SubCategory,
   FullProduct,
-  Brand,
 } from "@/types/products";
 
 import { getLocale } from "./common-actions";
@@ -65,16 +65,17 @@ export async function fetchSubCategories(
 }
 
 export async function fetchProductsBySubCategory(
-  subCategoryId: string
-): ActionResponse<{ items: Product[]; total: number }> {
+  subCategoryId: string,
+  page = 1
+): ActionResponse<{ items: Product[]; pagesCount: number }> {
   const locale = await getLocale();
   try {
     if (!subCategoryId) throw new Error("subCategoryId is required");
     const res = await axiosInstance.get(endpoints.products.products, {
       params: {
         category_sub_category_id: subCategoryId,
-        page: 1,
-        limit: 15,
+        page,
+        limit: 10,
       },
       headers: {
         "Accept-Language": locale,
@@ -83,7 +84,7 @@ export async function fetchProductsBySubCategory(
 
     return {
       items: res?.data?.data,
-      total: res?.data?.meta?.itemCount,
+      pagesCount: Math.ceil((res?.data?.meta?.itemCount || 0) / 10),
     };
   } catch (err: any) {
     return { error: err?.message };

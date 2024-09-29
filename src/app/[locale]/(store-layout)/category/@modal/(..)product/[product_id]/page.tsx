@@ -1,4 +1,4 @@
-import ProductDialogView from "@/sections/products/product-dialog-view";
+import ProductDialogView from "@/sections/products/view/product-dialog-view";
 
 interface Props {
   params: {
