@@ -44,6 +44,7 @@ export default function HeaderSimple() {
   return (
     <AppBar
       sx={{
+        bgcolor: theme.palette.background.default,
         borderBottom: `solid 1px ${theme.palette.divider}`,
         transition: theme.transitions.create(["transform"], {
           easing: theme.transitions.easing.easeInOut,
@@ -57,7 +58,6 @@ export default function HeaderSimple() {
       <Container>
         <Toolbar
           sx={{
-            bgcolor: theme.palette.background.default,
             justifyContent: "space-between",
             minHeight: { xs: HEADER.H_SIMPLE },
           }}

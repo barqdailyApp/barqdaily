@@ -74,6 +74,12 @@
       "login_submit": "تسجيل الدخول",
       "register_submit": "إنشاء حساب",
       "otp_submit": "تأكيد الرقم"
+    },
+    "Home": {
+      "Product": {
+        "add_to_cart": "أضف إلى السلة",
+        "description": "الوصف"
+      }
     }
   }
 }

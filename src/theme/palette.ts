@@ -40,7 +40,7 @@ export const grey = {
 };
 
 export const primary = {
-  lighter: "#B2E596",
+  lighter: "#DFF1FF",
   light: "#42a5f5",
   main: "#1976d2",
   dark: "#1565c0",
@@ -76,11 +76,11 @@ export const success = {
 };
 
 export const warning = {
-  lighter: "#fecb10",
+  lighter: "#fff9e2",
   light: "#fecb10",
   main: "#fecb10",
   dark: "#ffc800",
-  darker: "#ffc800",
+  darker: "#c49a00",
   contrastText: "#FFFFFF",
 };
 
