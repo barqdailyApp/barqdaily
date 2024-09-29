@@ -3,11 +3,11 @@ import { fetchBanars } from "@/actions/banars-actions";
 import BanarsSwiper from "@/sections/home/banars-swiper";
 
 export default async function Page() {
-  const banras = await fetchBanars();
+  const banars = await fetchBanars();
 
-  if ("error" in banras) {
-    throw new Error(banras.error);
+  if ("error" in banars || banars.length === 0) {
+    return null;
   }
 
-  return <BanarsSwiper banars={banras} />;
+  return <BanarsSwiper banars={banars} />;
 }
