@@ -15,7 +15,7 @@ export async function register(body: { phone: string; name: string }) {
     });
     return res.data;
   } catch (err: any) {
-    return { error: err?.response?.data?.message };
+    return { error: err.message };
   }
 }
 
@@ -31,7 +31,7 @@ export async function sendOtp(phone: string) {
     });
     return res.data;
   } catch (err: any) {
-    return { error: err?.response?.data?.message };
+    throw new Error(err?.message);
   }
 }
 export async function verifyOtp(reqBody: verifyOtpCredentials) {
@@ -42,14 +42,14 @@ export async function verifyOtp(reqBody: verifyOtpCredentials) {
       type: "phone",
     });
 
-    const { name, avatar, email, phone, access_token: token } = res.data.data;
+    const { name, avatar, email, phone, access_token: token } = res.data;
     const user = { name, avatar, email, phone };
 
     cookies().set(COOKIES_KEYS.session, token);
     cookies().set(COOKIES_KEYS.user, JSON.stringify(user));
     return user;
   } catch (err: any) {
-    return { error: err?.response?.data?.message };
+    return { error: err.message };
   }
 }
 
