@@ -1,7 +1,5 @@
 "use client";
 
-import "swiper/css";
-import "swiper/css/pagination";
 import { useLocale } from "next-intl";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
@@ -12,17 +10,18 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 import { LocaleType, localesSettings } from "@/i18n/config-locale";
 
-import { Banar } from "@/types/banars";
-import { Brand } from "@/types/products";
+import Image from "@/components/image";
 
-// ----------------------------------------------------------------------
+import { Banar } from "@/types/banars";
+
 interface Props {
   banars: Banar[];
-  brands: Brand[];
 }
-export default function HomeView({ banars, brands }: Props) {
+
+export default function BanarsSwiper({ banars }: Props) {
   const locale = useLocale();
   const { dir } = localesSettings[locale as LocaleType];
+
   return (
     <Box
       sx={(theme) => ({
@@ -41,17 +40,19 @@ export default function HomeView({ banars, brands }: Props) {
             autoplay={{ delay: 3000 }}
             pagination={{ clickable: true }}
             navigation={{
-              nextEl: ".swiper-button-next",
-              prevEl: ".swiper-button-prev",
+              nextEl: ".hero-next",
+              prevEl: ".hero-prev",
             }}
             className="mySwiper"
           >
             {banars?.map((item, index) => (
               <SwiperSlide key={index}>
-                <img
+                <Image
                   className="responsive-banar"
                   src={item.banar}
-                  alt={`banar-${index}`}
+                  alt="banner"
+                  width={1920}
+                  height={500}
                 />
               </SwiperSlide>
             ))}
@@ -65,7 +66,7 @@ export default function HomeView({ banars, brands }: Props) {
               backgroundColor: theme.customShadows.card,
               zIndex: 10,
             })}
-            className="swiper-button-next"
+            className="hero-prev"
           >
             <ArrowBackIosNewIcon
               sx={{
@@ -83,7 +84,7 @@ export default function HomeView({ banars, brands }: Props) {
               backgroundColor: theme.customShadows.card,
               zIndex: 10,
             })}
-            className="swiper-button-prev"
+            className="hero-next"
           >
             <ArrowForwardIosIcon
               sx={{

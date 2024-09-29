@@ -126,12 +126,7 @@ function ProductDialogContent({
       <Typography fontWeight={700} component="p">
         {t("description")}
       </Typography>
-      <DialogContentText>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perspiciatis
-        debitis aliquid, officiis alias cum sunt nisi autem officia asperiores
-        beatae est facilis vel repellendus molestiae quasi laboriosam
-        laudantium, dignissimos possimus.
-      </DialogContentText>
+      <DialogContentText>{product.product_description}</DialogContentText>
     </DialogContent>
   );
 
