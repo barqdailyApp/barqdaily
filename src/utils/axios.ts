@@ -12,7 +12,7 @@ const axiosInstance = axios.create({
 // Add a request interceptor
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = getCookie("access_token");
+    const token = getCookie("session");
     const lang = getCookie("lang") || "ar";
 
     // Attach headers

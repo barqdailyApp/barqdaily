@@ -75,6 +75,12 @@
       "login_submit": "Login",
       "register_submit": "Create Account",
       "otp_submit": "Confirm Number"
+    },
+    "Order": {
+      "canceled_status_label": "CANCELED",
+      "confirmed_status_label": "CONFIRMED",
+      "on_process_status_label": "ON PROCESS",
+      "pending_status_label": "PENDING"
     }
   }
 }

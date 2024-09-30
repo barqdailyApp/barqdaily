@@ -74,6 +74,13 @@
       "login_submit": "تسجيل الدخول",
       "register_submit": "إنشاء حساب",
       "otp_submit": "تأكيد الرقم"
+    },
+
+    "Order": {
+      "canceled_status_label": "ملغى",
+      "confirmed_status_label": "مؤكد",
+      "on_process_status_label": "قيد التنفيذ",
+      "pending_status_label": "قيد الانتظار"
     }
   }
 }
