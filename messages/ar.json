@@ -1,5 +1,6 @@
 {
   "Global": {
+    "currency": "ريال",
     "Label": {
       "your_name": "ادخل اسمك",
       "name": "الاسم",
@@ -20,6 +21,17 @@
       "download_ios": "قم بالتنزيل من App Store",
       "download_android": "قم بالتنزيل من Google Play",
       "copyright": "إلما © حقوق الطبع والنشر 2020, Inc. جميع الحقوق محفوظة"
+    },
+    "Date": {
+      "sunday": "الأحد",
+      "monday": "الاثنين",
+      "tuesday": "الثلاثاء",
+      "wednesday": "الأربعاء",
+      "thursday": "الخميس",
+      "friday": "الجمعة",
+      "saturday": "السبت",
+      "AM": "ص",
+      "PM": "م"
     }
   },
   "Navbar": {
@@ -77,10 +89,21 @@
     },
 
     "Order": {
-      "canceled_status_label": "ملغى",
-      "confirmed_status_label": "مؤكد",
-      "on_process_status_label": "قيد التنفيذ",
-      "pending_status_label": "قيد الانتظار"
+      "Status": {
+        "canceled": "تم الإلغاء",
+        "pending": "قيد الانتظار",
+        "returned": "تم الإرجاع",
+        "confirmed": "تم التأكيد",
+        "processing": "جاري التجهيز",
+        "ready_for_pickup": "جاهز للتوصيل",
+        "picked_up": "في الطريق للتوصيل",
+        "delivered": "تم التوصيل",
+        "completed": "إكتمل"
+      },
+      "order_number": "رقم الطلب",
+      "deliver_to": "التوصيل الي",
+      "total_payment": "المبلغ الكلي",
+      "arrival_time": "وقت الوصول"
     }
   }
 }

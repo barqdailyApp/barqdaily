@@ -1,5 +1,6 @@
 {
   "Global": {
+    "currency": "YER",
     "Label": {
       "your_name": "Your name",
       "name": "Name",
@@ -21,6 +22,17 @@
       "download_ios": "Download from the App Store",
       "download_android": "Download from Google Play",
       "copyright": "Elma © Copyright 2020, Inc. All rights reserved"
+    },
+    "Date": {
+      "sunday": "Sunday",
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday",
+      "AM": "AM",
+      "PM": "PM"
     }
   },
   "Navbar": {
@@ -77,10 +89,21 @@
       "otp_submit": "Confirm Number"
     },
     "Order": {
-      "canceled_status_label": "CANCELED",
-      "confirmed_status_label": "CONFIRMED",
-      "on_process_status_label": "ON PROCESS",
-      "pending_status_label": "PENDING"
+      "Status": {
+        "canceled": "Canceled",
+        "pending": "Pending",
+        "returned": "Returned",
+        "confirmed": "Confirmed",
+        "processing": "On process",
+        "ready_for_pickup": "Ready for pickup",
+        "picked_up": "Out for delivery",
+        "delivered": "Delivered",
+        "completed": "completed"
+      },
+      "order_number": "Order Number",
+      "deliver_to": "Deliver to",
+      "total_payment": "Total Payment",
+      "arrival_time": "Arrival time"
     }
   }
 }

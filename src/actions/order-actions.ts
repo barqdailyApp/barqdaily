@@ -1,7 +1,9 @@
-import { Order } from "@/types/order";
+import { cookies } from "next/headers";
+
 import axiosInstance from "@/utils/axios";
 import { endpoints } from "@/utils/endpoints";
-import { cookies } from "next/headers";
+
+import { Order } from "@/types/order";
 
 export async function fetchOrders(): Promise<
   { items: Order[]; total: number } | { error: string }
@@ -12,11 +14,11 @@ export async function fetchOrders(): Promise<
       params: { page: 1, limit: 10 },
       headers: { Authorization: `Bearer ${token?.value}` },
     });
-    const {
-      data,
-      meta: { itemCount },
-    } = res?.data?.data;
-    return { items: data, total: itemCount };
+
+    return {
+      items: res?.data?.data?.data,
+      total: res?.data?.data?.meta.itemCount,
+    };
   } catch (err: any) {
     return { error: err?.message };
   }
