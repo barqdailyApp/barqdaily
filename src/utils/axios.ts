@@ -1,7 +1,7 @@
 import axios from "axios";
+import { getCookie } from "cookies-next";
 
 import { HOST_API } from "@/config-global";
-import { getLocale, getSession } from "@/actions/common-actions";
 // ----------------------------------------------------------------------
 
 // Create an Axios instance
@@ -13,14 +13,14 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   (config) =>
     (async () => {
-      const session = await getSession();
-      const locale = await getLocale();
+      const token = getCookie("access_token");
+      const lang = getCookie("lang") || "ar";
 
       // Attach headers
-      if (session) {
-        config.headers.Authorization = `Bearer ${session}`;
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
       }
-      config.headers["Accept-Language"] = locale;
+      config.headers["Accept-Language"] = lang;
       config.headers["Content-Type"] = "application/json";
 
       return config;
