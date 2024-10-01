@@ -90,6 +90,7 @@
     },
     "Order": {
       "Status": {
+        "all-orders": "All Orders",
         "canceled": "Canceled",
         "pending": "Pending",
         "returned": "Returned",
@@ -103,7 +104,8 @@
       "order_number": "Order Number",
       "deliver_to": "Deliver to",
       "total_payment": "Total Payment",
-      "arrival_time": "Arrival time"
+      "arrival_time": "Arrival time",
+      "error": "No orders to show"
     }
   }
 }

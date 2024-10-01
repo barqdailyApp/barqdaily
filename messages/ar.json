@@ -90,6 +90,7 @@
 
     "Order": {
       "Status": {
+        "all-orders": "كل الطلبات",
         "canceled": "تم الإلغاء",
         "pending": "قيد الانتظار",
         "returned": "تم الإرجاع",
@@ -103,7 +104,8 @@
       "order_number": "رقم الطلب",
       "deliver_to": "التوصيل الي",
       "total_payment": "المبلغ الكلي",
-      "arrival_time": "وقت الوصول"
+      "arrival_time": "وقت الوصول",
+      "error": "لا توجد طلبات للعرض"
     }
   }
 }
