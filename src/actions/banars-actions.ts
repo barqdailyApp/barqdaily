@@ -1,17 +1,14 @@
 "use server";
 
-import axiosInstance from "@/utils/axios";
 import { endpoints } from "@/utils/endpoints";
+import { getData } from "@/utils/crud-fetch-api";
 
 import { Banar } from "@/types/banars";
-import { ActionResponse } from "@/types/actions";
 
-export async function fetchBanars(): ActionResponse<Banar[]> {
-  try {
-    const res = await axiosInstance.get(endpoints.banars);
-
-    return res?.data;
-  } catch (err: any) {
-    return { error: err?.message };
+export async function fetchBanars() {
+  const res = await getData<Banar[]>(endpoints.banars);
+  if ("error" in res) {
+    return res;
   }
+  return res?.data;
 }

@@ -1,3 +1,16 @@
+export interface Section {
+  id: string;
+  name: string;
+  logo: string;
+  order_by: number;
+  min_order_price: string;
+  allowed_roles: string[];
+  is_active: boolean;
+  delivery_price: string;
+  delivery_type: string;
+  delivery_type_list: string[];
+}
+
 export interface Category {
   id: string;
   category_id: string;
