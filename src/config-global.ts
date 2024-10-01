@@ -14,6 +14,6 @@ export const SESSION_PERIOD = 60 * 30 * 1_000; //  (60 seconds * 30 * (1_000 = 1
 export const COOKIES_KEYS = {
   session: "session",
   user: "user",
-  lang: "lang",
+  lang: "NEXT_LOCALE",
   expiryTime: "expiryTime",
 };
