@@ -1,6 +1,6 @@
 "use client";
 
-import { getCookie, setCookie } from "cookies-next";
+import { getCookie } from "cookies-next";
 import { useMemo, useEffect, useReducer, useCallback } from "react";
 
 import { COOKIES_KEYS } from "@/config-global";
@@ -65,9 +65,6 @@ export function AuthProvider({ children }: Props) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const initialize = useCallback(async () => {
-    const lang: string = getCookie(COOKIES_KEYS.lang) || "ar";
-    setCookie(COOKIES_KEYS.lang, lang);
-
     const access_token = getCookie(COOKIES_KEYS.session) || "";
     const storedUser = getCookie(COOKIES_KEYS.user) || "";
 

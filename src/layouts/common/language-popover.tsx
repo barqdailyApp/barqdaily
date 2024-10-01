@@ -1,7 +1,7 @@
 import { m } from "framer-motion";
 import { useCallback } from "react";
 import { useLocale } from "next-intl";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 
 import MenuItem from "@mui/material/MenuItem";
 import { Button, Typography } from "@mui/material";
@@ -21,16 +21,19 @@ export default function LanguagePopover() {
   const currentLocale = useCurrentLocale();
 
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const router = useRouter();
 
   const handleChangeLang = useCallback(
     (newLocale: LocaleType) => {
       if (locale !== newLocale) {
-        router.push(pathname.replace(`/${locale}`, `/${newLocale}`));
+        router.push(
+          `${pathname.replace(`/${locale}`, `/${newLocale}`)}${searchParams ? `?${searchParams.toString()}` : ""}`
+        );
       }
       popover.onClose();
     },
-    [locale, pathname, popover, router]
+    [locale, pathname, popover, router, searchParams]
   );
 
   return (

@@ -1,7 +1,8 @@
 import axios from "axios";
-import { getCookie } from "cookies-next";
+import { cookies } from "next/headers";
 
-import { HOST_API } from "@/config-global";
+import { defaultLocale } from "@/i18n/config-locale";
+import { HOST_API, COOKIES_KEYS } from "@/config-global";
 // ----------------------------------------------------------------------
 
 // Create an Axios instance
@@ -12,8 +13,8 @@ const axiosInstance = axios.create({
 // Add a request interceptor
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = getCookie("access_token");
-    const lang = getCookie("lang") || "ar";
+    const token = cookies().get(COOKIES_KEYS.session)?.value;
+    const lang = cookies().get(COOKIES_KEYS.lang)?.value || defaultLocale;
 
     // Attach headers
     if (token) {
