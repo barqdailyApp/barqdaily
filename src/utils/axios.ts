@@ -1,7 +1,7 @@
 import axios from "axios";
-import { getCookie } from "cookies-next";
 
 import { HOST_API } from "@/config-global";
+import { getLocale, getSession } from "@/actions/common-actions";
 // ----------------------------------------------------------------------
 
 // Create an Axios instance
@@ -11,19 +11,20 @@ const axiosInstance = axios.create({
 
 // Add a request interceptor
 axiosInstance.interceptors.request.use(
-  (config) => {
-    const token = getCookie("access_token");
-    const lang = getCookie("lang") || "ar";
+  (config) =>
+    (async () => {
+      const session = await getSession();
+      const locale = await getLocale();
 
-    // Attach headers
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    config.headers["Accept-Language"] = lang;
-    config.headers["Content-Type"] = "application/json";
+      // Attach headers
+      if (session) {
+        config.headers.Authorization = `Bearer ${session}`;
+      }
+      config.headers["Accept-Language"] = locale;
+      config.headers["Content-Type"] = "application/json";
 
-    return config;
-  },
+      return config;
+    })(),
   (error) => Promise.reject(error)
 );
 
