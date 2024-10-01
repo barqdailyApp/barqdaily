@@ -6,14 +6,13 @@ import { useRouter } from "next/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 
-import { Box, Card, Container, IconButton, Stack, styled } from "@mui/material";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { Box, Card, Stack, styled, Container, IconButton } from "@mui/material";
 
 import { LocaleType, localesSettings } from "@/i18n/config-locale";
 
-import { Brand } from "@/types/products";
 import Iconify from "@/components/iconify";
+
+import { Brand } from "@/types/products";
 
 const StyledButton = styled(IconButton)(({ theme }) => ({
   width: 60,

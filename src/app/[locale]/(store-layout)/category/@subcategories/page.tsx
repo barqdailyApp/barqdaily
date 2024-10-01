@@ -1,4 +1,4 @@
-import { Alert, Box, Skeleton, Stack } from "@mui/material";
+import { Box, Alert, Stack, Skeleton } from "@mui/material";
 
 import { fetchSubCategories } from "@/actions/products-actions";
 
