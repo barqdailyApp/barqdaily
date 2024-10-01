@@ -12,17 +12,9 @@ import {
   FullProduct,
 } from "@/types/products";
 
-import { getLocale } from "./common-actions";
-
 export async function fetchCategories(): ActionResponse<Category[]> {
-  const locale = await getLocale();
-
   try {
-    const sectionRes = await axiosInstance.get(endpoints.products.sections, {
-      headers: {
-        "Accept-Language": locale,
-      },
-    });
+    const sectionRes = await axiosInstance.get(endpoints.products.sections, {});
 
     const sectionId = sectionRes?.data[0]?.id;
 
@@ -30,9 +22,6 @@ export async function fetchCategories(): ActionResponse<Category[]> {
       endpoints.products.categories(sectionId),
       {
         params: { all: false },
-        headers: {
-          "Accept-Language": locale,
-        },
       }
     );
 
@@ -45,16 +34,11 @@ export async function fetchCategories(): ActionResponse<Category[]> {
 export async function fetchSubCategories(
   categoryId: string
 ): ActionResponse<SubCategory[]> {
-  const locale = await getLocale();
-
   try {
     const res = await axiosInstance.get(
       endpoints.products.subCategories(categoryId),
       {
         params: { all: false },
-        headers: {
-          "Accept-Language": locale,
-        },
       }
     );
 
@@ -68,7 +52,6 @@ export async function fetchProductsBySubCategory(
   subCategoryId: string,
   page = 1
 ): ActionResponse<{ items: Product[]; pagesCount: number }> {
-  const locale = await getLocale();
   try {
     if (!subCategoryId) throw new Error("subCategoryId is required");
     const res = await axiosInstance.get(endpoints.products.products, {
@@ -76,9 +59,6 @@ export async function fetchProductsBySubCategory(
         category_sub_category_id: subCategoryId,
         page,
         limit: 10,
-      },
-      headers: {
-        "Accept-Language": locale,
       },
     });
 
@@ -95,16 +75,12 @@ export async function fetchProductsByBrand(
   brandId: string,
   page = 1
 ): ActionResponse<{ items: Product[]; pagesCount: number }> {
-  const locale = await getLocale();
   try {
     const res = await axiosInstance.get(endpoints.products.products, {
       params: {
         brand_id: brandId,
         page,
         limit: 10,
-      },
-      headers: {
-        "Accept-Language": locale,
       },
     });
 
@@ -120,16 +96,10 @@ export async function fetchProductsByBrand(
 export async function fetchSingleProduct(
   productId: string
 ): ActionResponse<FullProduct> {
-  const locale = await getLocale();
-
   try {
     const res = await axiosInstance.get(
       `${endpoints.products.singleProduct}/${productId}`,
-      {
-        headers: {
-          "Accept-Language": locale,
-        },
-      }
+      {}
     );
 
     return res?.data;
@@ -139,14 +109,8 @@ export async function fetchSingleProduct(
 }
 
 export async function fetchBrands(): ActionResponse<Brand[]> {
-  const locale = await getLocale();
-
   try {
-    const res = await axiosInstance.get(endpoints.products.brands, {
-      headers: {
-        "Accept-Language": locale,
-      },
-    });
+    const res = await axiosInstance.get(endpoints.products.brands, {});
 
     return res?.data;
   } catch (err: any) {

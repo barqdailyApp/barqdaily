@@ -1,8 +1,16 @@
+import { NextRequest } from "next/server";
 import createMiddleware from "next-intl/middleware";
 
-import { routing } from "./i18n/routing";
+export default async function middleware(request: NextRequest) {
+  request.headers.set("Accept-Language", "ar");
 
-export default createMiddleware({ ...routing, localeDetection: false });
+  const handleI18nRouting = createMiddleware({
+    locales: ["ar", "en"],
+    defaultLocale: "ar",
+  });
+  const response = handleI18nRouting(request);
+  return response;
+}
 
 export const config = {
   matcher: [
