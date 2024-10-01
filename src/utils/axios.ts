@@ -11,20 +11,19 @@ const axiosInstance = axios.create({
 
 // Add a request interceptor
 axiosInstance.interceptors.request.use(
-  (config) =>
-    (async () => {
-      const token = getCookie("access_token");
-      const lang = getCookie("lang") || "ar";
+  (config) => {
+    const token = getCookie("access_token");
+    const lang = getCookie("lang") || "ar";
 
-      // Attach headers
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
-      }
-      config.headers["Accept-Language"] = lang;
-      config.headers["Content-Type"] = "application/json";
+    // Attach headers
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    config.headers["Accept-Language"] = lang;
+    config.headers["Content-Type"] = "application/json";
 
-      return config;
-    })(),
+    return config;
+  },
   (error) => Promise.reject(error)
 );
 
