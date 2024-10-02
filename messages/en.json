@@ -1,5 +1,6 @@
 {
   "Global": {
+    "currency": "YER",
     "Label": {
       "your_name": "Your name",
       "name": "Name",
