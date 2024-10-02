@@ -35,15 +35,7 @@ export default function SingleProductView({
     measurement.offer?.quantity ?? measurement.max_order_quantity
   );
 
-  const renderSwiper = (
-    <ProductSwiper
-      images={[
-        ...product.product_images,
-        ...product.product_images,
-        ...product.product_images,
-      ]}
-    />
-  );
+  const renderSwiper = <ProductSwiper images={product.product_images} />;
 
   const renderContent = (
     <Box sx={{ height: "auto", pt: 4 }}>
