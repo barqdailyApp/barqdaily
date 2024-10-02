@@ -68,10 +68,6 @@ export const setSession = (access_token: string | null) => {
       maxAge: 259200000,
     });
     axios.defaults.headers.common.Authorization = `Bearer ${access_token}`;
-
-    // This function below will handle when token is expired
-    const { exp } = jwtDecode(access_token); // ~3 days by minimals server
-    //   tokenExpired(exp);
   } else {
     deleteCookie("access_token");
     //  sessionStorage.removeItem('access_token');

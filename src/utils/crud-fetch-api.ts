@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 
+import { defaultLocale } from "@/i18n/config-locale";
 import { HOST_API, COOKIES_KEYS } from "@/config-global";
 
 import {
@@ -20,7 +21,7 @@ const getToken = (): string => {
 // Helper function to get the language from cookies or default to 'ar'
 const getLanguage = (): string => {
   const cookieStore = cookies();
-  return cookieStore.get(COOKIES_KEYS.lang)?.value || "ar";
+  return cookieStore.get(COOKIES_KEYS.lang)?.value || defaultLocale;
 };
 
 function isFormData(value: unknown) {
@@ -40,8 +41,13 @@ async function apiRequest<TResponse, TBody = undefined>(
   options: RequestOptions = {}
 ): Promise<ApiResponse<TResponse>> {
   const url = `${API_BASE_URL}${endpoint}`;
-  const token = getToken();
-  const lang = getLanguage();
+  const cookie = cookies().getAll();
+  const token = cookie.find(
+    (item) => item.name === COOKIES_KEYS.session
+  )?.value;
+  const lang =
+    cookie.find((item) => item.name === COOKIES_KEYS.lang)?.value ||
+    defaultLocale;
 
   const headers = {
     ...(!isFormData(body) && {
@@ -117,7 +123,7 @@ async function apiRequest<TResponse, TBody = undefined>(
 
     return {
       success: true,
-      data: responseData,
+      data: responseData.data,
       message: responseData.message || "Success",
       status: response.status,
     };
