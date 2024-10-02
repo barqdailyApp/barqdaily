@@ -14,7 +14,7 @@ export default async function Layout({
   modal: ReactNode;
 }) {
   return (
-    <Stack spacing={2} minHeight="100%" py={3} component={Container}>
+    <Stack spacing={2} minHeight="100%" component={Container}>
       {categories}
       {subcategories}
       {children}
