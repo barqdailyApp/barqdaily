@@ -9,8 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
-import InputAdornment from "@mui/material/InputAdornment";
-import { Box, Link, Divider, Checkbox, FormLabel } from "@mui/material";
+import { Box, Link, Divider, FormLabel } from "@mui/material";
 
 import { paths } from "@/routes/paths";
 import { useRouter } from "@/routes/hooks";
@@ -18,24 +17,21 @@ import { RouterLink } from "@/routes/components";
 
 import { register } from "@/actions/auth-methods";
 
-import Iconify from "@/components/iconify";
 import FormProvider, { RHFTextField } from "@/components/hook-form";
-import { useDir } from "@/routes/hooks/use-dir";
+
+import AuthAgreePolicyField from "./components/agree-policy-field";
+import AuthPhoneField, { phoneSchema } from "./components/phone-field";
 
 // ----------------------------------------------------------------------
 
 export default function JwtRegisterView() {
   const t = useTranslations();
-  const dir = useDir();
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
 
   const LoginSchema = Yup.object().shape({
     name: Yup.string().required(t("Global.Error.name_required")),
-    phoneNumber: Yup.string()
-      .min(9, t("Global.Error.phone_invalid"))
-      .max(9, t("Global.Error.phone_invalid"))
-      .required(t("Global.Error.phone_required")),
+    phoneNumber: phoneSchema(Yup, t),
     agree: Yup.bool().oneOf([true]).required(),
   });
 
@@ -45,9 +41,7 @@ export default function JwtRegisterView() {
 
   const {
     handleSubmit,
-    watch,
-    setValue,
-    formState: { isSubmitting, errors },
+    formState: { isSubmitting },
   } = methods;
 
   const onSubmit = handleSubmit(async (data) => {
@@ -79,66 +73,8 @@ export default function JwtRegisterView() {
             <FormLabel>{t("Global.Label.your_name")}</FormLabel>
             <RHFTextField name="name" placeholder={t("Global.Label.name")} />
           </Box>
-          <Box>
-            <FormLabel>{t("Global.Label.phone")}</FormLabel>
-            <RHFTextField
-              name="phoneNumber"
-              placeholder="123 456 789"
-              InputProps={{
-                [dir === "ltr" ? "startAdornment" : "endAdornment"]: (
-                  <Stack
-                    direction="row"
-                    alignItems="center"
-                    marginInlineEnd={1}
-                    dir="ltr"
-                  >
-                    <InputAdornment position={dir === "ltr" ? "start" : "end"}>
-                      <Iconify icon="twemoji:flag-yemen" />
-                    </InputAdornment>
-                    <Typography color="text.secondary">+967</Typography>
-                  </Stack>
-                ),
-                inputProps: {
-                  dir: "ltr",
-                },
-              }}
-            />
-          </Box>
-          <Stack direction="row" alignItems="center" justifyContent="start">
-            <Checkbox
-              color="default"
-              checked={watch("agree")}
-              onChange={(e, value) => setValue("agree", value)}
-              sx={{ color: errors?.agree ? "error.main" : undefined }}
-            />
-            <Typography
-              variant="body2"
-              color={errors?.agree ? "error.main" : "text.secondary"}
-            >
-              {t.rich("Pages.Auth.policies", {
-                terms: (chunks) => (
-                  <Link
-                    href="#"
-                    color="text.primary"
-                    fontWeight="bold"
-                    component={RouterLink}
-                  >
-                    {chunks}
-                  </Link>
-                ),
-                privacy: (chunks) => (
-                  <Link
-                    href="#"
-                    color="text.primary"
-                    fontWeight="bold"
-                    component={RouterLink}
-                  >
-                    {chunks}
-                  </Link>
-                ),
-              })}
-            </Typography>
-          </Stack>
+          <AuthPhoneField />
+          <AuthAgreePolicyField />
           <LoadingButton
             fullWidth
             color="primary"

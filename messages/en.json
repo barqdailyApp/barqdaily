@@ -11,7 +11,10 @@
     "Error": {
       "name_required": "Name is required",
       "phone_required": "Phone is required",
-      "phone_invalid": "Phone is invalid"
+      "phone_invalid": "Phone is invalid",
+      "phone_digits": "Phone must be 9 digits",
+      "phone_start_with_7": "Phone must start with 7",
+      "phone_only_digits": "Phone must be only digits"
     },
     "Message": {
       "otp_sent": "A code has sent to your WhatsApp number."
