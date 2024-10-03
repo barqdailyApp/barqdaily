@@ -10,6 +10,7 @@ import {
   Category,
   SubCategory,
   FullProduct,
+  Offer,
 } from "@/types/products";
 
 export async function fetchCategories() {
@@ -69,8 +70,25 @@ export async function fetchProductsByBrand(brandId: string, page = 1) {
     limit: String(10),
   });
   const res = await getData<{ data: Product[]; meta: { itemCount: number } }>(
-    `${endpoints.products.products}?${searchParams.toString()}`,
-    {}
+    `${endpoints.products.products}?${searchParams.toString()}`
+  );
+
+  if ("error" in res) {
+    return res;
+  }
+  return {
+    items: res?.data?.data,
+    pagesCount: Math.ceil((res?.data?.meta?.itemCount || 0) / 10),
+  };
+}
+
+export async function fetchOffers(page = 1) {
+  const searchParams = new URLSearchParams({
+    page: String(page),
+    limit: String(10),
+  });
+  const res = await getData<{ data: Offer[]; meta: { itemCount: number } }>(
+    `${endpoints.products.offers}?${searchParams.toString()}`
   );
 
   if ("error" in res) {
