@@ -1,9 +1,12 @@
-type Props = Record<"children" | "banars" | "filters", React.ReactNode>;
+type Props = Record<
+  "children" | "banars" | "filters" | "offers",
+  React.ReactNode
+>;
 
-export default function Layout({ children, banars, filters }: Props) {
+export default function Layout({ children, banars, filters, offers }: Props) {
   return (
     <>
-      {banars} {filters} {children}
+      {banars} {filters} {offers} {children}
     </>
   );
 }

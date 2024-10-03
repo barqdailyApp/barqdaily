@@ -17,12 +17,12 @@ import {
 
 import Iconify from "@/components/iconify";
 
-import { Product } from "@/types/products";
+import { Offer, Product } from "@/types/products";
 
 import IncrementerButton from "./incrementer-button";
 
 interface Props {
-  product: Product;
+  product: Product | Offer;
   href: string;
 }
 

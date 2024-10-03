@@ -81,7 +81,9 @@
       "Product": {
         "add_to_cart": "Add to cart",
         "description": "Description"
-      }
+      },
+      "offers_title": "Daily Offers",
+      "offers_action": "View All"
     }
   }
 }

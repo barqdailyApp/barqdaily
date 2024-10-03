@@ -80,7 +80,9 @@
       "Product": {
         "add_to_cart": "أضف إلى السلة",
         "description": "الوصف"
-      }
+      },
+      "offers_title": "العروض اليومية",
+      "offers_action": "عرض الكل"
     }
   }
 }

@@ -117,3 +117,27 @@ export interface Brand {
   order: number;
   is_active: boolean;
 }
+
+export interface Offer {
+  section_id: string;
+  product_category_price_id: string;
+  category_sub_category_id: string;
+  offer_id: string;
+  offer_description_ar: string;
+  offer_description_en: string;
+  offer_price: string;
+  is_quantity_available: boolean;
+  warehouse_quantity: number;
+  product_id: string;
+  offer_quantity: number;
+  product_name: string;
+  product_logo: string;
+  product_price_id: string;
+  product_price: string;
+  min_order_quantity: number;
+  max_order_quantity: number;
+  product_measurement_id: string;
+  measurement_unit_id: string;
+  measurement_unit: string;
+  cart_products: any;
+}

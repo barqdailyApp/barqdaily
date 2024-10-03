@@ -14,7 +14,7 @@ export default function CategoriesList({ categories }: Props) {
   const router = useRouter();
 
   return (
-    <Container sx={{ width: "100%", position: "relative", px: 0.5, pt: 6 }}>
+    <Container sx={{ width: "100%", position: "relative", px: 0.5, py: 6 }}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         {categories?.map((item, index) => (
           <Grid item xs={12} sm={6} md={2.4} key={index}>
