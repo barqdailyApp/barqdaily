@@ -20,11 +20,13 @@ import { register } from "@/actions/auth-methods";
 
 import Iconify from "@/components/iconify";
 import FormProvider, { RHFTextField } from "@/components/hook-form";
+import { useDir } from "@/routes/hooks/use-dir";
 
 // ----------------------------------------------------------------------
 
 export default function JwtRegisterView() {
   const t = useTranslations();
+  const dir = useDir();
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -83,18 +85,22 @@ export default function JwtRegisterView() {
               name="phoneNumber"
               placeholder="123 456 789"
               InputProps={{
-                startAdornment: (
+                [dir === "ltr" ? "startAdornment" : "endAdornment"]: (
                   <Stack
                     direction="row"
                     alignItems="center"
                     marginInlineEnd={1}
+                    dir="ltr"
                   >
-                    <InputAdornment position="start">
+                    <InputAdornment position={dir === "ltr" ? "start" : "end"}>
                       <Iconify icon="twemoji:flag-yemen" />
                     </InputAdornment>
                     <Typography color="text.secondary">+967</Typography>
                   </Stack>
                 ),
+                inputProps: {
+                  dir: "ltr",
+                },
               }}
             />
           </Box>

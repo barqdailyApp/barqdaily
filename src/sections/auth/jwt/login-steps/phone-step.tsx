@@ -24,6 +24,7 @@ import { useSnackbar } from "@/components/snackbar";
 import FormProvider, { RHFTextField } from "@/components/hook-form";
 
 import { LoginSteps } from "@/types/auth";
+import { useDir } from "@/routes/hooks/use-dir";
 
 export default function LoginPhoneStep({
   handleStepChange,
@@ -39,6 +40,7 @@ export default function LoginPhoneStep({
   handleAgree: (value: boolean) => void;
 }) {
   const t = useTranslations();
+  const dir = useDir();
   const { enqueueSnackbar } = useSnackbar();
 
   const LoginSchema = Yup.object().shape({
@@ -95,18 +97,22 @@ export default function LoginPhoneStep({
               name="phoneNumber"
               placeholder="123 456 789"
               InputProps={{
-                startAdornment: (
+                [dir === "ltr" ? "startAdornment" : "endAdornment"]: (
                   <Stack
                     direction="row"
                     alignItems="center"
                     marginInlineEnd={1}
+                    dir="ltr"
                   >
-                    <InputAdornment position="start">
+                    <InputAdornment position={dir === "ltr" ? "start" : "end"}>
                       <Iconify icon="twemoji:flag-yemen" />
                     </InputAdornment>
                     <Typography color="text.secondary">+967</Typography>
                   </Stack>
                 ),
+                inputProps: {
+                  dir: "ltr",
+                },
               }}
             />
           </Box>
