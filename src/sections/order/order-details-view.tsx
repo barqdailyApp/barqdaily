@@ -7,13 +7,18 @@ import {
   CardContent,
 } from "@mui/material";
 
-import { OrderDetailsCard } from "@/sections/order-details/view/order-details";
-import { OrderDriverInfoCard } from "@/sections/order-details/view/order-driver";
-import { OrderProcessCard } from "@/sections/order-details/view/order-process";
-import { OrderSummaryCard } from "@/sections/order-details/view/order-summary";
+import { OrderDetailsCard } from "./order-details";
+import { OrderDriverInfoCard } from "./order-driver";
+import { OrderProcessCard } from "./order-process";
+import { OrderSummaryCard } from "./order-summary";
+import { FullOrder } from "@/types/order-details";
 
-export function OrderDetails() {
-  const renderDetails = <OrderDetailsCard />;
+export function OrderDetails({ orderdetails }: { orderdetails: FullOrder }) {
+  const renderDetails = (
+    <OrderDetailsCard
+      shipmentPrdoucts={orderdetails.shipments.shipment_products}
+    />
+  );
 
   const renderDriverTitle = (
     <Typography
@@ -27,9 +32,7 @@ export function OrderDetails() {
   );
 
   const renderDriver = <OrderDriverInfoCard />;
-
   const renderOrderProcess = <OrderProcessCard />;
-
   const renderOrderSummary = <OrderSummaryCard />;
 
   return (
@@ -102,11 +105,12 @@ export function OrderDetails() {
                     textAlign="center"
                     sx={{ mb: 3 }}
                   >
-                    Order ID GC092921
+                    {orderdetails.order_number}
                   </Typography>
                   <Box sx={{ px: -1 }}>{renderOrderProcess}</Box>
                 </CardContent>
               </Card>
+
               <Card
                 sx={{
                   border: "1px solid #CFCFCF",
@@ -123,5 +127,3 @@ export function OrderDetails() {
     </Box>
   );
 }
-
-export default OrderDetails;

@@ -1,7 +1,7 @@
 import { Stack, Typography, Button } from "@mui/material";
 import Iconify from "@/components/iconify";
-
-export function OrderDriverInfoCard() {
+import { Shipments } from "@/types/order-details";
+export function OrderDriverInfoCard({ driver }: { driver: Shipments }) {
   return (
     <>
       <Stack direction="row" spacing={1} alignItems="center">
@@ -9,7 +9,7 @@ export function OrderDriverInfoCard() {
         <Stack>
           <Typography variant="caption">Driver Name</Typography>
           <Typography variant="body2" fontWeight="bold">
-            Omar Wael
+            {driver?.driver?.username || "No Driver Assigned"}
           </Typography>
         </Stack>
       </Stack>

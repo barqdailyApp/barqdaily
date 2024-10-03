@@ -14,5 +14,7 @@ export const endpoints = {
     brands: "product/get-brands-client",
   },
   banars: "banar/guest",
+
   orders: "order/client-orders",
+  singleOrder: (order_id: string) => `order/single-order/${order_id}`,
 };

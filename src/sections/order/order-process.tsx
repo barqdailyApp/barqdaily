@@ -6,6 +6,7 @@ import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineContent from "@mui/lab/TimelineContent";
 import { Box, Stack, Typography } from "@mui/material";
 import Iconify from "@/components/iconify";
+import { Shipments } from "@/types/order-details";
 
 export function OrderProcessCard() {
   return (

@@ -1,8 +1,5 @@
-"use client";
-
 import { OrderDetails } from "@/sections/order-details/view/order-details-view";
-// ----------------------------------------------------------------------
 
-export default function Loading() {
+export default async function Page() {
   return <OrderDetails />;
 }

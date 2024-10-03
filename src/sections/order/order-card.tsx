@@ -8,6 +8,7 @@ import {
   Button,
   Typography,
   CardContent,
+  Link,
 } from "@mui/material";
 
 import { fDate } from "@/utils/format-time";
@@ -20,6 +21,7 @@ import Iconify from "@/components/iconify";
 import { Order } from "@/types/order";
 
 import { icons, WEEK_DAYS, STATUS_SETTINGS } from "./config-orders";
+import { paths } from "@/routes/paths";
 
 export default function OrderCard({ order }: { order: Order }) {
   const t = useTranslations();
@@ -182,13 +184,32 @@ export default function OrderCard({ order }: { order: Order }) {
 
   return (
     <Card
-      sx={{
+      sx={(theme) => ({
         marginTop: 4,
         width: "100%",
         border: "solid 1px",
-        borderColor: "grey",
-      }}
+        borderColor: "grey.200",
+        position: "relative",
+        display: "flex",
+        flexDirection: "column",
+        "&.selected": { border: `1px solid ${theme.palette.primary.main}` },
+        "&:hover": {
+          boxShadow: `0px 0px 0px 1px ${theme.palette.primary.main}, 0px 0px 0px 4px ${theme.palette.primary.main}`,
+          "&:has(.card-clickable-layer:active)": {
+            boxShadow: `0px 0px 0px 1px ${theme.palette.primary.main}`,
+          },
+          zIndex: 9,
+        },
+      })}
     >
+      <Box
+        className="card-clickable-layer"
+        aria-hidden
+        sx={{ position: "absolute", inset: 0, cursor: "pointer" }}
+        href={`${paths.orders}/${order.order_id}`}
+        component={Link}
+      />
+
       <CardContent>
         <Stack
           direction={{ xs: "column", md: "row" }}
