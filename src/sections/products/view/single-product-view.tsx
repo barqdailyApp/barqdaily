@@ -68,7 +68,13 @@ export default function SingleProductView({
   );
 
   const renderActions = (
-    <Stack direction="row" alignItems="center" spacing={1} pt={1}>
+    <Stack
+      direction="row"
+      alignItems="center"
+      justifyContent="start"
+      spacing={1}
+      pt={1}
+    >
       <Button variant="outlined">
         <Iconify icon="ph:heart-bold" width={24} />
       </Button>
@@ -79,33 +85,31 @@ export default function SingleProductView({
           color="primary"
           startIcon={<Iconify icon="bxs:cart-alt" />}
           onClick={() => setQuantity(measurement.min_order_quantity)}
-          sx={{ flexGrow: 1 }}
         >
           {t("Pages.Home.Product.add_to_cart")}
         </Button>
       ) : (
-        <Box>
-          <IncrementerButton
-            onIncrease={() => setQuantity((prev) => prev + 1)}
-            onDecrease={() =>
-              setQuantity((prev) =>
-                prev > measurement.min_order_quantity ? prev - 1 : 0
-              )
-            }
-            sx={{ flexGrow: 1, position: "relative" }}
-            quantity={quantity}
-            disabledIncrease={quantity >= maxQuantity}
-            min={measurement.min_order_quantity}
-          />
-        </Box>
+        <IncrementerButton
+          onIncrease={() => setQuantity((prev) => prev + 1)}
+          onDecrease={() =>
+            setQuantity((prev) =>
+              prev > measurement.min_order_quantity ? prev - 1 : 0
+            )
+          }
+          quantity={quantity}
+          disabledIncrease={quantity >= maxQuantity}
+          min={measurement.min_order_quantity}
+        />
       )}
     </Stack>
   );
 
   return (
-    <Container>
+    <Container sx={{ py: { xs: 4, sm: 6 } }}>
       <Stack direction={{ md: "row" }} spacing={4}>
-        <Box flexShrink={0}>{renderSwiper}</Box>
+        <Box flexShrink={0} maxWidth={{ md: "50%" }}>
+          {renderSwiper}
+        </Box>
 
         <Box flexGrow={1}>
           {renderContent}
