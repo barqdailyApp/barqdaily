@@ -1,5 +1,7 @@
 {
   "Global": {
+    "currency": "ريال",
+    "comma": ",",
     "Label": {
       "your_name": "ادخل اسمك",
       "name": "الاسم",
@@ -79,7 +81,11 @@
       "Product": {
         "add_to_cart": "أضف إلى السلة",
         "description": "الوصف"
-      }
+      },
+      "offers_title": "العروض اليومية",
+      "order_again_title": "أطلب مرة أخرى",
+      "action": "عرض الكل",
+      "order_again": "أطلب مرة أخرى"
     }
   }
 }

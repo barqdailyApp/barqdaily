@@ -6,12 +6,12 @@ import { paths } from "@/routes/paths";
 
 import { ProductCard } from "@/CustomSharedComponents/product/product-card";
 
-import { Product } from "@/types/products";
+import { Offer, Product } from "@/types/products";
 
 import ProductPagination from "../products-pagination";
 
 interface Props {
-  products: Product[];
+  products: (Product | Offer)[];
   pagesCount: number;
 }
 
@@ -36,7 +36,11 @@ export default function ProductsListView({ products, pagesCount }: Props) {
         ))}
       </Grid>
 
-      {pagesCount > 1 && <ProductPagination pagesCount={pagesCount} />}
+      {pagesCount > 1 && (
+        <Box pt={{ xs: 4, sm: 6 }}>
+          <ProductPagination pagesCount={pagesCount} />
+        </Box>
+      )}
     </Box>
   );
 }

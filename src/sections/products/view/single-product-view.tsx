@@ -1,25 +1,17 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 
-import {
-  Box,
-  Button,
-  Typography,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-} from "@mui/material";
-
-import { fCurrency } from "@/utils/format-number";
+import { Box, Stack, Button, Container, Typography } from "@mui/material";
 
 import IncrementerButton from "@/CustomSharedComponents/product/incrementer-button";
 
 import Iconify from "@/components/iconify";
 
-import { FullProduct } from "@/types/products";
+import { FullProduct, ProductMeasurement } from "@/types/products";
+
+import ProductSwiper from "../product-swiper";
 
 interface Props {
   product: FullProduct;
@@ -28,54 +20,57 @@ interface Props {
 export default function SingleProductView({
   product: { product, product_measurements },
 }: Props) {
-  const t = useTranslations("Pages.Home.Product");
+  const t = useTranslations("");
   const [quantity, setQuantity] = useState(0);
 
-  const renderImage = (
-    <Image
-      src={product.product_logo}
-      alt={product.product_name}
-      width={200}
-      height={200}
-      style={{
-        objectFit: "contain",
-        textAlign: "center",
-        display: "block",
-        marginInline: "auto",
-        borderRadius: 10,
-      }}
-    />
+  const measurement =
+    product_measurements.find((item) => item.is_main_unit) ||
+    ({} as ProductMeasurement);
+  const offerPrice = measurement.offer?.offer_price;
+  const originalPrice = measurement.product_category_price.product_price;
+  const finalPrice = offerPrice ?? originalPrice;
+
+  const maxQuantity = Math.min(
+    measurement.warehouse_quantity,
+    measurement.offer?.quantity ?? measurement.max_order_quantity
   );
 
+  const renderSwiper = <ProductSwiper images={product.product_images} />;
+
   const renderContent = (
-    <DialogContent sx={{ height: "auto", padding: 4 }}>
-      {renderImage}
-      <Typography variant="h4" component="p" pt={2}>
+    <Box sx={{ height: "auto", pt: 4 }}>
+      <Typography variant="h4" component="p">
         {product.product_name}
       </Typography>
+      <Typography variant="h6">{measurement.measurement_unit}</Typography>
       <Typography
         variant="h5"
-        fontWeight={500}
         color="primary"
         gutterBottom
         component="p"
         suppressHydrationWarning
       >
-        {fCurrency(
-          product_measurements[0].product_category_price.product_price
+        {offerPrice && (
+          <Typography
+            component="del"
+            color="text.disabled"
+          >{`${originalPrice} `}</Typography>
         )}
+        {`${finalPrice} ${t("Global.currency")}`}
       </Typography>
       <Typography fontWeight={700} component="p">
-        {t("description")}
+        {t("Pages.Home.Product.description")}
       </Typography>
-      <DialogContentText>{product.product_description}</DialogContentText>
-    </DialogContent>
+      <Typography color="text.disabled">
+        {product.product_description}
+      </Typography>
+    </Box>
   );
 
   const renderActions = (
-    <DialogActions>
+    <Stack direction="row" alignItems="center" spacing={1} pt={1}>
       <Button variant="outlined">
-        <Iconify icon="ph:heart-bold" />
+        <Iconify icon="ph:heart-bold" width={24} />
       </Button>
 
       {quantity === 0 ? (
@@ -83,37 +78,41 @@ export default function SingleProductView({
           variant="contained"
           color="primary"
           startIcon={<Iconify icon="bxs:cart-alt" />}
-          onClick={() =>
-            setQuantity(product_measurements[0].min_order_quantity)
-          }
+          onClick={() => setQuantity(measurement.min_order_quantity)}
           sx={{ flexGrow: 1 }}
         >
-          {t("add_to_cart")}
+          {t("Pages.Home.Product.add_to_cart")}
         </Button>
       ) : (
-        <IncrementerButton
-          onIncrease={() => setQuantity((prev) => prev + 1)}
-          onDecrease={() =>
-            setQuantity((prev) =>
-              prev > product_measurements[0].min_order_quantity ? prev - 1 : 0
-            )
-          }
-          sx={{ flexGrow: 1, position: "relative" }}
-          quantity={quantity}
-          disabledIncrease={
-            quantity >= product_measurements[0].max_order_quantity
-          }
-          min={product_measurements[0].min_order_quantity}
-        />
+        <Box>
+          <IncrementerButton
+            onIncrease={() => setQuantity((prev) => prev + 1)}
+            onDecrease={() =>
+              setQuantity((prev) =>
+                prev > measurement.min_order_quantity ? prev - 1 : 0
+              )
+            }
+            sx={{ flexGrow: 1, position: "relative" }}
+            quantity={quantity}
+            disabledIncrease={quantity >= maxQuantity}
+            min={measurement.min_order_quantity}
+          />
+        </Box>
       )}
-    </DialogActions>
+    </Stack>
   );
 
   return (
-    <Box>
-      {renderContent}
+    <Container>
+      <Stack direction={{ md: "row" }} spacing={4}>
+        <Box flexShrink={0}>{renderSwiper}</Box>
 
-      {renderActions}
-    </Box>
+        <Box flexGrow={1}>
+          {renderContent}
+
+          {renderActions}
+        </Box>
+      </Stack>
+    </Container>
   );
 }
