@@ -2,16 +2,17 @@
 
 import { useTranslations } from "next-intl";
 
-import { Box, Link, Stack, Container, Typography, Grid } from "@mui/material";
+import { Box, Link, Grid, Stack, Container, Typography } from "@mui/material";
 
 import { paths } from "@/routes/paths";
 import { useDir } from "@/routes/hooks/use-dir";
 import { RouterLink } from "@/routes/components";
 
+import { ProductCard } from "@/CustomSharedComponents/product/product-card";
+
 import Iconify from "@/components/iconify";
 
 import { Offer } from "@/types/products";
-import { ProductCard } from "@/CustomSharedComponents/product/product-card";
 
 export default function DailyOffers({ offers }: { offers: Offer[] }) {
   const t = useTranslations("Pages.Home");
