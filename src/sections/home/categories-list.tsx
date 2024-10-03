@@ -15,7 +15,13 @@ export default function CategoriesList({ categories }: Props) {
 
   return (
     <Container
-      sx={{ width: "100%", position: "relative", px: { xs: 2, lg: 0 }, py: 6 }}
+      sx={{
+        width: "100%",
+        position: "relative",
+        px: { xs: 2, lg: 0 },
+        pt: 2,
+        pb: 6,
+      }}
     >
       <Grid container spacing={1}>
         {categories?.map((item, index) => (
