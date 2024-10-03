@@ -1,8 +1,16 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import { Card, Grid, CardMedia, Container, Typography } from "@mui/material";
+import {
+  Box,
+  Card,
+  Grid,
+  CardMedia,
+  Container,
+  Typography,
+} from "@mui/material";
 
 import { Category } from "@/types/products";
 
@@ -30,8 +38,16 @@ export default function CategoriesList({ categories }: Props) {
               sx={(theme) => ({
                 border: `1px solid ${theme.palette.primary.main}`,
                 backgroundColor: theme.palette.primary.lighter,
+                position: "relative",
               })}
             >
+              <Box
+                className="card-clickable-layer"
+                aria-hidden
+                sx={{ position: "absolute", inset: 0, cursor: "pointer" }}
+                href={`/category?categoryId=${item.id}`}
+                component={Link}
+              />
               <Typography
                 variant="body2"
                 textAlign="center"
