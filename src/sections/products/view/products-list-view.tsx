@@ -17,7 +17,7 @@ interface Props {
 
 export default function ProductsListView({ products, pagesCount }: Props) {
   return (
-    <Box>
+    <Box pb={{ xs: 4, sm: 6 }}>
       <Grid container spacing={3}>
         {products.map((item) => (
           <Grid

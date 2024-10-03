@@ -1,6 +1,7 @@
 {
   "Global": {
     "currency": "YER",
+    "comma": ",",
     "Label": {
       "your_name": "Your name",
       "name": "Name",
@@ -15,7 +16,6 @@
     "Message": {
       "otp_sent": "A code has sent to your WhatsApp number."
     },
-
     "Footer": {
       "contact_title": "Contact us",
       "download": "Download the app",
@@ -83,7 +83,9 @@
         "description": "Description"
       },
       "offers_title": "Daily Offers",
-      "offers_action": "View All"
+      "order_again_title": "Order Again",
+      "action": "View All",
+      "order_again": "Order Again"
     }
   }
 }

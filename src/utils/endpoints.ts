@@ -15,4 +15,5 @@ export const endpoints = {
     offers: "product/all-products-offers-for-client",
   },
   banars: "banar/guest",
+  orders: "order/client-orders",
 };

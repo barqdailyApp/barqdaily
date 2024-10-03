@@ -35,7 +35,7 @@ export default function StoreLayout({ children }: Props) {
           width: "100%",
         }}
       >
-        <Box pb={{ xs: 5, md: 9 }}>{children}</Box>
+        <Box>{children}</Box>
         <Box sx={{ flexShrink: 0 }}>
           <Footer />
           <Copyrights />
