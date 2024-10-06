@@ -60,6 +60,7 @@ export function ProductCard({ product, href }: Props) {
         aria-hidden
         sx={{ position: "absolute", inset: 0, cursor: "pointer" }}
         href={href}
+        scroll={false}
         component={Link}
       />
 
