@@ -26,6 +26,7 @@ import Iconify from "@/components/iconify";
 import IncrementerButton from "@/sections/products/incrementer-button";
 
 import { FullProduct, ProductMeasurement } from "@/types/products";
+import { useCurrency } from "@/utils/format-number";
 
 interface Props {
   productId: string;
@@ -86,6 +87,7 @@ function ProductDialogContent({
   product: FullProduct;
 }) {
   const t = useTranslations();
+  const currency = useCurrency();
   const [quantity, setQuantity] = useState(0);
 
   const measurement =
@@ -130,12 +132,11 @@ function ProductDialogContent({
         suppressHydrationWarning
       >
         {offerPrice && (
-          <Typography
-            component="del"
-            color="text.disabled"
-          >{`${originalPrice} `}</Typography>
-        )}
-        {`${finalPrice} ${t("Global.currency")}`}
+          <Typography component="del" color="text.disabled">
+            {currency(originalPrice, false)}
+          </Typography>
+        )}{" "}
+        {currency(finalPrice)}
       </Typography>
       <Typography fontWeight={700} component="p">
         {t("Pages.Home.Product.description")}

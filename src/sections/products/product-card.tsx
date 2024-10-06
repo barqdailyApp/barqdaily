@@ -15,6 +15,8 @@ import {
   CardContent,
 } from "@mui/material";
 
+import { useCurrency } from "@/utils/format-number";
+
 import Iconify from "@/components/iconify";
 
 import { Offer, Product } from "@/types/products";
@@ -53,6 +55,8 @@ export function ProductCard({ product, href }: Props) {
     product.offer_quantity ?? product.max_order_quantity
   );
 
+  const currency = useCurrency();
+
   return (
     <StyledCard className={quantity > 0 ? "selected" : ""}>
       <Box
@@ -83,12 +87,11 @@ export function ProductCard({ product, href }: Props) {
         <Box flexGrow={1} aria-hidden />
         <Typography fontWeight={600} color="primary" suppressHydrationWarning>
           {offerPrice && (
-            <Typography
-              component="del"
-              color="text.disabled"
-            >{`${originalPrice} `}</Typography>
-          )}
-          {`${finalPrice} ${t("Global.currency")}`}
+            <Typography component="del" color="text.disabled">
+              {currency(originalPrice, false)}
+            </Typography>
+          )}{" "}
+          {currency(finalPrice)}
         </Typography>
 
         <Stack direction="row" spacing={1} flexWrap="wrap">

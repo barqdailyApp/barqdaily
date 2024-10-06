@@ -1,6 +1,9 @@
 // ----------------------------------------------------------------------
 
+import { useLocale } from "next-intl";
+
 import { useCurrentLocale } from "@/i18n/localization-provider";
+import { LocaleType, localesSettings } from "@/i18n/config-locale";
 
 /*
  * Locales code
@@ -55,6 +58,28 @@ export function fCurrency(inputValue: InputValue) {
   }).format(number);
 
   return fm;
+}
+
+// ----------------------------------------------------------------------
+
+export function useCurrency() {
+  const locale = useLocale() as LocaleType;
+  const { currency } = localesSettings[locale];
+
+  const formater = (inputValue: InputValue, currencyCode = true) => {
+    if (!inputValue) return "";
+
+    const number = Number(inputValue);
+
+    const fm = new Intl.NumberFormat("en-US", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(number);
+
+    return currencyCode ? `${fm} ${currency}` : fm;
+  };
+
+  return formater;
 }
 
 // ----------------------------------------------------------------------

@@ -11,10 +11,13 @@ import {
   AvatarGroup,
 } from "@mui/material";
 
+import { useCurrency } from "@/utils/format-number";
+
 import Iconify from "@/components/iconify";
 
 export default function OrderAgainProductCard({ order }: { order: any }) {
   const t = useTranslations();
+  const currency = useCurrency();
 
   const { products } = order.shipments;
 
@@ -40,7 +43,7 @@ export default function OrderAgainProductCard({ order }: { order: any }) {
         </AvatarGroup>
 
         <Typography variant="h6" fontWeight={700} color="primary" mt={1}>
-          {`${order.total_price} ${t("Global.currency")}`}
+          {currency(order.total_price)}
         </Typography>
         <Typography variant="caption" component="p" mt={0.5}>
           {names.join(`${t("Global.comma")} `)}

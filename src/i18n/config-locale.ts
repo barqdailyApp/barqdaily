@@ -15,6 +15,7 @@ interface LocaleSetting {
   label: string;
   value: LocaleType;
   dir: "ltr" | "rtl";
+  currency: string;
   systemValue: any;
   adapterLocale: any;
   icon: string;
@@ -32,6 +33,7 @@ export const localesSettings: { [key in LocaleType]: LocaleSetting } = {
     label: "العربية",
     value: "ar",
     dir: "rtl",
+    currency: "ر.ي",
     systemValue: merge(arSDDataGrid, arSACore),
     adapterLocale: arSAAdapter,
     icon: "flagpack:sa",
@@ -44,6 +46,7 @@ export const localesSettings: { [key in LocaleType]: LocaleSetting } = {
     label: "English",
     value: "en",
     dir: "ltr",
+    currency: "YER",
     systemValue: merge(enUSDate, enUSDataGrid, enUSCore),
     adapterLocale: enUSAdapter,
     icon: "flagpack:gb-nir",

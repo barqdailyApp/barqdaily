@@ -5,6 +5,8 @@ import { useTranslations } from "next-intl";
 
 import { Box, Stack, Button, Container, Typography } from "@mui/material";
 
+import { useCurrency } from "@/utils/format-number";
+
 import { SECTION_PADDING } from "@/layouts/config-layout";
 
 import Iconify from "@/components/iconify";
@@ -22,6 +24,7 @@ interface Props {
 export default function SingleProductView({
   product: { product, product_measurements },
 }: Props) {
+  const currency = useCurrency();
   const t = useTranslations("");
   const [quantity, setQuantity] = useState(0);
 
@@ -53,12 +56,11 @@ export default function SingleProductView({
         suppressHydrationWarning
       >
         {offerPrice && (
-          <Typography
-            component="del"
-            color="text.disabled"
-          >{`${originalPrice} `}</Typography>
-        )}
-        {`${finalPrice} ${t("Global.currency")}`}
+          <Typography component="del" color="text.disabled">
+            {currency(originalPrice, false)}
+          </Typography>
+        )}{" "}
+        {currency(finalPrice)}
       </Typography>
       <Typography fontWeight={700} component="p">
         {t("Pages.Home.Product.description")}
