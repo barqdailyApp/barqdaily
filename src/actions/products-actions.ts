@@ -5,12 +5,12 @@ import { getData } from "@/utils/crud-fetch-api";
 
 import {
   Brand,
+  Offer,
   Product,
   Section,
   Category,
   SubCategory,
   FullProduct,
-  Offer,
 } from "@/types/products";
 
 export async function fetchCategories() {

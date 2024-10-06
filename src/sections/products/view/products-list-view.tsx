@@ -4,7 +4,9 @@ import { Box, Grid } from "@mui/material";
 
 import { paths } from "@/routes/paths";
 
-import { ProductCard } from "@/CustomSharedComponents/product/product-card";
+import { SECTION_PADDING } from "@/layouts/config-layout";
+
+import { ProductCard } from "@/sections/products/product-card";
 
 import { Offer, Product } from "@/types/products";
 
@@ -17,7 +19,7 @@ interface Props {
 
 export default function ProductsListView({ products, pagesCount }: Props) {
   return (
-    <Box>
+    <Box pb={SECTION_PADDING}>
       <Grid container spacing={3}>
         {products.map((item) => (
           <Grid
@@ -37,7 +39,7 @@ export default function ProductsListView({ products, pagesCount }: Props) {
       </Grid>
 
       {pagesCount > 1 && (
-        <Box pt={{ xs: 4, sm: 6 }}>
+        <Box>
           <ProductPagination pagesCount={pagesCount} />
         </Box>
       )}

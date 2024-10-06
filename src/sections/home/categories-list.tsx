@@ -12,6 +12,8 @@ import {
   Typography,
 } from "@mui/material";
 
+import { SECTION_PADDING } from "@/layouts/config-layout";
+
 import { Category } from "@/types/products";
 
 interface Props {
@@ -26,8 +28,7 @@ export default function CategoriesList({ categories }: Props) {
       sx={{
         width: "100%",
         position: "relative",
-        pt: 2,
-        pb: 6,
+        pb: SECTION_PADDING,
       }}
     >
       <Grid container spacing={1}>

@@ -7,6 +7,7 @@ import { Autoplay, Navigation } from "swiper/modules";
 
 import { Box, Stack, styled, Container, IconButton } from "@mui/material";
 
+import { SECTION_PADDING } from "@/layouts/config-layout";
 import { LocaleType, localesSettings } from "@/i18n/config-locale";
 
 import Iconify from "@/components/iconify";
@@ -99,8 +100,14 @@ export default function BanarsSwiper({ banars }: Props) {
         background: theme.palette.background.neutral,
       })}
     >
-      <Container style={{ marginTop: 1 }}>
-        <Box sx={{ width: "100%", position: "relative", px: 0.5, py: 6 }}>
+      <Container>
+        <Box
+          sx={{
+            width: "100%",
+            position: "relative",
+            py: SECTION_PADDING,
+          }}
+        >
           {renderSwiper}
           {renderButtons}
         </Box>

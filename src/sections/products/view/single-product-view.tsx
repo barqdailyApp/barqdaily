@@ -5,7 +5,8 @@ import { useTranslations } from "next-intl";
 
 import { Box, Stack, Button, Container, Typography } from "@mui/material";
 
-import IncrementerButton from "@/CustomSharedComponents/product/incrementer-button";
+import { SECTION_PADDING } from "@/layouts/config-layout";
+import IncrementerButton from "@/sections/products/incrementer-button";
 
 import Iconify from "@/components/iconify";
 
@@ -105,7 +106,7 @@ export default function SingleProductView({
   );
 
   return (
-    <Container sx={{ py: { xs: 4, sm: 6 } }}>
+    <Container sx={{ py: SECTION_PADDING }}>
       <Stack direction={{ md: "row" }} spacing={4}>
         <Box flexShrink={0} maxWidth={{ md: "50%" }}>
           {renderSwiper}

@@ -20,9 +20,10 @@ import {
 } from "@mui/material";
 
 import { fetchSingleProduct } from "@/actions/products-actions";
-import IncrementerButton from "@/CustomSharedComponents/product/incrementer-button";
 
 import Iconify from "@/components/iconify";
+
+import IncrementerButton from "@/sections/products/incrementer-button";
 
 import { FullProduct, ProductMeasurement } from "@/types/products";
 

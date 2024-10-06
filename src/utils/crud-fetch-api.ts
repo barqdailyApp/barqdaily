@@ -12,18 +12,6 @@ import {
 // Base URL for the API
 const API_BASE_URL = HOST_API;
 
-// Helper function to get the token from cookies
-const getToken = (): string => {
-  const cookieStore = cookies();
-  return cookieStore.get(COOKIES_KEYS.session)?.value || "";
-};
-
-// Helper function to get the language from cookies or default to 'ar'
-const getLanguage = (): string => {
-  const cookieStore = cookies();
-  return cookieStore.get(COOKIES_KEYS.lang)?.value || defaultLocale;
-};
-
 function isFormData(value: unknown) {
   return value instanceof FormData;
 }

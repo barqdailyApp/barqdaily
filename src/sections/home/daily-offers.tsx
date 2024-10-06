@@ -4,7 +4,9 @@ import { Box, Grid, Container } from "@mui/material";
 
 import { paths } from "@/routes/paths";
 
-import { ProductCard } from "@/CustomSharedComponents/product/product-card";
+import { SECTION_PADDING } from "@/layouts/config-layout";
+
+import { ProductCard } from "@/sections/products/product-card";
 
 import { Offer } from "@/types/products";
 
@@ -34,7 +36,7 @@ export default function DailyOffers({ offers }: { offers: Offer[] }) {
   );
 
   return (
-    <Box bgcolor="background.neutral" py={{ xs: 4, sm: 6 }}>
+    <Box bgcolor="background.neutral" py={SECTION_PADDING}>
       <Container>
         <SectionHeadding titleName="offers_title" href={paths.offers} />
         {renderOffers}
