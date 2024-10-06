@@ -63,8 +63,7 @@ export function fCurrency(inputValue: InputValue) {
 // ----------------------------------------------------------------------
 
 export function useCurrency() {
-  const locale = useLocale() as LocaleType;
-  const { currency } = localesSettings[locale];
+  const { currency } = useCurrentLocale();
 
   const formater = (inputValue: InputValue, currencyCode = true) => {
     if (!inputValue) return "";
