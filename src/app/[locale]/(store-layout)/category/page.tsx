@@ -1,9 +1,10 @@
-import { Grid, Alert, Skeleton } from "@mui/material";
+import { Alert } from "@mui/material";
 
 import TAlert from "@/CustomSharedComponents/t-alert";
 import { fetchProductsBySubCategory } from "@/actions/products-actions";
 
 import ProductsListView from "@/sections/products/view/products-list-view";
+import ProductsListLoading from "@/sections/products/loading/products-list-loading";
 
 interface Props {
   searchParams: Record<"subCategoryId" | "page", string | undefined>;
@@ -13,15 +14,7 @@ export default async function Page({
   searchParams: { subCategoryId, page },
 }: Props) {
   if (!subCategoryId) {
-    return (
-      <Grid container spacing={3}>
-        {[...Array(10)].map((_, index) => (
-          <Grid item xs={6} md={4} lg={3} key={index}>
-            <Skeleton variant="rectangular" width="100%" height={300} />
-          </Grid>
-        ))}
-      </Grid>
-    );
+    return <ProductsListLoading />;
   }
 
   const products = await fetchProductsBySubCategory(

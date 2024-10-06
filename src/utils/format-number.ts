@@ -1,6 +1,9 @@
 // ----------------------------------------------------------------------
 
+import { useLocale } from "next-intl";
+
 import { useCurrentLocale } from "@/i18n/localization-provider";
+import { LocaleType, localesSettings } from "@/i18n/config-locale";
 
 /*
  * Locales code
@@ -60,7 +63,8 @@ export function fCurrency(inputValue: InputValue) {
 // ----------------------------------------------------------------------
 
 export function useCurrency() {
-  const { currency } = useCurrentLocale();
+  const locale = useLocale() as LocaleType;
+  const { currency } = localesSettings[locale];
 
   const formater = (inputValue: InputValue, currencyCode = true) => {
     if (!inputValue) return "";
