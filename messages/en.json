@@ -14,7 +14,9 @@
       "phone_invalid": "Phone is invalid",
       "phone_digits": "Phone must be 9 digits",
       "phone_start_with_7": "Phone must start with 7",
-      "phone_only_digits": "Phone must be only digits"
+      "phone_only_digits": "Phone must be only digits",
+      "no_products_found": "No products found",
+      "no_subcategories_found": "No subcategories found"
     },
     "Message": {
       "otp_sent": "A code has sent to your WhatsApp number."

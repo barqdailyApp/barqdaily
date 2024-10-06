@@ -1,5 +1,6 @@
 import { Grid, Alert, Skeleton } from "@mui/material";
 
+import TAlert from "@/CustomSharedComponents/t-alert";
 import { fetchProductsBySubCategory } from "@/actions/products-actions";
 
 import ProductsListView from "@/sections/products/view/products-list-view";
@@ -33,7 +34,7 @@ export default async function Page({
   }
 
   if (products.pagesCount === 0) {
-    return <Alert severity="warning">No products found</Alert>;
+    return <TAlert severity="warning">Global.Error.no_products_found</TAlert>;
   }
 
   return (

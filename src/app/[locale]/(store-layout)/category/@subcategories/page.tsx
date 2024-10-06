@@ -1,5 +1,6 @@
-import { Box, Alert, Stack, Skeleton } from "@mui/material";
+import { Box, Stack, Skeleton } from "@mui/material";
 
+import TAlert from "@/CustomSharedComponents/t-alert";
 import { fetchSubCategories } from "@/actions/products-actions";
 
 import SubCategoriesFilter from "@/sections/products/subCategories-filter";
@@ -39,7 +40,9 @@ export default async function Page({
   }
 
   if (subCategories.length === 0) {
-    return <Alert severity="error">No subCategories found</Alert>;
+    return (
+      <TAlert severity="error">Global.Error.no_subcategories_found</TAlert>
+    );
   }
 
   return (
