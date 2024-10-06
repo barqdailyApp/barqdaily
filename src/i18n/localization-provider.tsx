@@ -14,9 +14,9 @@ type Props = {
 };
 
 export function useCurrentLocale() {
-  const lang = useLocale();
+  const locale = useLocale();
 
-  const currentLocale = localesSettings[lang as LocaleType];
+  const currentLocale = localesSettings[locale as LocaleType];
 
   return currentLocale;
 }

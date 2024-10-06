@@ -1,9 +1,6 @@
 // ----------------------------------------------------------------------
 
-import { useLocale } from "next-intl";
-
 import { useCurrentLocale } from "@/i18n/localization-provider";
-import { LocaleType, localesSettings } from "@/i18n/config-locale";
 
 /*
  * Locales code
