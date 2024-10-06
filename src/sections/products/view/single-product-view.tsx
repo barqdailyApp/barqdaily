@@ -6,9 +6,10 @@ import { useTranslations } from "next-intl";
 import { Box, Stack, Button, Container, Typography } from "@mui/material";
 
 import { SECTION_PADDING } from "@/layouts/config-layout";
-import IncrementerButton from "@/sections/products/incrementer-button";
 
 import Iconify from "@/components/iconify";
+
+import IncrementerButton from "@/sections/products/incrementer-button";
 
 import { FullProduct, ProductMeasurement } from "@/types/products";
 
