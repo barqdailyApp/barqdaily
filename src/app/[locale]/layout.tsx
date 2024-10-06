@@ -62,3 +62,5 @@ export default async function LocaleLayout({
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
+
+export const dynamic = "force-dynamic";
