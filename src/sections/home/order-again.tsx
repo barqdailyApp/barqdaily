@@ -9,8 +9,8 @@ export default function OrderAgain({ orders }: { orders: any[] }) {
       <SectionHeadding titleName="order_again_title" href="/" />
       <Grid container spacing={3} pt={{ xs: 3, sm: 6 }}>
         {orders.map((item) => (
-          <Grid item xs={12} sm={6} md={4}>
-            <OrderAgainProductCard order={item} key={item.product_id} />
+          <Grid item xs={12} sm={6} md={4} key={item.product_id}>
+            <OrderAgainProductCard order={item} />
           </Grid>
         ))}
       </Grid>

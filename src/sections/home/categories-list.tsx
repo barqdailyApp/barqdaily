@@ -26,7 +26,6 @@ export default function CategoriesList({ categories }: Props) {
       sx={{
         width: "100%",
         position: "relative",
-        px: { xs: 2, lg: 0 },
         pt: 2,
         pb: 6,
       }}
