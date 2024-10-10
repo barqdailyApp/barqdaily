@@ -1,8 +1,9 @@
-import { OrderDetails } from "@/sections/order/order-details-view";
-import { FullOrder } from "@/types/order-details";
-import { getData } from "@/utils/crud-fetch-api";
 import { endpoints } from "@/utils/endpoints";
-import { error } from "console";
+import { getData } from "@/utils/crud-fetch-api";
+
+import { OrderDetails } from "@/sections/order/order-details-view";
+
+import { FullOrder } from "@/types/order-details";
 
 export default async function Page({
   params,
