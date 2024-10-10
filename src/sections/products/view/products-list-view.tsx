@@ -4,11 +4,10 @@ import { Box, Grid } from "@mui/material";
 
 import { paths } from "@/routes/paths";
 
+import ParamsPagination from "@/CustomSharedComponents/params-pagination";
 import { ProductCard } from "@/CustomSharedComponents/product/product-card";
 
 import { Product } from "@/types/products";
-
-import ProductPagination from "../products-pagination";
 
 interface Props {
   products: Product[];
@@ -36,7 +35,7 @@ export default function ProductsListView({ products, pagesCount }: Props) {
         ))}
       </Grid>
 
-      {pagesCount > 1 && <ProductPagination pagesCount={pagesCount} />}
+      {pagesCount > 1 && <ParamsPagination pagesCount={pagesCount} />}
     </Box>
   );
 }

@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import { useTranslations } from "next-intl";
 
 import { Stack, Alert, Container } from "@mui/material";
+
+import ParamsPagination from "@/CustomSharedComponents/params-pagination";
 
 import { Order } from "@/types/order";
 
@@ -11,40 +12,29 @@ import OrderCard from "../order-card";
 import StatusFilter from "../status-filter";
 
 interface Props {
-  initialStatus?: string;
   orders: Order[];
+  pagesCount: number;
 }
 
-export default function OrderView({ initialStatus, orders }: Props) {
-  const [statusFilter, setStatusFilter] = useState(
-    initialStatus || "all-orders"
-  );
-
-  const filteredOrders = orders.filter(
-    (order) =>
-      statusFilter === "all-orders" ||
-      order.shipments.status === statusFilter.toUpperCase()
-  );
-
+export default function OrderView({ orders, pagesCount }: Props) {
   const t = useTranslations();
 
   return (
     <Container sx={{ padding: 4 }}>
-      <StatusFilter
-        initialStatus={initialStatus}
-        onStatusChange={(status) => setStatusFilter(status)}
-      />
-      {filteredOrders.length === 0 ? (
+      <StatusFilter />
+      {orders.length === 0 ? (
         <Alert severity="warning" sx={{ mt: 3 }}>
-          {t("Pages.Order.error")}
+          {t("Pages.Order.no_orders")}
         </Alert>
       ) : (
         <Stack spacing={1}>
-          {filteredOrders.map((order) => (
+          {orders.map((order) => (
             <OrderCard key={order.order_id} order={order} />
           ))}
         </Stack>
       )}
+
+      {pagesCount > 1 && <ParamsPagination pagesCount={pagesCount} />}
     </Container>
   );
 }

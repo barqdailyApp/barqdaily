@@ -7,16 +7,26 @@ import { Order } from "@/types/order";
 
 type Response = { data: Order[]; meta: { itemCount: number } };
 
-export default async function Page() {
-  const searchParams = new URLSearchParams({
-    page: "1",
-    limit: "10",
+interface Props {
+  searchParams: { status: string | undefined; page: string | undefined };
+}
+
+export default async function Page({ searchParams: { status, page } }: Props) {
+  const queries = new URLSearchParams({
+    page: page || "1",
+    limit: "5",
+    ...(status ? { status } : {}),
   });
   const orders = await getData<Response>(
-    `${endpoints.orders}?${searchParams.toString()}`
+    `${endpoints.orders}?${queries.toString()}`
   );
   if ("error" in orders) {
     throw new Error(orders.error);
   }
-  return <OrderView orders={orders.data.data} />;
+  return (
+    <OrderView
+      orders={orders.data.data}
+      pagesCount={Math.ceil(orders.data.meta.itemCount / 5)}
+    />
+  );
 }

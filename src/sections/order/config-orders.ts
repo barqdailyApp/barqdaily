@@ -1,14 +1,16 @@
 import { LabelColor } from "@/components/label";
 
-export const orderStatuses = [
-  { label: "all-orders", value: "all-orders" },
-  { label: "confirmed", value: "confirmed" },
-  { label: "delivered", value: "delivered" },
-  { label: "picked_up", value: "picked_up" },
-  { label: "ready_for_pickup", value: "ready_for_pickup" },
-  { label: "processing", value: "processing" },
-  { label: "canceled", value: "canceled" },
-  { label: "returned", value: "returned" },
+export const ALL_ORDER_STATUS = [
+  { label: "all", value: "" },
+  { label: "pending", value: "PENDING" },
+  { label: "confirmed", value: "CONFIRMED" },
+  { label: "processing", value: "PROCESSING" },
+  { label: "ready_for_pickup", value: "READY_FOR_PICKUP" },
+  { label: "picked_up", value: "PICKED_UP" },
+  { label: "delivered", value: "DELIVERED" },
+  { label: "completed", value: "COMPLETED" },
+  { label: "returned", value: "RETRUNED" },
+  { label: "canceled", value: "CANCELED" },
 ];
 
 export const WEEK_DAYS = [
@@ -40,6 +42,7 @@ export const icons = [
   },
 ];
 
+// Index for displaying the status progress
 export const STATUS_SETTINGS: Record<
   string,
   { index: number; label: string; color: LabelColor }

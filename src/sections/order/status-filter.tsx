@@ -1,37 +1,40 @@
 import { useTranslations } from "next-intl";
 import { useState, useCallback } from "react";
+import { useSearchParams } from "next/navigation";
 
 import { Tab, Tabs } from "@mui/material";
 
-import { orderStatuses } from "./config-orders";
+import { useQueryString } from "@/hooks/use-queryString";
 
-interface Props {
-  initialStatus?: string;
-  onStatusChange: (status: string) => void; // Notify parent of the status change
-}
+import { ALL_ORDER_STATUS } from "./config-orders";
 
-export default function StatusFilter({ initialStatus, onStatusChange }: Props) {
-  const [selectedStatus, setSelectedStatus] = useState(
-    initialStatus || "all-orders"
+export default function StatusFilter() {
+  const t = useTranslations("Pages.Order.Status");
+  const { createQueryString } = useQueryString();
+  const searshParams = useSearchParams();
+
+  const [currentStatus, setCurrentState] = useState(
+    searshParams.get("status") || ""
   );
 
   const handleChange = useCallback(
     (event: React.SyntheticEvent, newValue: string) => {
-      setSelectedStatus(newValue);
-      onStatusChange(newValue); // Notify parent of the status change
+      setCurrentState(newValue);
+      createQueryString([
+        { name: "status", value: newValue },
+        { name: "page" },
+      ]);
     },
-    [onStatusChange]
+    [createQueryString]
   );
-
-  const t = useTranslations("Pages.Order.Status");
 
   return (
     <Tabs
-      value={selectedStatus}
+      value={currentStatus}
       onChange={handleChange}
       aria-label="Order Status Navigation"
     >
-      {orderStatuses.map((status) => (
+      {ALL_ORDER_STATUS.map((status) => (
         <Tab
           label={t(`${status.label}`)}
           key={status.value}
