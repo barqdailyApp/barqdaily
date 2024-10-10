@@ -1,4 +1,4 @@
-import { Stack, Typography, Button } from "@mui/material";
+import { Stack, Button, Typography } from "@mui/material";
 
 export function OrderSummaryCard() {
   return (

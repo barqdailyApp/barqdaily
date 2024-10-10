@@ -1,7 +1,9 @@
-import { useState, useCallback } from "react";
-import { Tab, Tabs } from "@mui/material";
-import { orderStatuses } from "./config-orders";
 import { useTranslations } from "next-intl";
+import { useState, useCallback } from "react";
+
+import { Tab, Tabs } from "@mui/material";
+
+import { orderStatuses } from "./config-orders";
 
 interface Props {
   initialStatus?: string;

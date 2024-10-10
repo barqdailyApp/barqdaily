@@ -1,11 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { Stack, Container, Alert } from "@mui/material";
+import { useTranslations } from "next-intl";
+
+import { Stack, Alert, Container } from "@mui/material";
+
 import { Order } from "@/types/order";
+
 import OrderCard from "../order-card";
 import StatusFilter from "../status-filter";
-import { useTranslations } from "next-intl";
 
 interface Props {
   initialStatus?: string;
@@ -32,7 +35,9 @@ export default function OrderView({ initialStatus, orders }: Props) {
         onStatusChange={(status) => setStatusFilter(status)}
       />
       {filteredOrders.length === 0 ? (
-        <Alert severity="warning">{t("Pages.Order.error")}</Alert>
+        <Alert severity="warning" sx={{ mt: 3 }}>
+          {t("Pages.Order.error")}
+        </Alert>
       ) : (
         <Stack spacing={1}>
           {filteredOrders.map((order) => (

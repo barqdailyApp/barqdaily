@@ -1,17 +1,18 @@
 import {
-  Container,
-  Card,
   Box,
+  Card,
   Stack,
+  Container,
   Typography,
   CardContent,
 } from "@mui/material";
 
+import { FullOrder } from "@/types/order-details";
+
 import { OrderDetailsCard } from "./order-details";
-import { OrderDriverInfoCard } from "./order-driver";
 import { OrderProcessCard } from "./order-process";
 import { OrderSummaryCard } from "./order-summary";
-import { FullOrder } from "@/types/order-details";
+import { OrderDriverInfoCard } from "./order-driver";
 
 export function OrderDetails({ orderdetails }: { orderdetails: FullOrder }) {
   const renderDetails = (

@@ -1,14 +1,7 @@
-import {
-  Card,
-  CardContent,
-  Stack,
-  Typography,
-  Button,
-  Divider,
-  Box,
-} from "@mui/material";
-
 import Image from "next/image";
+
+import { Box, Stack, Button, Divider, Typography } from "@mui/material";
+
 import { ShipmentProduct } from "@/types/order-details";
 
 export function OrderDetailsCard({

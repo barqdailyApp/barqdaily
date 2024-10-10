@@ -1,7 +1,10 @@
-import { Stack, Typography, Button } from "@mui/material";
+import { Stack, Button, Typography } from "@mui/material";
+
 import Iconify from "@/components/iconify";
+
 import { Shipments } from "@/types/order-details";
-export function OrderDriverInfoCard({ driver }: { driver: Shipments }) {
+
+export function OrderDriverInfoCard({ driver }: { driver?: Shipments }) {
   return (
     <>
       <Stack direction="row" spacing={1} alignItems="center">

@@ -3,13 +3,15 @@ import { useLocale, useTranslations } from "next-intl";
 import {
   Box,
   Card,
+  Link,
   Stack,
   alpha,
   Button,
   Typography,
   CardContent,
-  Link,
 } from "@mui/material";
+
+import { paths } from "@/routes/paths";
 
 import { fDate } from "@/utils/format-time";
 
@@ -21,7 +23,6 @@ import Iconify from "@/components/iconify";
 import { Order } from "@/types/order";
 
 import { icons, WEEK_DAYS, STATUS_SETTINGS } from "./config-orders";
-import { paths } from "@/routes/paths";
 
 export default function OrderCard({ order }: { order: Order }) {
   const t = useTranslations();
