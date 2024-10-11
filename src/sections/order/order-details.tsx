@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { Fragment } from "react";
+import { useTranslations } from "next-intl";
 
 import { Box, Stack, Button, Divider, Typography } from "@mui/material";
 
@@ -9,13 +11,18 @@ export function OrderDetailsCard({
 }: {
   shipmentPrdoucts: ShipmentProduct[];
 }) {
+  const t = useTranslations("Pages.Order");
+
   return (
     <Stack spacing={2} pt={2} alignItems="stretch" width="100%">
+      <Typography variant="h6" gutterBottom>
+        {t("order_details_title")}
+      </Typography>
       {shipmentPrdoucts.map((item, index) => (
-        <>
+        <Fragment key={index}>
           {index !== 0 ? <Divider flexItem /> : null}
 
-          <Box key={index} px={2}>
+          <Box px={2}>
             <Stack spacing={1} justifyContent="flex-start">
               <Stack direction="row" alignItems="center" spacing={2}>
                 <Image
@@ -66,7 +73,7 @@ export function OrderDetailsCard({
               </Stack>
             </Stack>
           </Box>
-        </>
+        </Fragment>
       ))}
     </Stack>
   );

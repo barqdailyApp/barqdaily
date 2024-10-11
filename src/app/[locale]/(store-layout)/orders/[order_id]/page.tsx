@@ -1,7 +1,7 @@
 import { endpoints } from "@/utils/endpoints";
 import { getData } from "@/utils/crud-fetch-api";
 
-import { OrderDetails } from "@/sections/order/order-details-view";
+import SingleOrderView from "@/sections/order/view/single-order-view";
 
 import { FullOrder } from "@/types/order-details";
 
@@ -16,5 +16,5 @@ export default async function Page({
   if ("error" in order) {
     throw new Error(order.error);
   }
-  return <OrderDetails orderdetails={order.data} />;
+  return <SingleOrderView orderdetails={order.data} />;
 }

@@ -114,11 +114,15 @@
         "delivered": "Delivered",
         "completed": "completed"
       },
+      "driver_name": "Driver name",
       "order_number": "Order Number",
       "deliver_to": "Deliver to",
       "total_payment": "Total Payment",
       "arrival_time": "Arrival time",
-      "no_orders": "No orders to show"
+      "no_orders": "No orders to show",
+      "single_order_title": "Order Details",
+      "order_details_title": "Order Details",
+      "driver_card_title": "Driver Info"
     }
   }
 }

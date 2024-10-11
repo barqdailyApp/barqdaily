@@ -14,6 +14,7 @@ import {
 import { paths } from "@/routes/paths";
 
 import { fDate } from "@/utils/format-time";
+import { useCurrency } from "@/utils/format-number";
 
 import { LocaleType, localesSettings } from "@/i18n/config-locale";
 
@@ -26,6 +27,7 @@ import { icons, WEEK_DAYS, STATUS_SETTINGS } from "./config-orders";
 
 export default function OrderCard({ order }: { order: Order }) {
   const t = useTranslations();
+  const currency = useCurrency();
   const locale = useLocale();
   const { dir } = localesSettings[locale as LocaleType];
 
@@ -116,7 +118,7 @@ export default function OrderCard({ order }: { order: Order }) {
           {t("Pages.Order.total_payment")}
         </Typography>
         <Typography variant="body2" fontWeight="bold">
-          {`${order.total_price} ${t("Global.currency")}`}
+          {currency(order.total_price)}
         </Typography>
       </Stack>
 
@@ -139,7 +141,9 @@ export default function OrderCard({ order }: { order: Order }) {
       justifyContent="start"
     >
       <Stack direction="column" spacing={0.5}>
-        <Typography variant="caption">Driver Name</Typography>
+        <Typography variant="caption">
+          {t("Pages.Order.driver_name")}
+        </Typography>
         <Typography variant="body2" fontWeight="bold">
           {driver}
         </Typography>
