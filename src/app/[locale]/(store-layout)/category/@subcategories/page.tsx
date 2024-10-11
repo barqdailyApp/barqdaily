@@ -1,8 +1,8 @@
-import { Box, Alert, Stack, Skeleton } from "@mui/material";
-
+import TAlert from "@/CustomSharedComponents/t-alert";
 import { fetchSubCategories } from "@/actions/products-actions";
 
 import SubCategoriesFilter from "@/sections/products/subCategories-filter";
+import SubCategoriesLoading from "@/sections/products/loading/subCategories-loading";
 
 interface Props {
   searchParams: {
@@ -15,22 +15,7 @@ export default async function Page({
   searchParams: { categoryId, subCategoryId },
 }: Props) {
   if (!categoryId) {
-    return (
-      <Box>
-        <Stack direction="row" spacing={2}>
-          {[...Array(5)].map((_, index) => (
-            <Skeleton
-              variant="text"
-              sx={{
-                fontSize: "36px",
-                display: "block",
-                width: "7rem",
-              }}
-            />
-          ))}
-        </Stack>
-      </Box>
-    );
+    return <SubCategoriesLoading />;
   }
 
   const subCategories = await fetchSubCategories(categoryId);
@@ -39,7 +24,9 @@ export default async function Page({
   }
 
   if (subCategories.length === 0) {
-    return <Alert severity="error">No subCategories found</Alert>;
+    return (
+      <TAlert severity="error">Global.Error.no_subcategories_found</TAlert>
+    );
   }
 
   return (

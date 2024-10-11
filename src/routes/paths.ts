@@ -11,5 +11,7 @@ export const paths = {
   },
   home: "/",
   products: "/product",
+  brands: "/brand",
+  offers: "/offers",
   orders: "/orders",
 };

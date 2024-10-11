@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import Stack, { StackProps } from "@mui/material/Stack";
 
 import Iconify from "@/components/iconify";
@@ -47,6 +47,7 @@ const IncrementerButton = forwardRef<HTMLDivElement, Props>(
       {...other}
     >
       <Button
+        size="small"
         variant="contained"
         color="primary"
         onClick={onDecrease}
@@ -56,9 +57,12 @@ const IncrementerButton = forwardRef<HTMLDivElement, Props>(
         <Iconify icon={quantity > min ? "eva:minus-fill" : "mage:trash"} />
       </Button>
 
-      {quantity}
+      <Box px={1} mx={1}>
+        {quantity}
+      </Box>
 
       <Button
+        size="small"
         variant="contained"
         color="primary"
         onClick={onIncrease}

@@ -15,16 +15,16 @@ import {
   CardContent,
 } from "@mui/material";
 
-import { fCurrency } from "@/utils/format-number";
+import { useCurrency } from "@/utils/format-number";
 
 import Iconify from "@/components/iconify";
 
-import { Product } from "@/types/products";
+import { Offer, Product } from "@/types/products";
 
 import IncrementerButton from "./incrementer-button";
 
 interface Props {
-  product: Product;
+  product: Product | Offer;
   href: string;
 }
 
@@ -43,8 +43,20 @@ const StyledCard = styled(Card)(({ theme }) => ({
 }));
 
 export function ProductCard({ product, href }: Props) {
-  const t = useTranslations("Pages.Home.Product");
+  const t = useTranslations();
   const [quantity, setQuantity] = useState(0);
+
+  const offerPrice = product.offer_price;
+  const originalPrice = product.product_price;
+  const finalPrice = offerPrice ?? originalPrice;
+
+  const maxQuantity = Math.min(
+    product.warehouse_quantity,
+    product.offer_quantity ?? product.max_order_quantity
+  );
+
+  const currency = useCurrency();
+
   return (
     <StyledCard className={quantity > 0 ? "selected" : ""}>
       <Box
@@ -52,6 +64,7 @@ export function ProductCard({ product, href }: Props) {
         aria-hidden
         sx={{ position: "absolute", inset: 0, cursor: "pointer" }}
         href={href}
+        scroll={false}
         component={Link}
       />
 
@@ -73,7 +86,12 @@ export function ProductCard({ product, href }: Props) {
         <Typography variant="caption">{product.measurement_unit}</Typography>
         <Box flexGrow={1} aria-hidden />
         <Typography fontWeight={600} color="primary" suppressHydrationWarning>
-          {fCurrency(product.product_price)}
+          {offerPrice && (
+            <Typography component="del" color="text.disabled">
+              {currency(originalPrice, false)}
+            </Typography>
+          )}{" "}
+          {currency(finalPrice)}
         </Typography>
 
         <Stack direction="row" spacing={1} flexWrap="wrap">
@@ -89,7 +107,7 @@ export function ProductCard({ product, href }: Props) {
               onClick={() => setQuantity(product.min_order_quantity)}
               sx={{ flexGrow: 1 }}
             >
-              {t("add_to_cart")}
+              {t("Pages.Home.Product.add_to_cart")}
             </Button>
           ) : (
             <IncrementerButton
@@ -101,7 +119,7 @@ export function ProductCard({ product, href }: Props) {
               }
               sx={{ flexGrow: 1, position: "relative" }}
               quantity={quantity}
-              disabledIncrease={quantity >= product.max_order_quantity}
+              disabledIncrease={quantity >= maxQuantity}
               min={product.min_order_quantity}
             />
           )}

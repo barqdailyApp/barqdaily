@@ -4,19 +4,21 @@ import { Box, Grid } from "@mui/material";
 
 import { paths } from "@/routes/paths";
 
+import { SECTION_PADDING } from "@/layouts/config-layout";
 import ParamsPagination from "@/CustomSharedComponents/params-pagination";
-import { ProductCard } from "@/CustomSharedComponents/product/product-card";
 
-import { Product } from "@/types/products";
+import { Offer, Product } from "@/types/products";
+
+import { ProductCard } from "../product-card";
 
 interface Props {
-  products: Product[];
+  products: (Product | Offer)[];
   pagesCount: number;
 }
 
 export default function ProductsListView({ products, pagesCount }: Props) {
   return (
-    <Box>
+    <Box pb={SECTION_PADDING}>
       <Grid container spacing={3}>
         {products.map((item) => (
           <Grid

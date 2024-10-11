@@ -1,6 +1,6 @@
 {
   "Global": {
-    "currency": "YER",
+    "comma": ",",
     "Label": {
       "your_name": "Your name",
       "name": "Name",
@@ -10,12 +10,16 @@
     "Error": {
       "name_required": "Name is required",
       "phone_required": "Phone is required",
-      "phone_invalid": "Phone is invalid"
+      "phone_invalid": "Phone is invalid",
+      "phone_digits": "Phone must be 9 digits",
+      "phone_start_with_7": "Phone must start with 7",
+      "phone_only_digits": "Phone must be only digits",
+      "no_products_found": "No products found",
+      "no_subcategories_found": "No subcategories found"
     },
     "Message": {
       "otp_sent": "A code has sent to your WhatsApp number."
     },
-
     "Footer": {
       "contact_title": "Contact us",
       "download": "Download the app",
@@ -50,8 +54,7 @@
         "List": { "title": "list" },
         "Details": { "title": "details" }
       }
-    },
-    "Management": {}
+    }
   },
   "Pages": {
     "Error404": {
@@ -92,7 +95,11 @@
       "Product": {
         "add_to_cart": "Add to cart",
         "description": "Description"
-      }
+      },
+      "offers_title": "Daily Offers",
+      "order_again_title": "Order Again",
+      "action": "View All",
+      "order_again": "Order Again"
     },
     "Order": {
       "Status": {

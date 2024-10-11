@@ -117,7 +117,7 @@ export default function LoginOTPStep({
           <Stack spacing={2.5} direction="row" style={{ direction: "ltr" }}>
             {Array.from({ length: 4 }).map((_, index) => (
               <RHFTextField
-                placeholder={`${index + 1}`}
+                type="password"
                 autoComplete="off"
                 autoCorrect="off"
                 key={index}

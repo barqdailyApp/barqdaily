@@ -4,7 +4,9 @@ const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  images: { domains: ["dev.barqdaily.com"] },
+  images: {
+    remotePatterns: [{ protocol: "https", hostname: "**" }],
+  },
 };
 
 export default withNextIntl(nextConfig);

@@ -8,6 +8,7 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 
 import { Box, Card, Stack, styled, Container, IconButton } from "@mui/material";
 
+import { SECTION_PADDING } from "@/layouts/config-layout";
 import { LocaleType, localesSettings } from "@/i18n/config-locale";
 
 import Iconify from "@/components/iconify";
@@ -121,8 +122,8 @@ export default function BrandsSwiper({ brands }: Props) {
         textAlign: "center",
       })}
     >
-      <Container style={{ marginTop: 1 }}>
-        <Box sx={{ width: "100%", position: "relative", px: 0.5, py: 4 }}>
+      <Container>
+        <Box sx={{ width: "100%", position: "relative", py: SECTION_PADDING }}>
           {renderSwiper}
           {renderButtons}
         </Box>
