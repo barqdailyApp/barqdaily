@@ -23,7 +23,7 @@ export const WEEK_DAYS = [
   "saturday",
 ];
 
-export const icons = [
+export const ICONS = [
   {
     icon: "material-symbols:check",
     color: "success",
@@ -60,7 +60,7 @@ export const STATUS_SETTINGS: Record<
   RETURNED: {
     index: -1,
     label: "returned",
-    color: "warning",
+    color: "info",
   },
   CONFIRMED: {
     index: 0,

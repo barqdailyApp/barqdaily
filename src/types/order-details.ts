@@ -16,10 +16,10 @@ export interface Shipments {
   order_id: string;
   driver: Driver | null;
   status: string;
-  order_confirmed_at: any;
-  order_on_processed_at: any;
-  order_shipped_at: any;
-  order_delivered_at: any;
+  order_confirmed_at: string | null;
+  order_on_processed_at: string | null;
+  order_shipped_at: string | null;
+  order_delivered_at: string | null;
   order_canceled_at: string;
   canceled_by: string;
   shipment_feedback: any;

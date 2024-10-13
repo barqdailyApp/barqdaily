@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useTranslations } from "next-intl";
 
 import Timeline from "@mui/lab/Timeline";
 import TimelineContent from "@mui/lab/TimelineContent";
@@ -7,9 +7,42 @@ import TimelineConnector from "@mui/lab/TimelineConnector";
 import { Box, Card, Stack, Typography, CardContent } from "@mui/material";
 import TimelineItem, { timelineItemClasses } from "@mui/lab/TimelineItem";
 
-import Iconify from "@/components/iconify";
+import { useFormatDate, useFormatTime } from "@/utils/format-time";
 
-export function OrderProcessCard({ orderNumber }: { orderNumber: string }) {
+import { Shipments } from "@/types/order-details";
+
+import orderStatusCircles from "./order-status-cricles";
+
+export function OrderProcessCard({
+  orderNumber,
+  orderShipments,
+}: {
+  orderNumber: string;
+  orderShipments: Shipments;
+}) {
+  const t = useTranslations("Pages.Orders.Single.Status");
+  const formatTime = useFormatTime();
+  const formatDate = useFormatDate();
+
+  const statusText = [
+    {
+      label: t("confirmed"),
+      date: orderShipments.order_confirmed_at,
+    },
+    {
+      label: t("processing"),
+      date: orderShipments.order_on_processed_at,
+    },
+    {
+      label: t("picked_up"),
+      date: orderShipments.order_shipped_at,
+    },
+    {
+      label: t("delivered"),
+      date: orderShipments.order_delivered_at,
+    },
+  ];
+
   return (
     <Card
       sx={{
@@ -37,141 +70,45 @@ export function OrderProcessCard({ orderNumber }: { orderNumber: string }) {
                 },
               }}
             >
-              <TimelineItem>
-                <TimelineSeparator>
-                  <Box
-                    sx={{
-                      border: "solid 1px",
-                      borderColor: "success.main",
-                      borderRadius: "50px",
-                      padding: 0.75,
-                      color: "success.main",
-                    }}
-                  >
-                    <Iconify icon="material-symbols:check" width={12} />
-                  </Box>
-                  <TimelineConnector />
-                </TimelineSeparator>
-                <Stack
-                  direction="row"
-                  justifyContent="space-between"
-                  width="100%"
-                >
-                  <TimelineContent>
-                    <Typography variant="body2">Order Confirmed</Typography>
-                    <Typography variant="caption" fontWeight="400">
-                      Sep 29, 2021
-                    </Typography>
-                  </TimelineContent>
-                  <TimelineContent sx={{ textAlign: "right" }}>
-                    <Typography variant="caption" fontWeight="400">
-                      8:00 PM
-                    </Typography>
-                  </TimelineContent>
-                </Stack>
-              </TimelineItem>
-
-              <TimelineItem>
-                <TimelineSeparator>
-                  <Box
-                    sx={{
-                      border: "solid 1px",
-                      borderColor: "warning.main",
-                      borderRadius: "50px",
-                      padding: 0.75,
-                      color: "warning.main",
-                    }}
-                  >
-                    <Iconify icon="ph:gift" width={12} />
-                  </Box>
-                  <TimelineConnector />
-                </TimelineSeparator>
-                <Stack
-                  direction="row"
-                  justifyContent="space-between"
-                  width="100%"
-                >
-                  <TimelineContent>
-                    <Typography variant="body2">Order in Process</Typography>
-                    <Typography variant="caption" fontWeight="400">
-                      Sep 30, 2021
-                    </Typography>
-                  </TimelineContent>
-                  <TimelineContent sx={{ textAlign: "right" }}>
-                    <Typography variant="caption" fontWeight="400">
-                      7:00 AM
-                    </Typography>
-                  </TimelineContent>
-                </Stack>
-              </TimelineItem>
-
-              <TimelineItem>
-                <TimelineSeparator>
-                  <Box
-                    sx={{
-                      border: "solid 1px",
-                      borderColor: "secondary.main",
-                      borderRadius: "50px",
-                      padding: 0.75,
-                      color: "secondary.main",
-                    }}
-                  >
-                    <Iconify icon="mdi:truck-outline" width={12} />
-                  </Box>
-                  <TimelineConnector />
-                </TimelineSeparator>
-                <Stack
-                  direction="row"
-                  justifyContent="space-between"
-                  width="100%"
-                >
-                  <TimelineContent>
-                    <Typography variant="body2">Order Shipped</Typography>
-                    <Typography variant="caption" fontWeight="400">
-                      Sep 30, 2021
-                    </Typography>
-                  </TimelineContent>
-                  <TimelineContent sx={{ textAlign: "right" }}>
-                    <Typography variant="caption" fontWeight="400">
-                      7:30 PM
-                    </Typography>
-                  </TimelineContent>
-                </Stack>
-              </TimelineItem>
-
-              <TimelineItem>
-                <TimelineSeparator>
-                  <Box
-                    sx={{
-                      border: "solid 1px",
-                      borderColor: "primary.main",
-                      borderRadius: "50px",
-                      padding: 0.75,
-                      color: "primary.main",
-                    }}
-                  >
-                    <Iconify icon="lucide:smile" width={12} />
-                  </Box>
-                  <TimelineConnector />
-                </TimelineSeparator>
-                <Stack
-                  direction="row"
-                  justifyContent="space-between"
-                  width="100%"
-                >
-                  <TimelineContent>
-                    <Typography variant="body2">Order Delivered</Typography>
-                    <Typography variant="caption" fontWeight="400">
-                      Sep 30, 2021
-                    </Typography>
-                  </TimelineContent>
-                  <TimelineContent sx={{ textAlign: "right" }}>
-                    <Typography variant="caption" fontWeight="400">
-                      8:00 AM
-                    </Typography>
-                  </TimelineContent>
-                </Stack>
-              </TimelineItem>
+              {orderStatusCircles(orderShipments.status).map((item, index) =>
+                statusText[index].date ? (
+                  <TimelineItem>
+                    <TimelineSeparator>
+                      {item}
+                      <TimelineConnector />
+                    </TimelineSeparator>
+                    <TimelineContent>
+                      <Stack
+                        direction="row"
+                        justifyContent="space-between"
+                        width="100%"
+                      >
+                        <Box>
+                          <Typography variant="body2">
+                            {statusText[index].label}
+                          </Typography>
+                          <Typography variant="caption" fontWeight="400">
+                            {formatDate(
+                              new Date(statusText[index].date),
+                              "MMMM dd, yyyy"
+                            )}
+                          </Typography>
+                        </Box>
+                        <Typography
+                          variant="caption"
+                          fontWeight="400"
+                          textAlign="end"
+                        >
+                          {formatTime(
+                            new Date(statusText[index].date),
+                            "hh:mm a"
+                          )}
+                        </Typography>
+                      </Stack>
+                    </TimelineContent>
+                  </TimelineItem>
+                ) : null
+              )}
             </Timeline>
           </Stack>
         </Box>

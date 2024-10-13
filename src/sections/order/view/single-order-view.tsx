@@ -41,7 +41,10 @@ export default function SingleOrderView({ order }: { order: FullOrder }) {
                 <OrderDriverInfoCard driver={order.shipments.driver} />
               )}
 
-              <OrderProcessCard orderNumber={order.order_number} />
+              <OrderProcessCard
+                orderNumber={order.order_number}
+                orderShipments={order.shipments}
+              />
 
               <OrderSummaryCard />
             </Stack>

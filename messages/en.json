@@ -35,8 +35,20 @@
       "thursday": "Thursday",
       "friday": "Friday",
       "saturday": "Saturday",
-      "AM": "AM",
-      "PM": "PM"
+      "am": "AM",
+      "pm": "PM",
+      "jan": "Jan",
+      "feb": "Feb",
+      "mar": "Mar",
+      "apr": "Apr",
+      "may": "May",
+      "jun": "Jun",
+      "jul": "Jul",
+      "aug": "Aug",
+      "sep": "Sep",
+      "oct": "Oct",
+      "nov": "Nov",
+      "dec": "Dec"
     }
   },
   "Navbar": {
@@ -128,6 +140,12 @@
           "buy_again": "Buy Again",
           "quantity": "Quantity",
           "total": "Total"
+        },
+        "Status": {
+          "confirmed": "Order Confirmed",
+          "processing": "Order on Process",
+          "picked_up": "Order Shipped",
+          "delivered": "Order Delivered"
         }
       }
     }

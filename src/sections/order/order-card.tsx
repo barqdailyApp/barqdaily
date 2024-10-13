@@ -5,7 +5,6 @@ import {
   Card,
   Link,
   Stack,
-  alpha,
   Button,
   Typography,
   CardContent,
@@ -13,8 +12,8 @@ import {
 
 import { paths } from "@/routes/paths";
 
-import { fDate } from "@/utils/format-time";
 import { useCurrency } from "@/utils/format-number";
+import { useFormatTime } from "@/utils/format-time";
 
 import { LocaleType, localesSettings } from "@/i18n/config-locale";
 
@@ -23,21 +22,23 @@ import Iconify from "@/components/iconify";
 
 import { Order } from "@/types/order";
 
-import { icons, WEEK_DAYS, STATUS_SETTINGS } from "./config-orders";
+import orderStatusCircles from "./order-status-cricles";
+import { WEEK_DAYS, STATUS_SETTINGS } from "./config-orders";
 
 export default function OrderCard({ order }: { order: Order }) {
   const t = useTranslations();
   const currency = useCurrency();
   const locale = useLocale();
   const { dir } = localesSettings[locale as LocaleType];
+  const formatTime = useFormatTime();
 
   const deliveryDate = t(
     `Global.Date.${WEEK_DAYS[new Date(order.estimated_delivery_time).getDay()]}`
   );
-  const deliveryTime = fDate(
+  const deliveryTime = formatTime(
     new Date(order.estimated_delivery_time),
     "hh:mm a"
-  ).replace(/AM|PM/g, (matched) => t(`Global.Date.${matched}`));
+  );
 
   const status = STATUS_SETTINGS[order.shipments.status];
 
@@ -51,40 +52,7 @@ export default function OrderCard({ order }: { order: Order }) {
         </Label>
       )}
 
-      {icons.map((item, iconIndex) => {
-        const statusIndex = status.index;
-        return (
-          <Box
-            key={iconIndex}
-            sx={(theme) => ({
-              color:
-                iconIndex <= statusIndex
-                  ? `${item.color}.main`
-                  : "text.disabled",
-              bgcolor:
-                iconIndex <= statusIndex
-                  ? alpha(
-                      theme.palette?.[item.color as "primary" | "secondary"]
-                        .main,
-                      0.1
-                    )
-                  : undefined,
-              border: "solid 1px",
-              borderColor:
-                // eslint-disable-next-line no-nested-ternary
-                iconIndex > statusIndex
-                  ? "text.disabled"
-                  : iconIndex === statusIndex
-                    ? `${item.color}.main`
-                    : "transparent",
-              borderRadius: "50px",
-              padding: 0.75,
-            })}
-          >
-            <Iconify icon={item.icon} width={15} />
-          </Box>
-        );
-      })}
+      {orderStatusCircles(order.shipments.status)}
     </Stack>
   );
 
