@@ -64,6 +64,7 @@ export function OrderProcessCard({
           <Stack spacing={1}>
             <Timeline
               sx={{
+                px: 0,
                 [`& .${timelineItemClasses.root}:before`]: {
                   flex: 0,
                   padding: 0,
@@ -77,7 +78,7 @@ export function OrderProcessCard({
                       {item}
                       <TimelineConnector />
                     </TimelineSeparator>
-                    <TimelineContent>
+                    <TimelineContent sx={{ paddingInlineEnd: 0 }}>
                       <Stack
                         direction="row"
                         justifyContent="space-between"
