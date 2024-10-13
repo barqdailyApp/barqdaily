@@ -5,11 +5,11 @@ import { useTranslations } from "next-intl";
 import { Box, Stack, Divider, Typography } from "@mui/material";
 
 import { paths } from "@/routes/paths";
+import ButtonLink from "@/routes/components/link-button";
 
 import { useCurrency } from "@/utils/format-number";
 
 import { ShipmentProduct } from "@/types/order-details";
-import ButtonLink from "@/routes/components/link-button";
 
 export function OrderDetailsCard({
   shipmentPrdoucts,
