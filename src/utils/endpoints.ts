@@ -20,4 +20,7 @@ export const endpoints = {
   singleOrder: (order_id: string) => `order/single-order/${order_id}`,
   singleShipment: (shipment_id: string) =>
     `order/single-shipment/${shipment_id}`,
+  cancelShipment: (shipment_id: string) =>
+    `shipment/cancel-shipment/${shipment_id}`,
+  getReasons: (type: string) => `reason/all?type=${type}`,
 };

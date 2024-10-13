@@ -1,10 +1,12 @@
 import { useTranslations } from "next-intl";
 
-import { Card, Stack, Button, Typography, CardContent } from "@mui/material";
+import { Card, Stack, Typography, CardContent } from "@mui/material";
 
 import { useCurrency } from "@/utils/format-number";
 
 import { SingleShipment } from "@/types/order-shipment";
+
+import CancelButton from "./cancel-button";
 
 export function OrderSummaryCard({ shipment }: { shipment: SingleShipment }) {
   const t = useTranslations("Pages.Orders");
@@ -49,16 +51,9 @@ export function OrderSummaryCard({ shipment }: { shipment: SingleShipment }) {
               </Typography>
             </Stack>
           ))}
-          <Stack alignItems="center" sx={{ mt: 2 }}>
-            <Button
-              variant="outlined"
-              color="error"
-              size="large"
-              sx={{ border: "none", width: "156px", height: "60px" }}
-            >
-              Cancel order
-            </Button>
-          </Stack>
+          {!["CANCELED", "RETURNED", "DELIVERED", "COMPLETED"].includes(
+            shipment.status
+          ) && <CancelButton shipmentId={shipment.shipment_id} />}
         </Stack>
       </CardContent>
     </Card>

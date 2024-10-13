@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
-import { format, getTime, formatDistanceToNow } from "date-fns";
 import { getTranslations } from "next-intl/server";
+import { format, getTime, formatDistanceToNow } from "date-fns";
 
 // ----------------------------------------------------------------------
 

@@ -51,6 +51,12 @@
       "dec": "Dec"
     }
   },
+  "ConfirmDialog": {
+    "title": "Are you sure?",
+    "message": "You won't be able to revert this!",
+    "confirm": "Confirm",
+    "cancel": "Cancel"
+  },
   "Navbar": {
     "Overview": {
       "subheader": "overview",
@@ -167,6 +173,12 @@
           "picked_up": "Order Shipped",
           "delivered": "Order Delivered",
           "canceled": "Order Canceled"
+        },
+        "Cancel": {
+          "action": "Cancel Order",
+          "title": "Choose a reason",
+          "field_label": "Reason",
+          "success": "Order has been canceled successfully"
         }
       }
     }
