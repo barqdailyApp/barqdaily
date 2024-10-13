@@ -18,4 +18,6 @@ export const endpoints = {
 
   orders: "order/client-orders",
   singleOrder: (order_id: string) => `order/single-order/${order_id}`,
+  singleShipment: (shipment_id: string) =>
+    `order/single-shipment/${shipment_id}`,
 };

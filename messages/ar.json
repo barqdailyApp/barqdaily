@@ -114,6 +114,16 @@
       "order_again": "أطلب مرة أخرى"
     },
     "Orders": {
+      "driver_name": "اسم السائق",
+      "order_number": "رقم الطلب",
+      "deliver_to": "التوصيل الي",
+      "total_payment": "المبلغ الكلي",
+      "arrival_time": "وقت الوصول",
+      "no_orders": "لا توجد طلبات للعرض",
+      "products_price": "إجمالي سعر المنتجات",
+      "delivery_fee": "رسوم التوصيل",
+      "total": "الإجمالي",
+      "payment_method": "طريقة الدفع",
       "Status": {
         "all": "كل الطلبات",
         "canceled": "تم الإلغاء",
@@ -126,12 +136,13 @@
         "delivered": "تم التوصيل",
         "completed": "إكتمل"
       },
-      "driver_name": "اسم السائق",
-      "order_number": "رقم الطلب",
-      "deliver_to": "التوصيل الي",
-      "total_payment": "المبلغ الكلي",
-      "arrival_time": "وقت الوصول",
-      "no_orders": "لا توجد طلبات للعرض",
+      "Payment": {
+        "CASH": "كاش",
+        "WALLET": "محفظة",
+        "KURAIMI": "بنك الكريمي",
+        "JAWALI": "جوالي",
+        "JAIB": "جيب"
+      },
       "Single": {
         "title": "تفاصيل الطلب",
         "order_details_title": "تفاصيل الطلب",

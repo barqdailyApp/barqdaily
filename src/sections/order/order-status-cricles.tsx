@@ -26,6 +26,7 @@ export default function orderStatusCircles(currentStatus: string) {
           staticStatusVariant ||
           (iconIndex >= statusIndex ? "outlined" : "soft")
         }
+        key={iconIndex}
       >
         <Iconify icon={item.icon} width={15} />
       </CircularStatus>

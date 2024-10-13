@@ -114,6 +114,16 @@
       "order_again": "Order Again"
     },
     "Orders": {
+      "driver_name": "Driver name",
+      "order_number": "Order Number",
+      "deliver_to": "Deliver to",
+      "total_payment": "Total Payment",
+      "arrival_time": "Arrival time",
+      "no_orders": "No orders to show",
+      "products_price": "Total products price",
+      "delivery_fee": "Delivery fee",
+      "total": "Total",
+      "payment_method": "Payment method",
       "Status": {
         "all": "All Orders",
         "canceled": "Canceled",
@@ -126,12 +136,13 @@
         "delivered": "Delivered",
         "completed": "completed"
       },
-      "driver_name": "Driver name",
-      "order_number": "Order Number",
-      "deliver_to": "Deliver to",
-      "total_payment": "Total Payment",
-      "arrival_time": "Arrival time",
-      "no_orders": "No orders to show",
+      "Payment": {
+        "CASH": "Cash",
+        "WALLET": "Wallet",
+        "KURAIMI": "Kuraimi",
+        "JAWALI": "Jawali",
+        "JAIB": "Jaib"
+      },
       "Single": {
         "title": "Order Details",
         "order_details_title": "Order Details",

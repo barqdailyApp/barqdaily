@@ -78,4 +78,4 @@ export const CircularStatus = styled("div", {
     styles.root,
     props.color && styles[props.color],
   ],
-})<CircularStatusProps>();
+})<CircularStatusProps>({});

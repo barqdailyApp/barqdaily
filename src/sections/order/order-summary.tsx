@@ -1,6 +1,32 @@
+import { useTranslations } from "next-intl";
+
 import { Card, Stack, Button, Typography, CardContent } from "@mui/material";
 
-export function OrderSummaryCard() {
+import { getCurrency } from "@/utils/get-locale";
+
+import { SingleShipment } from "@/types/order-shipment";
+
+export async function OrderSummaryCard({
+  shipment,
+}: {
+  shipment: SingleShipment;
+}) {
+  const t = useTranslations("Pages.Orders");
+  const currency = await getCurrency();
+
+  const fields = [
+    {
+      label: t("products_price"),
+      value: currency(shipment.order.products_price),
+    },
+    { label: t("delivery_fee"), value: currency(shipment.order.delivery_fee) },
+    { label: t("total"), value: currency(shipment.order.total_price) },
+    {
+      label: t("payment_method"),
+      value: t(`Payment.${shipment.order.payment_method}`),
+    },
+  ];
+
   return (
     <Card
       sx={{
@@ -11,32 +37,22 @@ export function OrderSummaryCard() {
     >
       <CardContent>
         <Stack spacing={1}>
-          <Stack
-            direction="row"
-            alignItems="center"
-            justifyContent="space-between"
-            sx={{ mt: 1 }}
-          >
-            <Typography variant="body2" fontWeight="500">
-              Total Amount
-            </Typography>
-            <Typography variant="caption" fontWeight="400">
-              230 YER
-            </Typography>
-          </Stack>
-          <Stack
-            direction="row"
-            alignItems="center"
-            justifyContent="space-between"
-            sx={{ mt: 1 }}
-          >
-            <Typography variant="body2" fontWeight="500">
-              Payment Method
-            </Typography>
-            <Typography variant="caption" fontWeight="400">
-              Cash on delivery
-            </Typography>
-          </Stack>
+          {fields.map((item) => (
+            <Stack
+              direction="row"
+              alignItems="center"
+              justifyContent="space-between"
+              sx={{ mt: 1 }}
+              key={item.label}
+            >
+              <Typography variant="body2" fontWeight="500">
+                {item.label}
+              </Typography>
+              <Typography variant="subtitle2" fontWeight="400">
+                {item.value}
+              </Typography>
+            </Stack>
+          ))}
           <Stack alignItems="center" sx={{ mt: 2 }}>
             <Button
               variant="outlined"

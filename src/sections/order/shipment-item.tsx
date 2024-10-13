@@ -33,16 +33,16 @@ export default function ShipmentItem({
       />
 
       <Box sx={{ flexGrow: 1 }}>
-        <Typography variant="body1" fontWeight="bold">
+        <Typography variant="body1" fontWeight="700">
           {shipment.product_name}
         </Typography>
-        <Typography variant="body2" mt={0.5}>
+        <Typography variant="subtitle2" mt={0.5} fontWeight="400">
           {`${t("quantity")} : ${shipment.quantity}`}
         </Typography>
       </Box>
 
-      <Typography variant="body2" flexShrink={0}>
-        <Typography variant="inherit" fontWeight="bold" component="span">
+      <Typography variant="subtitle2" fontWeight="400" flexShrink={0}>
+        <Typography variant="body2" fontWeight="bold" component="span">
           {`${currency(shipment.product_price)} / `}
         </Typography>
         {shipment.measurement_unit}
@@ -59,7 +59,7 @@ export default function ShipmentItem({
     >
       <Typography variant="subtitle2">
         {`${t("total")} : `}
-        <Typography variant="inherit" fontWeight="bold" component="span">
+        <Typography variant="inherit" fontWeight="700" component="span">
           {currency(shipment.total_price)}
         </Typography>
       </Typography>

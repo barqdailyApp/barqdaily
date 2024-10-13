@@ -73,7 +73,7 @@ export function OrderProcessCard({
             >
               {orderStatusCircles(orderShipments.status).map((item, index) =>
                 statusText[index].date ? (
-                  <TimelineItem>
+                  <TimelineItem key={item.key}>
                     <TimelineSeparator>
                       {item}
                       <TimelineConnector />
@@ -85,10 +85,14 @@ export function OrderProcessCard({
                         width="100%"
                       >
                         <Box>
-                          <Typography variant="body2">
+                          <Typography variant="body2" fontWeight={500}>
                             {statusText[index].label}
                           </Typography>
-                          <Typography variant="caption" fontWeight="400">
+                          <Typography
+                            variant="subtitle2"
+                            fontWeight="400"
+                            mt={0.5}
+                          >
                             {formatDate(
                               new Date(statusText[index].date),
                               "MMMM dd, yyyy"
@@ -96,7 +100,7 @@ export function OrderProcessCard({
                           </Typography>
                         </Box>
                         <Typography
-                          variant="caption"
+                          variant="subtitle2"
                           fontWeight="400"
                           textAlign="end"
                         >

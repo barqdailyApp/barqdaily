@@ -3,13 +3,20 @@ import { useTranslations } from "next-intl";
 import { Box, Stack, Container, Typography } from "@mui/material";
 
 import { FullOrder } from "@/types/order-details";
+import { SingleShipment } from "@/types/order-shipment";
 
 import { OrderDetailsCard } from "../order-details";
 import { OrderProcessCard } from "../order-process";
 import { OrderSummaryCard } from "../order-summary";
 import { OrderDriverInfoCard } from "../order-driver";
 
-export default function SingleOrderView({ order }: { order: FullOrder }) {
+export default function SingleOrderView({
+  order,
+  shipment,
+}: {
+  order: FullOrder;
+  shipment: SingleShipment;
+}) {
   const t = useTranslations("Pages.Orders.Single");
 
   const renderHeadding = (
@@ -46,7 +53,7 @@ export default function SingleOrderView({ order }: { order: FullOrder }) {
                 orderShipments={order.shipments}
               />
 
-              <OrderSummaryCard />
+              <OrderSummaryCard shipment={shipment} />
             </Stack>
           </Stack>
         </Container>
