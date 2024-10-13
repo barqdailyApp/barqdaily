@@ -16,5 +16,5 @@ export default async function Page({
   if ("error" in order) {
     throw new Error(order.error);
   }
-  return <SingleOrderView orderdetails={order.data} />;
+  return <SingleOrderView order={order.data} />;
 }

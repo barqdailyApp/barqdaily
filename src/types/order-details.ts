@@ -14,7 +14,7 @@ export interface FullOrder {
 export interface Shipments {
   id: string;
   order_id: string;
-  driver: any;
+  driver: Driver | null;
   status: string;
   order_confirmed_at: any;
   order_on_processed_at: any;
@@ -24,6 +24,15 @@ export interface Shipments {
   canceled_by: string;
   shipment_feedback: any;
   shipment_products: ShipmentProduct[];
+}
+
+export interface Driver {
+  id: string;
+  username: string;
+  phone: string;
+  avatar: string;
+  latitude: number;
+  longitude: number;
 }
 
 export interface ShipmentProduct {

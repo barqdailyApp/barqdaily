@@ -9,11 +9,7 @@ import { OrderProcessCard } from "../order-process";
 import { OrderSummaryCard } from "../order-summary";
 import { OrderDriverInfoCard } from "../order-driver";
 
-export default function SingleOrderView({
-  orderdetails,
-}: {
-  orderdetails: FullOrder;
-}) {
+export default function SingleOrderView({ order }: { order: FullOrder }) {
   const t = useTranslations("Pages.Orders.Single");
 
   const renderHeadding = (
@@ -37,13 +33,15 @@ export default function SingleOrderView({
         <Container>
           <Stack gap={8} direction={{ md: "row" }}>
             <OrderDetailsCard
-              shipmentPrdoucts={orderdetails.shipments.shipment_products}
+              shipmentPrdoucts={order.shipments.shipment_products}
             />
 
             <Stack spacing={2} width={{ md: "380px" }} flexShrink={0}>
-              <OrderDriverInfoCard />
+              {order.shipments.driver && (
+                <OrderDriverInfoCard driver={order.shipments.driver} />
+              )}
 
-              <OrderProcessCard orderNumber={orderdetails.order_number} />
+              <OrderProcessCard orderNumber={order.order_number} />
 
               <OrderSummaryCard />
             </Stack>
