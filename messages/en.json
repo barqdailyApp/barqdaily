@@ -101,7 +101,7 @@
       "action": "View All",
       "order_again": "Order Again"
     },
-    "Order": {
+    "Orders": {
       "Status": {
         "all": "All Orders",
         "canceled": "Canceled",
@@ -120,12 +120,16 @@
       "total_payment": "Total Payment",
       "arrival_time": "Arrival time",
       "no_orders": "No orders to show",
-      "single_order_title": "Order Details",
-      "order_details_title": "Order Details",
-      "driver_card_title": "Driver Info",
-      "buy_again": "Buy Again",
-      "quantity": "Quantity",
-      "total": "Total"
+      "Single": {
+        "title": "Order Details",
+        "order_details_title": "Order Details",
+        "driver_card_title": "Driver Info",
+        "Shipment": {
+          "buy_again": "Buy Again",
+          "quantity": "Quantity",
+          "total": "Total"
+        }
+      }
     }
   }
 }

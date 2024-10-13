@@ -14,12 +14,12 @@ export default function SingleOrderView({
 }: {
   orderdetails: FullOrder;
 }) {
-  const t = useTranslations("Pages.Order");
+  const t = useTranslations("Pages.Orders.Single");
 
   const renderHeadding = (
     <Stack alignItems="center" py={7} bgcolor="background.neutral">
       <Typography variant="h4" fontWeight="bold" textAlign="center">
-        {t("single_order_title")}
+        {t("title")}
       </Typography>
     </Stack>
   );

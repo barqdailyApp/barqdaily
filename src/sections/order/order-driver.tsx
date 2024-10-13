@@ -14,7 +14,7 @@ import Iconify from "@/components/iconify";
 import { Shipments } from "@/types/order-details";
 
 export function OrderDriverInfoCard({ driver }: { driver?: Shipments }) {
-  const t = useTranslations("Pages.Order");
+  const t = useTranslations("Pages.Orders.Single");
 
   return (
     <Card

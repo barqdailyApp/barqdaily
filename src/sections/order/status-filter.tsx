@@ -9,7 +9,7 @@ import { useQueryString } from "@/hooks/use-queryString";
 import { ALL_ORDER_STATUS } from "./config-orders";
 
 export default function StatusFilter() {
-  const t = useTranslations("Pages.Order.Status");
+  const t = useTranslations("Pages.Orders.Status");
   const { createQueryString } = useQueryString();
   const searshParams = useSearchParams();
 

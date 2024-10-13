@@ -101,7 +101,7 @@
       "action": "عرض الكل",
       "order_again": "أطلب مرة أخرى"
     },
-    "Order": {
+    "Orders": {
       "Status": {
         "all": "كل الطلبات",
         "canceled": "تم الإلغاء",
@@ -120,12 +120,16 @@
       "total_payment": "المبلغ الكلي",
       "arrival_time": "وقت الوصول",
       "no_orders": "لا توجد طلبات للعرض",
-      "single_order_title": "تفاصيل الطلب",
-      "order_details_title": "تفاصيل الطلب",
-      "driver_card_title": "معلومات السائق",
-      "buy_again": "اشتري مرة أخرى",
-      "quantity": "الكمية",
-      "total": "الإجمالي"
+      "Single": {
+        "title": "تفاصيل الطلب",
+        "order_details_title": "تفاصيل الطلب",
+        "driver_card_title": "معلومات السائق",
+        "Shipment": {
+          "buy_again": "اشتري مرة أخرى",
+          "quantity": "الكمية",
+          "total": "الإجمالي"
+        }
+      }
     }
   }
 }

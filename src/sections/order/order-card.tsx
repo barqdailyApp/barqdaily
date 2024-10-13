@@ -47,7 +47,7 @@ export default function OrderCard({ order }: { order: Order }) {
     <Stack direction="row" spacing={1} alignItems="center">
       {order.shipments.status && (
         <Label color={status.color} variant="soft" sx={{ fontWeight: "bold" }}>
-          {t(`Pages.Order.Status.${status.label}`)}
+          {t(`Pages.Orders.Status.${status.label}`)}
         </Label>
       )}
 
@@ -99,7 +99,7 @@ export default function OrderCard({ order }: { order: Order }) {
     >
       <Stack spacing={0.5} alignItems="center">
         <Typography variant="caption">
-          {t("Pages.Order.order_number")}
+          {t("Pages.Orders.order_number")}
         </Typography>
         <Typography variant="body2" fontWeight="bold">
           {order.order_number}
@@ -107,7 +107,9 @@ export default function OrderCard({ order }: { order: Order }) {
       </Stack>
 
       <Stack spacing={0.5} alignItems="center">
-        <Typography variant="caption">{t("Pages.Order.deliver_to")}</Typography>
+        <Typography variant="caption">
+          {t("Pages.Orders.deliver_to")}
+        </Typography>
         <Typography variant="body2" fontWeight="bold">
           {order.address.address}
         </Typography>
@@ -115,7 +117,7 @@ export default function OrderCard({ order }: { order: Order }) {
 
       <Stack spacing={0.5} alignItems="center">
         <Typography variant="caption">
-          {t("Pages.Order.total_payment")}
+          {t("Pages.Orders.total_payment")}
         </Typography>
         <Typography variant="body2" fontWeight="bold">
           {currency(order.total_price)}
@@ -124,7 +126,7 @@ export default function OrderCard({ order }: { order: Order }) {
 
       <Stack spacing={0.5} alignItems="center">
         <Typography variant="caption">
-          {t("Pages.Order.arrival_time")}
+          {t("Pages.Orders.arrival_time")}
         </Typography>
         <Typography variant="body2" fontWeight="bold">
           {`${deliveryDate} ${deliveryTime}`}
@@ -142,7 +144,7 @@ export default function OrderCard({ order }: { order: Order }) {
     >
       <Stack direction="column" spacing={0.5}>
         <Typography variant="caption">
-          {t("Pages.Order.driver_name")}
+          {t("Pages.Orders.driver_name")}
         </Typography>
         <Typography variant="body2" fontWeight="bold">
           {driver}

@@ -24,7 +24,7 @@ export default function OrderView({ orders, pagesCount }: Props) {
       <StatusFilter />
       {orders.length === 0 ? (
         <Alert severity="warning" sx={{ mt: 3 }}>
-          {t("Pages.Order.no_orders")}
+          {t("Pages.Orders.no_orders")}
         </Alert>
       ) : (
         <Stack spacing={1}>
