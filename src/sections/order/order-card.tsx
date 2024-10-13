@@ -1,8 +1,9 @@
 "use server";
 
+import { getTranslations } from "next-intl/server";
+
 import {
   Box,
-  Card,
   Link,
   Stack,
   Button,
@@ -20,10 +21,9 @@ import Iconify from "@/components/iconify";
 
 import { Order } from "@/types/order";
 
+import OrderCardWrapper from "./order-card-wrapper";
 import orderStatusCircles from "./order-status-cricles";
 import { WEEK_DAYS, STATUS_SETTINGS } from "./config-orders";
-import { getTranslations } from "next-intl/server";
-import OrderCardWrapper from "./order-card-wrapper";
 
 export default async function OrderCard({ order }: { order: Order }) {
   const t = await getTranslations();
@@ -51,7 +51,15 @@ export default async function OrderCard({ order }: { order: Order }) {
         </Label>
       )}
 
-      {orderStatusCircles(order.shipments.status)}
+      {order.shipments.status === "CANCELED" && (
+        <Label
+          color="error"
+          variant="soft"
+          sx={{ fontWeight: "bold" }}
+        >{`${t(`Pages.Orders.Cancel.${order.shipments.canceled_by}`)} - ${order.shipments.cancel_reason.name}`}</Label>
+      )}
+      {order.shipments.status !== "CANCELED" &&
+        orderStatusCircles(order.shipments.status)}
     </Stack>
   );
 

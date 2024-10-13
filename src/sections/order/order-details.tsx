@@ -15,7 +15,7 @@ export function OrderDetailsCard({
   const t = useTranslations("Pages.Orders.Single");
 
   return (
-    <Stack spacing={2} pt={2} alignItems="stretch" width="100%">
+    <Stack spacing={2} py={2} alignItems="stretch" width="100%">
       <Typography variant="h6" gutterBottom>
         {t("order_details_title")}
       </Typography>

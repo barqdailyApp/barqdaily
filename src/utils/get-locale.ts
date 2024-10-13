@@ -14,8 +14,8 @@ export const getCurrentLocale = () => {
   return localesSettings[code as unknown as LocaleType];
 };
 
-export const getCurrency = () => {
-  const { currency } = getCurrentLocale();
+export const getCurrency = async () => {
+  const { currency } = await getCurrentLocale();
 
   const formater = (
     inputValue: string | number | null,

@@ -9,6 +9,11 @@ import TimelineItem, { timelineItemClasses } from "@mui/lab/TimelineItem";
 
 import { useFormatDate, useFormatTime } from "@/utils/format-time";
 
+import { CircularStatus } from "@/theme/overrides/components/circular-status";
+
+import Label from "@/components/label";
+import Iconify from "@/components/iconify";
+
 import { Shipments } from "@/types/order-details";
 
 import orderStatusCircles from "./order-status-cricles";
@@ -16,32 +21,44 @@ import orderStatusCircles from "./order-status-cricles";
 export function OrderProcessCard({
   orderNumber,
   orderShipments,
+  deliveryType,
 }: {
   orderNumber: string;
   orderShipments: Shipments;
+  deliveryType: string;
 }) {
-  const t = useTranslations("Pages.Orders.Single.Status");
+  const t = useTranslations("Pages.Orders");
   const formatTime = useFormatTime();
   const formatDate = useFormatDate();
 
   const statusText = [
     {
-      label: t("confirmed"),
+      label: t("Single.Status.confirmed"),
       date: orderShipments.order_confirmed_at,
     },
     {
-      label: t("processing"),
+      label: t("Single.Status.processing"),
       date: orderShipments.order_on_processed_at,
     },
     {
-      label: t("picked_up"),
+      label: t("Single.Status.picked_up"),
       date: orderShipments.order_shipped_at,
     },
     {
-      label: t("delivered"),
+      label: t("Single.Status.delivered"),
       date: orderShipments.order_delivered_at,
     },
+    {
+      label: t("Single.Status.canceled"),
+      date: orderShipments.order_canceled_at,
+    },
   ];
+
+  const renderCancelCircle = (
+    <CircularStatus color="error">
+      <Iconify icon="material-symbols:close" width={15} />
+    </CircularStatus>
+  );
 
   return (
     <Card
@@ -52,71 +69,69 @@ export function OrderProcessCard({
       }}
     >
       <CardContent>
-        <Typography
-          variant="body1"
-          fontWeight="bold"
-          textAlign="center"
-          sx={{ mb: 3 }}
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
         >
-          {orderNumber}
-        </Typography>
-        <Box sx={{ px: -1 }}>
-          <Stack spacing={1}>
-            <Timeline
-              sx={{
-                px: 0,
-                [`& .${timelineItemClasses.root}:before`]: {
-                  flex: 0,
-                  padding: 0,
-                },
-              }}
-            >
-              {orderStatusCircles(orderShipments.status).map((item, index) =>
-                statusText[index].date ? (
-                  <TimelineItem key={item.key}>
-                    <TimelineSeparator>
-                      {item}
-                      <TimelineConnector />
-                    </TimelineSeparator>
-                    <TimelineContent sx={{ paddingInlineEnd: 0 }}>
-                      <Stack
-                        direction="row"
-                        justifyContent="space-between"
-                        width="100%"
-                      >
-                        <Box>
-                          <Typography variant="body2" fontWeight={500}>
-                            {statusText[index].label}
-                          </Typography>
-                          <Typography
-                            variant="subtitle2"
-                            fontWeight="400"
-                            mt={0.5}
-                          >
-                            {formatDate(
-                              new Date(statusText[index].date),
-                              "MMMM dd, yyyy"
-                            )}
-                          </Typography>
-                        </Box>
-                        <Typography
-                          variant="subtitle2"
-                          fontWeight="400"
-                          textAlign="end"
-                        >
-                          {formatTime(
-                            new Date(statusText[index].date),
-                            "hh:mm a"
-                          )}
-                        </Typography>
-                      </Stack>
-                    </TimelineContent>
-                  </TimelineItem>
-                ) : null
-              )}
-            </Timeline>
-          </Stack>
-        </Box>
+          <Typography variant="body1" fontWeight="bold" textAlign="center">
+            {`${t("order_number")}: ${orderNumber}`}
+          </Typography>
+          <Label variant="soft" color="info">
+            {t(`DeliveryType.${deliveryType}`)}
+          </Label>
+        </Stack>
+
+        <Timeline
+          sx={{
+            px: 0,
+            mt: 3,
+            [`& .${timelineItemClasses.root}:before`]: {
+              flex: 0,
+              padding: 0,
+            },
+          }}
+        >
+          {[
+            ...orderStatusCircles(orderShipments.status),
+            renderCancelCircle,
+          ].map((item, index) =>
+            statusText[index].date ? (
+              <TimelineItem key={item.key}>
+                <TimelineSeparator>
+                  {item}
+                  <TimelineConnector />
+                </TimelineSeparator>
+                <TimelineContent sx={{ paddingInlineEnd: 0 }}>
+                  <Stack
+                    direction="row"
+                    justifyContent="space-between"
+                    width="100%"
+                  >
+                    <Box>
+                      <Typography variant="body2" fontWeight={500}>
+                        {statusText[index].label}
+                      </Typography>
+                      <Typography variant="subtitle2" fontWeight="400" mt={0.5}>
+                        {formatDate(
+                          new Date(statusText[index].date),
+                          "MMMM dd, yyyy"
+                        )}
+                      </Typography>
+                    </Box>
+                    <Typography
+                      variant="subtitle2"
+                      fontWeight="400"
+                      textAlign="end"
+                    >
+                      {formatTime(new Date(statusText[index].date), "hh:mm a")}
+                    </Typography>
+                  </Stack>
+                </TimelineContent>
+              </TimelineItem>
+            ) : null
+          )}
+        </Timeline>
       </CardContent>
     </Card>
   );

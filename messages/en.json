@@ -143,6 +143,15 @@
         "JAWALI": "Jawali",
         "JAIB": "Jaib"
       },
+      "DeliveryType": {
+        "FAST": "Fast",
+        "SCHEDULED": "Scheduled"
+      },
+      "Cancel": {
+        "ADMIN": "Supervisor",
+        "DRIVER": "Driver",
+        "CLIENT": "Client"
+      },
       "Single": {
         "title": "Order Details",
         "order_details_title": "Order Details",
@@ -156,7 +165,8 @@
           "confirmed": "Order Confirmed",
           "processing": "Order on Process",
           "picked_up": "Order Shipped",
-          "delivered": "Order Delivered"
+          "delivered": "Order Delivered",
+          "canceled": "Order Canceled"
         }
       }
     }

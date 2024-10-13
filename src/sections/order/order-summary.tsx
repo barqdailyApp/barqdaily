@@ -2,17 +2,13 @@ import { useTranslations } from "next-intl";
 
 import { Card, Stack, Button, Typography, CardContent } from "@mui/material";
 
-import { getCurrency } from "@/utils/get-locale";
+import { useCurrency } from "@/utils/format-number";
 
 import { SingleShipment } from "@/types/order-shipment";
 
-export async function OrderSummaryCard({
-  shipment,
-}: {
-  shipment: SingleShipment;
-}) {
+export function OrderSummaryCard({ shipment }: { shipment: SingleShipment }) {
   const t = useTranslations("Pages.Orders");
-  const currency = await getCurrency();
+  const currency = useCurrency();
 
   const fields = [
     {

@@ -16,7 +16,6 @@ interface Props {
 
 export default function OrderView({ orders, pagesCount }: Props) {
   const t = useTranslations();
-  console.log("hello");
 
   return (
     <Container sx={{ padding: 4 }}>

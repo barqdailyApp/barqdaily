@@ -51,6 +51,7 @@ export default function SingleOrderView({
               <OrderProcessCard
                 orderNumber={order.order_number}
                 orderShipments={order.shipments}
+                deliveryType={shipment.order.delivery_type}
               />
 
               <OrderSummaryCard shipment={shipment} />

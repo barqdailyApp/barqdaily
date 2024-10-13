@@ -143,6 +143,15 @@
         "JAWALI": "جوالي",
         "JAIB": "جيب"
       },
+      "DeliveryType": {
+        "FAST": "سريع",
+        "SCHEDULED": "مجدول"
+      },
+      "Cancel": {
+        "ADMIN": "المشرف",
+        "DRIVER": "السائق",
+        "CLIENT": "العميل"
+      },
       "Single": {
         "title": "تفاصيل الطلب",
         "order_details_title": "تفاصيل الطلب",
@@ -156,7 +165,8 @@
           "confirmed": "تم تأكيد الطلب",
           "processing": "جاري تجهيز الطلب",
           "picked_up": "تم شحن الطلب",
-          "delivered": "تم توصيل الطلب"
+          "delivered": "تم توصيل الطلب",
+          "canceled": "تم الغاء الطلب"
         }
       }
     }
