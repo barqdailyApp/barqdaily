@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { format, getTime, formatDistanceToNow } from "date-fns";
+import { getTranslations } from "next-intl/server";
 
 // ----------------------------------------------------------------------
 
@@ -35,6 +36,20 @@ export function fTime(date: InputValue, newFormat?: string) {
 
 export function useFormatTime() {
   const t = useTranslations();
+
+  return (date: InputValue, newFormat?: string) => {
+    const fm = newFormat || "p";
+
+    return date
+      ? format(new Date(date), fm).replace(/AM|PM/g, (matched) =>
+          t(`Global.Date.${matched.toLocaleLowerCase()}`)
+        )
+      : "";
+  };
+}
+
+export async function getFormatTime() {
+  const t = await getTranslations();
 
   return (date: InputValue, newFormat?: string) => {
     const fm = newFormat || "p";

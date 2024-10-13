@@ -1,4 +1,4 @@
-import { useLocale, useTranslations } from "next-intl";
+"use server";
 
 import {
   Box,
@@ -12,10 +12,8 @@ import {
 
 import { paths } from "@/routes/paths";
 
-import { useCurrency } from "@/utils/format-number";
-import { useFormatTime } from "@/utils/format-time";
-
-import { LocaleType, localesSettings } from "@/i18n/config-locale";
+import { getFormatTime } from "@/utils/format-time";
+import { getCurrency, getCurrentLocale } from "@/utils/get-locale";
 
 import Label from "@/components/label";
 import Iconify from "@/components/iconify";
@@ -24,13 +22,14 @@ import { Order } from "@/types/order";
 
 import orderStatusCircles from "./order-status-cricles";
 import { WEEK_DAYS, STATUS_SETTINGS } from "./config-orders";
+import { getTranslations } from "next-intl/server";
+import OrderCardWrapper from "./order-card-wrapper";
 
-export default function OrderCard({ order }: { order: Order }) {
-  const t = useTranslations();
-  const currency = useCurrency();
-  const locale = useLocale();
-  const { dir } = localesSettings[locale as LocaleType];
-  const formatTime = useFormatTime();
+export default async function OrderCard({ order }: { order: Order }) {
+  const t = await getTranslations();
+  const currency = await getCurrency();
+  const { dir } = await getCurrentLocale();
+  const formatTime = await getFormatTime();
 
   const deliveryDate = t(
     `Global.Date.${WEEK_DAYS[new Date(order.estimated_delivery_time).getDay()]}`
@@ -158,25 +157,7 @@ export default function OrderCard({ order }: { order: Order }) {
   );
 
   return (
-    <Card
-      sx={(theme) => ({
-        marginTop: 4,
-        width: "100%",
-        border: "solid 1px",
-        borderColor: "grey.200",
-        position: "relative",
-        display: "flex",
-        flexDirection: "column",
-        "&.selected": { border: `1px solid ${theme.palette.primary.main}` },
-        "&:hover": {
-          boxShadow: `0px 0px 0px 1px ${theme.palette.primary.main}, 0px 0px 0px 4px ${theme.palette.primary.main}`,
-          "&:has(.card-clickable-layer:active)": {
-            boxShadow: `0px 0px 0px 1px ${theme.palette.primary.main}`,
-          },
-          zIndex: 9,
-        },
-      })}
-    >
+    <OrderCardWrapper>
       <Box
         className="card-clickable-layer"
         aria-hidden
@@ -210,6 +191,6 @@ export default function OrderCard({ order }: { order: Order }) {
           )}
         </Stack>
       </CardContent>
-    </Card>
+    </OrderCardWrapper>
   );
 }

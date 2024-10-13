@@ -9,13 +9,13 @@ import {
   localesSettings,
 } from "@/i18n/config-locale";
 
-export const getCurrentLocale = async () => {
+export const getCurrentLocale = () => {
   const code = cookies().get(COOKIES_KEYS.lang)?.value || defaultLocale;
-  return localesSettings[code as LocaleType];
+  return localesSettings[code as unknown as LocaleType];
 };
 
-export const getCurrency = async () => {
-  const { currency } = await getCurrentLocale();
+export const getCurrency = () => {
+  const { currency } = getCurrentLocale();
 
   const formater = (
     inputValue: string | number | null,

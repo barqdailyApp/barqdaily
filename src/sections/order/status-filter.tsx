@@ -1,3 +1,5 @@
+"use client";
+
 import { useTranslations } from "next-intl";
 import { useState, useCallback } from "react";
 import { useSearchParams } from "next/navigation";

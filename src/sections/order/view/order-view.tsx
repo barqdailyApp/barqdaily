@@ -1,5 +1,3 @@
-"use client";
-
 import { useTranslations } from "next-intl";
 
 import { Stack, Alert, Container } from "@mui/material";
@@ -18,6 +16,7 @@ interface Props {
 
 export default function OrderView({ orders, pagesCount }: Props) {
   const t = useTranslations();
+  console.log("hello");
 
   return (
     <Container sx={{ padding: 4 }}>
