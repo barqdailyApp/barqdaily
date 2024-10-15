@@ -151,7 +151,8 @@
       },
       "DeliveryType": {
         "FAST": "Fast",
-        "SCHEDULED": "Scheduled"
+        "SCHEDULED": "Scheduled",
+        "WAREHOUSE_PICKUP": "Pickup from warehouse"
       },
       "Cancel": {
         "ADMIN": "Supervisor",

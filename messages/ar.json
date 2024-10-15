@@ -152,7 +152,8 @@
       },
       "DeliveryType": {
         "FAST": "سريع",
-        "SCHEDULED": "مجدول"
+        "SCHEDULED": "مجدول",
+        "WAREHOUSE_PICKUP": "استلام من المستودع"
       },
       "Cancel": {
         "ADMIN": "المشرف",
