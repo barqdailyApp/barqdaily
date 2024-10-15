@@ -180,6 +180,24 @@
           "title": "Choose a reason",
           "field_label": "Reason",
           "success": "Order has been canceled successfully"
+        },
+        "Rate": {
+          "action": "Rate",
+          "title": "Your Feedback",
+          "sub_title": "Rate Your Delivery Experience",
+          "delivery_time": "Delivery Time",
+          "packaging": "Packaging",
+          "communication": "Communication",
+          "cancel": "Cancel",
+          "submit": "Rate",
+          "success": "Feedback has been submitted successfully"
+        },
+        "Return": {
+          "action": "Return",
+          "title": "Return request",
+          "sub_title": "Please specify the products you wish to reutrn, then chosse the reason and quantity for each product from the items to be returned",
+          "cancel": "Cancel",
+          "submit": "Return"
         }
       }
     }

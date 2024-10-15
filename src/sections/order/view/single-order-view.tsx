@@ -5,6 +5,7 @@ import { Box, Stack, Container, Typography } from "@mui/material";
 import { FullOrder } from "@/types/order-details";
 import { SingleShipment } from "@/types/order-shipment";
 
+import RateCard from "../rate-card";
 import { OrderDetailsCard } from "../order-details";
 import { OrderProcessCard } from "../order-process";
 import { OrderSummaryCard } from "../order-summary";
@@ -55,6 +56,10 @@ export default function SingleOrderView({
               />
 
               <OrderSummaryCard shipment={shipment} />
+
+              {shipment.shipment_feedback && (
+                <RateCard feedback={shipment.shipment_feedback} />
+              )}
             </Stack>
           </Stack>
         </Container>

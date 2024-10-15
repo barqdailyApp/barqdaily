@@ -10,7 +10,7 @@ export interface SingleShipment {
   status: string;
   driver: Driver;
   order: Order;
-  shipment_feedback: any;
+  shipment_feedback: ShipmentFeedback | null;
   shipment_products: ShipmentProduct[];
   warehouse: Warehouse;
 }
@@ -56,6 +56,16 @@ export interface Address {
   latitude: number;
   longitude: number;
   phone: string;
+}
+
+export interface ShipmentFeedback {
+  id: string;
+  communication: string;
+  packaging: string;
+  delivery_time: string;
+  client_id: string;
+  driver_id: string;
+  shipment_id: string;
 }
 
 export interface ShipmentProduct {

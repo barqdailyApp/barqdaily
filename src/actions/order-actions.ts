@@ -29,3 +29,21 @@ export const cancelShipment = async ({
 
   return res;
 };
+
+interface Feedback {
+  shipment_id: string;
+  driver_id: string;
+  delivery_time: number;
+  packaging: number;
+  communication: number;
+}
+export const addShipmentFeedback = async (
+  body: Feedback
+): Promise<{ data: string } | { error: string }> => {
+  const res = await postData<string, Feedback>(
+    endpoints.addShipmentFeedback,
+    body
+  );
+
+  return res;
+};

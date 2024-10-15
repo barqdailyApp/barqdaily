@@ -80,7 +80,7 @@ export default function CancelButton({ shipmentId }: { shipmentId: string }) {
       <Button
         color="error"
         size="large"
-        sx={{ mt: 2 }}
+        sx={{ flexGrow: 1, flexBasis: 110 }}
         onClick={() => isOpen.onTrue()}
       >
         {t("action")}

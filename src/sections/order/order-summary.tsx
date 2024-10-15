@@ -6,11 +6,26 @@ import { useCurrency } from "@/utils/format-number";
 
 import { SingleShipment } from "@/types/order-shipment";
 
+import RateButton from "./rate-button";
 import CancelButton from "./cancel-button";
+import ReturnButton from "./return-button";
 
 export function OrderSummaryCard({ shipment }: { shipment: SingleShipment }) {
   const t = useTranslations("Pages.Orders");
   const currency = useCurrency();
+  const canReturn =
+    shipment.shipment_products.some(
+      (item) => item.can_return || item.is_recoverd
+    ) && checkStatus(shipment.status, ["DELIVERED", "COMPLETED"]);
+  const canRate =
+    !shipment.shipment_feedback &&
+    checkStatus(shipment.status, ["DELIVERED", "COMPLETED"]);
+  const canCancel = !checkStatus(shipment.status, [
+    "CANCELED",
+    "RETURNED",
+    "DELIVERED",
+    "COMPLETED",
+  ]);
 
   const fields = [
     {
@@ -51,11 +66,31 @@ export function OrderSummaryCard({ shipment }: { shipment: SingleShipment }) {
               </Typography>
             </Stack>
           ))}
-          {!["CANCELED", "RETURNED", "DELIVERED", "COMPLETED"].includes(
-            shipment.status
-          ) && <CancelButton shipmentId={shipment.shipment_id} />}
+
+          {(canReturn || canRate || canCancel) && (
+            <Stack
+              direction="row"
+              spacing={1}
+              flexWrap="wrap"
+              justifyContent="stretch"
+              mt={2}
+            >
+              {canRate && (
+                <RateButton
+                  shipmentId={shipment.shipment_id}
+                  driverId={shipment.driver.id}
+                />
+              )}
+              {canReturn && <ReturnButton shipment={shipment} />}
+              {canCancel && <CancelButton shipmentId={shipment.shipment_id} />}
+            </Stack>
+          )}
         </Stack>
       </CardContent>
     </Card>
   );
+}
+
+function checkStatus(shipmentStatus: string, availableStatus: string[]) {
+  return availableStatus.includes(shipmentStatus);
 }
