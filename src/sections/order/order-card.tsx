@@ -2,14 +2,7 @@
 
 import { getTranslations } from "next-intl/server";
 
-import {
-  Box,
-  Link,
-  Stack,
-  Button,
-  Typography,
-  CardContent,
-} from "@mui/material";
+import { Box, Link, Stack, Typography, CardContent } from "@mui/material";
 
 import { paths } from "@/routes/paths";
 
@@ -21,10 +14,10 @@ import Iconify from "@/components/iconify";
 
 import { Order } from "@/types/order";
 
+import DriverActions from "./driver-actions";
 import OrderCardWrapper from "./order-card-wrapper";
 import orderStatusCircles from "./order-status-cricles";
 import { WEEK_DAYS, STATUS_SETTINGS } from "./config-orders";
-import DriverActions from "./driver-actions";
 
 export default async function OrderCard({ order }: { order: Order }) {
   const t = await getTranslations();
