@@ -16,14 +16,19 @@ import {
   DialogActions,
 } from "@mui/material";
 
+import { paths } from "@/routes/paths";
+
 import { useBoolean } from "@/hooks/use-boolean";
 
 import { addShipmentFeedback } from "@/actions/order-actions";
+import { invalidateCaching } from "@/actions/cache-invalidation";
 
 export default function RateButton({
+  orderId,
   shipmentId,
   driverId,
 }: {
+  orderId: string;
   shipmentId: string;
   driverId: string;
 }) {
@@ -44,6 +49,7 @@ export default function RateButton({
 
       {rateDialog.value && (
         <RateDialog
+          orderId={orderId}
           shipmentId={shipmentId}
           driverId={driverId}
           onClose={rateDialog.onFalse}
@@ -61,10 +67,12 @@ const feedbackNames: FeedbackNames[] = [
 ];
 
 function RateDialog({
+  orderId,
   shipmentId,
   driverId,
   onClose,
 }: {
+  orderId: string;
   shipmentId: string;
   driverId: string;
   onClose: VoidFunction;
@@ -93,11 +101,12 @@ function RateDialog({
       } else {
         enqueueSnackbar(t("success"), { variant: "success" });
         onClose();
+        invalidateCaching(`${paths.orders}/${orderId}`);
       }
 
       setIsloading(false);
     })();
-  }, [driverId, enqueueSnackbar, feedback, onClose, shipmentId, t]);
+  }, [driverId, enqueueSnackbar, feedback, onClose, orderId, shipmentId, t]);
 
   return (
     <Dialog open onClose={onClose} fullWidth maxWidth="xs">

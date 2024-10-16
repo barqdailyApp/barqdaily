@@ -24,4 +24,5 @@ export const endpoints = {
     `shipment/cancel-shipment/${shipment_id}`,
   getReasons: (type: string) => `reason/all?type=${type}`,
   addShipmentFeedback: "shipment/add-shipment-feedback",
+  returnOrder: (order_id: string) => `order/return-order/${order_id}`,
 };

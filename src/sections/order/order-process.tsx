@@ -77,7 +77,7 @@ export function OrderProcessCard({
           <Typography variant="body1" fontWeight="bold" textAlign="center">
             {`${t("order_number")}: ${orderNumber}`}
           </Typography>
-          <Label variant="soft" color="info">
+          <Label variant="soft" color="info" sx={{ flexShrink: 0 }}>
             {t(`DeliveryType.${deliveryType}`)}
           </Label>
         </Stack>

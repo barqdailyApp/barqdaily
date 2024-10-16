@@ -202,7 +202,17 @@
           "title": "Return request",
           "sub_title": "Please specify the products you wish to reutrn, then chosse the reason and quantity for each product from the items to be returned",
           "cancel": "Cancel",
-          "submit": "Return"
+          "submit": "Return",
+          "quantity": "Quantity",
+          "reason": "Reason",
+          "note": "Notes",
+          "success": "Return request has been submitted successfully",
+          "Errors": {
+            "no_reason": "({name}) should have a reason",
+            "no_quantity": "({name}) should have a quantity",
+            "quantity_exceed": "The quantity of ({name}) should not exceed {quantity}",
+            "recovered_before": "The product has been already returned"
+          }
         }
       }
     }
