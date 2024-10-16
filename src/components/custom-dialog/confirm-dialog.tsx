@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import { Box, Typography } from "@mui/material";
+import LoadingButton from "@mui/lab/LoadingButton";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -20,14 +21,14 @@ export default function ConfirmDialog({
   open,
   onClose,
   handleConfirmation,
+  buttonDisabled,
+  buttonLoading,
   ...other
 }: ConfirmDialogProps) {
-  const t = useTranslations();
+  const t = useTranslations("ConfirmDialog");
   return (
     <Dialog fullWidth maxWidth="xs" open={open} onClose={onClose} {...other}>
-      <DialogTitle sx={{ pb: 0.5 }}>
-        {title ? t(`${title}`) : t("GLOBAL.BUTTON.DELETE")}
-      </DialogTitle>
+      <DialogTitle sx={{ pb: 0.5 }}>{title || t("title")}</DialogTitle>
 
       <DialogContent
         sx={{
@@ -36,24 +37,27 @@ export default function ConfirmDialog({
         }}
       >
         <Box sx={{ py: 1 }}>
-          <Typography variant="body1" color="disabled">
-            {t(
-              typeof content === "string" ? content : "MSG.DELETE_CONFIRMATION"
-            )}
-          </Typography>
+          {content || (
+            <Typography variant="body1" color="disabled">
+              {t("message")}
+            </Typography>
+          )}
         </Box>
       </DialogContent>
       <DialogActions>
-        <Button
+        <Button variant="outlined" color="inherit" onClick={onClose}>
+          {t("cancel")}
+        </Button>
+
+        <LoadingButton
           variant="contained"
           color={buttonColor || "error"}
           onClick={handleConfirmation}
+          disabled={buttonDisabled}
+          loading={buttonLoading}
         >
-          {buttonTitle ? t(`${buttonTitle}`) : t("GLOBAL.BUTTON.CONFIRM")}
-        </Button>
-        <Button variant="outlined" color="inherit" onClick={onClose}>
-          {t("GLOBAL.BUTTON.CANCEL")}
-        </Button>
+          {buttonTitle || t("confirm")}
+        </LoadingButton>
       </DialogActions>
     </Dialog>
   );

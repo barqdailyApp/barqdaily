@@ -6,17 +6,19 @@ import { Box, Pagination } from "@mui/material";
 
 import { useQueryString } from "@/hooks/use-queryString";
 
-export default function ProductPagination({
+export default function ParamsPagination({
   pagesCount,
+  query = "page",
 }: {
   pagesCount: number;
+  query?: string;
 }) {
   const searshParams = useSearchParams();
   const { createQueryString } = useQueryString();
 
-  const page = Number(searshParams.get("page") || "1");
+  const page = Number(searshParams.get(query) || "1");
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    createQueryString([{ name: "page", value: String(value) }], true);
+    createQueryString([{ name: query, value: String(value) }], true);
   };
 
   return (

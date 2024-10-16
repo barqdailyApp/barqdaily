@@ -90,11 +90,9 @@ async function apiRequest<TResponse, TBody = undefined>(
 
     // Response check after parsing so i can get the error message
     if (!response.ok) {
-      const errMsg =
-        responseData?.error?.message ||
-        (responseData?.errors &&
-          Object.values(responseData.errors).join(" | ")) ||
-        "ERROR.AN_ERROR_OCCURRED";
+      const errMsg = Array.isArray(responseData?.message)
+        ? responseData?.message.join(" | ")
+        : responseData?.message || "ERROR.AN_ERROR_OCCURRED";
       const resCode = responseData?.code || null;
       const resDetails = responseData?.details || null;
       const resData = responseData?.data || {};

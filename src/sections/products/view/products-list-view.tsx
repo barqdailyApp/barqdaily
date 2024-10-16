@@ -5,12 +5,11 @@ import { Box, Grid } from "@mui/material";
 import { paths } from "@/routes/paths";
 
 import { SECTION_PADDING } from "@/layouts/config-layout";
-
-import { ProductCard } from "@/sections/products/product-card";
+import ParamsPagination from "@/CustomSharedComponents/params-pagination";
 
 import { Offer, Product } from "@/types/products";
 
-import ProductPagination from "../products-pagination";
+import { ProductCard } from "../product-card";
 
 interface Props {
   products: (Product | Offer)[];
@@ -38,11 +37,7 @@ export default function ProductsListView({ products, pagesCount }: Props) {
         ))}
       </Grid>
 
-      {pagesCount > 1 && (
-        <Box>
-          <ProductPagination pagesCount={pagesCount} />
-        </Box>
-      )}
+      {pagesCount > 1 && <ParamsPagination pagesCount={pagesCount} />}
     </Box>
   );
 }

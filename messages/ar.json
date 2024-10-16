@@ -26,7 +26,36 @@
       "download_ios": "قم بالتنزيل من App Store",
       "download_android": "قم بالتنزيل من Google Play",
       "copyright": "إلما © حقوق الطبع والنشر 2020, Inc. جميع الحقوق محفوظة"
+    },
+    "Date": {
+      "sunday": "الأحد",
+      "monday": "الاثنين",
+      "tuesday": "الثلاثاء",
+      "wednesday": "الأربعاء",
+      "thursday": "الخميس",
+      "friday": "الجمعة",
+      "saturday": "السبت",
+      "am": "ص",
+      "pm": "م",
+      "jan": "يناير",
+      "feb": "فبراير",
+      "mar": "مارس",
+      "apr": "أبريل",
+      "may": "مايو",
+      "jun": "يونيو",
+      "jul": "يوليو",
+      "aug": "أغسطس",
+      "sep": "سبتمبر",
+      "oct": "أكتوبر",
+      "nov": "نوفمبر",
+      "dec": "ديسمبر"
     }
+  },
+  "ConfirmDialog": {
+    "title": "هل انت متأكد؟",
+    "message": "لن تتمكن من التراجع عن هذا!",
+    "confirm": "تأكيد",
+    "cancel": "الغاء"
   },
   "Navbar": {
     "Overview": {
@@ -43,8 +72,12 @@
         "List": { "title": "القائمة" },
         "Details": { "title": "التفاصيل" }
       }
-    },
-    "Management": {}
+    }
+  },
+  "Navigation": {
+    "home": "الرئيسية",
+    "orders": "طلباتي",
+    "logout": "تسجيل خروج"
   },
   "Pages": {
     "Error404": {
@@ -90,6 +123,89 @@
       "order_again_title": "أطلب مرة أخرى",
       "action": "عرض الكل",
       "order_again": "أطلب مرة أخرى"
+    },
+    "Orders": {
+      "driver_name": "اسم السائق",
+      "order_number": "رقم الطلب",
+      "deliver_to": "التوصيل الي",
+      "total_payment": "المبلغ الكلي",
+      "arrival_time": "وقت الوصول",
+      "no_orders": "لا توجد طلبات للعرض",
+      "products_price": "إجمالي سعر المنتجات",
+      "delivery_fee": "رسوم التوصيل",
+      "total": "الإجمالي",
+      "payment_method": "طريقة الدفع",
+      "cancel_order": "إلغاء الطلب",
+      "Status": {
+        "all": "كل الطلبات",
+        "canceled": "تم الإلغاء",
+        "pending": "قيد الانتظار",
+        "returned": "تم الإرجاع",
+        "confirmed": "تم التأكيد",
+        "processing": "جاري التجهيز",
+        "ready_for_pickup": "جاهز للتوصيل",
+        "picked_up": "في الطريق للتوصيل",
+        "delivered": "تم التوصيل",
+        "completed": "إكتمل"
+      },
+      "Payment": {
+        "CASH": "كاش",
+        "WALLET": "محفظة",
+        "KURAIMI": "بنك الكريمي",
+        "JAWALI": "جوالي",
+        "JAIB": "جيب"
+      },
+      "DeliveryType": {
+        "FAST": "سريع",
+        "SCHEDULED": "مجدول",
+        "WAREHOUSE_PICKUP": "استلام من المستودع"
+      },
+      "Cancel": {
+        "ADMIN": "المشرف",
+        "DRIVER": "السائق",
+        "CLIENT": "العميل"
+      },
+      "Single": {
+        "title": "تفاصيل الطلب",
+        "order_details_title": "تفاصيل الطلب",
+        "driver_card_title": "معلومات السائق",
+        "Shipment": {
+          "buy_again": "اشتري مرة أخرى",
+          "quantity": "الكمية",
+          "total": "الإجمالي"
+        },
+        "Status": {
+          "confirmed": "تم تأكيد الطلب",
+          "processing": "جاري تجهيز الطلب",
+          "picked_up": "تم شحن الطلب",
+          "delivered": "تم توصيل الطلب",
+          "canceled": "تم الغاء الطلب"
+        },
+        "Cancel": {
+          "action": "الغاء الطلب",
+          "title": "اختر سبب",
+          "field_label": "السبب",
+          "success": "تم الغاء الطلب بنجاح"
+        },
+        "Rate": {
+          "action": "تقييم",
+          "title": "تقييمك",
+          "sub_title": "قم بتقييم تجربة التوصيل",
+          "delivery_time": "وقت التوصيل",
+          "packaging": "التعبئة",
+          "communication": "التواصل",
+          "cancel": "إلغاء",
+          "submit": "إرسال التقييم",
+          "success": "تم ارسال التقييم بنجاح"
+        },
+        "Return": {
+          "action": "إرجاع",
+          "title": "طلب الإرجاع",
+          "sub_title": "قم بتحديد المنتجات التي ترغب في إرجاعها، ثم اختيار السبب والكمية لكل منتج من العناصر المراد إرجاعها",
+          "cancel": "إلغاء",
+          "submit": "إرجاع"
+        }
+      }
     }
   }
 }

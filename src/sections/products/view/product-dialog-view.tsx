@@ -19,6 +19,8 @@ import {
   DialogContentText,
 } from "@mui/material";
 
+import { useCurrency } from "@/utils/format-number";
+
 import { fetchSingleProduct } from "@/actions/products-actions";
 
 import Iconify from "@/components/iconify";
@@ -26,7 +28,6 @@ import Iconify from "@/components/iconify";
 import IncrementerButton from "@/sections/products/incrementer-button";
 
 import { FullProduct, ProductMeasurement } from "@/types/products";
-import { useCurrency } from "@/utils/format-number";
 
 interface Props {
   productId: string;

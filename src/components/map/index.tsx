@@ -36,7 +36,7 @@ export function GoogleMap({
       <Box height="100%">
         <Map
           defaultCenter={defaultPosition || ComponentDefaultPosition}
-          defaultZoom={defaultZoom ?? 5}
+          defaultZoom={defaultZoom ?? 17}
           disableDefaultUI
           mapId={process.env.NEXT_PUBLIC_GOOGLE_MAP_ID}
           onClick={(e) => {

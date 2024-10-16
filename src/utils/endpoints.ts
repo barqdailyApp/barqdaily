@@ -15,5 +15,13 @@ export const endpoints = {
     offers: "product/all-products-offers-for-client",
   },
   banars: "banar/guest",
+
   orders: "order/client-orders",
+  singleOrder: (order_id: string) => `order/single-order/${order_id}`,
+  singleShipment: (shipment_id: string) =>
+    `order/single-shipment/${shipment_id}`,
+  cancelShipment: (shipment_id: string) =>
+    `shipment/cancel-shipment/${shipment_id}`,
+  getReasons: (type: string) => `reason/all?type=${type}`,
+  addShipmentFeedback: "shipment/add-shipment-feedback",
 };

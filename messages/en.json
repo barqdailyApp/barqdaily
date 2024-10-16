@@ -26,7 +26,36 @@
       "download_ios": "Download from the App Store",
       "download_android": "Download from Google Play",
       "copyright": "Elma © Copyright 2020, Inc. All rights reserved"
+    },
+    "Date": {
+      "sunday": "Sunday",
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday",
+      "am": "AM",
+      "pm": "PM",
+      "jan": "Jan",
+      "feb": "Feb",
+      "mar": "Mar",
+      "apr": "Apr",
+      "may": "May",
+      "jun": "Jun",
+      "jul": "Jul",
+      "aug": "Aug",
+      "sep": "Sep",
+      "oct": "Oct",
+      "nov": "Nov",
+      "dec": "Dec"
     }
+  },
+  "ConfirmDialog": {
+    "title": "Are you sure?",
+    "message": "You won't be able to revert this!",
+    "confirm": "Confirm",
+    "cancel": "Cancel"
   },
   "Navbar": {
     "Overview": {
@@ -43,8 +72,12 @@
         "List": { "title": "list" },
         "Details": { "title": "details" }
       }
-    },
-    "Management": {}
+    }
+  },
+  "Navigation": {
+    "home": "Home",
+    "orders": "My Orders",
+    "logout": "Logout"
   },
   "Pages": {
     "Error404": {
@@ -90,6 +123,88 @@
       "order_again_title": "Order Again",
       "action": "View All",
       "order_again": "Order Again"
+    },
+    "Orders": {
+      "driver_name": "Driver name",
+      "order_number": "Order Number",
+      "deliver_to": "Deliver to",
+      "total_payment": "Total Payment",
+      "arrival_time": "Arrival time",
+      "no_orders": "No orders to show",
+      "products_price": "Total products price",
+      "delivery_fee": "Delivery fee",
+      "total": "Total",
+      "payment_method": "Payment method",
+      "Status": {
+        "all": "All Orders",
+        "canceled": "Canceled",
+        "pending": "Pending",
+        "returned": "Returned",
+        "confirmed": "Confirmed",
+        "processing": "On process",
+        "ready_for_pickup": "Ready for pickup",
+        "picked_up": "Out for delivery",
+        "delivered": "Delivered",
+        "completed": "completed"
+      },
+      "Payment": {
+        "CASH": "Cash",
+        "WALLET": "Wallet",
+        "KURAIMI": "Kuraimi",
+        "JAWALI": "Jawali",
+        "JAIB": "Jaib"
+      },
+      "DeliveryType": {
+        "FAST": "Fast",
+        "SCHEDULED": "Scheduled",
+        "WAREHOUSE_PICKUP": "Pickup from warehouse"
+      },
+      "Cancel": {
+        "ADMIN": "Supervisor",
+        "DRIVER": "Driver",
+        "CLIENT": "Client"
+      },
+      "Single": {
+        "title": "Order Details",
+        "order_details_title": "Order Details",
+        "driver_card_title": "Driver Info",
+        "Shipment": {
+          "buy_again": "Buy Again",
+          "quantity": "Quantity",
+          "total": "Total"
+        },
+        "Status": {
+          "confirmed": "Order Confirmed",
+          "processing": "Order on Process",
+          "picked_up": "Order Shipped",
+          "delivered": "Order Delivered",
+          "canceled": "Order Canceled"
+        },
+        "Cancel": {
+          "action": "Cancel Order",
+          "title": "Choose a reason",
+          "field_label": "Reason",
+          "success": "Order has been canceled successfully"
+        },
+        "Rate": {
+          "action": "Rate",
+          "title": "Your Feedback",
+          "sub_title": "Rate Your Delivery Experience",
+          "delivery_time": "Delivery Time",
+          "packaging": "Packaging",
+          "communication": "Communication",
+          "cancel": "Cancel",
+          "submit": "Rate",
+          "success": "Feedback has been submitted successfully"
+        },
+        "Return": {
+          "action": "Return",
+          "title": "Return request",
+          "sub_title": "Please specify the products you wish to reutrn, then chosse the reason and quantity for each product from the items to be returned",
+          "cancel": "Cancel",
+          "submit": "Return"
+        }
+      }
     }
   }
 }
