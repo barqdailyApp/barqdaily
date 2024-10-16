@@ -20,26 +20,43 @@ export default function ShipmentItem({
   const currency = useCurrency();
 
   const renderTopRow = (
-    <Stack direction="row" alignItems="center" spacing={2}>
-      <Image
-        src={shipment.product_logo}
-        alt={shipment.product_name}
-        width={60}
-        height={60}
-        style={{
-          borderRadius: "50px",
-          objectFit: "cover",
-        }}
-      />
+    <Stack direction="row" alignItems="center" spacing={2} flexWrap="wrap">
+      <Stack
+        direction="row"
+        alignItems="center"
+        spacing={2}
+        sx={{ flexGrow: 1, flexBasis: "200px" }}
+      >
+        <Image
+          src={shipment.product_logo}
+          alt={shipment.product_name}
+          width={60}
+          height={60}
+          style={{
+            borderRadius: "50px",
+            objectFit: "cover",
+          }}
+        />
 
-      <Box sx={{ flexGrow: 1 }}>
-        <Typography variant="body1" fontWeight="700">
-          {shipment.product_name}
-        </Typography>
-        <Typography variant="subtitle2" mt={0.5} fontWeight="400">
-          {`${t("quantity")} : ${shipment.quantity}`}
-        </Typography>
-      </Box>
+        <Box>
+          <Typography
+            variant="body1"
+            fontWeight="700"
+            sx={{
+              display: "-webkit-box",
+              WebkitLineClamp: "2",
+              WebkitBoxOrient: "vertical",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+          >
+            {shipment.product_name}
+          </Typography>
+          <Typography variant="subtitle2" mt={0.5} fontWeight="400">
+            {`${t("quantity")} : ${shipment.quantity}`}
+          </Typography>
+        </Box>
+      </Stack>
 
       <Typography variant="subtitle2" fontWeight="400" flexShrink={0}>
         <Typography variant="body2" fontWeight="bold" component="span">

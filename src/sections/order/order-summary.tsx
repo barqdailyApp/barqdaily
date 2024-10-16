@@ -14,9 +14,8 @@ export function OrderSummaryCard({ shipment }: { shipment: SingleShipment }) {
   const t = useTranslations("Pages.Orders");
   const currency = useCurrency();
   const canReturn =
-    shipment.shipment_products.some(
-      (item) => item.can_return || item.is_recoverd
-    ) && checkStatus(shipment.status, ["DELIVERED", "COMPLETED"]);
+    shipment.shipment_products.some((item) => item.can_return) &&
+    checkStatus(shipment.status, ["DELIVERED", "COMPLETED"]);
   const canRate =
     !shipment.shipment_feedback &&
     checkStatus(shipment.status, ["DELIVERED", "COMPLETED"]);
@@ -75,8 +74,9 @@ export function OrderSummaryCard({ shipment }: { shipment: SingleShipment }) {
               justifyContent="stretch"
               mt={2}
             >
-              {canRate && (
+              {canRate && shipment.driver && (
                 <RateButton
+                  orderId={shipment.order.id}
                   shipmentId={shipment.shipment_id}
                   driverId={shipment.driver.id}
                 />

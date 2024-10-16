@@ -14,6 +14,15 @@ export const fetchCancelReasons = async (): Promise<
 
   return reasons;
 };
+export const fetchReturnReasons = async (): Promise<
+  { data: CancelReason[] } | { error: string }
+> => {
+  const reasons = await getData<CancelReason[]>(
+    endpoints.getReasons("RETURN_ORDER")
+  );
+
+  return reasons;
+};
 
 export const cancelShipment = async ({
   shipmentId,
@@ -42,6 +51,30 @@ export const addShipmentFeedback = async (
 ): Promise<{ data: string } | { error: string }> => {
   const res = await postData<string, Feedback>(
     endpoints.addShipmentFeedback,
+    body
+  );
+
+  return res;
+};
+
+interface ReturnOrderBody {
+  returned_shipment_products: {
+    shipment_product_id: string;
+    return_product_reason_id: string;
+    quantity: number;
+  }[];
+  customer_note: string;
+}
+
+export const returnOrder = async ({
+  orderId,
+  body,
+}: {
+  orderId: string;
+  body: ReturnOrderBody;
+}): Promise<{ data: string } | { error: string }> => {
+  const res = await postData<string, ReturnOrderBody>(
+    endpoints.returnOrder(orderId),
     body
   );
 

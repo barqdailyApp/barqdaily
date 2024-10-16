@@ -10,11 +10,15 @@ import {
 
 import Iconify from "@/components/iconify";
 
-export default function ProductDialogLoading() {
+export default function ProductDialogLoading({
+  maxWidth = "xs",
+}: {
+  maxWidth?: "xs" | "sm" | "md" | "lg" | "xl";
+}) {
   const router = useRouter();
 
   return (
-    <Dialog open onClose={() => router.back()} maxWidth="xs" fullWidth>
+    <Dialog open onClose={() => router.back()} maxWidth={maxWidth} fullWidth>
       <DialogTitle>
         <IconButton onClick={() => router.back()}>
           <Iconify icon="heroicons:x-mark-16-solid" />
