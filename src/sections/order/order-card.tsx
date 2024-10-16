@@ -24,6 +24,7 @@ import { Order } from "@/types/order";
 import OrderCardWrapper from "./order-card-wrapper";
 import orderStatusCircles from "./order-status-cricles";
 import { WEEK_DAYS, STATUS_SETTINGS } from "./config-orders";
+import DriverActions from "./driver-actions";
 
 export default async function OrderCard({ order }: { order: Order }) {
   const t = await getTranslations();
@@ -137,30 +138,9 @@ export default async function OrderCard({ order }: { order: Order }) {
       </Box>
     </Stack>
   );
-
   const renderActions = (
     <Stack direction="row" spacing={0.5} justifyContent="flex-end">
-      <Button
-        color="primary"
-        variant="contained"
-        sx={{ borderRadius: "10rem", p: 1, minWidth: 0 }}
-      >
-        <Iconify icon="material-symbols:map-outline" />
-      </Button>
-      <Button
-        color="primary"
-        variant="contained"
-        sx={{ borderRadius: "10rem", p: 1, minWidth: 0 }}
-      >
-        <Iconify icon="majesticons:comment-line" />
-      </Button>
-      <Button
-        color="primary"
-        variant="contained"
-        sx={{ borderRadius: "10rem", p: 1, minWidth: 0 }}
-      >
-        <Iconify icon="ic:outline-phone" />
-      </Button>
+      <DriverActions driver={order.shipments.driver} />
     </Stack>
   );
 
