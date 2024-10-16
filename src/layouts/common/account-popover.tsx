@@ -17,27 +17,26 @@ import { useAuthContext } from "@/auth/hooks";
 import { varHover } from "@/components/animate";
 import { useSnackbar } from "@/components/snackbar";
 import CustomPopover, { usePopover } from "@/components/custom-popover";
+import { useTranslations } from "next-intl";
 
 // ----------------------------------------------------------------------
 
 const OPTIONS = [
   {
-    label: "Home",
+    label: "home",
     linkTo: paths.home,
   },
   {
-    label: "Profile",
-    linkTo: "/",
-  },
-  {
-    label: "Settings",
-    linkTo: "/",
+    label: "orders",
+    linkTo: paths.orders,
   },
 ];
 
 // ----------------------------------------------------------------------
 
 export default function AccountPopover() {
+  const t = useTranslations("Navigation");
+
   const router = useRouter();
 
   const { user } = useAuthContext();
@@ -117,7 +116,7 @@ export default function AccountPopover() {
               key={option.label}
               onClick={() => handleClickItem(option.linkTo)}
             >
-              {option.label}
+              {t(option.label)}
             </MenuItem>
           ))}
         </Stack>
@@ -128,7 +127,7 @@ export default function AccountPopover() {
           onClick={handleLogout}
           sx={{ m: 1, fontWeight: "fontWeightBold", color: "error.main" }}
         >
-          Logout
+          {t("logout")}
         </MenuItem>
       </CustomPopover>
     </>

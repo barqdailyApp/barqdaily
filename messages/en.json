@@ -74,6 +74,11 @@
       }
     }
   },
+  "Navigation": {
+    "home": "Home",
+    "orders": "My Orders",
+    "logout": "Logout"
+  },
   "Pages": {
     "Error404": {
       "title": "Sorry, Page Not Found!",
