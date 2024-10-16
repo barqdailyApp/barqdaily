@@ -1,4 +1,5 @@
 import { m } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
@@ -17,7 +18,6 @@ import { useAuthContext } from "@/auth/hooks";
 import { varHover } from "@/components/animate";
 import { useSnackbar } from "@/components/snackbar";
 import CustomPopover, { usePopover } from "@/components/custom-popover";
-import { useTranslations } from "next-intl";
 
 // ----------------------------------------------------------------------
 
