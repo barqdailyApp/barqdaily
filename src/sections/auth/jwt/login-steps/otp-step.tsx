@@ -129,6 +129,12 @@ export default function LoginOTPStep({
                   "& .MuiInputBase-input": {
                     textAlign: "center",
                   },
+                  "& input": {
+                    fontSize: { xs: "2rem", sm: "4rem" },
+                    pt: { xs: ".25rem", sm: ".5rem" },
+                    pb: { xs: "1.25rem", sm: "2.5rem" },
+                    boxSizing: "border-box",
+                  },
                 }}
                 onChange={(event) => {
                   handleInputChange(event, index);
