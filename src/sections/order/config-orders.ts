@@ -5,7 +5,7 @@ export const ALL_ORDER_STATUS = [
   { label: "pending", value: "PENDING" },
   { label: "confirmed", value: "CONFIRMED" },
   { label: "processing", value: "PROCESSING" },
-  { label: "ready_for_pickup", value: "READY_FOR_PICKUP" },
+  // { label: "ready_for_pickup", value: "READY_FOR_PICKUP" },
   { label: "picked_up", value: "PICKED_UP" },
   { label: "delivered", value: "DELIVERED" },
   { label: "completed", value: "COMPLETED" },
