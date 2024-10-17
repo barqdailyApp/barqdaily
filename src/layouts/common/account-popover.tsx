@@ -1,4 +1,5 @@
 import { m } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
@@ -12,8 +13,6 @@ import Typography from "@mui/material/Typography";
 import { paths } from "@/routes/paths";
 import { useRouter } from "@/routes/hooks";
 
-import { useMockedUser } from "@/hooks/use-mocked-user";
-
 import { useAuthContext } from "@/auth/hooks";
 
 import { varHover } from "@/components/animate";
@@ -24,25 +23,23 @@ import CustomPopover, { usePopover } from "@/components/custom-popover";
 
 const OPTIONS = [
   {
-    label: "Home",
-    linkTo: "/",
+    label: "home",
+    linkTo: paths.home,
   },
   {
-    label: "Profile",
-    linkTo: paths.dashboard.root,
-  },
-  {
-    label: "Settings",
-    linkTo: paths.dashboard.root,
+    label: "orders",
+    linkTo: paths.orders,
   },
 ];
 
 // ----------------------------------------------------------------------
 
 export default function AccountPopover() {
+  const t = useTranslations("Navigation");
+
   const router = useRouter();
 
-  const { user } = useMockedUser();
+  const { user } = useAuthContext();
 
   const { logout } = useAuthContext();
 
@@ -54,7 +51,6 @@ export default function AccountPopover() {
     try {
       await logout();
       popover.onClose();
-      router.replace(paths.auth.jwt.login);
     } catch (error) {
       console.error(error);
       enqueueSnackbar("Unable to logout!", { variant: "error" });
@@ -85,15 +81,15 @@ export default function AccountPopover() {
         }}
       >
         <Avatar
-          src={user?.photoURL}
-          alt={user?.displayName}
+          src={user?.avatar}
+          alt={user?.name}
           sx={{
             width: 36,
             height: 36,
             border: (theme) => `solid 2px ${theme.palette.background.default}`,
           }}
         >
-          {user?.displayName?.charAt(0).toUpperCase()}
+          {user?.name?.charAt(0).toUpperCase()}
         </Avatar>
       </IconButton>
 
@@ -104,11 +100,11 @@ export default function AccountPopover() {
       >
         <Box sx={{ p: 2, pb: 1.5 }}>
           <Typography variant="subtitle2" noWrap>
-            {user?.displayName}
+            {user?.name}
           </Typography>
 
           <Typography variant="body2" sx={{ color: "text.secondary" }} noWrap>
-            {user?.email}
+            {user?.phone}
           </Typography>
         </Box>
 
@@ -120,7 +116,7 @@ export default function AccountPopover() {
               key={option.label}
               onClick={() => handleClickItem(option.linkTo)}
             >
-              {option.label}
+              {t(option.label)}
             </MenuItem>
           ))}
         </Stack>
@@ -131,7 +127,7 @@ export default function AccountPopover() {
           onClick={handleLogout}
           sx={{ m: 1, fontWeight: "fontWeightBold", color: "error.main" }}
         >
-          Logout
+          {t("logout")}
         </MenuItem>
       </CustomPopover>
     </>

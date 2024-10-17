@@ -1,5 +1,4 @@
 import axios from "axios";
-import { getCookie } from "cookies-next";
 
 import { HOST_API } from "@/config-global";
 // ----------------------------------------------------------------------
@@ -12,14 +11,6 @@ const axiosInstance = axios.create({
 // Add a request interceptor
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = getCookie("access_token");
-    const lang = getCookie("lang") || "ar";
-
-    // Attach headers
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    config.headers["Accept-Language"] = lang;
     config.headers["Content-Type"] = "application/json";
 
     return config;
@@ -29,10 +20,10 @@ axiosInstance.interceptors.request.use(
 
 // Add a response interceptor (optional)
 axiosInstance.interceptors.response.use(
-  (response) => response,
+  (response) => response?.data,
   (error) => {
     const status = error.response?.status || 500;
-    const message = getErrorMessage(error);
+    const message = getErrorMessage(error.response?.data);
     // Handle errors
     // eslint-disable-next-line prefer-promise-reject-errors
     return Promise.reject({ message, status });

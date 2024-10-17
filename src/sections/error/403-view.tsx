@@ -1,6 +1,7 @@
 "use client";
 
 import { m } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -15,20 +16,22 @@ import { varBounce, MotionContainer } from "@/components/animate";
 // ----------------------------------------------------------------------
 
 export default function View403() {
+  const t = useTranslations("Pages.Error403");
+
   return (
     <CompactLayout>
       <MotionContainer>
         <m.div variants={varBounce().in}>
           <Typography variant="h3" sx={{ mb: 2 }}>
-            No permission
+            {t("title")}
           </Typography>
         </m.div>
 
         <m.div variants={varBounce().in}>
           <Typography sx={{ color: "text.secondary" }}>
-            The page you&apos;re trying access has restricted access.
+            {t("message1")}
             <br />
-            Please refer to your system administrator
+            {t("message2")}
           </Typography>
         </m.div>
 
@@ -42,7 +45,7 @@ export default function View403() {
           size="large"
           variant="contained"
         >
-          Go to Home
+          {t("button")}
         </Button>
       </MotionContainer>
     </CompactLayout>

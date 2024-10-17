@@ -23,7 +23,7 @@ import Scrollbar from "@/components/scrollbar";
 import SearchNotFound from "@/components/search-not-found";
 
 import ResultItem from "./result-item";
-import { useNavData } from "../../dashboard/config-navigation";
+import { useNavData } from "../../store/config-navigation";
 import { applyFilter, groupedData, getAllItems } from "./utils";
 
 // ----------------------------------------------------------------------

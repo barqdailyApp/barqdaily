@@ -1,4 +1,5 @@
 import { m } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
@@ -30,7 +31,7 @@ export default function RoleBasedGuard({
 
   // const currentRole = 'user';
   const currentRole = user?.role; // admin;
-
+  const t = useTranslations("Pages.RoleBasedGuard");
   if (typeof roles !== "undefined" && !roles.includes(currentRole)) {
     return hasContent ? (
       <Container
@@ -39,13 +40,13 @@ export default function RoleBasedGuard({
       >
         <m.div variants={varBounce().in}>
           <Typography variant="h3" sx={{ mb: 2 }}>
-            Permission Denied
+            {t("title")}
           </Typography>
         </m.div>
 
         <m.div variants={varBounce().in}>
           <Typography sx={{ color: "text.secondary" }}>
-            You do not have permission to access this page
+            {t("message")}
           </Typography>
         </m.div>
 

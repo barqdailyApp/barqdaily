@@ -40,16 +40,10 @@ export const grey = {
 };
 
 export const primary = {
-  // lighter: "#B2E596",
-  // light: "#98DC74",
-  // main: "#83D457",
-  // dark: "#518336",
-  // darker: "#3D6329",
-  // contrastText: "#FFFFFF",
-  lighter: "#B2E596",
-  light: "#98DC74",
-  main: "#0575E6",
-  dark: "#518336",
+  lighter: "#DFF1FF",
+  light: "#42a5f5",
+  main: "#1976d2",
+  dark: "#1565c0",
   darker: "#3D6329",
   contrastText: "#FFFFFF",
 };
@@ -82,12 +76,12 @@ export const success = {
 };
 
 export const warning = {
-  lighter: "#FFF5CC",
-  light: "#FFD666",
-  main: "#FFAB00",
-  dark: "#B76E00",
-  darker: "#7A4100",
-  contrastText: grey[800],
+  lighter: "#fff9e2",
+  light: "#fecb10",
+  main: "#fecb10",
+  dark: "#ffc800",
+  darker: "#c49a00",
+  contrastText: "#FFFFFF",
 };
 
 export const error = {

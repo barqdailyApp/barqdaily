@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 
+import { defaultLocale } from "@/i18n/config-locale";
 import { HOST_API, COOKIES_KEYS } from "@/config-global";
 
 import {
@@ -10,18 +11,6 @@ import {
 
 // Base URL for the API
 const API_BASE_URL = HOST_API;
-
-// Helper function to get the token from cookies
-const getToken = (): string => {
-  const cookieStore = cookies();
-  return cookieStore.get(COOKIES_KEYS.session)?.value || "";
-};
-
-// Helper function to get the language from cookies or default to 'ar'
-const getLanguage = (): string => {
-  const cookieStore = cookies();
-  return cookieStore.get(COOKIES_KEYS.lang)?.value || "ar";
-};
 
 function isFormData(value: unknown) {
   return value instanceof FormData;
@@ -40,8 +29,13 @@ async function apiRequest<TResponse, TBody = undefined>(
   options: RequestOptions = {}
 ): Promise<ApiResponse<TResponse>> {
   const url = `${API_BASE_URL}${endpoint}`;
-  const token = getToken();
-  const lang = getLanguage();
+  const cookie = cookies().getAll();
+  const token = cookie.find(
+    (item) => item.name === COOKIES_KEYS.session
+  )?.value;
+  const lang =
+    cookie.find((item) => item.name === COOKIES_KEYS.lang)?.value ||
+    defaultLocale;
 
   const headers = {
     ...(!isFormData(body) && {
@@ -96,11 +90,9 @@ async function apiRequest<TResponse, TBody = undefined>(
 
     // Response check after parsing so i can get the error message
     if (!response.ok) {
-      const errMsg =
-        responseData?.error?.message ||
-        (responseData?.errors &&
-          Object.values(responseData.errors).join(" | ")) ||
-        "ERROR.AN_ERROR_OCCURRED";
+      const errMsg = Array.isArray(responseData?.message)
+        ? responseData?.message.join(" | ")
+        : responseData?.message || "ERROR.AN_ERROR_OCCURRED";
       const resCode = responseData?.code || null;
       const resDetails = responseData?.details || null;
       const resData = responseData?.data || {};
@@ -117,7 +109,7 @@ async function apiRequest<TResponse, TBody = undefined>(
 
     return {
       success: true,
-      data: responseData,
+      data: responseData.data,
       message: responseData.message || "Success",
       status: response.status,
     };

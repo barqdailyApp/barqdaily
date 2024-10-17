@@ -1,3 +1,5 @@
+import { setCookie, deleteCookie } from "cookies-next";
+
 import { paths } from "@/routes/paths";
 
 import axios from "@/utils/axios";
@@ -20,12 +22,12 @@ function jwtDecode(token: string) {
 
 // ----------------------------------------------------------------------
 
-export const isValidToken = (accessToken: string) => {
-  if (!accessToken) {
+export const isValidToken = (access_token: string) => {
+  if (!access_token) {
     return false;
   }
 
-  const decoded = jwtDecode(accessToken);
+  const decoded = jwtDecode(access_token);
 
   const currentTime = Date.now() / 1000;
 
@@ -40,7 +42,7 @@ export const tokenExpired = (exp: number) => {
 
   const currentTime = Date.now();
 
-  // Test token expires after 10s
+  // Test token expires after day
   // const timeLeft = currentTime + 10000 - currentTime; // ~10s
   const timeLeft = exp * 1000 - currentTime;
 
@@ -49,7 +51,8 @@ export const tokenExpired = (exp: number) => {
   expiredTimer = setTimeout(() => {
     alert("Token expired");
 
-    sessionStorage.removeItem("accessToken");
+    //  sessionStorage.removeItem('access_token');
+    deleteCookie("access_token");
 
     window.location.href = paths.auth.jwt.login;
   }, timeLeft);
@@ -57,18 +60,17 @@ export const tokenExpired = (exp: number) => {
 
 // ----------------------------------------------------------------------
 
-export const setSession = (accessToken: string | null) => {
-  if (accessToken) {
-    sessionStorage.setItem("accessToken", accessToken);
-
-    axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
-
-    // This function below will handle when token is expired
-    const { exp } = jwtDecode(accessToken); // ~3 days by minimals server
-    tokenExpired(exp);
+export const setSession = (access_token: string | null) => {
+  if (access_token) {
+    //  sessionStorage.setItem('access_token', access_token);
+    setCookie("access_token", access_token, {
+      secure: true,
+      maxAge: 259200000,
+    });
+    axios.defaults.headers.common.Authorization = `Bearer ${access_token}`;
   } else {
-    sessionStorage.removeItem("accessToken");
-
+    deleteCookie("access_token");
+    //  sessionStorage.removeItem('access_token');
     delete axios.defaults.headers.common.Authorization;
   }
 };
