@@ -1,11 +1,8 @@
-"use client";
-
+import Link from "next/link";
 import { useTranslations } from "next-intl";
 
 import Stack from "@mui/material/Stack";
 import { Box, Container, IconButton, Typography } from "@mui/material";
-
-import { RouterLink } from "@/routes/components";
 
 import Iconify from "@/components/iconify";
 
@@ -49,10 +46,10 @@ export default function Copyrights() {
             {socials.map((item) => (
               <IconButton
                 key={item.name}
-                LinkComponent={RouterLink}
                 href={item.link}
-                target="_blank"
                 sx={{ color: "text.disabled", p: 0.8 }}
+                target="_blank"
+                LinkComponent={Link}
               >
                 <Iconify icon={item.icon} width={20} height={20} />
               </IconButton>

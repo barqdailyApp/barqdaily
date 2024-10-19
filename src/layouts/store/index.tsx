@@ -1,11 +1,8 @@
-"use client";
+"use server";
 
 import { Box } from "@mui/material";
 
-import { useBoolean } from "@/hooks/use-boolean";
-
 import StoreHeader from "./header";
-import StoreNav from "./store-nav";
 import Footer from "../common/footer";
 import { HEADER } from "../config-layout";
 import Copyrights from "../common/copyrights";
@@ -17,20 +14,18 @@ type Props = {
   children: React.ReactNode;
 };
 
-export default function StoreLayout({ children }: Props) {
-  const nav = useBoolean();
+export default async function StoreLayout({ children }: Props) {
   return (
     <>
       <HeaderSimple />
-      <StoreNav openNav={nav.value} onCloseNav={nav.onFalse} />
-      <StoreHeader onOpenNav={nav.onTrue} />
+      <StoreHeader />
       <Box
         sx={{
           display: "grid",
           gridTemplateRows: "1fr auto",
           gridTemplateColumns: "100%",
           pt: `${HEADER.H_SIMPLE + HEADER.H_MOBILE}px`,
-          minHeight: "100%", // don't ask me why
+          minHeight: "100%",
           overflow: "hidden",
           width: "100%",
         }}

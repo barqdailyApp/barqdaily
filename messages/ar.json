@@ -5,7 +5,8 @@
       "your_name": "ادخل اسمك",
       "name": "الاسم",
       "phone": "الهاتف",
-      "login": "تسجيل الدخول"
+      "login": "تسجيل الدخول",
+      "search": "ابحث عن المنتجات..."
     },
     "Error": {
       "name_required": "الاسم مطلوب",
@@ -15,7 +16,8 @@
       "phone_start_with_7": "رقم الهاتف يجب ان يبدأ بـ7",
       "phone_only_digits": "رقم الهاتف يجب ان يحتوي علي ارقام فقط",
       "no_products_found": "لم يتم العثور على منتجات",
-      "no_subcategories_found": "لم يتم العثور على الفئات"
+      "no_subcategories_found": "لم يتم العثور على الفئات",
+      "no_products": "لم يتم العثور على منتجات"
     },
     "Message": {
       "otp_sent": "تم إرسال رمز إلى الواتساب الخاص بك."
@@ -56,23 +58,6 @@
     "message": "لن تتمكن من التراجع عن هذا!",
     "confirm": "تأكيد",
     "cancel": "الغاء"
-  },
-  "Navbar": {
-    "Overview": {
-      "subheader": "نظرة عامة",
-      "App": {
-        "title": "التطبيق",
-        "label": "جديد",
-        "caption": "فقط الأدمن او المدير يمكنه رؤية هذا العنصر"
-      },
-      "Ecommerce": { "title": "تجاري" },
-      "Analytics": { "title": "التحليلات" },
-      "Product": {
-        "title": "المنتج",
-        "List": { "title": "القائمة" },
-        "Details": { "title": "التفاصيل" }
-      }
-    }
   },
   "Navigation": {
     "home": "الرئيسية",

@@ -39,7 +39,7 @@ const socials = [
 export default function HeaderSimple() {
   const theme = useTheme();
 
-  const offsetTop = useOffSetTop(HEADER.H_DESKTOP);
+  const offsetTop = useOffSetTop(HEADER.H_OFFSET);
 
   return (
     <AppBar
@@ -59,7 +59,7 @@ export default function HeaderSimple() {
         <Toolbar
           sx={{
             justifyContent: "space-between",
-            minHeight: { xs: HEADER.H_SIMPLE },
+            minHeight: HEADER.H_SIMPLE,
           }}
         >
           <Stack direction="row" spacing={0.5}>
