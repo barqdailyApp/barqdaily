@@ -5,7 +5,7 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import { useTheme } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
-import { Box, Badge, Container } from "@mui/material";
+import { Box, Badge, Container, useMediaQuery } from "@mui/material";
 
 import { useOffSetTop } from "@/hooks/use-off-set-top";
 
@@ -14,6 +14,7 @@ import { bgBlur } from "@/theme/css";
 import Logo from "@/components/logo";
 import Iconify from "@/components/iconify";
 
+import StoreSearch from "./search";
 import { HEADER } from "../config-layout";
 import AccountPopover from "../common/account-popover";
 
@@ -22,24 +23,30 @@ import AccountPopover from "../common/account-popover";
 export default function StoreHeader() {
   const theme = useTheme();
 
-  const offsetTop = useOffSetTop(HEADER.H_DESKTOP);
+  const offsetTop = useOffSetTop(HEADER.H_OFFSET);
+
+  const isSm = useMediaQuery(theme.breakpoints.down("sm"));
 
   const renderContent = (
     <>
-      <Box
-        width={80}
-        height={80}
-        sx={{
-          paddingInlineStart: 2,
-          py: 2,
-          "& img": {
-            width: "auto",
-            height: "100%",
-          },
-        }}
-      >
-        <Logo />
-      </Box>
+      {!isSm && (
+        <Box
+          width={80}
+          height={80}
+          sx={{
+            paddingInlineStart: 2,
+            py: 2,
+            "& img": {
+              width: "auto",
+              height: "100%",
+            },
+          }}
+        >
+          <Logo />
+        </Box>
+      )}
+
+      <StoreSearch />
 
       <Stack
         flexGrow={1}
@@ -77,7 +84,7 @@ export default function StoreHeader() {
         }),
       }}
     >
-      <Container>
+      <Container sx={{ minHeight: "100%" }}>
         <Toolbar
           sx={{
             height: 1,
