@@ -118,3 +118,20 @@ export async function fetchBrands() {
   }
   return res?.data;
 }
+
+export async function searchProducts(search: string) {
+  const searchParams = new URLSearchParams({
+    product_name: search,
+    page: String(1),
+    limit: String(10),
+  });
+  const res = await getData<{ data: Product[]; meta: { itemCount: number } }>(
+    `${endpoints.products.products}?${searchParams.toString()}`
+  );
+
+  if ("error" in res) {
+    return res;
+  }
+
+  return res?.data?.data;
+}

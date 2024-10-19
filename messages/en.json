@@ -5,7 +5,9 @@
       "your_name": "Your name",
       "name": "Name",
       "phone": "Phone",
-      "login": "Login"
+      "login": "Login",
+      "search": "Search Products...",
+      "no_products": "No products found"
     },
     "Error": {
       "name_required": "Name is required",
