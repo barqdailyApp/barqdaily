@@ -19,19 +19,13 @@ import { useAuthContext } from "@/auth/hooks";
 
 import Logo from "@/components/logo";
 import Iconify from "@/components/iconify";
-import SvgColor from "@/components/svg-color";
 
 import { HEADER } from "../config-layout";
-import Searchbar from "../common/searchbar";
 import AccountPopover from "../common/account-popover";
 
 // ----------------------------------------------------------------------
 
-type Props = {
-  onOpenNav?: VoidFunction;
-};
-
-export default function StoreHeader({ onOpenNav }: Props) {
+export default function StoreHeader() {
   const theme = useTheme();
 
   const t = useTranslations();
@@ -44,10 +38,6 @@ export default function StoreHeader({ onOpenNav }: Props) {
 
   const renderContent = (
     <>
-      <IconButton onClick={onOpenNav}>
-        <SvgColor src="/assets/icons/navbar/ic_menu_item.svg" />
-      </IconButton>
-
       <Box
         width={80}
         height={80}
@@ -62,8 +52,6 @@ export default function StoreHeader({ onOpenNav }: Props) {
       >
         <Logo />
       </Box>
-
-      <Searchbar />
 
       <Stack
         flexGrow={1}

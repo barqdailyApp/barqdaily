@@ -2,10 +2,7 @@
 
 import { Box } from "@mui/material";
 
-import { useBoolean } from "@/hooks/use-boolean";
-
 import StoreHeader from "./header";
-import StoreNav from "./store-nav";
 import Footer from "../common/footer";
 import { HEADER } from "../config-layout";
 import Copyrights from "../common/copyrights";
@@ -18,12 +15,10 @@ type Props = {
 };
 
 export default function StoreLayout({ children }: Props) {
-  const nav = useBoolean();
   return (
     <>
       <HeaderSimple />
-      <StoreNav openNav={nav.value} onCloseNav={nav.onFalse} />
-      <StoreHeader onOpenNav={nav.onTrue} />
+      <StoreHeader />
       <Box
         sx={{
           display: "grid",
