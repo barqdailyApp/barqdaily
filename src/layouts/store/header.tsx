@@ -1,69 +1,52 @@
 "use client";
 
-import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
-
 import Stack from "@mui/material/Stack";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import { useTheme } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
-import { Box, Badge, Button, Container } from "@mui/material";
-
-import { paths } from "@/routes/paths";
+import { Box, Badge, Container, useMediaQuery } from "@mui/material";
 
 import { useOffSetTop } from "@/hooks/use-off-set-top";
 
 import { bgBlur } from "@/theme/css";
-import { useAuthContext } from "@/auth/hooks";
 
 import Logo from "@/components/logo";
 import Iconify from "@/components/iconify";
-import SvgColor from "@/components/svg-color";
 
+import StoreSearch from "./search";
 import { HEADER } from "../config-layout";
-import Searchbar from "../common/searchbar";
 import AccountPopover from "../common/account-popover";
 
 // ----------------------------------------------------------------------
 
-type Props = {
-  onOpenNav?: VoidFunction;
-};
-
-export default function StoreHeader({ onOpenNav }: Props) {
+export default function StoreHeader() {
   const theme = useTheme();
 
-  const t = useTranslations();
+  const offsetTop = useOffSetTop(HEADER.H_OFFSET);
 
-  const { authenticated } = useAuthContext();
-
-  const offsetTop = useOffSetTop(HEADER.H_DESKTOP);
-
-  const router = useRouter();
+  const isSm = useMediaQuery(theme.breakpoints.down("sm"));
 
   const renderContent = (
     <>
-      <IconButton onClick={onOpenNav}>
-        <SvgColor src="/assets/icons/navbar/ic_menu_item.svg" />
-      </IconButton>
+      {!isSm && (
+        <Box
+          width={80}
+          height={80}
+          sx={{
+            paddingInlineStart: 2,
+            py: 2,
+            "& img": {
+              width: "auto",
+              height: "100%",
+            },
+          }}
+        >
+          <Logo />
+        </Box>
+      )}
 
-      <Box
-        width={80}
-        height={80}
-        sx={{
-          paddingInlineStart: 2,
-          py: 2,
-          "& img": {
-            width: "auto",
-            height: "100%",
-          },
-        }}
-      >
-        <Logo />
-      </Box>
-
-      <Searchbar />
+      <StoreSearch />
 
       <Stack
         flexGrow={1}
@@ -78,16 +61,7 @@ export default function StoreHeader({ onOpenNav }: Props) {
           </Badge>
         </IconButton>
 
-        {authenticated ? (
-          <AccountPopover />
-        ) : (
-          <Button
-            variant="outlined"
-            onClick={() => router.push(paths.auth.jwt.login)}
-          >
-            {t("Global.Label.login")}
-          </Button>
-        )}
+        <AccountPopover />
       </Stack>
     </>
   );
@@ -110,7 +84,7 @@ export default function StoreHeader({ onOpenNav }: Props) {
         }),
       }}
     >
-      <Container>
+      <Container sx={{ minHeight: "100%" }}>
         <Toolbar
           sx={{
             height: 1,

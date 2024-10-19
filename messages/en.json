@@ -5,7 +5,9 @@
       "your_name": "Your name",
       "name": "Name",
       "phone": "Phone",
-      "login": "Login"
+      "login": "Login",
+      "search": "Search Products...",
+      "no_products": "No products found"
     },
     "Error": {
       "name_required": "Name is required",
@@ -56,23 +58,6 @@
     "message": "You won't be able to revert this!",
     "confirm": "Confirm",
     "cancel": "Cancel"
-  },
-  "Navbar": {
-    "Overview": {
-      "subheader": "overview",
-      "App": {
-        "title": "app",
-        "label": "NEW",
-        "caption": "Only admin or manager can see this item."
-      },
-      "Ecommerce": { "title": "ecommerce" },
-      "Analytics": { "title": "analytics" },
-      "Product": {
-        "title": "product",
-        "List": { "title": "list" },
-        "Details": { "title": "details" }
-      }
-    }
   },
   "Navigation": {
     "home": "Home",
