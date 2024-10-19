@@ -33,12 +33,8 @@ export default function OrderAgainProductCard({ order }: { order: any }) {
     <Card sx={{ minHeight: "100%", display: "grid" }}>
       <Stack p={2} minHeight="100%">
         <AvatarGroup max={5}>
-          {images.map((item: any) => (
-            <Avatar
-              alt={item.name}
-              src={item.src}
-              key={`${item.name}-${item.src}`}
-            />
+          {images.map((item: any, index: number) => (
+            <Avatar alt={item.name} src={item.src} key={index} />
           ))}
         </AvatarGroup>
 
