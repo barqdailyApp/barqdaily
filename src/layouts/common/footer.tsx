@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 
@@ -15,7 +13,6 @@ export default function Footer() {
         fontWeight={500}
         letterSpacing=".02em"
         component="h2"
-        sx={(theme) => ({ fontSize: { md: theme.typography.h2.fontSize } })}
       >
         {t("contact_title")}
       </Typography>
@@ -47,14 +44,14 @@ export default function Footer() {
 
   return (
     <Box
-      sx={(theme) => ({
-        background: theme.palette.primary.main,
+      sx={{
+        bgcolor: "primary.main",
         color: "white",
         py: {
           xs: 2,
           md: 3,
         },
-      })}
+      }}
       component="footer"
     >
       <Container>

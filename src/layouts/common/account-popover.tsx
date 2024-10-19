@@ -1,7 +1,10 @@
+"use client";
+
 import { m } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 import Box from "@mui/material/Box";
+import { Button } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
@@ -12,6 +15,7 @@ import Typography from "@mui/material/Typography";
 
 import { paths } from "@/routes/paths";
 import { useRouter } from "@/routes/hooks";
+import { RouterLink } from "@/routes/components";
 
 import { useAuthContext } from "@/auth/hooks";
 
@@ -35,13 +39,28 @@ const OPTIONS = [
 // ----------------------------------------------------------------------
 
 export default function AccountPopover() {
+  const t = useTranslations();
+  const { authenticated } = useAuthContext();
+
+  if (authenticated) return <AccountPopoverContent />;
+
+  return (
+    <Button
+      variant="outlined"
+      LinkComponent={RouterLink}
+      href={paths.auth.jwt.login}
+    >
+      {t("Global.Label.login")}
+    </Button>
+  );
+}
+
+function AccountPopoverContent() {
   const t = useTranslations("Navigation");
 
   const router = useRouter();
 
-  const { user } = useAuthContext();
-
-  const { logout } = useAuthContext();
+  const { user, logout } = useAuthContext();
 
   const { enqueueSnackbar } = useSnackbar();
 

@@ -1,4 +1,4 @@
-"use client";
+"use server";
 
 import { Box } from "@mui/material";
 
@@ -14,7 +14,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-export default function StoreLayout({ children }: Props) {
+export default async function StoreLayout({ children }: Props) {
   return (
     <>
       <HeaderSimple />
@@ -25,7 +25,7 @@ export default function StoreLayout({ children }: Props) {
           gridTemplateRows: "1fr auto",
           gridTemplateColumns: "100%",
           pt: `${HEADER.H_SIMPLE + HEADER.H_MOBILE}px`,
-          minHeight: "100%", // don't ask me why
+          minHeight: "100%",
           overflow: "hidden",
           width: "100%",
         }}
