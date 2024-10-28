@@ -49,6 +49,7 @@ export default function AccountPopover() {
       variant="outlined"
       LinkComponent={RouterLink}
       href={paths.auth.jwt.login}
+      sx={{ flexShrink: 0 }}
     >
       {t("Global.Label.login")}
     </Button>

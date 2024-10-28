@@ -54,6 +54,7 @@ export default function StoreHeader() {
         alignItems="center"
         justifyContent="flex-end"
         spacing={1}
+        flexShrink={0}
       >
         <IconButton>
           <Badge badgeContent={4} color="warning">
