@@ -59,7 +59,7 @@ export default function HeaderSimple() {
         <Toolbar
           sx={{
             justifyContent: "space-between",
-            minHeight: HEADER.H_SIMPLE,
+            minHeight: `${HEADER.H_SIMPLE}px !important`,
           }}
         >
           <Stack direction="row" spacing={0.5}>
