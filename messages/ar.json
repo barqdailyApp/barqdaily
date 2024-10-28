@@ -121,6 +121,7 @@
       "total": "الإجمالي",
       "payment_method": "طريقة الدفع",
       "cancel_order": "إلغاء الطلب",
+      "track_order": "تتبع الطلب",
       "Status": {
         "all": "كل الطلبات",
         "canceled": "تم الإلغاء",

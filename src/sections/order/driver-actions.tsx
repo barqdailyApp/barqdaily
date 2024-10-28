@@ -18,6 +18,7 @@ import { GoogleMap } from "@/components/map";
 
 import { Position } from "@/types/map";
 import { Driver } from "@/types/order-details";
+import { useTranslations } from "next-intl";
 
 const buttonAttributes: Partial<ButtonProps> = {
   color: "primary",
@@ -47,7 +48,7 @@ export default function DriverActions({ driver }: { driver: Driver }) {
   );
 
   const renderChat = (
-    <Button {...buttonAttributes}>
+    <Button {...buttonAttributes} disabled>
       <Iconify icon="majesticons:comment-line" />
     </Button>
   );
@@ -61,8 +62,8 @@ export default function DriverActions({ driver }: { driver: Driver }) {
   return (
     <>
       {renderPhone}
-      {renderChat}
       {renderMap}
+      {renderChat}
       {mapOpen.value && (
         <MapDialog
           onClose={mapOpen.onFalse}
@@ -80,9 +81,11 @@ function MapDialog({
   position: Position;
   onClose: VoidFunction;
 }) {
+  const t = useTranslations("Pages.Orders");
+
   return (
     <Dialog open onClose={onClose} fullWidth maxWidth="md">
-      <DialogTitle>Track Order</DialogTitle>
+      <DialogTitle>{t("track_order")}</DialogTitle>
       <IconButton
         aria-label="close"
         onClick={() => onClose()}

@@ -6,8 +6,7 @@
       "name": "Name",
       "phone": "Phone",
       "login": "Login",
-      "search": "Search Products...",
-      "no_products": "No products found"
+      "search": "Search Products..."
     },
     "Error": {
       "name_required": "Name is required",
@@ -17,7 +16,8 @@
       "phone_start_with_7": "Phone must start with 7",
       "phone_only_digits": "Phone must be only digits",
       "no_products_found": "No products found",
-      "no_subcategories_found": "No subcategories found"
+      "no_subcategories_found": "No subcategories found",
+      "no_products": "No products found"
     },
     "Message": {
       "otp_sent": "A code has sent to your WhatsApp number."
@@ -120,6 +120,7 @@
       "delivery_fee": "Delivery fee",
       "total": "Total",
       "payment_method": "Payment method",
+      "track_ordere": "Track Order",
       "Status": {
         "all": "All Orders",
         "canceled": "Canceled",
