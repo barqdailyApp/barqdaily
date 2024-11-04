@@ -89,7 +89,6 @@ function ProductDialogContent({
 }) {
   const t = useTranslations();
   const currency = useCurrency();
-  const [quantity, setQuantity] = useState(0);
 
   const measurement =
     product_measurements.find((item) => item.is_main_unit) ||
@@ -100,7 +99,8 @@ function ProductDialogContent({
 
   const maxQuantity = Math.min(
     measurement.warehouse_quantity,
-    measurement.offer?.quantity ?? measurement.max_order_quantity
+    measurement.max_order_quantity,
+    ...(measurement.offer?.quantity ? [measurement.offer?.quantity] : [])
   );
 
   const renderImage = (
@@ -152,30 +152,18 @@ function ProductDialogContent({
         <Iconify icon="ph:heart-bold" />
       </Button>
 
-      {quantity === 0 ? (
-        <Button
-          variant="contained"
-          color="primary"
-          startIcon={<Iconify icon="bxs:cart-alt" />}
-          onClick={() => setQuantity(measurement.min_order_quantity)}
-          sx={{ flexGrow: 1 }}
-        >
-          {t("Pages.Home.Product.add_to_cart")}
-        </Button>
-      ) : (
-        <IncrementerButton
-          onIncrease={() => setQuantity((prev) => prev + 1)}
-          onDecrease={() =>
-            setQuantity((prev) =>
-              prev > measurement.min_order_quantity ? prev - 1 : 0
-            )
-          }
-          sx={{ flexGrow: 1, position: "relative" }}
-          quantity={quantity}
-          disabledIncrease={quantity >= maxQuantity}
-          min={measurement.min_order_quantity}
-        />
-      )}
+      <IncrementerButton
+        product_id={product.product_id}
+        product_price_id={
+          measurement.product_category_price.product_category_price_id
+        }
+        min_order_quantity={measurement.min_order_quantity}
+        max_order_quantity={maxQuantity}
+        addButtonProps={{
+          sx: { flexGrow: 1 },
+        }}
+        sx={{ flexGrow: 1 }}
+      />
     </DialogActions>
   );
 

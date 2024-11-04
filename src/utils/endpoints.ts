@@ -14,8 +14,12 @@ export const endpoints = {
     brands: "product/get-brands-client",
     offers: "product/all-products-offers-for-client",
   },
+  cart: {
+    add: "cart/add",
+    delete: (cart_product_id: string) => `cart/delete/${cart_product_id}`,
+    update: "cart/update/{cart}-product",
+  },
   banars: "banar/guest",
-
   orders: "order/client-orders",
   singleOrder: (order_id: string) => `order/single-order/${order_id}`,
   singleShipment: (shipment_id: string) =>

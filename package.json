@@ -59,7 +59,8 @@
     "swiper": "^11.1.14",
     "use-debounce": "^10.0.0",
     "yet-another-react-lightbox": "^3.17.0",
-    "yup": "^1.3.2"
+    "yup": "^1.3.2",
+    "zustand": "^5.0.1"
   },
   "devDependencies": {
     "@7nohe/openapi-react-query-codegen": "^0.5.2",
