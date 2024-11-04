@@ -19,7 +19,7 @@ import Iconify from "@/components/iconify";
 
 interface Props extends StackProps {
   product_id: string;
-  product_price_id: string;
+  product_price_id?: string;
   min_order_quantity: number;
   max_order_quantity: number;
   addButtonProps?: ButtonProps;
@@ -48,6 +48,8 @@ const IncrementerButton = forwardRef<HTMLDivElement, Props>(
     const quantity = product?.quantity || 0;
 
     const handleAdd = useCallback(() => {
+      if (!product_price_id) return;
+
       (async () => {
         setLoading(true);
         const res = await addProductToCart(product_price_id);
@@ -62,54 +64,51 @@ const IncrementerButton = forwardRef<HTMLDivElement, Props>(
     }, [enqueueSnackbar, product_price_id, setLoading, setProduct]);
 
     const handleRemove = useCallback(() => {
-      if (product) {
-        (async () => {
-          setLoading(true);
-          const res = await removeCartProduct(product.id);
+      if (!product) return;
+      (async () => {
+        setLoading(true);
+        const res = await removeCartProduct(product.id);
 
-          if ("error" in res) {
-            enqueueSnackbar(res.error, { variant: "error" });
-          } else {
-            removeProduct(product.id);
-          }
-          setLoading(false);
-        })();
-      }
+        if ("error" in res) {
+          enqueueSnackbar(res.error, { variant: "error" });
+        } else {
+          removeProduct(product.id);
+        }
+        setLoading(false);
+      })();
     }, [enqueueSnackbar, product, removeProduct, setLoading]);
 
     const handleIncrease = useCallback(() => {
-      if (product) {
-        (async () => {
-          setLoading(true);
-          const res = await updateCartProduct(product.id, true);
+      if (!product) return;
+      (async () => {
+        setLoading(true);
+        const res = await updateCartProduct(product.id, true);
 
-          if ("error" in res) {
-            enqueueSnackbar(res.error, { variant: "error" });
-          } else {
-            setProduct(res);
-          }
-          setLoading(false);
-        })();
-      }
+        if ("error" in res) {
+          enqueueSnackbar(res.error, { variant: "error" });
+        } else {
+          setProduct(res);
+        }
+        setLoading(false);
+      })();
     }, [enqueueSnackbar, product, setLoading, setProduct]);
 
     const handleDecrease = useCallback(() => {
-      if (product) {
-        (async () => {
-          setLoading(true);
-          const res = await updateCartProduct(product.id, false);
+      if (!product) return;
+      (async () => {
+        setLoading(true);
+        const res = await updateCartProduct(product.id, false);
 
-          if ("error" in res) {
-            enqueueSnackbar(res.error, { variant: "error" });
-          } else {
-            setProduct(res);
-          }
-          setLoading(false);
-        })();
-      }
+        if ("error" in res) {
+          enqueueSnackbar(res.error, { variant: "error" });
+        } else {
+          setProduct(res);
+        }
+        setLoading(false);
+      })();
     }, [enqueueSnackbar, product, setLoading, setProduct]);
 
-    if (!product)
+    if (!product && product_price_id)
       return (
         <LoadingButton
           variant="contained"

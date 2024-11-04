@@ -201,6 +201,21 @@
           }
         }
       }
+    },
+    "Cart": {
+      "Steps": {
+        "cart": "Adding items",
+        "time-location": "Time & Location",
+        "payment": "Payment",
+        "done": "Done"
+      },
+      "Summary": {
+        "title": "Order Summary",
+        "products-total": "Products Total",
+        "shipping": "Delivery Fee",
+        "total": "Total",
+        "next": "Next"
+      }
     }
   }
 }

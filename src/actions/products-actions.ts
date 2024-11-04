@@ -13,13 +13,21 @@ import {
   FullProduct,
 } from "@/types/products";
 
-export async function fetchCategories() {
+export async function fetchSections() {
   const sectionRes = await getData<Section[]>(endpoints.products.sections);
   if ("error" in sectionRes) {
     return sectionRes;
   }
+  return sectionRes.data;
+}
 
-  const sectionId = sectionRes?.data[0]?.id;
+export async function fetchCategories() {
+  const sectionRes = await fetchSections();
+  if ("error" in sectionRes) {
+    return sectionRes;
+  }
+
+  const sectionId = sectionRes[0]?.id;
   const categoriesRes = await getData<Category[]>(
     `${endpoints.products.categories(sectionId)}?all=false`
   );
