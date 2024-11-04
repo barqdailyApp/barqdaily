@@ -9,6 +9,7 @@ import {
 } from "@/utils/crud-fetch-api";
 
 import { CartProduct } from "@/contexts/cart-store";
+
 import { TimeSlot } from "@/types/cart";
 
 export async function fetchCartProducts() {

@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
-import { Address } from "@/types/profile";
 import { TimeSlot } from "@/types/cart";
+import { Address } from "@/types/profile";
 
 type DeliveryType = "FAST" | "WAREHOUSE_PICKUP" | "SCHEDULED";
 interface CheckoutState {
