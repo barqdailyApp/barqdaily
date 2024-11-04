@@ -1,9 +1,23 @@
 "use server";
 
 import { endpoints } from "@/utils/endpoints";
-import { postData, editData, deleteData } from "@/utils/crud-fetch-api";
+import {
+  getData,
+  postData,
+  editData,
+  deleteData,
+} from "@/utils/crud-fetch-api";
 
 import { CartProduct } from "@/contexts/cart-store";
+
+export async function fetchCartProducts() {
+  const res = await getData<CartProduct[]>(endpoints.cart.fetchProducts);
+
+  if ("error" in res) {
+    return res;
+  }
+  return res?.data;
+}
 
 export async function addProductToCart(product_category_price_id: string) {
   const res = await postData<

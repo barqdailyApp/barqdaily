@@ -15,6 +15,7 @@ export const endpoints = {
     offers: "product/all-products-offers-for-client",
   },
   cart: {
+    fetchProducts: "cart",
     add: "cart/add",
     delete: (cart_product_id: string) => `cart/delete/${cart_product_id}`,
     update: "cart/update/{cart}-product",

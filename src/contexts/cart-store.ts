@@ -27,6 +27,7 @@ interface CartState {
   productsQuantity: number;
   setProduct: (product: CartProduct) => void;
   removeProduct: (id: string) => void;
+  initProducts: (products: CartProduct[]) => void;
 }
 
 export const useCartStore = create<CartState>()((set) => ({
@@ -59,4 +60,6 @@ export const useCartStore = create<CartState>()((set) => ({
       products: state.products.filter((product) => product.id !== id),
       productsQuantity: state.productsQuantity - 1,
     })),
+  initProducts: (products) =>
+    set({ products, productsQuantity: products.length }),
 }));
