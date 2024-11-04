@@ -17,7 +17,6 @@ export default function InitCart() {
       if ("error" in res) {
         enqueueSnackbar(res.error, { variant: "error" });
       } else {
-        console.log(res);
         initProducts(res);
       }
     })();
