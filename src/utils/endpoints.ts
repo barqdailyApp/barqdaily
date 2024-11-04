@@ -19,6 +19,10 @@ export const endpoints = {
     add: "cart/add",
     delete: (cart_product_id: string) => `cart/delete/${cart_product_id}`,
     update: "cart/update/{cart}-product",
+    timeSlots: (delivery_day: string) => `slot/${delivery_day}/all-slots`,
+  },
+  address: {
+    list: "addresses",
   },
   banars: "banar/guest",
   orders: "order/client-orders",

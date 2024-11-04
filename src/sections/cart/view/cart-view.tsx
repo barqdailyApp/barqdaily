@@ -9,6 +9,7 @@ import { usecheckoutStore } from "@/contexts/checkout-store";
 import CartStep from "../cart-step";
 import { steps } from "../config-cart";
 import OrderSumamry from "../order-summary";
+import TimeLocationStep from "../time-location-step";
 
 export default function Cart() {
   const t = useTranslations("Pages.Cart");
@@ -29,7 +30,7 @@ export default function Cart() {
     </Stack>
   );
 
-  const stepsElements = [<CartStep />];
+  const stepsElements = [<CartStep />, <TimeLocationStep />];
 
   return (
     <>

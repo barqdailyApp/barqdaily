@@ -216,6 +216,18 @@
         "shipping": "رسوم التوصيل",
         "total": "إجمالي سعر الطلب",
         "next": "التالي"
+      },
+      "DeliveryTypes": {
+        "FAST": "توصيل سريع",
+        "SCHEDULED": "توصيل مجدول",
+        "WAREHOUSE_PICKUP": "استلام من المستودع"
+      },
+      "fast-delivery-time": "40 دقيقة",
+      "TimeZones": {
+        "NIGHT": "ليلًا",
+        "MORNING": "صباحًا",
+        "AFTERNOON": "ظهرًا",
+        "EVENING": "مساءً"
       }
     }
   }

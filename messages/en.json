@@ -215,6 +215,18 @@
         "shipping": "Delivery Fee",
         "total": "Total",
         "next": "Next"
+      },
+      "DeliveryTypes": {
+        "FAST": "Fast Delivery",
+        "SCHEDULED": "Scheduled Delivery",
+        "WAREHOUSE_PICKUP": "Pickup from warehouse"
+      },
+      "fast-delivery-time": "40min",
+      "TimeZones": {
+        "NIGHT": "Night",
+        "MORNING": "Morning",
+        "AFTERNOON": "Afternoon",
+        "EVENING": "Evening"
       }
     }
   }
