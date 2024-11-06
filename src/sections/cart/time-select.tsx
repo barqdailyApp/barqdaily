@@ -38,15 +38,16 @@ export default function TimeSelect() {
     setChoosenDeliveryType,
     timeSlot,
     setTimeSlot,
+    day,
+    setDay,
   } = usecheckoutStore();
   const dateDialog = useBoolean();
   const formateDate = useFormatDate();
-  const [date, setDate] = useState<Date>(new Date());
   const [times, setTimes] = useState<TimeSlot[]>([]);
 
   useEffect(() => {
     const getTimeSlots = async () => {
-      const res = await fetchTimeSlots(fDate(date, "MM-dd-yyyy"));
+      const res = await fetchTimeSlots(fDate(day, "MM-dd-yyyy"));
       if ("error" in res) {
         enqueueSnackbar(res.error, { variant: "error" });
       } else {
@@ -56,7 +57,7 @@ export default function TimeSelect() {
     };
 
     getTimeSlots();
-  }, [date, enqueueSnackbar, setTimeSlot]);
+  }, [day, enqueueSnackbar, setTimeSlot]);
 
   const renderDeliveryTypes = deliveryTypes.map((item, index) => (
     <Fragment key={item}>
@@ -100,7 +101,7 @@ export default function TimeSelect() {
         <Typography py={2.5} paddingInlineStart={1.5}>
           تاريخ التسليم :
           <Typography color="primary.main" variant="body2" component="span">
-            {formateDate(date)}
+            {formateDate(day)}
           </Typography>
         </Typography>
       </ButtonBase>
@@ -125,9 +126,9 @@ export default function TimeSelect() {
     <Dialog open={dateDialog.value} onClose={dateDialog.onFalse}>
       <DialogContent>
         <DateCalendar
-          value={date}
+          value={day}
           onChange={(value) => {
-            setDate(value);
+            setDay(value);
             dateDialog.onFalse();
           }}
         />

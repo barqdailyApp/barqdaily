@@ -20,6 +20,8 @@ interface CheckoutState {
   ) => void;
   setChoosenAddress: (address: Address | null) => void;
 
+  day: Date;
+  setDay: (day: Date) => void;
   timeSlot: TimeSlot | null;
   setTimeSlot: (timeSlot: TimeSlot | null) => void;
 }
@@ -56,6 +58,8 @@ export const usecheckoutStore = create<CheckoutState>()((set) => ({
     }),
   setChoosenAddress: (address) => set(() => ({ choosenAddress: address })),
 
+  day: new Date(),
+  setDay: (day) => set(() => ({ day })),
   timeSlot: null,
   setTimeSlot: (timeSlot) => set(() => ({ timeSlot })),
 }));

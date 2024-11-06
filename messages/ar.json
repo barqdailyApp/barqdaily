@@ -219,6 +219,10 @@
         "title": "ملخص الطلب",
         "products-total": "إجمالي سعر المنتجات",
         "shipping": "رسوم التوصيل",
+        "delivery-type": "نوع التوصيل",
+        "delivery-day": "يوم التوصيل",
+        "delivery-time": "وقت التوصيل",
+        "delivery-address": "عنوان التوصيل",
         "total": "إجمالي سعر الطلب",
         "next": "التالي"
       },

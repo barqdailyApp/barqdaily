@@ -218,6 +218,10 @@
         "title": "Order Summary",
         "products-total": "Products Total",
         "shipping": "Delivery Fee",
+        "delivery-type": "Delivery Type",
+        "delivery-day": "Delivery Day",
+        "delivery-time": "Delivery Time",
+        "delivery-address": "Delivery Address",
         "total": "Total",
         "next": "Next"
       },
