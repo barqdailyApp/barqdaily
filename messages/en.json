@@ -6,7 +6,9 @@
       "name": "Name",
       "phone": "Phone",
       "login": "Login",
-      "search": "Search Products..."
+      "search": "Search Products...",
+      "address_description": "Address Description (Nearest Landmark)",
+      "is_default_address": "Make default shipping address"
     },
     "Error": {
       "name_required": "Name is required",
@@ -17,7 +19,9 @@
       "phone_only_digits": "Phone must be only digits",
       "no_products_found": "No products found",
       "no_subcategories_found": "No subcategories found",
-      "no_products": "No products found"
+      "no_products": "No products found",
+      "address_description_required": "Address Description is required",
+      "location_required": "Location is required"
     },
     "Message": {
       "otp_sent": "A code has sent to your WhatsApp number."
@@ -203,6 +207,7 @@
       }
     },
     "Cart": {
+      "fast-delivery-time": "40min",
       "Steps": {
         "cart": "Adding items",
         "time-location": "Time & Location",
@@ -221,12 +226,26 @@
         "SCHEDULED": "Scheduled Delivery",
         "WAREHOUSE_PICKUP": "Pickup from warehouse"
       },
-      "fast-delivery-time": "40min",
       "TimeZones": {
         "NIGHT": "Night",
         "MORNING": "Morning",
         "AFTERNOON": "Afternoon",
         "EVENING": "Evening"
+      },
+      "Location": {
+        "deliver-to": "Deliver to: {location}",
+        "default": "Default Address",
+        "phone": "Phone Number: {phone}",
+        "select-title": "Select an Address",
+        "new-title": "Add an Address",
+        "edit-title": "Edit Address",
+        "cancel": "Cancel",
+        "save": "Save",
+        "edit": "Edit",
+        "new": "Add",
+        "back": "Back",
+        "new-address": "Add new address",
+        "delete_success": "Address has been deleted successfully"
       }
     }
   }

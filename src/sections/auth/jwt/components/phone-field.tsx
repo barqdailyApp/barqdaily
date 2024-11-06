@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import {
   Box,
   Stack,
+  BoxProps,
   FormLabel,
   Typography,
   InputAdornment,
@@ -17,15 +18,16 @@ import { RHFTextField } from "@/components/hook-form";
 export default function AuthPhoneField({
   name = "phoneNumber",
   label = "Global.Label.phone",
+  ...other
 }: {
   name?: string;
   label?: string;
-}) {
+} & BoxProps) {
   const t = useTranslations();
   const dir = useDir();
 
   return (
-    <Box>
+    <Box {...other}>
       <FormLabel>{t(label)}</FormLabel>
       <RHFTextField
         name={name}

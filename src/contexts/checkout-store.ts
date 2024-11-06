@@ -15,7 +15,9 @@ interface CheckoutState {
 
   addresses: Address[];
   choosenAddress: Address | null;
-  setAddresses: (addresses: Address[]) => void;
+  setAddresses: (
+    addresses: Address[] | ((prev: Address[]) => Address[])
+  ) => void;
   setChoosenAddress: (address: Address | null) => void;
 
   timeSlot: TimeSlot | null;
@@ -42,10 +44,16 @@ export const usecheckoutStore = create<CheckoutState>()((set) => ({
   addresses: [],
   choosenAddress: null,
   setAddresses: (addresses) =>
-    set(() => ({
-      addresses,
-      choosenAddress: addresses[0],
-    })),
+    set((state) => {
+      const newAddresses =
+        typeof addresses === "function"
+          ? addresses(state.addresses)
+          : addresses;
+      return {
+        addresses: newAddresses,
+        choosenAddress: state.choosenAddress || newAddresses[0],
+      };
+    }),
   setChoosenAddress: (address) => set(() => ({ choosenAddress: address })),
 
   timeSlot: null,

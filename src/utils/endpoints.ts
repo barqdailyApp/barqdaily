@@ -22,7 +22,9 @@ export const endpoints = {
     timeSlots: (delivery_day: string) => `slot/${delivery_day}/all-slots`,
   },
   address: {
-    list: "addresses",
+    root: "addresses",
+    delete: (id: string) => `addresses/${id}`,
+    setFavorite: (id: string) => `addresses/${id}/set-favorite`,
   },
   banars: "banar/guest",
   orders: "order/client-orders",
