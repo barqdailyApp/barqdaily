@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useTranslations } from "next-intl";
 
 import {
@@ -19,6 +20,9 @@ import { usecheckoutStore } from "@/contexts/checkout-store";
 
 import Iconify from "@/components/iconify";
 
+import FinishButton from "./finish-button";
+import PromoCodeField from "./promo-code-field";
+
 export default function OrderSumamry() {
   const t = useTranslations("Pages.Cart");
   const dir = useDir();
@@ -26,56 +30,76 @@ export default function OrderSumamry() {
   const formateDate = useFormatDate();
   const { step, setStep, choosenDeliveryType, day, timeSlot, choosenAddress } =
     usecheckoutStore();
-  const { totalPrice, deliveryFee } = useCartStore();
+  const { totalPrice, deliveryFee, promocode } = useCartStore();
 
-  const fields: (string | { label: string; value: string })[] = [
-    {
-      label: t("Summary.products-total"),
-      value: currency(totalPrice),
-    },
-    {
-      label: t("Summary.shipping"),
-      value: currency(deliveryFee),
-    },
-    {
-      label: t("Summary.total"),
-      value: currency(totalPrice + deliveryFee),
-    },
-  ];
+  const fields = useMemo(() => {
+    const discount = promocode?.discount || 0;
 
-  if (step > 1)
-    fields.push("divider", {
-      label: t("Summary.delivery-type"),
-      value:
-        choosenDeliveryType === "SCHEDULED"
-          ? t(`DeliveryTypes.${choosenDeliveryType}`)
-          : t("FAST"),
-    });
-
-  if (step > 1 && choosenDeliveryType === "SCHEDULED")
-    fields.push(
+    const items: { label?: string; value: React.ReactNode }[] = [
       {
-        label: t("Summary.delivery-day"),
-        value: formateDate(day),
+        label: t("Summary.products-total"),
+        value: currency(totalPrice),
+      },
+      ...(discount
+        ? [{ label: t("PromoCode.label"), value: `${discount}%` }]
+        : []),
+      {
+        label: t("Summary.shipping"),
+        value: currency(deliveryFee),
       },
       {
-        label: t("Summary.delivery-time"),
-        value: `${timeSlot?.start_time} - ${timeSlot?.end_time} ${t(`TimeZones.${timeSlot?.time_zone}`)}`,
-      }
-    );
+        label: t("Summary.total"),
+        value: currency((totalPrice * (100 - discount)) / 100 + deliveryFee),
+      },
+      { value: <PromoCodeField /> },
+    ];
 
-  if (step > 1 && choosenDeliveryType !== "WAREHOUSE_PICKUP")
-    fields.push({
-      label: t("Summary.delivery-address"),
-      value: choosenAddress?.name || "",
-    });
+    if (step > 1)
+      items.push(
+        { value: <Divider flexItem /> },
+        {
+          label: t("Summary.delivery-type"),
+          value: t(`DeliveryTypes.${choosenDeliveryType}`),
+        }
+      );
+
+    if (step > 1 && choosenDeliveryType === "SCHEDULED")
+      items.push(
+        {
+          label: t("Summary.delivery-day"),
+          value: formateDate(day),
+        },
+        {
+          label: t("Summary.delivery-time"),
+          value: `${timeSlot?.start_time} - ${timeSlot?.end_time} ${t(`TimeZones.${timeSlot?.time_zone}`)}`,
+        }
+      );
+
+    if (step > 1 && choosenDeliveryType !== "WAREHOUSE_PICKUP")
+      items.push({
+        label: t("Summary.delivery-address"),
+        value: choosenAddress?.name || "",
+      });
+
+    return items;
+  }, [
+    choosenAddress?.name,
+    choosenDeliveryType,
+    currency,
+    day,
+    deliveryFee,
+    formateDate,
+    promocode,
+    step,
+    t,
+    timeSlot,
+    totalPrice,
+  ]);
 
   const renderFields = (
     <Stack spacing={1}>
-      {fields.map((item, index) =>
-        typeof item === "string" ? (
-          <Divider key={index} flexItem />
-        ) : (
+      {fields.map((item) =>
+        item.label ? (
           <Stack
             direction="row"
             alignItems="center"
@@ -90,6 +114,8 @@ export default function OrderSumamry() {
               {item.value}
             </Typography>
           </Stack>
+        ) : (
+          item.value
         )
       )}
     </Stack>
@@ -112,14 +138,18 @@ export default function OrderSumamry() {
           />
         </Button>
       )}
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => setStep((prev) => prev + 1)}
-        sx={{ flexGrow: 1 }}
-      >
-        {t("Summary.next")}
-      </Button>
+      {step === 2 ? (
+        <FinishButton sx={{ flexGrow: 1 }} />
+      ) : (
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => setStep((prev) => prev + 1)}
+          sx={{ flexGrow: 1 }}
+        >
+          {t("Summary.next")}
+        </Button>
+      )}
     </Stack>
   );
 

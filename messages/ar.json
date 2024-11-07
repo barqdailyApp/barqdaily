@@ -224,7 +224,12 @@
         "delivery-time": "وقت التوصيل",
         "delivery-address": "عنوان التوصيل",
         "total": "إجمالي سعر الطلب",
-        "next": "التالي"
+        "next": "التالي",
+        "finish": "اشتري الآن"
+      },
+      "PromoCode": {
+        "label": "كود الخصم",
+        "apply": "تطبيق"
       },
       "DeliveryTypes": {
         "FAST": "توصيل سريع",
@@ -251,6 +256,17 @@
         "back": "رجوع",
         "new-address": "اضافة عنوان جديد",
         "delete_success": "تم حذف العنوان بنجاح"
+      },
+      "Payment": {
+        "kurami-title": "استكمال عملية الدفع",
+        "kurami-description": "<typography>لتفعيل الخدمة: من أيقونة تفعيل التسوق الالكتروني في تطبيق البنك، اختر \"برق\"، ثم أدخل رقم موبايلك <number></number></typography><typography>قم بإدخال رمز التعريق الخاص بك ( يمكنك اضافته من تطبيق البنك )</typography>",
+        "kurami-transaction-number": "رقم التعريف الخاص بك في تطبيق الكريمي",
+        "jawali-description": "يرجي إدخال كود الشراء الذي تم توليده من تطبيق جوالي",
+        "jawali-transaction-number": "كود الشراء من تطبيق جوالي",
+        "jaib-description": "يرجي إدخال كود الشراء الذي تم توليده من تطبيق جيب",
+        "jaib-transaction-number": "كود الشراء من تطبيق جيب",
+        "notes": "ملاحظات عن الطلب",
+        "terms": "اوافق على <link>الشروط والاحكام</link>"
       }
     }
   }

@@ -20,6 +20,10 @@ export const endpoints = {
     delete: (cart_product_id: string) => `cart/delete/${cart_product_id}`,
     update: "cart/update/{cart}-product",
     timeSlots: (delivery_day: string) => `slot/${delivery_day}/all-slots`,
+    listPayments: "payment-method",
+    fetchPromoCode: (code: string, paymentMethodId: string) =>
+      `promo-code/valid/{id}?code=${code}&payment_method_id=${paymentMethodId}`,
+    createOrder: "order",
   },
   address: {
     root: "addresses",

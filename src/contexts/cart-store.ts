@@ -20,76 +20,100 @@ export interface CartProduct {
   image: string;
 }
 
-interface CartState {
+export interface PromoCode {
+  id: string;
+  code: string;
+  discount: number;
+}
+
+interface InitialState {
   loading: boolean;
-  setLoading: (loading: boolean) => void;
+  promocode: PromoCode | null;
   products: CartProduct[];
   productsQuantity: number;
   totalPrice: number;
+  deliveryFee: number;
+}
+
+interface CartStateActions {
+  initCart: VoidFunction;
+  setLoading: (loading: boolean) => void;
+  setPromocode: (promocode: PromoCode | null) => void;
   setProduct: (product: CartProduct) => void;
   removeProduct: (id: string) => void;
   initProducts: (products: CartProduct[]) => void;
-  deliveryFee: number;
   setDeliveryFee: (fee: number) => void;
 }
 
-export const useCartStore = create<CartState>()((set) => ({
+const initialState: InitialState = {
   loading: false,
-  setLoading: (loading) => set({ loading }),
+
+  promocode: null,
+
   products: [],
   productsQuantity: 0,
   totalPrice: 0,
-  setProduct: (newProduct) =>
-    set((state) => {
-      let isProductExist = false;
-      let priceDiff = 0;
 
-      const updatedProducts = state.products.map((product) => {
-        if (product.id === newProduct.id) {
-          isProductExist = true;
-          priceDiff =
-            newProduct.price * newProduct.quantity -
-            product.price * product.quantity;
-          return newProduct;
-        }
-        return product;
-      });
-
-      return {
-        ...(isProductExist
-          ? {
-              products: updatedProducts,
-              totalPrice: state.totalPrice + priceDiff,
-            }
-          : {
-              products: [...updatedProducts, newProduct],
-              productsQuantity: state.productsQuantity + 1,
-              totalPrice:
-                state.totalPrice + newProduct.price * newProduct.quantity,
-            }),
-      };
-    }),
-  removeProduct: (id) =>
-    set((state) => {
-      const oldProduct = state.products.find(
-        (product) => product.id === id
-      ) || { price: 0, quantity: 0 };
-
-      return {
-        products: state.products.filter((product) => product.id !== id),
-        productsQuantity: state.productsQuantity - 1,
-        totalPrice: state.totalPrice - oldProduct.price * oldProduct.quantity,
-      };
-    }),
-  initProducts: (products) =>
-    set({
-      products,
-      productsQuantity: products.length,
-      totalPrice: products.reduce(
-        (acc, product) => acc + product.price * product.quantity,
-        0
-      ),
-    }),
   deliveryFee: 0,
-  setDeliveryFee: (fee) => set({ deliveryFee: fee }),
-}));
+};
+
+export const useCartStore = create<InitialState & CartStateActions>()(
+  (set) => ({
+    ...initialState,
+    initCart: () => set({ ...initialState }),
+    setLoading: (loading) => set({ loading }),
+    setPromocode: (promocode) => set({ promocode }),
+    setProduct: (newProduct) =>
+      set((state) => {
+        let isProductExist = false;
+        let priceDiff = 0;
+
+        const updatedProducts = state.products.map((product) => {
+          if (product.id === newProduct.id) {
+            isProductExist = true;
+            priceDiff =
+              newProduct.price * newProduct.quantity -
+              product.price * product.quantity;
+            return newProduct;
+          }
+          return product;
+        });
+
+        return {
+          ...(isProductExist
+            ? {
+                products: updatedProducts,
+                totalPrice: state.totalPrice + priceDiff,
+              }
+            : {
+                products: [...updatedProducts, newProduct],
+                productsQuantity: state.productsQuantity + 1,
+                totalPrice:
+                  state.totalPrice + newProduct.price * newProduct.quantity,
+              }),
+        };
+      }),
+    removeProduct: (id) =>
+      set((state) => {
+        const oldProduct = state.products.find(
+          (product) => product.id === id
+        ) || { price: 0, quantity: 0 };
+
+        return {
+          products: state.products.filter((product) => product.id !== id),
+          productsQuantity: state.productsQuantity - 1,
+          totalPrice: state.totalPrice - oldProduct.price * oldProduct.quantity,
+        };
+      }),
+    initProducts: (products) =>
+      set({
+        products,
+        productsQuantity: products.length,
+        totalPrice: products.reduce(
+          (acc, product) => acc + product.price * product.quantity,
+          0
+        ),
+      }),
+    setDeliveryFee: (fee) => set({ deliveryFee: fee }),
+  })
+);

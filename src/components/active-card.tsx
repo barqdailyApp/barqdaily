@@ -6,7 +6,12 @@ const StyledCard = styled(Card)(({ theme }) => ({
   position: "relative",
   display: "flex",
   flexDirection: "column",
-  "&.selected": { boxShadow: `0px 0px 0px 1px ${theme.palette.primary.main}` },
+  "&.selected-thin": {
+    boxShadow: `0px 0px 0px 1px ${theme.palette.primary.main}`,
+  },
+  "&.selected-bold": {
+    boxShadow: `0px 0px 0px 1px ${theme.palette.primary.main}, 0px 0px 0px 4px ${theme.palette.primary.main}`,
+  },
   "&:hover": {
     boxShadow: `0px 0px 0px 1px ${theme.palette.primary.main}, 0px 0px 0px 4px ${theme.palette.primary.main}`,
     "&:has(.card-clickable-layer:active)": {
@@ -19,17 +24,19 @@ const StyledCard = styled(Card)(({ theme }) => ({
 export default function ActiveCard({
   active,
   children,
+  activeRing = "thin",
   ...props
-}: { active?: boolean; children: React.ReactNode } & (
-  | { href?: string }
-  | ({ onClick?: VoidFunction } & CardProps)
-)) {
+}: {
+  active?: boolean;
+  children: React.ReactNode;
+  activeRing?: "thin" | "bold";
+} & ({ href?: string } | ({ onClick?: VoidFunction } & CardProps))) {
   const href = "href" in props ? props.href : undefined;
   const onClick = "onClick" in props ? props.onClick : undefined;
 
   return (
     <StyledCard
-      className={active ? "selected" : ""}
+      className={active ? `selected-${activeRing}` : ""}
       {...{ ...props, onClick: undefined, href: undefined }}
     >
       <Box

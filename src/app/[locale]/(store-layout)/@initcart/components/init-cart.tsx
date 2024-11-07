@@ -4,15 +4,15 @@ import { useEffect } from "react";
 import { useSnackbar } from "notistack";
 
 import { useCartStore } from "@/contexts/cart-store";
-import { fetchCartProducts } from "@/actions/cart-actions";
 import { fetchSections } from "@/actions/products-actions";
 import { fetchAddresses } from "@/actions/profile-actions";
 import { usecheckoutStore } from "@/contexts/checkout-store";
+import { fetchPayments, fetchCartProducts } from "@/actions/cart-actions";
 
 export default function InitCart() {
   const { enqueueSnackbar } = useSnackbar();
   const { initProducts, setDeliveryFee } = useCartStore();
-  const { setAddresses, setDeliveryTypes } = usecheckoutStore();
+  const { setAddresses, setDeliveryTypes, setPayments } = usecheckoutStore();
 
   useEffect(() => {
     (async () => {
@@ -40,6 +40,14 @@ export default function InitCart() {
       } else {
         setAddresses(addressesRes);
       }
+
+      const paymentsRes = await fetchPayments();
+
+      if ("error" in paymentsRes) {
+        enqueueSnackbar(paymentsRes.error, { variant: "error" });
+      } else {
+        setPayments(paymentsRes);
+      }
     })();
   }, [
     enqueueSnackbar,
@@ -47,6 +55,7 @@ export default function InitCart() {
     setAddresses,
     setDeliveryFee,
     setDeliveryTypes,
+    setPayments,
   ]);
 
   return null;

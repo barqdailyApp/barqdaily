@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { useTranslations } from "next-intl";
 
 import { Box, Step, Stack, Stepper, StepLabel, Container } from "@mui/material";
@@ -8,13 +9,18 @@ import { usecheckoutStore } from "@/contexts/checkout-store";
 
 import CartStep from "../cart-step";
 import { steps } from "../config-cart";
+import PaymentStep from "../payment-step";
 import OrderSumamry from "../order-summary";
 import TimeLocationStep from "../time-location-step";
 
 export default function Cart() {
   const t = useTranslations("Pages.Cart");
 
-  const { step } = usecheckoutStore();
+  const { step, setStep } = usecheckoutStore();
+
+  useEffect(() => {
+    setStep(0);
+  }, [setStep]);
 
   const renderHeadding = (
     <Stack py={5} bgcolor="background.neutral">
@@ -30,7 +36,7 @@ export default function Cart() {
     </Stack>
   );
 
-  const stepsElements = [<CartStep />, <TimeLocationStep />];
+  const stepsElements = [<CartStep />, <TimeLocationStep />, <PaymentStep />];
 
   return (
     <>
