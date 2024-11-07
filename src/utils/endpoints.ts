@@ -14,8 +14,23 @@ export const endpoints = {
     brands: "product/get-brands-client",
     offers: "product/all-products-offers-for-client",
   },
+  cart: {
+    fetchProducts: "cart",
+    add: "cart/add",
+    delete: (cart_product_id: string) => `cart/delete/${cart_product_id}`,
+    update: "cart/update/{cart}-product",
+    timeSlots: (delivery_day: string) => `slot/${delivery_day}/all-slots`,
+    listPayments: "payment-method",
+    fetchPromoCode: (code: string, paymentMethodId: string) =>
+      `promo-code/valid/{id}?code=${code}&payment_method_id=${paymentMethodId}`,
+    createOrder: "order",
+  },
+  address: {
+    root: "addresses",
+    delete: (id: string) => `addresses/${id}`,
+    setFavorite: (id: string) => `addresses/${id}/set-favorite`,
+  },
   banars: "banar/guest",
-
   orders: "order/client-orders",
   singleOrder: (order_id: string) => `order/single-order/${order_id}`,
   singleShipment: (shipment_id: string) =>
