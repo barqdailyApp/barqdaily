@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import {
   Grid,
@@ -14,6 +14,7 @@ import {
 import { useBoolean } from "@/hooks/use-boolean";
 
 import { usecheckoutStore } from "@/contexts/checkout-store";
+import { setFavoriteAddress } from "@/actions/profile-actions";
 
 import { Address } from "@/types/profile";
 
@@ -45,6 +46,19 @@ export default function AddressDialog({ open, onClose }: Props) {
   useEffect(() => {
     setSelectedItem(choosenAddress);
   }, [choosenAddress]);
+
+  const handleSave = useCallback(() => {
+    if (!selectedItem) return;
+
+    (async () => {
+      if (choosenAddress?.id !== selectedItem.id) {
+        await setFavoriteAddress(selectedItem.id);
+      }
+    })();
+
+    setChoosenAddress(selectedItem);
+    onClose();
+  }, [choosenAddress?.id, onClose, selectedItem, setChoosenAddress]);
 
   const renderCards = (
     <Grid container spacing={2} py={1}>
@@ -95,10 +109,7 @@ export default function AddressDialog({ open, onClose }: Props) {
         <Button
           variant="contained"
           color="primary"
-          onClick={() => {
-            setChoosenAddress(selectedItem);
-            onClose();
-          }}
+          onClick={() => handleSave()}
         >
           {t("save")}
         </Button>
