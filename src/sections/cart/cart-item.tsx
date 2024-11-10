@@ -1,16 +1,13 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 
-import { Box, Stack, Button, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 
 import { useCurrency } from "@/utils/format-number";
 
 import { CartProduct } from "@/contexts/cart-store";
 
-import Iconify from "@/components/iconify";
-
 import IncrementerButton from "../products/incrementer-button";
-import ProductFavButton from "../products/fav-button";
 
 export default function CartItem({ product }: { product: CartProduct }) {
   const t = useTranslations("Pages.Orders.Single.Shipment");
