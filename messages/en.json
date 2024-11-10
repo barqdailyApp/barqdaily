@@ -272,6 +272,11 @@
         "message": "Your order has been placed successfully.",
         "track": "Track Order",
         "shopping": "Continue Shopping"
+      },
+      "Empty": {
+        "title": "Oops!",
+        "message": "Your cart is empty.",
+        "shopping": "Start Shopping"
       }
     }
   }
