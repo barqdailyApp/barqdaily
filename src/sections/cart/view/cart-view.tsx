@@ -8,6 +8,7 @@ import { Box, Step, Stack, Stepper, StepLabel, Container } from "@mui/material";
 import { usecheckoutStore } from "@/contexts/checkout-store";
 
 import CartStep from "../cart-step";
+import DoneStep from "../done-step";
 import { steps } from "../config-cart";
 import PaymentStep from "../payment-step";
 import OrderSumamry from "../order-summary";
@@ -17,6 +18,8 @@ export default function Cart() {
   const t = useTranslations("Pages.Cart");
 
   const { step, setStep } = usecheckoutStore();
+
+  const isDone = step === 3;
 
   useEffect(() => {
     setStep(0);
@@ -36,17 +39,24 @@ export default function Cart() {
     </Stack>
   );
 
-  const stepsElements = [<CartStep />, <TimeLocationStep />, <PaymentStep />];
+  const stepsElements = [
+    <CartStep />,
+    <TimeLocationStep />,
+    <PaymentStep />,
+    <DoneStep />,
+  ];
 
   return (
     <>
-      {renderHeadding}
+      {!isDone && renderHeadding}
       <Container sx={{ py: 3 }}>
         <Stack gap={3} direction={{ md: "row" }}>
           <Box flexGrow={1}>{stepsElements[step]}</Box>
-          <Box flexShrink={0} width={{ md: "380px" }}>
-            <OrderSumamry />
-          </Box>
+          {!isDone && (
+            <Box flexShrink={0} width={{ md: "380px" }}>
+              <OrderSumamry />
+            </Box>
+          )}
         </Stack>
       </Container>
     </>

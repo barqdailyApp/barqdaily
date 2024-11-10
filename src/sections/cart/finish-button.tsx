@@ -26,6 +26,7 @@ export default function FinishButton(props: ButtonProps) {
     timeSlot,
     day,
     initCheckout,
+    setOrderId,
   } = usecheckoutStore();
   const [loading, setLoading] = useState(false);
 
@@ -74,6 +75,7 @@ export default function FinishButton(props: ButtonProps) {
       } else {
         initCart();
         initCheckout();
+        setOrderId(res.id || null);
         setStep((prev) => 3);
         invalidateCaching(paths.cart);
       }
@@ -90,6 +92,7 @@ export default function FinishButton(props: ButtonProps) {
     paymentForm.transaction_number,
     products,
     promocode?.code,
+    setOrderId,
     setStep,
     timeSlot?.id,
   ]);
