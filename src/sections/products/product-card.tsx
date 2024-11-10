@@ -6,7 +6,6 @@ import {
   Box,
   Card,
   Stack,
-  Button,
   styled,
   CardMedia,
   Typography,
@@ -16,8 +15,6 @@ import {
 import { useCurrency } from "@/utils/format-number";
 
 import { useCartStore } from "@/contexts/cart-store";
-
-import Iconify from "@/components/iconify";
 
 import { Offer, Product } from "@/types/products";
 
@@ -98,10 +95,6 @@ export function ProductCard({ product, href }: Props) {
         </Typography>
 
         <Stack direction="row" spacing={1} flexWrap="wrap">
-          <Button variant="outlined">
-            <Iconify icon="ph:heart-bold" />
-          </Button>
-
           <IncrementerButton
             product_id={product.product_id}
             product_price_id={product.product_price_id}

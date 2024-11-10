@@ -10,6 +10,7 @@ import { CartProduct } from "@/contexts/cart-store";
 import Iconify from "@/components/iconify";
 
 import IncrementerButton from "../products/incrementer-button";
+import ProductFavButton from "../products/fav-button";
 
 export default function CartItem({ product }: { product: CartProduct }) {
   const t = useTranslations("Pages.Orders.Single.Shipment");
@@ -21,58 +22,44 @@ export default function CartItem({ product }: { product: CartProduct }) {
   );
 
   const renderTopRow = (
-    <Stack direction="row" alignItems="flex-start" spacing={2} flexWrap="wrap">
-      <Stack
-        direction="row"
-        alignItems="center"
-        spacing={2}
-        sx={{ flexGrow: 1, flexBasis: "200px" }}
-      >
-        <Image
-          src={product.image}
-          alt={product.name}
-          width={60}
-          height={60}
-          style={{
-            borderRadius: "50px",
-            objectFit: "cover",
+    <Stack direction="row" alignItems="center" spacing={2}>
+      <Image
+        src={product.image}
+        alt={product.name}
+        width={60}
+        height={60}
+        style={{
+          borderRadius: "50px",
+          objectFit: "cover",
+        }}
+      />
+
+      <Box>
+        <Typography
+          variant="body1"
+          fontWeight="700"
+          sx={{
+            display: "-webkit-box",
+            WebkitLineClamp: "2",
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
           }}
-        />
-
-        <Box>
+        >
+          {product.name}
+        </Typography>
+        <Typography variant="subtitle2" fontWeight="400" mt={1}>
           <Typography
-            variant="body1"
-            fontWeight="700"
-            sx={{
-              display: "-webkit-box",
-              WebkitLineClamp: "2",
-              WebkitBoxOrient: "vertical",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-            }}
+            variant="body2"
+            fontWeight="bold"
+            component="span"
+            color="primary"
           >
-            {product.name}
+            {`${currency(product.price)} / `}
           </Typography>
-          <Typography variant="subtitle2" fontWeight="400" mt={1}>
-            <Typography
-              variant="body2"
-              fontWeight="bold"
-              component="span"
-              color="primary"
-            >
-              {`${currency(product.price)} / `}
-            </Typography>
-            {product.unit}
-          </Typography>
-        </Box>
-      </Stack>
-
-      <Button
-        variant="outlined"
-        sx={{ flexShrink: 0, aspectRatio: 1, minWidth: 0 }}
-      >
-        <Iconify icon="ph:heart-bold" />
-      </Button>
+          {product.unit}
+        </Typography>
+      </Box>
     </Stack>
   );
 

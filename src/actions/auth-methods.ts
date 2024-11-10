@@ -57,12 +57,13 @@ export async function verifyOtp(reqBody: verifyOtpCredentials) {
     return res;
   }
 
-  const { name, avatar, email, phone, access_token: token } = res.data;
-  const user = { name, avatar, email, phone };
+  const { id, name, avatar, email, phone, access_token: token } = res.data;
+  const user = { id, name, avatar, email, phone };
 
   cookies().set(COOKIES_KEYS.session, token);
   cookies().set(COOKIES_KEYS.user, JSON.stringify(user));
-  return user;
+
+  return { ...user };
 }
 
 export async function logUserOut() {
@@ -79,6 +80,7 @@ export interface User {
   avatar: string;
   email: string;
   phone: string;
+  id: string;
 }
 export type verifyOtpResponse = User & {
   access_token: string;

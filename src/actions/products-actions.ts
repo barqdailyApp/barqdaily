@@ -1,7 +1,11 @@
 "use server";
 
+import { cookies } from "next/headers";
+
 import { endpoints } from "@/utils/endpoints";
-import { getData } from "@/utils/crud-fetch-api";
+import { getData, postData } from "@/utils/crud-fetch-api";
+
+import { COOKIES_KEYS } from "@/config-global";
 
 import {
   Brand,
@@ -58,6 +62,7 @@ export async function fetchProductsBySubCategory(
     page: String(page),
     limit: String(10),
   });
+
   const res = await getData<{ data: Product[]; meta: { itemCount: number } }>(
     `${endpoints.products.products}?${searchParams.toString()}`
   );
@@ -109,8 +114,10 @@ export async function fetchOffers(page = 1) {
 }
 
 export async function fetchSingleProduct(productId: string) {
+  const user = JSON.parse(cookies().get(COOKIES_KEYS.user)?.value || "");
+
   const res = await getData<FullProduct>(
-    `${endpoints.products.singleProduct}/${productId}`
+    `${endpoints.products.singleProduct}/${productId}?user_id=${user.id || ""}`
   );
   if ("error" in res) {
     return res;
@@ -142,4 +149,23 @@ export async function searchProducts(search: string) {
   }
 
   return res?.data?.data;
+}
+
+export async function toggleFavorite({
+  productId,
+  sectionId,
+}: {
+  productId: string;
+  sectionId: string;
+}) {
+  const res = await postData<any, {}>(
+    endpoints.products.favorite({ productId, sectionId }),
+    {}
+  );
+
+  if ("error" in res) {
+    return res;
+  }
+
+  return res;
 }
