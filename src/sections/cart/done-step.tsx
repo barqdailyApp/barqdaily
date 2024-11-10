@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 import { Stack, Button, Container, Typography } from "@mui/material";
 
@@ -6,7 +7,6 @@ import { paths } from "@/routes/paths";
 import { RouterLink } from "@/routes/components";
 
 import { usecheckoutStore } from "@/contexts/checkout-store";
-import { useTranslations } from "next-intl";
 
 export default function DoneStep() {
   const t = useTranslations("Pages.Cart.Done");
