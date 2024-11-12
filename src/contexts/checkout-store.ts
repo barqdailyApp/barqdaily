@@ -29,6 +29,8 @@ interface InitialState {
   choosenPayment: Payment | null;
 
   paymentForm: PaymentForm;
+
+  orderId: string | null;
 }
 
 interface CheckoutStateActions {
@@ -53,6 +55,8 @@ interface CheckoutStateActions {
   setPaymentForm: (
     paymentForm: PaymentForm | ((prev: PaymentForm) => PaymentForm)
   ) => void;
+
+  setOrderId: (orderId: string | null) => void;
 }
 
 const initialState: InitialState = {
@@ -73,6 +77,8 @@ const initialState: InitialState = {
   choosenPayment: null,
 
   paymentForm: { notes: "" },
+
+  orderId: null,
 };
 
 export const usecheckoutStore = create<InitialState & CheckoutStateActions>()(
@@ -116,5 +122,7 @@ export const usecheckoutStore = create<InitialState & CheckoutStateActions>()(
             ? paymentForm(state.paymentForm)
             : paymentForm,
       })),
+
+    setOrderId: (orderId) => set(() => ({ orderId })),
   })
 );

@@ -266,7 +266,24 @@
         "jaib-transaction-number": "Purchase code from the Jaib app.",
         "notes": "Notes about the order",
         "terms": "I agree to the <link>terms and conditions</link>"
+      },
+      "Done": {
+        "title": "Order Placed",
+        "message": "Your order has been placed successfully.",
+        "track": "Track Order",
+        "shopping": "Continue Shopping"
+      },
+      "Empty": {
+        "title": "Oops!",
+        "message": "Your cart is empty.",
+        "shopping": "Start Shopping"
       }
+    },
+    "NoGuest": {
+      "title": "Oops!",
+      "message": "You Need to Login First.",
+      "login": "Login",
+      "browsing": "Continue Browsing"
     }
   }
 }

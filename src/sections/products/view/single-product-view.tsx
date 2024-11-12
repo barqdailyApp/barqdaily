@@ -2,18 +2,17 @@
 
 import { useTranslations } from "next-intl";
 
-import { Box, Stack, Button, Container, Typography } from "@mui/material";
+import { Box, Stack, Container, Typography } from "@mui/material";
 
 import { useCurrency } from "@/utils/format-number";
 
 import { SECTION_PADDING } from "@/layouts/config-layout";
 
-import Iconify from "@/components/iconify";
-
 import IncrementerButton from "@/sections/products/incrementer-button";
 
 import { FullProduct, ProductMeasurement } from "@/types/products";
 
+import ProductFavButton from "../fav-button";
 import ProductSwiper from "../product-swiper";
 
 interface Props {
@@ -78,9 +77,12 @@ export default function SingleProductView({
       spacing={1}
       pt={1}
     >
-      <Button variant="outlined">
-        <Iconify icon="ph:heart-bold" width={24} />
-      </Button>
+      <ProductFavButton
+        isFav={product.product_is_fav}
+        productId={product.product_id}
+        sectionId={product.section_id}
+        sx={{ alignSelf: "stretch" }}
+      />
 
       <IncrementerButton
         product_id={product.product_id}

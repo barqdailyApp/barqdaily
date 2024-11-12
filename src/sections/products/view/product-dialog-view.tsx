@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 
 import {
   Box,
-  Button,
   Dialog,
   IconButton,
   Typography,
@@ -28,6 +27,8 @@ import Iconify from "@/components/iconify";
 import IncrementerButton from "@/sections/products/incrementer-button";
 
 import { FullProduct, ProductMeasurement } from "@/types/products";
+
+import ProductFavButton from "../fav-button";
 
 interface Props {
   productId: string;
@@ -148,9 +149,12 @@ function ProductDialogContent({
 
   const renderActions = (
     <DialogActions>
-      <Button variant="outlined">
-        <Iconify icon="ph:heart-bold" />
-      </Button>
+      <ProductFavButton
+        isFav={product.product_is_fav}
+        productId={product.product_id}
+        sectionId={product.section_id}
+        sx={{ alignSelf: "stretch" }}
+      />
 
       <IncrementerButton
         product_id={product.product_id}

@@ -4,6 +4,9 @@ export const endpoints = {
     verifyOtp: "auth/verify-otp",
     register: "auth/register",
   },
+  users: {
+    getProfile: "users/get-profile",
+  },
   products: {
     sections: "section",
     categories: (sectionId: string) => `section/${sectionId}/categories`,
@@ -13,6 +16,13 @@ export const endpoints = {
     singleProduct: "product/single-product-client",
     brands: "product/get-brands-client",
     offers: "product/all-products-offers-for-client",
+    favorite: ({
+      productId,
+      sectionId,
+    }: {
+      productId: string;
+      sectionId: string;
+    }) => `product/product-favorite/${productId}/${sectionId}`,
   },
   cart: {
     fetchProducts: "cart",

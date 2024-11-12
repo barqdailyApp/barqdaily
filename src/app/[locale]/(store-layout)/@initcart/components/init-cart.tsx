@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { useSnackbar } from "notistack";
 
+import { useAuthContext } from "@/auth/hooks";
 import { useCartStore } from "@/contexts/cart-store";
 import { fetchSections } from "@/actions/products-actions";
 import { fetchAddresses } from "@/actions/profile-actions";
@@ -10,11 +11,13 @@ import { usecheckoutStore } from "@/contexts/checkout-store";
 import { fetchPayments, fetchCartProducts } from "@/actions/cart-actions";
 
 export default function InitCart() {
+  const { authenticated } = useAuthContext();
   const { enqueueSnackbar } = useSnackbar();
   const { initProducts, setDeliveryFee } = useCartStore();
   const { setAddresses, setDeliveryTypes, setPayments } = usecheckoutStore();
 
   useEffect(() => {
+    if (!authenticated) return;
     (async () => {
       const cartRes = await fetchCartProducts();
 
@@ -50,6 +53,7 @@ export default function InitCart() {
       }
     })();
   }, [
+    authenticated,
     enqueueSnackbar,
     initProducts,
     setAddresses,
