@@ -1,14 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-import { useTranslations } from "next-intl";
 
 import {
   Box,
   Card,
   Stack,
-  Button,
   styled,
   CardMedia,
   Typography,
@@ -17,7 +14,7 @@ import {
 
 import { useCurrency } from "@/utils/format-number";
 
-import Iconify from "@/components/iconify";
+import { useCartStore } from "@/contexts/cart-store";
 
 import { Offer, Product } from "@/types/products";
 
@@ -32,7 +29,7 @@ const StyledCard = styled(Card)(({ theme }) => ({
   position: "relative",
   display: "flex",
   flexDirection: "column",
-  "&.selected": { border: `1px solid ${theme.palette.primary.main}` },
+  "&.selected": { boxShadow: `0px 0px 0px 1px ${theme.palette.primary.main}` },
   "&:hover": {
     boxShadow: `0px 0px 0px 1px ${theme.palette.primary.main}, 0px 0px 0px 4px ${theme.palette.primary.main}`,
     "&:has(.card-clickable-layer:active)": {
@@ -43,8 +40,10 @@ const StyledCard = styled(Card)(({ theme }) => ({
 }));
 
 export function ProductCard({ product, href }: Props) {
-  const t = useTranslations();
-  const [quantity, setQuantity] = useState(0);
+  const products = useCartStore((state) => state.products);
+  const isProductInCart = !!products.find(
+    (item) => item.product_id === product.product_id
+  );
 
   const offerPrice = product.offer_price;
   const originalPrice = product.product_price;
@@ -52,13 +51,14 @@ export function ProductCard({ product, href }: Props) {
 
   const maxQuantity = Math.min(
     product.warehouse_quantity,
-    product.offer_quantity ?? product.max_order_quantity
+    product.max_order_quantity,
+    ...(product.offer_quantity ? [product.offer_quantity] : [])
   );
 
   const currency = useCurrency();
 
   return (
-    <StyledCard className={quantity > 0 ? "selected" : ""}>
+    <StyledCard className={isProductInCart ? "selected" : ""}>
       <Box
         className="card-clickable-layer"
         aria-hidden
@@ -95,34 +95,16 @@ export function ProductCard({ product, href }: Props) {
         </Typography>
 
         <Stack direction="row" spacing={1} flexWrap="wrap">
-          <Button variant="outlined">
-            <Iconify icon="ph:heart-bold" />
-          </Button>
-
-          {quantity === 0 ? (
-            <Button
-              variant="contained"
-              color="primary"
-              startIcon={<Iconify icon="bxs:cart-alt" />}
-              onClick={() => setQuantity(product.min_order_quantity)}
-              sx={{ flexGrow: 1 }}
-            >
-              {t("Pages.Home.Product.add_to_cart")}
-            </Button>
-          ) : (
-            <IncrementerButton
-              onIncrease={() => setQuantity((prev) => prev + 1)}
-              onDecrease={() =>
-                setQuantity((prev) =>
-                  prev > product.min_order_quantity ? prev - 1 : 0
-                )
-              }
-              sx={{ flexGrow: 1, position: "relative" }}
-              quantity={quantity}
-              disabledIncrease={quantity >= maxQuantity}
-              min={product.min_order_quantity}
-            />
-          )}
+          <IncrementerButton
+            product_id={product.product_id}
+            product_price_id={product.product_price_id}
+            min_order_quantity={product.min_order_quantity}
+            max_order_quantity={maxQuantity}
+            addButtonProps={{
+              sx: { flexGrow: 1 },
+            }}
+            sx={{ flexGrow: 1 }}
+          />
         </Stack>
       </CardContent>
     </StyledCard>

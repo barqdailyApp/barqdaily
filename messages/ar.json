@@ -6,7 +6,9 @@
       "name": "الاسم",
       "phone": "الهاتف",
       "login": "تسجيل الدخول",
-      "search": "ابحث عن المنتجات..."
+      "search": "ابحث عن المنتجات...",
+      "address_description": "تفاصيل العنوان (اقرب معلم)",
+      "is_default_address": "تحديد كعنوان الشحن الافتراضي"
     },
     "Error": {
       "name_required": "الاسم مطلوب",
@@ -17,7 +19,9 @@
       "phone_only_digits": "رقم الهاتف يجب ان يحتوي علي ارقام فقط",
       "no_products_found": "لم يتم العثور على منتجات",
       "no_subcategories_found": "لم يتم العثور على الفئات",
-      "no_products": "لم يتم العثور على منتجات"
+      "no_products": "لم يتم العثور على منتجات",
+      "address_description_required": "تفاصيل العنوان مطلوبة",
+      "location_required": "الموقع مطلوب"
     },
     "Message": {
       "otp_sent": "تم إرسال رمز إلى الواتساب الخاص بك."
@@ -121,6 +125,7 @@
       "total": "الإجمالي",
       "payment_method": "طريقة الدفع",
       "cancel_order": "إلغاء الطلب",
+      "track_order": "تتبع الطلب",
       "Status": {
         "all": "كل الطلبات",
         "canceled": "تم الإلغاء",
@@ -201,6 +206,85 @@
           }
         }
       }
+    },
+    "Cart": {
+      "fast-delivery-time": "40 دقيقة",
+      "Steps": {
+        "cart": "إضافة متنجات",
+        "time-location": "الوقت والمكان",
+        "payment": "الدفع",
+        "done": "تم"
+      },
+      "Summary": {
+        "title": "ملخص الطلب",
+        "products-total": "إجمالي سعر المنتجات",
+        "shipping": "رسوم التوصيل",
+        "delivery-type": "نوع التوصيل",
+        "delivery-day": "يوم التوصيل",
+        "delivery-time": "وقت التوصيل",
+        "delivery-address": "عنوان التوصيل",
+        "total": "إجمالي سعر الطلب",
+        "next": "التالي",
+        "finish": "اشتري الآن"
+      },
+      "PromoCode": {
+        "label": "كود الخصم",
+        "apply": "تطبيق"
+      },
+      "DeliveryTypes": {
+        "FAST": "توصيل سريع",
+        "SCHEDULED": "توصيل مجدول",
+        "WAREHOUSE_PICKUP": "استلام من المستودع"
+      },
+      "TimeZones": {
+        "NIGHT": "ليلًا",
+        "MORNING": "صباحًا",
+        "AFTERNOON": "ظهرًا",
+        "EVENING": "مساءً"
+      },
+      "Location": {
+        "deliver-to": "التوصيل الى: {location}",
+        "default": "العنوان الافتراضي",
+        "phone": "رقم الهاتف: {phone}",
+        "select-title": "اختر عنوان",
+        "new-title": "اضافة عنوان جديد",
+        "edit-title": "تعديل العنوان",
+        "cancel": "الغاء",
+        "save": "حفظ",
+        "edit": "تعديل",
+        "new": "اضافة",
+        "back": "رجوع",
+        "new-address": "اضافة عنوان جديد",
+        "delete_success": "تم حذف العنوان بنجاح"
+      },
+      "Payment": {
+        "kurami-title": "استكمال عملية الدفع",
+        "kurami-description": "<typography>لتفعيل الخدمة: من أيقونة تفعيل التسوق الالكتروني في تطبيق البنك، اختر \"برق\"، ثم أدخل رقم موبايلك <number></number></typography><typography>قم بإدخال رمز التعريق الخاص بك ( يمكنك اضافته من تطبيق البنك )</typography>",
+        "kurami-transaction-number": "رقم التعريف الخاص بك في تطبيق الكريمي",
+        "jawali-description": "يرجي إدخال كود الشراء الذي تم توليده من تطبيق جوالي",
+        "jawali-transaction-number": "كود الشراء من تطبيق جوالي",
+        "jaib-description": "يرجي إدخال كود الشراء الذي تم توليده من تطبيق جيب",
+        "jaib-transaction-number": "كود الشراء من تطبيق جيب",
+        "notes": "ملاحظات عن الطلب",
+        "terms": "اوافق على <link>الشروط والاحكام</link>"
+      },
+      "Done": {
+        "title": "تم الطلب",
+        "message": "تم تقديم الطلب بنجاح.",
+        "track": "تتبع الطلب",
+        "shopping": "مواصلة التسوق"
+      },
+      "Empty": {
+        "title": "عفوًا!",
+        "message": "عربة التسوق فارغة.",
+        "shopping": "ابدأ التسوق"
+      }
+    },
+    "NoGuest": {
+      "title": "عفوًا!",
+      "message": "انت حتاج تسجيل الدخول اولا.",
+      "login": "تسجيل الدخول",
+      "browsing": "مواصلة التصفح"
     }
   }
 }

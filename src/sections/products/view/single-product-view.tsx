@@ -1,20 +1,18 @@
 "use client";
 
-import { useState } from "react";
 import { useTranslations } from "next-intl";
 
-import { Box, Stack, Button, Container, Typography } from "@mui/material";
+import { Box, Stack, Container, Typography } from "@mui/material";
 
 import { useCurrency } from "@/utils/format-number";
 
 import { SECTION_PADDING } from "@/layouts/config-layout";
 
-import Iconify from "@/components/iconify";
-
 import IncrementerButton from "@/sections/products/incrementer-button";
 
 import { FullProduct, ProductMeasurement } from "@/types/products";
 
+import ProductFavButton from "../fav-button";
 import ProductSwiper from "../product-swiper";
 
 interface Props {
@@ -26,7 +24,6 @@ export default function SingleProductView({
 }: Props) {
   const currency = useCurrency();
   const t = useTranslations("");
-  const [quantity, setQuantity] = useState(0);
 
   const measurement =
     product_measurements.find((item) => item.is_main_unit) ||
@@ -37,7 +34,8 @@ export default function SingleProductView({
 
   const maxQuantity = Math.min(
     measurement.warehouse_quantity,
-    measurement.offer?.quantity ?? measurement.max_order_quantity
+    measurement.max_order_quantity,
+    ...(measurement.offer?.quantity ? [measurement.offer?.quantity] : [])
   );
 
   const renderSwiper = <ProductSwiper images={product.product_images} />;
@@ -79,32 +77,21 @@ export default function SingleProductView({
       spacing={1}
       pt={1}
     >
-      <Button variant="outlined">
-        <Iconify icon="ph:heart-bold" width={24} />
-      </Button>
+      <ProductFavButton
+        isFav={product.product_is_fav}
+        productId={product.product_id}
+        sectionId={product.section_id}
+        sx={{ alignSelf: "stretch" }}
+      />
 
-      {quantity === 0 ? (
-        <Button
-          variant="contained"
-          color="primary"
-          startIcon={<Iconify icon="bxs:cart-alt" />}
-          onClick={() => setQuantity(measurement.min_order_quantity)}
-        >
-          {t("Pages.Home.Product.add_to_cart")}
-        </Button>
-      ) : (
-        <IncrementerButton
-          onIncrease={() => setQuantity((prev) => prev + 1)}
-          onDecrease={() =>
-            setQuantity((prev) =>
-              prev > measurement.min_order_quantity ? prev - 1 : 0
-            )
-          }
-          quantity={quantity}
-          disabledIncrease={quantity >= maxQuantity}
-          min={measurement.min_order_quantity}
-        />
-      )}
+      <IncrementerButton
+        product_id={product.product_id}
+        product_price_id={
+          measurement.product_category_price.product_category_price_id
+        }
+        min_order_quantity={measurement.min_order_quantity}
+        max_order_quantity={maxQuantity}
+      />
     </Stack>
   );
 

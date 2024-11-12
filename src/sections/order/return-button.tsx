@@ -435,14 +435,14 @@ function ProductFields({
       justifyContent="stretch"
       width="100%"
     >
-      <TextField
-        type="number"
-        value={quantity}
-        InputProps={{ inputProps: { min: 0, max: maxQuantity } }}
-        onChange={(e) => {
-          setQuantity(Number(e.target.value));
+      <Autocomplete
+        options={Array.from({ length: maxQuantity }, (_, i) => i + 1)}
+        renderInput={(params) => (
+          <TextField {...params} label={t("quantity")} value={quantity} />
+        )}
+        onChange={(e, value) => {
+          setQuantity(value || 0);
         }}
-        label={t("quantity")}
         sx={{ flexGrow: 1, flexBasis: "150px" }}
       />
       <Autocomplete

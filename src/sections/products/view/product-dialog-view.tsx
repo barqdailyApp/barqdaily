@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 
 import {
   Box,
-  Button,
   Dialog,
   IconButton,
   Typography,
@@ -28,6 +27,8 @@ import Iconify from "@/components/iconify";
 import IncrementerButton from "@/sections/products/incrementer-button";
 
 import { FullProduct, ProductMeasurement } from "@/types/products";
+
+import ProductFavButton from "../fav-button";
 
 interface Props {
   productId: string;
@@ -89,7 +90,6 @@ function ProductDialogContent({
 }) {
   const t = useTranslations();
   const currency = useCurrency();
-  const [quantity, setQuantity] = useState(0);
 
   const measurement =
     product_measurements.find((item) => item.is_main_unit) ||
@@ -100,7 +100,8 @@ function ProductDialogContent({
 
   const maxQuantity = Math.min(
     measurement.warehouse_quantity,
-    measurement.offer?.quantity ?? measurement.max_order_quantity
+    measurement.max_order_quantity,
+    ...(measurement.offer?.quantity ? [measurement.offer?.quantity] : [])
   );
 
   const renderImage = (
@@ -148,34 +149,25 @@ function ProductDialogContent({
 
   const renderActions = (
     <DialogActions>
-      <Button variant="outlined">
-        <Iconify icon="ph:heart-bold" />
-      </Button>
+      <ProductFavButton
+        isFav={product.product_is_fav}
+        productId={product.product_id}
+        sectionId={product.section_id}
+        sx={{ alignSelf: "stretch" }}
+      />
 
-      {quantity === 0 ? (
-        <Button
-          variant="contained"
-          color="primary"
-          startIcon={<Iconify icon="bxs:cart-alt" />}
-          onClick={() => setQuantity(measurement.min_order_quantity)}
-          sx={{ flexGrow: 1 }}
-        >
-          {t("Pages.Home.Product.add_to_cart")}
-        </Button>
-      ) : (
-        <IncrementerButton
-          onIncrease={() => setQuantity((prev) => prev + 1)}
-          onDecrease={() =>
-            setQuantity((prev) =>
-              prev > measurement.min_order_quantity ? prev - 1 : 0
-            )
-          }
-          sx={{ flexGrow: 1, position: "relative" }}
-          quantity={quantity}
-          disabledIncrease={quantity >= maxQuantity}
-          min={measurement.min_order_quantity}
-        />
-      )}
+      <IncrementerButton
+        product_id={product.product_id}
+        product_price_id={
+          measurement.product_category_price.product_category_price_id
+        }
+        min_order_quantity={measurement.min_order_quantity}
+        max_order_quantity={maxQuantity}
+        addButtonProps={{
+          sx: { flexGrow: 1 },
+        }}
+        sx={{ flexGrow: 1 }}
+      />
     </DialogActions>
   );
 
