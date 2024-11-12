@@ -6,7 +6,9 @@ import { Box, ButtonProps } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import Stack, { StackProps } from "@mui/material/Stack";
 
+import { useAuthContext } from "@/auth/hooks";
 import { useCartStore } from "@/contexts/cart-store";
+import { useNoGuestStore } from "@/contexts/no-guest";
 import {
   addProductToCart,
   removeCartProduct,
@@ -40,7 +42,8 @@ const IncrementerButton = forwardRef<HTMLDivElement, Props>(
   ) => {
     const t = useTranslations();
     const { enqueueSnackbar } = useSnackbar();
-
+    const { authenticated } = useAuthContext();
+    const { setOpen } = useNoGuestStore();
     const { loading, setLoading, products, setProduct, removeProduct } =
       useCartStore();
 
@@ -114,7 +117,7 @@ const IncrementerButton = forwardRef<HTMLDivElement, Props>(
           variant="contained"
           color="primary"
           startIcon={<Iconify icon="bxs:cart-alt" />}
-          onClick={() => handleAdd()}
+          onClick={() => (!authenticated ? setOpen(true) : handleAdd())}
           {...addButtonProps}
           loading={loading}
         >

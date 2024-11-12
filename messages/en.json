@@ -278,6 +278,12 @@
         "message": "Your cart is empty.",
         "shopping": "Start Shopping"
       }
+    },
+    "NoGuest": {
+      "title": "Oops!",
+      "message": "You Need to Login First.",
+      "login": "Login",
+      "browsing": "Continue Browsing"
     }
   }
 }

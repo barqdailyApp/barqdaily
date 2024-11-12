@@ -114,7 +114,7 @@ export async function fetchOffers(page = 1) {
 }
 
 export async function fetchSingleProduct(productId: string) {
-  const user = JSON.parse(cookies().get(COOKIES_KEYS.user)?.value || "");
+  const user = JSON.parse(cookies().get(COOKIES_KEYS.user)?.value || "{}");
 
   const res = await getData<FullProduct>(
     `${endpoints.products.singleProduct}/${productId}?user_id=${user.id || ""}`
