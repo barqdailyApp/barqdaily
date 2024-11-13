@@ -4,7 +4,6 @@ import { m } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 import Box from "@mui/material/Box";
-import { Button } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
@@ -12,17 +11,19 @@ import { alpha } from "@mui/material/styles";
 import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
+import { Button, ListItemIcon, ListItemText } from "@mui/material";
 
 import { paths } from "@/routes/paths";
 import { useRouter } from "@/routes/hooks";
 import { RouterLink } from "@/routes/components";
 
 import { useAuthContext } from "@/auth/hooks";
+import { invalidateCaching } from "@/actions/cache-invalidation";
 
+import Iconify from "@/components/iconify";
 import { varHover } from "@/components/animate";
 import { useSnackbar } from "@/components/snackbar";
 import CustomPopover, { usePopover } from "@/components/custom-popover";
-import { invalidateCaching } from "@/actions/cache-invalidation";
 
 // ----------------------------------------------------------------------
 
@@ -30,14 +31,17 @@ const OPTIONS = [
   {
     label: "home",
     linkTo: paths.home,
+    icon: "tabler:home",
   },
   {
     label: "favorite",
     linkTo: paths.favProducts,
+    icon: "mdi:heart-outline",
   },
   {
     label: "orders",
     linkTo: paths.orders,
+    icon: "mynaui:package",
   },
 ];
 
@@ -143,7 +147,13 @@ function AccountPopoverContent() {
               key={option.label}
               onClick={() => handleClickItem(option.linkTo)}
             >
-              {t(option.label)}
+              <ListItemIcon sx={{ minWidth: "20px !important" }}>
+                <Iconify
+                  icon={option.icon}
+                  sx={{ "&": { margin: "0 !important" } }}
+                />
+              </ListItemIcon>
+              <ListItemText>{t(option.label)}</ListItemText>
             </MenuItem>
           ))}
         </Stack>
@@ -154,7 +164,13 @@ function AccountPopoverContent() {
           onClick={handleLogout}
           sx={{ m: 1, fontWeight: "fontWeightBold", color: "error.main" }}
         >
-          {t("logout")}
+          <ListItemIcon sx={{ minWidth: "20px !important" }}>
+            <Iconify
+              icon="mdi:logout"
+              sx={{ "&": { margin: "0 !important" } }}
+            />
+          </ListItemIcon>
+          <ListItemText>{t("logout")}</ListItemText>
         </MenuItem>
       </CustomPopover>
     </>
