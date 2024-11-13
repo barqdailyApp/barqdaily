@@ -18,7 +18,7 @@ import { useRouter } from "@/routes/hooks";
 import { RouterLink } from "@/routes/components";
 
 import { useAuthContext } from "@/auth/hooks";
-import { invalidateCaching } from "@/actions/cache-invalidation";
+import { useCartStore } from "@/contexts/cart-store";
 
 import Iconify from "@/components/iconify";
 import { varHover } from "@/components/animate";
@@ -67,21 +67,18 @@ export default function AccountPopover() {
 
 function AccountPopoverContent() {
   const t = useTranslations("Navigation");
-
   const router = useRouter();
-
-  const { user, logout } = useAuthContext();
-
-  const { enqueueSnackbar } = useSnackbar();
-
   const popover = usePopover();
+  const { enqueueSnackbar } = useSnackbar();
+  const { user, logout } = useAuthContext();
+  const { initCart } = useCartStore();
 
   const handleLogout = async () => {
     try {
       await logout();
-      popover.onClose();
+      initCart();
       router.push(paths.home);
-      invalidateCaching(paths.home);
+      popover.onClose();
     } catch (error) {
       console.error(error);
       enqueueSnackbar("Unable to logout!", { variant: "error" });
