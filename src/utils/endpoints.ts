@@ -35,6 +35,9 @@ export const endpoints = {
       `promo-code/valid/{id}?code=${code}&payment_method_id=${paymentMethodId}`,
     createOrder: "order",
   },
+  staticPage: {
+    root: (static_page_type: string) => `static-page/${static_page_type}`,
+  },
   address: {
     root: "addresses",
     delete: (id: string) => `addresses/${id}`,

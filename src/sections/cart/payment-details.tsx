@@ -1,3 +1,4 @@
+import RouterLink from "next/link";
 import { useTranslations } from "next-intl";
 import { useMemo, useEffect, useCallback } from "react";
 
@@ -14,7 +15,7 @@ import {
   FormControlLabel,
 } from "@mui/material";
 
-import { RouterLink } from "@/routes/components";
+import { paths } from "@/routes/paths";
 
 import { useAuthContext } from "@/auth/hooks";
 import { usecheckoutStore } from "@/contexts/checkout-store";
@@ -138,9 +139,13 @@ export default function PaymentDetails() {
                 onChange={(_, value) => handleChange("terms", value)}
               />
             }
-            label={t.rich("terms", {
+            label={t.rich("policy", {
               link: (chunks) => (
-                <Link href="#" component={RouterLink}>
+                <Link
+                  href={paths.static.return}
+                  component={RouterLink}
+                  target="_blank"
+                >
                   {chunks}
                 </Link>
               ),
