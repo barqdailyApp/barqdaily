@@ -22,6 +22,7 @@ import { useAuthContext } from "@/auth/hooks";
 import { varHover } from "@/components/animate";
 import { useSnackbar } from "@/components/snackbar";
 import CustomPopover, { usePopover } from "@/components/custom-popover";
+import { invalidateCaching } from "@/actions/cache-invalidation";
 
 // ----------------------------------------------------------------------
 
@@ -75,7 +76,8 @@ function AccountPopoverContent() {
     try {
       await logout();
       popover.onClose();
-      window.location.reload();
+      router.push(paths.home);
+      invalidateCaching(paths.home);
     } catch (error) {
       console.error(error);
       enqueueSnackbar("Unable to logout!", { variant: "error" });
