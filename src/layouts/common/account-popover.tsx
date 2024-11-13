@@ -31,6 +31,10 @@ const OPTIONS = [
     linkTo: paths.home,
   },
   {
+    label: "favorite",
+    linkTo: paths.favProducts,
+  },
+  {
     label: "orders",
     linkTo: paths.orders,
   },

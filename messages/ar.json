@@ -66,6 +66,7 @@
   "Navigation": {
     "home": "الرئيسية",
     "orders": "طلباتي",
+    "favorite": "المنتجات المفضلة",
     "logout": "تسجيل خروج"
   },
   "Pages": {

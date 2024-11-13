@@ -13,6 +13,7 @@ export const endpoints = {
     subCategories: (categoryId: string) =>
       `category/${categoryId}/subcategories`,
     products: "product/all-products-for-client",
+    favoriteList: "product/all-Product-favorite",
     singleProduct: "product/single-product-client",
     brands: "product/get-brands-client",
     offers: "product/all-products-offers-for-client",

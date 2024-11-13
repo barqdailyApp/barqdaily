@@ -4,9 +4,12 @@ import { useState, useCallback } from "react";
 import { ButtonProps } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 
+import { paths } from "@/routes/paths";
+
 import { useAuthContext } from "@/auth/hooks";
 import { useNoGuestStore } from "@/contexts/no-guest";
 import { toggleFavorite } from "@/actions/products-actions";
+import { invalidateCaching } from "@/actions/cache-invalidation";
 
 import Iconify from "@/components/iconify";
 
@@ -33,6 +36,7 @@ export default function ProductFavButton({
         enqueueSnackbar(res.error, { variant: "error" });
       } else {
         setFavState((prev) => !prev);
+        invalidateCaching(paths.favProducts);
       }
       setLoading(false);
     })();

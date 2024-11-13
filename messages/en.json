@@ -66,6 +66,7 @@
   "Navigation": {
     "home": "Home",
     "orders": "My Orders",
+    "favorite": "Favorite Products",
     "logout": "Logout"
   },
   "Pages": {
