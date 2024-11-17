@@ -95,6 +95,34 @@ export async function fetchProductsByBrand(brandId: string, page = 1) {
   };
 }
 
+export async function fetchFavoriteProducts(page = 1) {
+  const sectionRes = await fetchSections();
+  if ("error" in sectionRes) {
+    return sectionRes;
+  }
+
+  const user = JSON.parse(cookies().get(COOKIES_KEYS.user)?.value || "{}");
+
+  const searchParams = new URLSearchParams({
+    section_id: sectionRes[0]?.id,
+    user_id: user.id || "",
+    page: String(page),
+    limit: String(10),
+  });
+
+  const res = await getData<{ data: Product[]; meta: { itemCount: number } }>(
+    `${endpoints.products.favoriteList}?${searchParams.toString()}`
+  );
+
+  if ("error" in res) {
+    return res;
+  }
+  return {
+    items: res?.data?.data,
+    pagesCount: Math.ceil((res?.data?.meta?.itemCount || 0) / 10),
+  };
+}
+
 export async function fetchOffers(page = 1) {
   const searchParams = new URLSearchParams({
     page: String(page),

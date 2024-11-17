@@ -1,9 +1,10 @@
+import RouterLink from "next/link";
 import { useTranslations } from "next-intl";
 import { useFormContext } from "react-hook-form";
 
 import { Link, Stack, Checkbox, Typography } from "@mui/material";
 
-import { RouterLink } from "@/routes/components";
+import { paths } from "@/routes/paths";
 
 export default function AuthAgreePolicyField({
   name = "agree",
@@ -33,20 +34,22 @@ export default function AuthAgreePolicyField({
         {t.rich("Pages.Auth.policies", {
           terms: (chunks) => (
             <Link
-              href="#"
+              href={paths.static.terms}
               color="text.primary"
               fontWeight="bold"
               component={RouterLink}
+              target="_blank"
             >
               {chunks}
             </Link>
           ),
           privacy: (chunks) => (
             <Link
-              href="#"
+              href={paths.static.privacy}
               color="text.primary"
               fontWeight="bold"
               component={RouterLink}
+              target="_blank"
             >
               {chunks}
             </Link>

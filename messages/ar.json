@@ -66,6 +66,7 @@
   "Navigation": {
     "home": "الرئيسية",
     "orders": "طلباتي",
+    "favorite": "المنتجات المفضلة",
     "logout": "تسجيل خروج"
   },
   "Pages": {
@@ -265,8 +266,8 @@
         "jawali-transaction-number": "كود الشراء من تطبيق جوالي",
         "jaib-description": "يرجي إدخال كود الشراء الذي تم توليده من تطبيق جيب",
         "jaib-transaction-number": "كود الشراء من تطبيق جيب",
-        "notes": "ملاحظات عن الطلب",
-        "terms": "اوافق على <link>الشروط والاحكام</link>"
+        "notes": "ملاحظات عن الطلب",=
+        "policy": "اوافق على <link>سياسة الإرجاع</link>"=
       },
       "Done": {
         "title": "تم الطلب",
@@ -285,6 +286,12 @@
       "message": "انت حتاج تسجيل الدخول اولا.",
       "login": "تسجيل الدخول",
       "browsing": "مواصلة التصفح"
+    },
+    "LegalPages": {
+      "ABOUT_US": "معلومات عنا",
+      "TERMS_AND_CONDITIONS": "الشروط والاحكام",
+      "PRIVACY_POLICY": "سياسة الخصوصية",
+      "RETURN_POLICY": "سياسة الإسترجاع"
     }
   }
 }

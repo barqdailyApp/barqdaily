@@ -11,8 +11,15 @@ export const paths = {
   },
   home: "/",
   products: "/product",
+  favProducts: "/favorite",
   brands: "/brand",
   offers: "/offers",
   orders: "/orders",
   cart: "/cart",
+  static: {
+    privacy: "/legal/privacy-policy",
+    terms: "/legal/terms-and-conditions",
+    return: "/legal/return-policy",
+    about: "/about-us",
+  },
 };

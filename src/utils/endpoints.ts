@@ -13,6 +13,7 @@ export const endpoints = {
     subCategories: (categoryId: string) =>
       `category/${categoryId}/subcategories`,
     products: "product/all-products-for-client",
+    favoriteList: "product/all-Product-favorite",
     singleProduct: "product/single-product-client",
     brands: "product/get-brands-client",
     offers: "product/all-products-offers-for-client",
@@ -34,6 +35,9 @@ export const endpoints = {
     fetchPromoCode: (code: string, paymentMethodId: string) =>
       `promo-code/valid/{id}?code=${code}&payment_method_id=${paymentMethodId}`,
     createOrder: "order",
+  },
+  staticPage: {
+    root: (static_page_type: string) => `static-page/${static_page_type}`,
   },
   address: {
     root: "addresses",
