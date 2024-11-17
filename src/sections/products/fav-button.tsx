@@ -4,6 +4,7 @@ import { useState, useCallback } from "react";
 import { ButtonProps } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 
+
 import { paths } from "@/routes/paths";
 
 import { useAuthContext } from "@/auth/hooks";
@@ -35,7 +36,7 @@ export default function ProductFavButton({
       if ("error" in res) {
         enqueueSnackbar(res.error, { variant: "error" });
       } else {
-        setFavState((prev) => !prev);
+        setFavState((prev) => !prev
         invalidateCaching(paths.favProducts);
       }
       setLoading(false);
