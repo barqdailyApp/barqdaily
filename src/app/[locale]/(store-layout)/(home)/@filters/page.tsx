@@ -18,8 +18,8 @@ export default async function Page() {
 
   return (
     <>
-      <BrandsSwiper brands={brands} />
-      <CategoriesList categories={categories} />
+      {brands.length > 0 && <BrandsSwiper brands={brands} />}
+      {categories.length > 0 && <CategoriesList categories={categories} />}
     </>
   );
 }
