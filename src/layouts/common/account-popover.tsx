@@ -53,11 +53,17 @@ export default function AccountPopover() {
 
   if (authenticated) return <AccountPopoverContent />;
 
+  const searchParams = new URLSearchParams({
+    returnTo: window.location.pathname,
+  }).toString();
+
+  const loginHref = `${paths.auth.jwt.login}?${searchParams}`;
+
   return (
     <Button
       variant="outlined"
       LinkComponent={RouterLink}
-      href={paths.auth.jwt.login}
+      href={loginHref}
       sx={{ flexShrink: 0 }}
     >
       {t("Global.Label.login")}
