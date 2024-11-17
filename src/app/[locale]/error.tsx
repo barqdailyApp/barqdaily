@@ -8,6 +8,6 @@ export const metadata = {
   title: "Error page!",
 };
 
-export default function NotFoundPage() {
-  return <View500 />;
+export default function NotFoundPage({ error }: { error: Error }) {
+  return <View500 error={error.message} />;
 }
