@@ -1,5 +1,7 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 import {
   Button,
   Dialog,
@@ -18,7 +20,6 @@ import { GoogleMap } from "@/components/map";
 
 import { Position } from "@/types/map";
 import { Driver } from "@/types/order-details";
-import { useTranslations } from "next-intl";
 
 const buttonAttributes: Partial<ButtonProps> = {
   color: "primary",
