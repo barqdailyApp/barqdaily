@@ -16,9 +16,9 @@ function isFormData(value: unknown) {
   return value instanceof FormData;
 }
 const commonErrorMessages = new Map([
-  ["404", "ERROR.REQUEST_URL_NO_FOUND"],
-  ["500", "ERROR.INTERNAL_SERVER_ERROR"],
-  ["503", "ERROR.SERVICE_IS_NOT_AVAILABLE"],
+  ["404", "Global.Error.Server.NOT_FOUND"],
+  ["500", "Global.Error.Server.INTERNAL_SERVER_ERROR"],
+  ["503", "Global.Error.Server.SERVICE_IS_NOT_AVAILABLE"],
 ]);
 const commonErrorStatus = new Set([500, 503, 404]);
 // generic function to make API requests
@@ -63,7 +63,7 @@ async function apiRequest<TResponse, TBody = undefined>(
 
     // UN-AUTHORIZED
     if (response.status === 401) {
-      return errorObject("ERROR.UNAUTHORIZED", response.status);
+      return errorObject("Global.Error.Server.UNAUTHORIZED", response.status);
     }
 
     if (commonErrorStatus.has(response.status)) {
@@ -92,7 +92,7 @@ async function apiRequest<TResponse, TBody = undefined>(
     if (!response.ok) {
       const errMsg = Array.isArray(responseData?.message)
         ? responseData?.message.join(" | ")
-        : responseData?.message || "ERROR.AN_ERROR_OCCURRED";
+        : responseData?.message || "Global.Error.Server.AN_ERROR_OCCURRED";
       const resCode = responseData?.code || null;
       const resDetails = responseData?.details || null;
       const resData = responseData?.data || {};
@@ -117,7 +117,7 @@ async function apiRequest<TResponse, TBody = undefined>(
     const errMsg =
       error instanceof Error
         ? error.message
-        : "ERROR.AN_UNEXPECTED_ERROR_OCCURRED";
+        : "Global.Error.Server.AN_UNEXPECTED_ERROR_OCCURRED";
     return errorObject(errMsg, 500);
   }
 }
