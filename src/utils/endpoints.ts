@@ -45,13 +45,13 @@ export const endpoints = {
     setFavorite: (id: string) => `addresses/${id}/set-favorite`,
   },
   banars: "banar/guest",
-  orders: "order/client-orders",
-  singleOrder: (order_id: string) => `order/single-order/${order_id}`,
-  singleShipment: (shipment_id: string) =>
-    `order/single-shipment/${shipment_id}`,
-  cancelShipment: (shipment_id: string) =>
-    `shipment/cancel-shipment/${shipment_id}`,
-  getReasons: (type: string) => `reason/all?type=${type}`,
-  addShipmentFeedback: "shipment/add-shipment-feedback",
-  returnOrder: (order_id: string) => `order/return-order/${order_id}`,
+  orders: {
+    single: (order_id: string) => `order/single-order/${order_id}`,
+    list: "order/client-orders",
+    shipment: (shipment_id: string) => `order/single-shipment/${shipment_id}`,
+    addFeedback: "shipment/add-shipment-feedback",
+    reasons: (type: string) => `reason/all?type=${type}`,
+    cancel: (shipment_id: string) => `shipment/cancel-shipment/${shipment_id}`,
+    return: (order_id: string) => `order/return-order/${order_id}`,
+  },
 };
