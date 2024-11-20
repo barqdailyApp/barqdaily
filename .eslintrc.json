@@ -14,7 +14,6 @@
     "next/core-web-vitals",
     "airbnb",
     "airbnb-typescript",
-    "airbnb/hooks",
     "prettier"
   ],
   "parser": "@typescript-eslint/parser",
