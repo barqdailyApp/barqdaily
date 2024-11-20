@@ -54,7 +54,7 @@ export default function AccountPopover() {
   if (authenticated) return <AccountPopoverContent />;
 
   const searchParams = new URLSearchParams({
-    returnTo: window.location.pathname,
+    returnTo: typeof window !== "undefined" ? window.location.pathname : "",
   }).toString();
 
   const loginHref = `${paths.auth.jwt.login}?${searchParams}`;
