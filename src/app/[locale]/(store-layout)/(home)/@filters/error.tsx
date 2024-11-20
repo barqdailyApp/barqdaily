@@ -1,14 +1,14 @@
 "use client";
 
-import { useSnackbar } from "notistack";
 import { useEffect } from "react";
+import { useSnackbar } from "notistack";
 
 export default function Error({ error }: { error: Error }) {
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     if (error.message) enqueueSnackbar(error.message, { variant: "error" });
-  }, [error.message]);
+  }, [enqueueSnackbar, error.message]);
 
   return null;
 }

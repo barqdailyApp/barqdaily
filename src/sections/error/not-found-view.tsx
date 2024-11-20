@@ -4,6 +4,7 @@ import { m } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 import Button from "@mui/material/Button";
+import { Container } from "@mui/material";
 import Typography from "@mui/material/Typography";
 
 import { RouterLink } from "@/routes/components";
@@ -12,7 +13,6 @@ import CompactLayout from "@/layouts/compact";
 import { PageNotFoundIllustration } from "@/assets/illustrations";
 
 import { varBounce, MotionContainer } from "@/components/animate";
-import { Container } from "@mui/material";
 
 // ----------------------------------------------------------------------
 

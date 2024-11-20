@@ -1,9 +1,12 @@
 "use client";
 
 import { m } from "framer-motion";
+import { useEffect } from "react";
+import { useSnackbar } from "notistack";
 import { useTranslations } from "next-intl";
 
 import Button from "@mui/material/Button";
+import { Container } from "@mui/material";
 import Typography from "@mui/material/Typography";
 
 import { RouterLink } from "@/routes/components";
@@ -12,9 +15,6 @@ import CompactLayout from "@/layouts/compact";
 import { SeverErrorIllustration } from "@/assets/illustrations";
 
 import { varBounce, MotionContainer } from "@/components/animate";
-import { Container } from "@mui/material";
-import { useSnackbar } from "notistack";
-import { useEffect } from "react";
 
 // ----------------------------------------------------------------------
 
@@ -25,7 +25,7 @@ export default function Page500({ error }: { error?: string }) {
 
   useEffect(() => {
     if (error) enqueueSnackbar(error, { variant: "error" });
-  }, [error]);
+  }, [enqueueSnackbar, error]);
 
   return (
     <CompactLayout>

@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
 import { Box, Card, Stack, Typography, CardContent } from "@mui/material";
 
@@ -11,7 +11,7 @@ import { Driver } from "@/types/order-details";
 import DriverActions from "./driver-actions";
 
 export async function OrderDriverInfoCard({ driver }: { driver: Driver }) {
-  const t = useTranslations("Pages.Orders");
+  const t = await getTranslations("Pages.Orders");
   const { dir } = await getCurrentLocale();
 
   return (
