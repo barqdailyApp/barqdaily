@@ -24,6 +24,7 @@ import Iconify from "@/components/iconify";
 import { varHover } from "@/components/animate";
 import { useSnackbar } from "@/components/snackbar";
 import CustomPopover, { usePopover } from "@/components/custom-popover";
+import { useEffect, useMemo, useState } from "react";
 
 // ----------------------------------------------------------------------
 
@@ -51,11 +52,17 @@ export default function AccountPopover() {
   const t = useTranslations();
   const { authenticated } = useAuthContext();
 
-  if (authenticated) return <AccountPopoverContent />;
+  const [searchParams, setSearchParams] = useState("");
 
-  const searchParams = new URLSearchParams({
-    returnTo: typeof window !== "undefined" ? window.location.pathname : "",
-  }).toString();
+  useEffect(() => {
+    setSearchParams(
+      new URLSearchParams({
+        returnTo: window.location.pathname,
+      }).toString()
+    );
+  }, []);
+
+  if (authenticated) return <AccountPopoverContent />;
 
   const loginHref = `${paths.auth.jwt.login}?${searchParams}`;
 
