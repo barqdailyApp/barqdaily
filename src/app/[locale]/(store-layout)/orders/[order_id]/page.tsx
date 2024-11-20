@@ -12,14 +12,14 @@ export default async function Page({
   params: { order_id: string };
 }) {
   const order = await getData<FullOrder>(
-    endpoints.singleOrder(params.order_id)
+    endpoints.orders.single(params.order_id)
   );
   if ("error" in order) {
     throw new Error(order.error);
   }
 
   const shipment = await getData<SingleShipment>(
-    endpoints.singleShipment(order.data.shipments.id)
+    endpoints.orders.shipment(order.data.shipments.id)
   );
   if ("error" in shipment) {
     throw new Error(shipment.error);

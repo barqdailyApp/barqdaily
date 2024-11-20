@@ -9,7 +9,7 @@ export const fetchCancelReasons = async (): Promise<
   { data: CancelReason[] } | { error: string }
 > => {
   const reasons = await getData<CancelReason[]>(
-    endpoints.getReasons("CANCEL_ORDER")
+    endpoints.orders.reasons("CANCEL_ORDER")
   );
 
   return reasons;
@@ -18,7 +18,7 @@ export const fetchReturnReasons = async (): Promise<
   { data: CancelReason[] } | { error: string }
 > => {
   const reasons = await getData<CancelReason[]>(
-    endpoints.getReasons("RETURN_ORDER")
+    endpoints.orders.reasons("RETURN_ORDER")
   );
 
   return reasons;
@@ -32,7 +32,7 @@ export const cancelShipment = async ({
   reasonId: string;
 }): Promise<{ data: string } | { error: string }> => {
   const res = await postData<string, { reason_id: string }>(
-    endpoints.cancelShipment(shipmentId),
+    endpoints.orders.cancel(shipmentId),
     { reason_id: reasonId }
   );
 
@@ -50,7 +50,7 @@ export const addShipmentFeedback = async (
   body: Feedback
 ): Promise<{ data: string } | { error: string }> => {
   const res = await postData<string, Feedback>(
-    endpoints.addShipmentFeedback,
+    endpoints.orders.addFeedback,
     body
   );
 
@@ -74,7 +74,7 @@ export const returnOrder = async ({
   body: ReturnOrderBody;
 }): Promise<{ data: string } | { error: string }> => {
   const res = await postData<string, ReturnOrderBody>(
-    endpoints.returnOrder(orderId),
+    endpoints.orders.return(orderId),
     body
   );
 

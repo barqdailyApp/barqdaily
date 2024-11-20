@@ -18,7 +18,7 @@ export default async function Page({ searchParams: { status, page } }: Props) {
     ...(status ? { status } : {}),
   });
   const orders = await getData<Response>(
-    `${endpoints.orders}?${queries.toString()}`
+    `${endpoints.orders.list}?${queries.toString()}`
   );
   if ("error" in orders) {
     throw new Error(orders.error);
