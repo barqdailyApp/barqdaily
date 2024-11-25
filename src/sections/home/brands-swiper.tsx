@@ -65,13 +65,12 @@ export default function BrandsSwiper({ brands }: Props) {
         }}
       >
         {brands?.map((item, index) => (
-          <SwiperSlide key={index}>
+          <SwiperSlide key={index} style={{ paddingBlock: ".75rem" }}>
             <Card
               sx={{
                 objectFit: "cover",
                 width: "120px",
                 height: "120px",
-                borderRadius: "50%",
                 cursor: "pointer",
               }}
               src={item.logo}
