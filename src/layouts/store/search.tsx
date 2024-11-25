@@ -27,7 +27,8 @@ export default function StoreSearch() {
   const { createQueryString } = useQueryString();
 
   const [options, setOptions] = useState<Record<"name" | "id", string>[]>([]);
-  const search = searchParams.get("search") || "";
+  const initialSearch = searchParams.get("search") || "";
+  const [search, setSearch] = useState(initialSearch);
   const debouncedSearch = useDebounce(search, 500);
 
   useEffect(() => {
@@ -70,9 +71,13 @@ export default function StoreSearch() {
       renderInput={(params) => (
         <SearchInput
           {...params}
-          onChange={(e) =>
-            createQueryString([{ name: "search", value: e.target.value }])
-          }
+          onChange={(e) => {
+            setSearch(e.target.value);
+            createQueryString(
+              [{ name: "search", value: e.target.value }],
+              true
+            );
+          }}
         />
       )}
       PopperComponent={(props: {
