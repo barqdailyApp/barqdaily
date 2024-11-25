@@ -39,6 +39,9 @@ export default function CategoriesList({ categories }: Props) {
                 border: `1px solid ${theme.palette.primary.main}`,
                 backgroundColor: theme.palette.primary.lighter,
                 position: "relative",
+                minHeight: "100%",
+                display: "grid",
+                alignContent: "space-between",
               })}
             >
               <Box

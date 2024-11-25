@@ -8,6 +8,7 @@ import {
   Stack,
   styled,
   CardMedia,
+  CardProps,
   Typography,
   CardContent,
 } from "@mui/material";
@@ -39,7 +40,11 @@ const StyledCard = styled(Card)(({ theme }) => ({
   },
 }));
 
-export function ProductCard({ product, href }: Props) {
+export function ProductCard({
+  product,
+  href,
+  ...cardProps
+}: Props & CardProps) {
   const products = useCartStore((state) => state.products);
   const isProductInCart = !!products.find(
     (item) => item.product_id === product.product_id
@@ -58,7 +63,10 @@ export function ProductCard({ product, href }: Props) {
   const currency = useCurrency();
 
   return (
-    <StyledCard className={isProductInCart ? "selected" : ""}>
+    <StyledCard
+      {...cardProps}
+      className={`${cardProps.className || ""} ${isProductInCart ? "selected" : ""}`}
+    >
       <Box
         className="card-clickable-layer"
         aria-hidden

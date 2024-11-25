@@ -29,6 +29,7 @@ export default function DailyOffers({ offers }: { offers: Offer[] }) {
           <ProductCard
             product={item}
             href={`${paths.products}/${item.product_id}`}
+            sx={{ minHeight: "100%" }}
           />
         </Grid>
       ))}
