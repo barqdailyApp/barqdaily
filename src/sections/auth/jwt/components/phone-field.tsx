@@ -48,6 +48,7 @@ export default function AuthPhoneField({
           ),
           inputProps: {
             dir: "ltr",
+            inputMode: "numeric",
           },
         }}
       />

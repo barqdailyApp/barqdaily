@@ -143,6 +143,7 @@ export default function LoginOTPStep({
                   ref: (el: HTMLInputElement) => {
                     inputsRef.current[index] = el;
                   },
+                  inputMode: "numeric",
                 }}
               />
             ))}
