@@ -61,7 +61,7 @@ export default function SubCategoriesFilter({
           onClick={(e) => handleChange(e, item.id)}
           key={index}
           value={item.id}
-          sx={{ mx: 1 }}
+          sx={{ mx: 1, flexShrink: 0 }}
         >
           {item.name}
         </Button>
