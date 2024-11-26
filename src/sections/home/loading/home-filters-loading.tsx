@@ -7,7 +7,7 @@ export default function HomeFiltersLoading() {
         {[...Array(3)].map((_, index) => (
           <Skeleton
             key={index}
-            variant="circular"
+            variant="rounded"
             width={120}
             sx={{ aspectRatio: "1/1", height: "auto" }}
           />

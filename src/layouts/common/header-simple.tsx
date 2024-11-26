@@ -13,28 +13,10 @@ import { useOffSetTop } from "@/hooks/use-off-set-top";
 import Iconify from "@/components/iconify";
 
 import { HEADER } from "../config-layout";
+import { SOCIAL_LINKS } from "../config-info";
 import LanguagePopover from "./language-popover";
 
 // ----------------------------------------------------------------------
-
-const socials = [
-  {
-    name: "facebook",
-    icon: "uil:facebook",
-    link: "#",
-  },
-  {
-    name: "x.com",
-    icon: "pajamas:twitter",
-    link: "#",
-  },
-  { name: "youtube", icon: "mdi:youtube", link: "#" },
-  {
-    name: "instagram",
-    icon: "mdi:instagram",
-    link: "#",
-  },
-];
 
 export default function HeaderSimple() {
   const theme = useTheme();
@@ -63,7 +45,7 @@ export default function HeaderSimple() {
           }}
         >
           <Stack direction="row" spacing={0.5}>
-            {socials.map((item) => (
+            {SOCIAL_LINKS.map((item) => (
               <IconButton
                 key={item.name}
                 LinkComponent={RouterLink}

@@ -79,9 +79,11 @@ export function ProductCard({
       <CardMedia
         src={product.product_logo}
         alt={product.product_name}
-        height={180}
+        // height={180}
         sx={{
-          height: { xs: "140px", sm: "250px" },
+          // height: { xs: "140px", sm: "250px" },
+          height: "auto",
+          aspectRatio: "1/1",
           objectFit: "cover",
           cursor: "pointer",
         }}
