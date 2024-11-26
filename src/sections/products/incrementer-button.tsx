@@ -2,9 +2,9 @@ import { useSnackbar } from "notistack";
 import { useTranslations } from "next-intl";
 import { forwardRef, useCallback } from "react";
 
-import { Box, ButtonProps } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import Stack, { StackProps } from "@mui/material/Stack";
+import { Box, ButtonProps, useMediaQuery } from "@mui/material";
 
 import { useAuthContext } from "@/auth/hooks";
 import { useCartStore } from "@/contexts/cart-store";
@@ -44,6 +44,7 @@ const IncrementerButton = forwardRef<HTMLDivElement, Props>(
     const { enqueueSnackbar } = useSnackbar();
     const { authenticated } = useAuthContext();
     const { setOpen } = useNoGuestStore();
+    const isMd = useMediaQuery("(min-width:450px)");
     const { loading, setLoading, products, setProduct, removeProduct } =
       useCartStore();
 
@@ -116,12 +117,16 @@ const IncrementerButton = forwardRef<HTMLDivElement, Props>(
         <LoadingButton
           variant="contained"
           color="primary"
-          startIcon={<Iconify icon="bxs:cart-alt" />}
+          startIcon={isMd && <Iconify icon="bxs:cart-alt" />}
           onClick={() => (!authenticated ? setOpen(true) : handleAdd())}
           {...addButtonProps}
           loading={loading}
         >
-          {t("Pages.Home.Product.add_to_cart")}
+          {isMd ? (
+            t("Pages.Home.Product.add_to_cart")
+          ) : (
+            <Iconify icon="fluent-emoji-high-contrast:plus" />
+          )}
         </LoadingButton>
       );
 
