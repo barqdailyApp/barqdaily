@@ -6,26 +6,9 @@ import { Box, Container, IconButton, Typography } from "@mui/material";
 
 import Iconify from "@/components/iconify";
 
-// ----------------------------------------------------------------------
+import { SOCIAL_LINKS } from "../config-info";
 
-const socials = [
-  {
-    name: "facebook",
-    icon: "uil:facebook",
-    link: "#",
-  },
-  {
-    name: "x.com",
-    icon: "pajamas:twitter",
-    link: "#",
-  },
-  { name: "youtube", icon: "mdi:youtube", link: "#" },
-  {
-    name: "instagram",
-    icon: "mdi:instagram",
-    link: "#",
-  },
-];
+// ----------------------------------------------------------------------
 
 export default function Copyrights() {
   const t = useTranslations("Global.Footer");
@@ -43,7 +26,7 @@ export default function Copyrights() {
             {t("copyright")}
           </Typography>
           <Stack direction="row" spacing={0.5}>
-            {socials.map((item) => (
+            {SOCIAL_LINKS.map((item) => (
               <IconButton
                 key={item.name}
                 href={item.link}
