@@ -1,16 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
-import { getTranslations } from "next-intl/server";
+import { useTranslations } from "next-intl";
 
 import { Box, Stack, Container, Typography } from "@mui/material";
 
-import { getCurrentLocale } from "@/utils/get-locale";
-
 import { APP_LINKS, CONTACT_INFO } from "../config-info";
 
-export default async function Footer() {
-  const t = await getTranslations("Global.Footer");
-  const { dir } = await getCurrentLocale();
+export default function Footer() {
+  const t = useTranslations("Global.Footer");
 
   const renderContact = (
     <Box>
@@ -25,14 +22,12 @@ export default async function Footer() {
       {CONTACT_INFO.map((item, index) => (
         <Typography
           dir="ltr"
-          sx={
-            dir === "rtl"
-              ? {
-                  width: { sm: "fit-content" },
-                  marginInlineStart: { sm: "auto" },
-                }
-              : {}
-          }
+          sx={{
+            "[dir='rtl'] &": {
+              width: { sm: "fit-content" },
+              marginInlineStart: { sm: "auto" },
+            },
+          }}
           key={index}
         >
           {item}
