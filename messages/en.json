@@ -75,6 +75,7 @@
     "home": "Home",
     "orders": "My Orders",
     "favorite": "Favorite Products",
+    "addresses": "My Addresses",
     "logout": "Logout"
   },
   "Pages": {
