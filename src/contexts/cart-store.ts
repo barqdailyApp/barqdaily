@@ -26,7 +26,6 @@ export interface PromoCode {
 }
 
 interface InitialState {
-  loading: boolean;
   promocode: PromoCode | null;
   products: CartProduct[];
   productsQuantity: number;
@@ -36,7 +35,6 @@ interface InitialState {
 
 interface CartStateActions {
   initCart: VoidFunction;
-  setLoading: (loading: boolean) => void;
   setPromocode: (promocode: PromoCode | null) => void;
   setProduct: (product: CartProduct) => void;
   removeProduct: (id: string) => void;
@@ -45,8 +43,6 @@ interface CartStateActions {
 }
 
 const initialState: InitialState = {
-  loading: false,
-
   promocode: null,
 
   products: [],
@@ -60,7 +56,6 @@ export const useCartStore = create<InitialState & CartStateActions>()(
   (set) => ({
     ...initialState,
     initCart: () => set({ ...initialState }),
-    setLoading: (loading) => set({ loading }),
     setPromocode: (promocode) => set({ promocode }),
     setProduct: (newProduct) =>
       set((state) => {
