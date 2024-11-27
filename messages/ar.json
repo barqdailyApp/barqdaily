@@ -228,6 +228,7 @@
       "Summary": {
         "title": "ملخص الطلب",
         "products-total": "إجمالي سعر المنتجات",
+        "min-order-price": "الحد الادنى لسعر الطلب",
         "shipping": "رسوم التوصيل",
         "delivery-type": "نوع التوصيل",
         "delivery-day": "يوم التوصيل",

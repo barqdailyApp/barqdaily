@@ -30,6 +30,7 @@ interface InitialState {
   products: CartProduct[];
   productsQuantity: number;
   totalPrice: number;
+  minOrderPrice: number;
   deliveryFee: number;
 }
 
@@ -39,16 +40,16 @@ interface CartStateActions {
   setProduct: (product: CartProduct) => void;
   removeProduct: (id: string) => void;
   initProducts: (products: CartProduct[]) => void;
+  setMinOrderPrice: (price: number) => void;
   setDeliveryFee: (fee: number) => void;
 }
 
 const initialState: InitialState = {
   promocode: null,
-
   products: [],
   productsQuantity: 0,
   totalPrice: 0,
-
+  minOrderPrice: 0,
   deliveryFee: 0,
 };
 
@@ -108,6 +109,7 @@ export const useCartStore = create<InitialState & CartStateActions>()(
           0
         ),
       }),
+    setMinOrderPrice: (price) => set({ minOrderPrice: price }),
     setDeliveryFee: (fee) => set({ deliveryFee: fee }),
   })
 );

@@ -13,7 +13,7 @@ import { fetchPayments, fetchCartProducts } from "@/actions/cart-actions";
 export default function InitCart() {
   const { authenticated } = useAuthContext();
   const { enqueueSnackbar } = useSnackbar();
-  const { initProducts, setDeliveryFee } = useCartStore();
+  const { initProducts, setDeliveryFee, setMinOrderPrice } = useCartStore();
   const { setAddresses, setDeliveryTypes, setPayments } = usecheckoutStore();
 
   useEffect(() => {
@@ -32,6 +32,7 @@ export default function InitCart() {
       if ("error" in sectionRes) {
         enqueueSnackbar(sectionRes.error, { variant: "error" });
       } else {
+        setMinOrderPrice(Number(sectionRes[0].min_order_price));
         setDeliveryFee(Number(sectionRes[0].delivery_price));
         setDeliveryTypes(sectionRes[0].delivery_type_list as "FAST"[]);
       }
@@ -59,6 +60,7 @@ export default function InitCart() {
     setAddresses,
     setDeliveryFee,
     setDeliveryTypes,
+    setMinOrderPrice,
     setPayments,
   ]);
 

@@ -227,6 +227,7 @@
       "Summary": {
         "title": "Order Summary",
         "products-total": "Products Total",
+        "min-order-price": "Min Order Price",
         "shipping": "Delivery Fee",
         "delivery-type": "Delivery Type",
         "delivery-day": "Delivery Day",
