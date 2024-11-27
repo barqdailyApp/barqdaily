@@ -60,9 +60,6 @@ export default function SingleProductView({
         )}{" "}
         {currency(finalPrice)}
       </Typography>
-      <Typography fontWeight={700} component="p">
-        {t("Pages.Home.Product.description")}
-      </Typography>
       <Typography color="text.disabled">
         {product.product_description}
       </Typography>

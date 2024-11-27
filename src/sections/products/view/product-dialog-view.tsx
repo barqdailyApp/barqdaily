@@ -140,9 +140,6 @@ function ProductDialogContent({
         )}{" "}
         {currency(finalPrice)}
       </Typography>
-      <Typography fontWeight={700} component="p">
-        {t("Pages.Home.Product.description")}
-      </Typography>
       <DialogContentText>{product.product_description}</DialogContentText>
     </DialogContent>
   );
