@@ -103,7 +103,7 @@
       "register_title": "Create an Account",
       "otp_title": "Confirm your number",
       "otp_subtitle": "Please enter the code we sent to your WhatsApp number",
-      "policies": "Agree with our <terms>terms</terms> and <privacy>privacy policy</privacy>",
+      "policies": "Agree with our <terms>terms and conditions</terms>, <privacy>privacy policy</privacy> and <return>return policy</return>",
       "redirect_to_register": "I don't have an account. <link>Register</link>",
       "redirect_to_login": "Already have an account? <link>Sign in</link>",
       "otp_back": "Edit number",
