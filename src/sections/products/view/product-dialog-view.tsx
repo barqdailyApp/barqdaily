@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useSnackbar } from "notistack";
 import { useState, useEffect } from "react";
-import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 
 import {
@@ -88,7 +87,6 @@ function ProductDialogContent({
 }: {
   product: FullProduct;
 }) {
-  const t = useTranslations();
   const currency = useCurrency();
 
   const measurement =

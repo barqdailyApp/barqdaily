@@ -1,7 +1,5 @@
 "use client";
 
-import { useTranslations } from "next-intl";
-
 import { Box, Stack, Container, Typography } from "@mui/material";
 
 import { useCurrency } from "@/utils/format-number";
@@ -23,7 +21,6 @@ export default function SingleProductView({
   product: { product, product_measurements },
 }: Props) {
   const currency = useCurrency();
-  const t = useTranslations("");
 
   const measurement =
     product_measurements.find((item) => item.is_main_unit) ||
