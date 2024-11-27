@@ -19,6 +19,7 @@ import { useCartStore } from "@/contexts/cart-store";
 import { usecheckoutStore } from "@/contexts/checkout-store";
 
 import Iconify from "@/components/iconify";
+import { LabelColor } from "@/components/label";
 
 import FinishButton from "./finish-button";
 import PromoCodeField from "./promo-code-field";
@@ -30,15 +31,26 @@ export default function OrderSumamry() {
   const formateDate = useFormatDate();
   const { step, setStep, choosenDeliveryType, day, timeSlot, choosenAddress } =
     usecheckoutStore();
-  const { totalPrice, deliveryFee, promocode } = useCartStore();
+  const { totalPrice, minOrderPrice, deliveryFee, promocode } = useCartStore();
 
   const fields = useMemo(() => {
     const discount = promocode?.discount || 0;
 
-    const items: { label?: string; value: React.ReactNode }[] = [
+    const items: {
+      label?: string;
+      value: React.ReactNode;
+      color?: LabelColor;
+      fontWeight?: number;
+    }[] = [
       {
         label: t("Summary.products-total"),
         value: currency(totalPrice),
+        color: totalPrice < minOrderPrice ? "error" : undefined,
+        fontWeight: totalPrice < minOrderPrice ? 700 : undefined,
+      },
+      {
+        label: t("Summary.min-order-price"),
+        value: currency(minOrderPrice),
       },
       ...(discount
         ? [{ label: t("PromoCode.label"), value: `${discount}%` }]
@@ -89,10 +101,13 @@ export default function OrderSumamry() {
     day,
     deliveryFee,
     formateDate,
-    promocode,
+    minOrderPrice,
+    promocode?.discount,
     step,
     t,
-    timeSlot,
+    timeSlot?.end_time,
+    timeSlot?.start_time,
+    timeSlot?.time_zone,
     totalPrice,
   ]);
 
@@ -110,7 +125,11 @@ export default function OrderSumamry() {
             <Typography variant="body2" fontWeight="500">
               {item.label}
             </Typography>
-            <Typography variant="subtitle2" fontWeight="400">
+            <Typography
+              variant="subtitle2"
+              fontWeight={item.fontWeight || "400"}
+              color={item.color}
+            >
               {item.value}
             </Typography>
           </Stack>
@@ -146,6 +165,7 @@ export default function OrderSumamry() {
           color="primary"
           onClick={() => setStep((prev) => prev + 1)}
           sx={{ flexGrow: 1 }}
+          disabled={totalPrice < minOrderPrice}
         >
           {t("Summary.next")}
         </Button>

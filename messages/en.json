@@ -1,4 +1,22 @@
 {
+  "Metadata": {
+    "Title": {
+      "default": "Barq Daily",
+      "main": "Barq Daily: Save your time and leave the grocery shopping on us",
+      "home": "Barq Daily: Save your time and leave the grocery shopping on us",
+      "brands": "Brands | Barq Daily",
+      "products": "Products | Barq Daily",
+      "offers": "Daily Offers | Barq Daily",
+      "cart": "My Cart | Barq Daily",
+      "orders": "My Orders | Barq Daily",
+      "favorites": "Favorite Products | Barq Daily",
+      "login": "Login | Barq Daily",
+      "register": "Create an Account | Barq Daily"
+    },
+    "Description": {
+      "main": "Save your time and leave the grocery shopping on us, pay the way you like. Cash on delivery or online through the purchase process, fast delivery within 40 minutes or you can schedule your order for the day and time that suitable for you."
+    }
+  },
   "Global": {
     "comma": ",",
     "Label": {
@@ -39,7 +57,7 @@
       "download": "Download the app",
       "download_ios": "Download from the App Store",
       "download_android": "Download from Google Play",
-      "copyright": "Elma © Copyright 2020, Inc. All rights reserved"
+      "copyright": "© {year} Barq Daily. All rights reserved."
     },
     "Date": {
       "sunday": "Sunday",
@@ -75,6 +93,7 @@
     "home": "Home",
     "orders": "My Orders",
     "favorite": "Favorite Products",
+    "addresses": "My Addresses",
     "logout": "Logout"
   },
   "Pages": {
@@ -103,7 +122,7 @@
       "register_title": "Create an Account",
       "otp_title": "Confirm your number",
       "otp_subtitle": "Please enter the code we sent to your WhatsApp number",
-      "policies": "Agree with our <terms>terms</terms> and <privacy>privacy policy</privacy>",
+      "policies": "Agree with our <terms>terms and conditions</terms>, <privacy>privacy policy</privacy> and <return>return policy</return>",
       "redirect_to_register": "I don't have an account. <link>Register</link>",
       "redirect_to_login": "Already have an account? <link>Sign in</link>",
       "otp_back": "Edit number",
@@ -226,6 +245,7 @@
       "Summary": {
         "title": "Order Summary",
         "products-total": "Products Total",
+        "min-order-price": "Min Order Price",
         "shipping": "Delivery Fee",
         "delivery-type": "Delivery Type",
         "delivery-day": "Delivery Day",

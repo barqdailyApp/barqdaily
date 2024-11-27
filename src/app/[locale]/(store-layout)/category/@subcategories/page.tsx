@@ -1,4 +1,7 @@
-import TAlert from "@/CustomSharedComponents/t-alert";
+import { getTranslations } from "next-intl/server";
+
+import { Alert } from "@mui/material";
+
 import { fetchSubCategories } from "@/actions/products-actions";
 
 import SubCategoriesFilter from "@/sections/products/subCategories-filter";
@@ -14,6 +17,8 @@ interface Props {
 export default async function Page({
   searchParams: { categoryId, subCategoryId },
 }: Props) {
+  const t = await getTranslations();
+
   if (!categoryId) {
     return <SubCategoriesLoading />;
   }
@@ -25,7 +30,7 @@ export default async function Page({
 
   if (subCategories.length === 0) {
     return (
-      <TAlert severity="error">Global.Error.no_subcategories_found</TAlert>
+      <Alert severity="error">{t("Global.Error.no_subcategories_found")}</Alert>
     );
   }
 

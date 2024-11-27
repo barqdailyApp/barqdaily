@@ -54,6 +54,17 @@ export default function AuthAgreePolicyField({
               {chunks}
             </Link>
           ),
+          return: (chunks) => (
+            <Link
+              href={paths.static.return}
+              color="text.primary"
+              fontWeight="bold"
+              component={RouterLink}
+              target="_blank"
+            >
+              {chunks}
+            </Link>
+          ),
         })}
       </Typography>
     </Stack>

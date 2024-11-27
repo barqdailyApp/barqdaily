@@ -2,6 +2,7 @@
 
 import { m } from "framer-motion";
 import { useTranslations } from "next-intl";
+import { useState, useEffect } from "react";
 
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
@@ -17,6 +18,8 @@ import { paths } from "@/routes/paths";
 import { useRouter } from "@/routes/hooks";
 import { RouterLink } from "@/routes/components";
 
+import { useBoolean } from "@/hooks/use-boolean";
+
 import { useAuthContext } from "@/auth/hooks";
 import { useCartStore } from "@/contexts/cart-store";
 
@@ -24,11 +27,15 @@ import Iconify from "@/components/iconify";
 import { varHover } from "@/components/animate";
 import { useSnackbar } from "@/components/snackbar";
 import CustomPopover, { usePopover } from "@/components/custom-popover";
-import { useEffect, useMemo, useState } from "react";
+
+import AddressDialog from "@/sections/cart/address-select/address-dialog";
 
 // ----------------------------------------------------------------------
 
-const OPTIONS = [
+let OPTIONS: ({ label: string; icon: string } & (
+  | { linkTo: string }
+  | { onClick: VoidFunction }
+))[] = [
   {
     label: "home",
     linkTo: paths.home,
@@ -43,6 +50,11 @@ const OPTIONS = [
     label: "orders",
     linkTo: paths.orders,
     icon: "mynaui:package",
+  },
+  {
+    label: "addresses",
+    onClick: () => {},
+    icon: "mdi:house-edit-outline",
   },
 ];
 
@@ -82,9 +94,24 @@ function AccountPopoverContent() {
   const t = useTranslations("Navigation");
   const router = useRouter();
   const popover = usePopover();
+  const addressesDialog = useBoolean();
   const { enqueueSnackbar } = useSnackbar();
   const { user, logout } = useAuthContext();
   const { initCart } = useCartStore();
+
+  useEffect(() => {
+    OPTIONS = OPTIONS.map((option) => {
+      switch (option.label) {
+        case "addresses":
+          return {
+            ...option,
+            onClick: () => addressesDialog.onTrue(),
+          };
+        default:
+          return option;
+      }
+    });
+  }, [addressesDialog]);
 
   const handleLogout = async () => {
     try {
@@ -98,9 +125,11 @@ function AccountPopoverContent() {
     }
   };
 
-  const handleClickItem = (path: string) => {
+  const handleClickItem = (action: string | VoidFunction) => {
     popover.onClose();
-    router.push(path);
+    if (typeof action === "string") {
+      router.push(action);
+    } else action();
   };
 
   return (
@@ -155,7 +184,11 @@ function AccountPopoverContent() {
           {OPTIONS.map((option) => (
             <MenuItem
               key={option.label}
-              onClick={() => handleClickItem(option.linkTo)}
+              onClick={() =>
+                handleClickItem(
+                  "linkTo" in option ? option.linkTo : option.onClick
+                )
+              }
             >
               <ListItemIcon sx={{ minWidth: "20px !important" }}>
                 <Iconify
@@ -183,6 +216,13 @@ function AccountPopoverContent() {
           <ListItemText>{t("logout")}</ListItemText>
         </MenuItem>
       </CustomPopover>
+
+      {addressesDialog.value && (
+        <AddressDialog
+          open={addressesDialog.value}
+          onClose={addressesDialog.onFalse}
+        />
+      )}
     </>
   );
 }

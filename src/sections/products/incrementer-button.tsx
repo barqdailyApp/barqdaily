@@ -1,6 +1,6 @@
 import { useSnackbar } from "notistack";
 import { useTranslations } from "next-intl";
-import { forwardRef, useCallback } from "react";
+import { useState, forwardRef, useCallback } from "react";
 
 import LoadingButton from "@mui/lab/LoadingButton";
 import Stack, { StackProps } from "@mui/material/Stack";
@@ -45,8 +45,8 @@ const IncrementerButton = forwardRef<HTMLDivElement, Props>(
     const { authenticated } = useAuthContext();
     const { setOpen } = useNoGuestStore();
     const isMd = useMediaQuery("(min-width:450px)");
-    const { loading, setLoading, products, setProduct, removeProduct } =
-      useCartStore();
+    const { products, setProduct, removeProduct } = useCartStore();
+    const [loading, setLoading] = useState(false);
 
     const product = products.find((item) => item.product_id === product_id);
     const quantity = product?.quantity || 0;

@@ -32,6 +32,7 @@ export default function AuthPhoneField({
       <RHFTextField
         name={name}
         placeholder="123 456 789"
+        maxLength={9}
         InputProps={{
           [dir === "ltr" ? "startAdornment" : "endAdornment"]: (
             <Stack

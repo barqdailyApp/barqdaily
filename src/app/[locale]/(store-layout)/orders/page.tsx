@@ -1,5 +1,9 @@
+import { getTranslations } from "next-intl/server";
+
 import { endpoints } from "@/utils/endpoints";
 import { getData } from "@/utils/crud-fetch-api";
+
+import { LocaleType } from "@/i18n/config-locale";
 
 import OrderView from "@/sections/order/view/order-view";
 
@@ -29,4 +33,16 @@ export default async function Page({ searchParams: { status, page } }: Props) {
       pagesCount={Math.ceil(orders.data.meta.itemCount / 5)}
     />
   );
+}
+
+export async function generateMetadata({
+  params: { locale },
+}: {
+  params: { locale: LocaleType };
+}) {
+  const t = await getTranslations({ locale, namespace: "Metadata" });
+
+  return {
+    title: t("Title.orders"),
+  };
 }

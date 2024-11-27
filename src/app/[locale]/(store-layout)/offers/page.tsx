@@ -1,5 +1,8 @@
+import { getTranslations } from "next-intl/server";
+
 import { Alert } from "@mui/material";
 
+import { LocaleType } from "@/i18n/config-locale";
 import { fetchOffers } from "@/actions/products-actions";
 
 import ProductsListView from "@/sections/products/view/products-list-view";
@@ -21,4 +24,16 @@ export default async function Page({ searchParams: { page } }: Props) {
   return (
     <ProductsListView products={offers.items} pagesCount={offers.pagesCount} />
   );
+}
+
+export async function generateMetadata({
+  params: { locale },
+}: {
+  params: { locale: LocaleType };
+}) {
+  const t = await getTranslations({ locale, namespace: "Metadata" });
+
+  return {
+    title: t("Title.offers"),
+  };
 }

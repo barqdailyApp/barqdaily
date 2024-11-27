@@ -130,9 +130,10 @@ export default function LoginOTPStep({
                     textAlign: "center",
                   },
                   "& input": {
-                    fontSize: { xs: "2rem", sm: "4rem" },
-                    pt: { xs: ".25rem", sm: ".5rem" },
-                    pb: { xs: "1.25rem", sm: "2.5rem" },
+                    fontSize: "40px !important",
+                    padding: "0 !important",
+                    font: "large sans-serif",
+                    "-webkit-text-security": "disc",
                     boxSizing: "border-box",
                   },
                 }}

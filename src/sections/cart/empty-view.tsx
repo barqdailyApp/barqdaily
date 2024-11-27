@@ -9,7 +9,16 @@ export default function EmptyView() {
   const t = useTranslations("Pages.Cart.Empty");
 
   return (
-    <Container sx={{ placeItems: "center", py: 6, pb: 10 }}>
+    <Container
+      sx={{
+        display: "grid",
+        alignContent: "center",
+        justifyContent: "center",
+        minHeight: "100%",
+        py: 6,
+        pb: 10,
+      }}
+    >
       <Box
         bgcolor="background.neutral"
         maxWidth="100%"

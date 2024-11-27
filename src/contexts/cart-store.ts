@@ -26,33 +26,30 @@ export interface PromoCode {
 }
 
 interface InitialState {
-  loading: boolean;
   promocode: PromoCode | null;
   products: CartProduct[];
   productsQuantity: number;
   totalPrice: number;
+  minOrderPrice: number;
   deliveryFee: number;
 }
 
 interface CartStateActions {
   initCart: VoidFunction;
-  setLoading: (loading: boolean) => void;
   setPromocode: (promocode: PromoCode | null) => void;
   setProduct: (product: CartProduct) => void;
   removeProduct: (id: string) => void;
   initProducts: (products: CartProduct[]) => void;
+  setMinOrderPrice: (price: number) => void;
   setDeliveryFee: (fee: number) => void;
 }
 
 const initialState: InitialState = {
-  loading: false,
-
   promocode: null,
-
   products: [],
   productsQuantity: 0,
   totalPrice: 0,
-
+  minOrderPrice: 0,
   deliveryFee: 0,
 };
 
@@ -60,7 +57,6 @@ export const useCartStore = create<InitialState & CartStateActions>()(
   (set) => ({
     ...initialState,
     initCart: () => set({ ...initialState }),
-    setLoading: (loading) => set({ loading }),
     setPromocode: (promocode) => set({ promocode }),
     setProduct: (newProduct) =>
       set((state) => {
@@ -113,6 +109,7 @@ export const useCartStore = create<InitialState & CartStateActions>()(
           0
         ),
       }),
+    setMinOrderPrice: (price) => set({ minOrderPrice: price }),
     setDeliveryFee: (fee) => set({ deliveryFee: fee }),
   })
 );
