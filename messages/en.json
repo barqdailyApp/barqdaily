@@ -1,4 +1,21 @@
 {
+  "Metadata": {
+    "Title": {
+      "main": "Barq Daily: Save your time and leave the grocery shopping on us",
+      "home": "Barq Daily: Save your time and leave the grocery shopping on us",
+      "brands": "Brands | Barq Daily",
+      "products": "Products | Barq Daily",
+      "offers": "Daily Offers | Barq Daily",
+      "cart": "My Cart | Barq Daily",
+      "orders": "My Orders | Barq Daily",
+      "favorites": "Favorite Products | Barq Daily",
+      "login": "Login | Barq Daily",
+      "register": "Create an Account | Barq Daily"
+    },
+    "Description": {
+      "main": "Save your time and leave the grocery shopping on us, pay the way you like. Cash on delivery or online through the purchase process, fast delivery within 40 minutes or you can schedule your order for the day and time that suitable for you."
+    }
+  },
   "Global": {
     "comma": ",",
     "Label": {

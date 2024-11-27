@@ -1,6 +1,6 @@
 {
-  "name": "Minimal Dashboard",
-  "short_name": "Minimal Dashboard",
+  "name": "Barq Daily",
+  "short_name": "Barq Daily",
   "display": "standalone",
   "start_url": "/",
   "theme_color": "#000000",

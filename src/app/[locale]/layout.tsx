@@ -1,5 +1,9 @@
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages, unstable_setRequestLocale } from "next-intl/server";
+import {
+  getMessages,
+  getTranslations,
+  unstable_setRequestLocale,
+} from "next-intl/server";
 
 import ThemeProvider from "@/theme";
 import { primaryFont } from "@/theme/typography";
@@ -61,6 +65,19 @@ export default async function LocaleLayout({
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
+}
+
+export async function generateMetadata({
+  params: { locale },
+}: {
+  params: { locale: LocaleType };
+}) {
+  const t = await getTranslations({ locale, namespace: "Metadata" });
+
+  return {
+    title: t("Title.main"),
+    description: t("Description.main"),
+  };
 }
 
 export const dynamic = "force-dynamic";

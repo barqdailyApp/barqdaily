@@ -1,5 +1,9 @@
+import { getTranslations } from "next-intl/server";
+
 import { endpoints } from "@/utils/endpoints";
 import { getData } from "@/utils/crud-fetch-api";
+
+import { LocaleType } from "@/i18n/config-locale";
 
 import SingleOrderView from "@/sections/order/view/single-order-view";
 
@@ -26,4 +30,16 @@ export default async function Page({
   }
 
   return <SingleOrderView order={order.data} shipment={shipment.data} />;
+}
+
+export async function generateMetadata({
+  params: { locale },
+}: {
+  params: { locale: LocaleType };
+}) {
+  const t = await getTranslations({ locale, namespace: "Metadata" });
+
+  return {
+    title: t("Title.orders"),
+  };
 }

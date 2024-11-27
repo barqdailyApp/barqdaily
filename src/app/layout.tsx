@@ -10,8 +10,8 @@ export const viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Barq Daily",
-  description: "A store in Yemen",
+  title: "برق ديلي",
+  description: "متجر يمني للمنتجات الغذائية",
   keywords: "Barq Daily, store, Yemen",
   manifest: "/manifest.json",
   icons: [
