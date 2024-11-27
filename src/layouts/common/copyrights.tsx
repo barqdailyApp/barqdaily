@@ -23,7 +23,7 @@ export default function Copyrights() {
           py={1}
         >
           <Typography color="text.secondary" variant="caption">
-            {t("copyright")}
+            {t("copyright", { year: new Date().getFullYear() })}
           </Typography>
           <Stack direction="row" spacing={0.5}>
             {SOCIAL_LINKS.map((item) => (

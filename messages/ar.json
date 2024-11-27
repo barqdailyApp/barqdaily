@@ -39,7 +39,7 @@
       "download": "قم بتنزيل التطبيق",
       "download_ios": "قم بالتنزيل من App Store",
       "download_android": "قم بالتنزيل من Google Play",
-      "copyright": "إلما © حقوق الطبع والنشر 2020, Inc. جميع الحقوق محفوظة"
+      "copyright": "© {year} Barq Daily. كل الحقوق محفوظة."
     },
     "Date": {
       "sunday": "الأحد",

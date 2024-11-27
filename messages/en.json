@@ -39,7 +39,7 @@
       "download": "Download the app",
       "download_ios": "Download from the App Store",
       "download_android": "Download from Google Play",
-      "copyright": "Elma © Copyright 2020, Inc. All rights reserved"
+      "copyright": "© {year} Barq Daily. All rights reserved."
     },
     "Date": {
       "sunday": "Sunday",
