@@ -1,3 +1,5 @@
+import { getTranslations } from "next-intl/server";
+
 import { Alert } from "@mui/material";
 
 import { fetchProductsByBrand } from "@/actions/products-actions";
@@ -14,6 +16,8 @@ export default async function Page({
   params: { brand_id },
   searchParams: { page },
 }: Props) {
+  const t = await getTranslations();
+
   const products = await fetchProductsByBrand(brand_id, Number(page || "1"));
 
   if ("error" in products) {
@@ -21,7 +25,9 @@ export default async function Page({
   }
 
   if (products.pagesCount === 0) {
-    return <Alert severity="warning">No products found</Alert>;
+    return (
+      <Alert severity="warning">{t("Global.Error.no_products_found")}</Alert>
+    );
   }
 
   return (
