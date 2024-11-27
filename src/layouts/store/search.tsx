@@ -29,7 +29,7 @@ export default function StoreSearch() {
   const [options, setOptions] = useState<Record<"name" | "id", string>[]>([]);
   const initialSearch = searchParams.get("search") || "";
   const [search, setSearch] = useState(initialSearch);
-  const debouncedSearch = useDebounce(search, 500);
+  const debouncedSearch = useDebounce(search, 150);
 
   useEffect(() => {
     if (!debouncedSearch) {
