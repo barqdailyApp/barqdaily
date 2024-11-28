@@ -134,7 +134,8 @@
     "Home": {
       "Product": {
         "add_to_cart": "أضف إلى السلة",
-        "description": "الوصف"
+        "description": "الوصف",
+        "no_available": "غير متوفر"
       },
       "offers_title": "العروض اليومية",
       "order_again_title": "أطلب مرة أخرى",

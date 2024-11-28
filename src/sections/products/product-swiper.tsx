@@ -31,7 +31,11 @@ export default function ProductSwiper({ images }: { images: string[] }) {
               alt=" "
               width={500}
               height={500}
-              style={{ borderRadius: "10px" }}
+              style={{
+                borderRadius: "10px",
+                aspectRatio: "1/1",
+                objectFit: "contain",
+              }}
             />
           </SwiperSlide>
         ))}
@@ -53,7 +57,11 @@ export default function ProductSwiper({ images }: { images: string[] }) {
                 alt=" "
                 width={150}
                 height={150}
-                style={{ borderRadius: "10px" }}
+                style={{
+                  borderRadius: "10px",
+                  aspectRatio: "1/1",
+                  objectFit: "contain",
+                }}
               />
             </Button>
           ))}

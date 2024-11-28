@@ -1,20 +1,17 @@
-import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useState, useEffect, useCallback } from "react";
 
 import {
-  Box,
   Popper,
   MenuItem,
   TextField,
+  ButtonBase,
   Autocomplete,
   TextFieldProps,
 } from "@mui/material";
 
 import { paths } from "@/routes/paths";
-
-import { useDebounce } from "@/hooks/use-debounce";
-import { useQueryString } from "@/hooks/use-queryString";
 
 import { searchProducts } from "@/actions/products-actions";
 
@@ -23,22 +20,13 @@ import Iconify from "@/components/iconify";
 export default function StoreSearch() {
   const t = useTranslations("Global.Error");
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const { createQueryString } = useQueryString();
 
   const [options, setOptions] = useState<Record<"name" | "id", string>[]>([]);
-  const initialSearch = searchParams.get("search") || "";
-  const [search, setSearch] = useState(initialSearch);
-  const debouncedSearch = useDebounce(search, 150);
+  const [search, setSearch] = useState("");
 
-  useEffect(() => {
-    if (!debouncedSearch) {
-      setOptions([]);
-      return;
-    }
-
+  const handleSearch = useCallback(() => {
     (async () => {
-      const res = await searchProducts(debouncedSearch);
+      const res = await searchProducts(search);
       if (!("error" in res)) {
         setOptions(
           res?.map((item) => ({
@@ -48,7 +36,12 @@ export default function StoreSearch() {
         );
       }
     })();
-  }, [debouncedSearch]);
+  }, [search]);
+
+  useEffect(() => {
+    handleSearch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Autocomplete
@@ -68,39 +61,45 @@ export default function StoreSearch() {
         </MenuItem>
       )}
       getOptionLabel={(option) => option.name}
-      renderInput={(params) => (
-        <SearchInput
-          {...params}
-          onChange={(e) => {
-            setSearch(e.target.value);
-            createQueryString(
-              [{ name: "search", value: e.target.value }],
-              true
-            );
-          }}
-        />
-      )}
+      renderInput={(params) => {
+        delete params.inputProps.value;
+        delete params.inputProps.onChange;
+
+        return (
+          <SearchInput
+            {...params}
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
+            onKeyUp={(e) => {
+              // console.log(e);
+              if (e.key === "Enter") handleSearch();
+            }}
+            onSubmit={() => {
+              handleSearch();
+            }}
+          />
+        );
+      }}
       PopperComponent={(props: {
         open: boolean;
         sx?: any;
         [key: string]: any;
-      }) => (
-        <Popper
-          {...props}
-          open={!debouncedSearch ? false : props.open}
-          sx={{ ...props.sx, minWidth: "20rem" }}
-        />
-      )}
+      }) => <Popper {...props} sx={{ ...props.sx, minWidth: "20rem" }} />}
       noOptionsText={t("no_products")}
-      inputValue={search}
+      inputValue=""
       sx={{ paddingInlineEnd: 1.5 }}
       fullWidth
     />
   );
 }
 
-function SearchInput({ ...props }: TextFieldProps) {
+function SearchInput({
+  onSubmit,
+  ...props
+}: { onSubmit: VoidFunction } & TextFieldProps) {
   const t = useTranslations("Global.Label");
+
   return (
     <TextField
       {...props}
@@ -117,10 +116,12 @@ function SearchInput({ ...props }: TextFieldProps) {
       }}
       variant="filled"
       placeholder={t("search")}
+      fullWidth
       InputProps={{
         ...props?.InputProps,
         endAdornment: (
-          <Box
+          <ButtonBase
+            onClick={() => onSubmit()}
             sx={{
               position: "absolute",
               insetInlineEnd: 0,
@@ -140,7 +141,7 @@ function SearchInput({ ...props }: TextFieldProps) {
               icon="material-symbols:search"
               width={{ xs: 20, sm: 24 }}
             />
-          </Box>
+          </ButtonBase>
         ),
       }}
     />

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 import {
   Box,
@@ -16,6 +17,8 @@ import {
 import { useCurrency } from "@/utils/format-number";
 
 import { useCartStore } from "@/contexts/cart-store";
+
+import Label from "@/components/label";
 
 import { Offer, Product } from "@/types/products";
 
@@ -45,6 +48,7 @@ export function ProductCard({
   href,
   ...cardProps
 }: Props & CardProps) {
+  const t = useTranslations("Pages.Home.Product");
   const products = useCartStore((state) => state.products);
   const isProductInCart = !!products.find(
     (item) => item.product_id === product.product_id
@@ -87,6 +91,20 @@ export function ProductCard({
         }}
         component="img"
       />
+
+      {!product.is_quantity_available && (
+        <Label
+          color="error"
+          sx={{
+            position: "absolute",
+            top: 6,
+            insetInlineStart: 6,
+          }}
+        >
+          {t("no_available")}
+        </Label>
+      )}
+
       <CardContent spacing={1} flexGrow={1} component={Stack}>
         <Typography variant="h6" component="p">
           {product.product_name}
@@ -111,6 +129,7 @@ export function ProductCard({
             addButtonProps={{
               sx: { flexGrow: 1 },
             }}
+            is_quantity_available={product.is_quantity_available}
             sx={{ flexGrow: 1 }}
           />
         </Stack>

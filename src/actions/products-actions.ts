@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 import { endpoints } from "@/utils/endpoints";
 import { getData, postData } from "@/utils/crud-fetch-api";
 
-import { COOKIES_KEYS } from "@/config-global";
+import { COOKIES_KEYS, PRODUCTS_PER_PAGE } from "@/config-global";
 
 import {
   Brand,
@@ -60,7 +60,8 @@ export async function fetchProductsBySubCategory(
   const searchParams = new URLSearchParams({
     category_sub_category_id: subCategoryId,
     page: String(page),
-    limit: String(10),
+    limit: String(PRODUCTS_PER_PAGE),
+    sort: "new",
   });
 
   const res = await getData<{ data: Product[]; meta: { itemCount: number } }>(
@@ -72,7 +73,9 @@ export async function fetchProductsBySubCategory(
   }
   return {
     items: res?.data?.data,
-    pagesCount: Math.ceil((res?.data?.meta?.itemCount || 0) / 10),
+    pagesCount: Math.ceil(
+      (res?.data?.meta?.itemCount || 0) / PRODUCTS_PER_PAGE
+    ),
   };
 }
 
@@ -80,7 +83,8 @@ export async function fetchProductsByBrand(brandId: string, page = 1) {
   const searchParams = new URLSearchParams({
     brand_id: brandId,
     page: String(page),
-    limit: String(10),
+    limit: String(PRODUCTS_PER_PAGE),
+    sort: "new",
   });
   const res = await getData<{ data: Product[]; meta: { itemCount: number } }>(
     `${endpoints.products.products}?${searchParams.toString()}`
@@ -91,7 +95,9 @@ export async function fetchProductsByBrand(brandId: string, page = 1) {
   }
   return {
     items: res?.data?.data,
-    pagesCount: Math.ceil((res?.data?.meta?.itemCount || 0) / 10),
+    pagesCount: Math.ceil(
+      (res?.data?.meta?.itemCount || 0) / PRODUCTS_PER_PAGE
+    ),
   };
 }
 
@@ -107,7 +113,8 @@ export async function fetchFavoriteProducts(page = 1) {
     section_id: sectionRes[0]?.id,
     user_id: user.id || "",
     page: String(page),
-    limit: String(10),
+    limit: String(PRODUCTS_PER_PAGE),
+    sort: "new",
   });
 
   const res = await getData<{ data: Product[]; meta: { itemCount: number } }>(
@@ -119,14 +126,16 @@ export async function fetchFavoriteProducts(page = 1) {
   }
   return {
     items: res?.data?.data,
-    pagesCount: Math.ceil((res?.data?.meta?.itemCount || 0) / 10),
+    pagesCount: Math.ceil(
+      (res?.data?.meta?.itemCount || 0) / PRODUCTS_PER_PAGE
+    ),
   };
 }
 
 export async function fetchOffers(page = 1) {
   const searchParams = new URLSearchParams({
     page: String(page),
-    limit: String(10),
+    limit: String(PRODUCTS_PER_PAGE),
   });
   const res = await getData<{ data: Offer[]; meta: { itemCount: number } }>(
     `${endpoints.products.offers}?${searchParams.toString()}`
@@ -137,7 +146,9 @@ export async function fetchOffers(page = 1) {
   }
   return {
     items: res?.data?.data,
-    pagesCount: Math.ceil((res?.data?.meta?.itemCount || 0) / 10),
+    pagesCount: Math.ceil(
+      (res?.data?.meta?.itemCount || 0) / PRODUCTS_PER_PAGE
+    ),
   };
 }
 

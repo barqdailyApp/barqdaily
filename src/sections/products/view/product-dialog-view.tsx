@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useSnackbar } from "notistack";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 import {
   Box,
@@ -21,6 +22,7 @@ import { useCurrency } from "@/utils/format-number";
 
 import { fetchSingleProduct } from "@/actions/products-actions";
 
+import Label from "@/components/label";
 import Iconify from "@/components/iconify";
 
 import IncrementerButton from "@/sections/products/incrementer-button";
@@ -87,6 +89,7 @@ function ProductDialogContent({
 }: {
   product: FullProduct;
 }) {
+  const t = useTranslations("Pages.Home.Product");
   const currency = useCurrency();
 
   const measurement =
@@ -138,6 +141,9 @@ function ProductDialogContent({
         )}{" "}
         {currency(finalPrice)}
       </Typography>
+      {!product.is_quantity_available && (
+        <Label color="error">{t("no_available")}</Label>
+      )}
       <DialogContentText>{product.product_description}</DialogContentText>
     </DialogContent>
   );
@@ -158,6 +164,7 @@ function ProductDialogContent({
         }
         min_order_quantity={measurement.min_order_quantity}
         max_order_quantity={maxQuantity}
+        is_quantity_available={product.is_quantity_available}
         addButtonProps={{
           sx: { flexGrow: 1 },
         }}
