@@ -61,6 +61,7 @@ export async function fetchProductsBySubCategory(
     category_sub_category_id: subCategoryId,
     page: String(page),
     limit: String(PRODUCTS_PER_PAGE),
+    sort: "new",
   });
 
   const res = await getData<{ data: Product[]; meta: { itemCount: number } }>(
@@ -83,6 +84,7 @@ export async function fetchProductsByBrand(brandId: string, page = 1) {
     brand_id: brandId,
     page: String(page),
     limit: String(PRODUCTS_PER_PAGE),
+    sort: "new",
   });
   const res = await getData<{ data: Product[]; meta: { itemCount: number } }>(
     `${endpoints.products.products}?${searchParams.toString()}`
@@ -112,6 +114,7 @@ export async function fetchFavoriteProducts(page = 1) {
     user_id: user.id || "",
     page: String(page),
     limit: String(PRODUCTS_PER_PAGE),
+    sort: "new",
   });
 
   const res = await getData<{ data: Product[]; meta: { itemCount: number } }>(
