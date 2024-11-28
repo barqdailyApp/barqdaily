@@ -134,7 +134,8 @@
     "Home": {
       "Product": {
         "add_to_cart": "Add to cart",
-        "description": "Description"
+        "description": "Description",
+        "no_available": "Not available"
       },
       "offers_title": "Daily Offers",
       "order_again_title": "Order Again",

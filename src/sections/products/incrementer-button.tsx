@@ -24,6 +24,7 @@ interface Props extends StackProps {
   product_price_id?: string;
   min_order_quantity: number;
   max_order_quantity: number;
+  is_quantity_available: boolean;
   addButtonProps?: ButtonProps;
 }
 
@@ -34,6 +35,7 @@ const IncrementerButton = forwardRef<HTMLDivElement, Props>(
       product_price_id,
       min_order_quantity,
       max_order_quantity,
+      is_quantity_available,
       addButtonProps,
       sx,
       ...other
@@ -120,6 +122,7 @@ const IncrementerButton = forwardRef<HTMLDivElement, Props>(
           startIcon={isMd && <Iconify icon="bxs:cart-alt" />}
           onClick={() => (!authenticated ? setOpen(true) : handleAdd())}
           {...addButtonProps}
+          disabled={!is_quantity_available || addButtonProps?.disabled}
           loading={loading}
         >
           {isMd ? (

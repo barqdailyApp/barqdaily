@@ -1,10 +1,14 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 import { Box, Stack, Container, Typography } from "@mui/material";
 
 import { useCurrency } from "@/utils/format-number";
 
 import { SECTION_PADDING } from "@/layouts/config-layout";
+
+import Label from "@/components/label";
 
 import IncrementerButton from "@/sections/products/incrementer-button";
 
@@ -20,6 +24,7 @@ interface Props {
 export default function SingleProductView({
   product: { product, product_measurements },
 }: Props) {
+  const t = useTranslations("Pages.Home.Product");
   const currency = useCurrency();
 
   const measurement =
@@ -57,6 +62,9 @@ export default function SingleProductView({
         )}{" "}
         {currency(finalPrice)}
       </Typography>
+      {!product.is_quantity_available && (
+        <Label color="error">{t("no_available")}</Label>
+      )}
       <Typography color="text.disabled">
         {product.product_description}
       </Typography>
@@ -85,6 +93,7 @@ export default function SingleProductView({
         }
         min_order_quantity={measurement.min_order_quantity}
         max_order_quantity={maxQuantity}
+        is_quantity_available={product.is_quantity_available}
       />
     </Stack>
   );
