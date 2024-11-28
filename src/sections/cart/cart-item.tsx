@@ -79,6 +79,7 @@ export default function CartItem({ product }: { product: CartProduct }) {
         min_order_quantity={product.min_order_quantity}
         max_order_quantity={maxQuantity}
         sx={{ flexShrink: 0, width: "fit-content" }}
+        is_quantity_available
       />
     </Stack>
   );
