@@ -17,3 +17,5 @@ export const COOKIES_KEYS = {
   lang: "NEXT_LOCALE",
   expiryTime: "expiryTime",
 };
+
+export const PRODUCTS_PER_PAGE = 15;
