@@ -140,9 +140,9 @@ export default function PaymentDetails() {
               />
             }
             label={t.rich("policy", {
-              link: (chunks) => (
+              terms: (chunks) => (
                 <Link
-                  href={paths.static.return}
+                  href={paths.static.terms}
                   component={RouterLink}
                   target="_blank"
                 >
