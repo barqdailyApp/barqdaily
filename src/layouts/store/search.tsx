@@ -45,6 +45,7 @@ export default function StoreSearch() {
 
   const handleSearch = useCallback(
     (value: string) => {
+      if (!value) return;
       router.push(`${paths.products}?search=${value}`, { scroll: false });
     },
     [router]
