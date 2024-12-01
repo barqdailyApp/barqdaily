@@ -179,6 +179,7 @@ export async function searchProducts(search: string) {
     product_name: search,
     page: String(1),
     limit: String(10),
+    sort: "new",
   });
   const res = await getData<{ data: Product[]; meta: { itemCount: number } }>(
     `${endpoints.products.products}?${searchParams.toString()}`
@@ -189,6 +190,28 @@ export async function searchProducts(search: string) {
   }
 
   return res?.data?.data;
+}
+
+export async function fetchProducts(productName: string, page = "1") {
+  const searchParams = new URLSearchParams({
+    product_name: productName,
+    page: String(page),
+    limit: String(PRODUCTS_PER_PAGE),
+    sort: "new",
+  });
+  const res = await getData<{ data: Product[]; meta: { itemCount: number } }>(
+    `${endpoints.products.products}?${searchParams.toString()}`
+  );
+
+  if ("error" in res) {
+    return res;
+  }
+  return {
+    items: res?.data?.data,
+    pagesCount: Math.ceil(
+      (res?.data?.meta?.itemCount || 0) / PRODUCTS_PER_PAGE
+    ),
+  };
 }
 
 export async function toggleFavorite({
