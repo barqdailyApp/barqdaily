@@ -13,6 +13,8 @@ import {
 
 import { paths } from "@/routes/paths";
 
+import { useDebounce } from "@/hooks/use-debounce";
+
 import { searchProducts } from "@/actions/products-actions";
 
 import Iconify from "@/components/iconify";
@@ -23,10 +25,12 @@ export default function StoreSearch() {
 
   const [options, setOptions] = useState<Record<"name" | "id", string>[]>([]);
   const [search, setSearch] = useState("");
+  const debouncedSearch = useDebounce(search, 150);
 
-  const handleSearch = useCallback(() => {
+  // Fetch on change
+  useEffect(() => {
     (async () => {
-      const res = await searchProducts(search);
+      const res = await searchProducts(debouncedSearch);
       if (!("error" in res)) {
         setOptions(
           res?.map((item) => ({
@@ -36,12 +40,16 @@ export default function StoreSearch() {
         );
       }
     })();
-  }, [search]);
-
-  useEffect(() => {
-    handleSearch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [debouncedSearch]);
+
+  const handleSearch = useCallback(
+    (value: string) => {
+      if (!value) return;
+      router.push(`${paths.products}?search=${value}`, { scroll: false });
+    },
+    [router]
+  );
 
   return (
     <Autocomplete
@@ -51,7 +59,7 @@ export default function StoreSearch() {
           {...props}
           key={option.id}
           onClick={() => {
-            router.push(`${paths.products}/${option.id}?search=${search}`, {
+            router.push(`${paths.products}/${option.id}`, {
               scroll: false,
             });
             setOptions([]);
@@ -73,10 +81,10 @@ export default function StoreSearch() {
             }}
             onKeyUp={(e) => {
               // console.log(e);
-              if (e.key === "Enter") handleSearch();
+              if (e.key === "Enter") handleSearch(search);
             }}
             onSubmit={() => {
-              handleSearch();
+              handleSearch(search);
             }}
           />
         );
