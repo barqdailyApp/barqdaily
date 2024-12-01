@@ -91,9 +91,9 @@ export interface CreateOrderBody {
   };
 }
 export async function createOrder(body: CreateOrderBody) {
-  const res = await postData<any, CreateOrderBody>(
+  const res = await postData<any, CreateOrderBody & { platform: "WEB" }>(
     `${endpoints.cart.createOrder}`,
-    body
+    { ...body, platform: "WEB" }
   );
 
   if ("error" in res) {
