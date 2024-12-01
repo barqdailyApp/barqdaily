@@ -136,6 +136,7 @@ export async function fetchOffers(page = 1) {
   const searchParams = new URLSearchParams({
     page: String(page),
     limit: String(PRODUCTS_PER_PAGE),
+    sort: "new",
   });
   const res = await getData<{ data: Offer[]; meta: { itemCount: number } }>(
     `${endpoints.products.offers}?${searchParams.toString()}`
