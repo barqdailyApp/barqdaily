@@ -80,7 +80,6 @@ export default function StoreSearch() {
               setSearch(e.target.value);
             }}
             onKeyUp={(e) => {
-              // console.log(e);
               if (e.key === "Enter") handleSearch(search);
             }}
             onSubmit={() => {
