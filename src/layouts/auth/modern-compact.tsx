@@ -30,7 +30,7 @@ export default function AuthModernCompactLayout({ children }: Props) {
           }}
         >
           <Box textAlign="center" mb={3}>
-            <Logo />
+            <Logo sx={{ width: 70, height: 70 }} />
           </Box>
           {children}
         </Box>

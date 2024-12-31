@@ -32,22 +32,7 @@ export default function StoreHeader() {
 
   const renderContent = (
     <>
-      <Box
-        width={{ xs: 65, sm: 80 }}
-        // height={80}
-        sx={{
-          paddingInlineStart: 2,
-          py: 2,
-          flexShrink: 0,
-          aspectRatio: 1,
-          "& img": {
-            width: "auto",
-            height: "100%",
-          },
-        }}
-      >
-        <Logo />
-      </Box>
+      <Logo sx={{ marginInlineStart: 0.5, marginInlineEnd: 1 }} />
 
       {isSm ? (
         <Button
@@ -57,6 +42,7 @@ export default function StoreHeader() {
           sx={{
             minWidth: 0,
             borderRadius: "100%",
+            aspectRatio: 1,
             flexShrink: 0,
             padding: "5px",
             marginInlineEnd: 1,
