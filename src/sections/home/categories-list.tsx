@@ -15,6 +15,7 @@ import {
 import { SECTION_PADDING } from "@/layouts/config-layout";
 
 import { Category } from "@/types/products";
+import { usecheckoutStore } from "@/contexts/checkout-store";
 
 interface Props {
   categories: Category[];
@@ -22,7 +23,8 @@ interface Props {
 
 export default function CategoriesList({ categories }: Props) {
   const router = useRouter();
-
+  const { addresses } = usecheckoutStore();
+  const defaultAddress = addresses?.find((address) => address?.is_favorite);
   return (
     <Container
       sx={{
@@ -48,7 +50,7 @@ export default function CategoriesList({ categories }: Props) {
                 className="card-clickable-layer"
                 aria-hidden
                 sx={{ position: "absolute", inset: 0, cursor: "pointer" }}
-                href={`/category?categoryId=${item.id}`}
+                href={`/category?categoryId=${item.id}&lat=${defaultAddress?.latitude}&lng=${defaultAddress?.longitude}`}
                 component={Link}
               />
               <Typography
@@ -71,7 +73,11 @@ export default function CategoriesList({ categories }: Props) {
                 }}
                 image={item.logo}
                 alt={item.name}
-                onClick={() => router.push(`/category?categoryId=${item.id}`)}
+                onClick={() =>
+                  router.push(
+                    `/category?categoryId=${item.id}&lat=${defaultAddress?.latitude}&lng=${defaultAddress?.longitude}`
+                  )
+                }
               />
             </Card>
           </Grid>

@@ -1,0 +1,56 @@
+name: Deploy to Ubuntu Server
+
+on:
+  push:
+    branches:
+      - dev  # Deploy only when code is pushed to the dev branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Next.js app
+        run: npm run build
+
+      - name: Deploy and Run Post-Build Commands on Server
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+        run: |
+          # Configure SSH key for server access
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H $SERVER_IP >> ~/.ssh/known_hosts
+
+          # SSH into server and run commands
+          ssh $SERVER_USER@$SERVER_IP << 'EOF'
+            source ~/.bashrc
+            eval "$(ssh-agent -s)"
+            ssh-add ~/.ssh/id_ed25519
+            cd /var/www/store-dev
+            git stash
+            git checkout dev
+            git pull
+            # Source nvm and set Node version
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # Load nvm
+
+            nvm use 20 
+            npm install -f
+            npm run build
+            pm2 restart all
+          EOF
