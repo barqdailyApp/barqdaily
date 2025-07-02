@@ -9,20 +9,26 @@ import ProductsListView from "@/sections/products/view/products-list-view";
 import ProductsListLoading from "@/sections/products/loading/products-list-loading";
 
 interface Props {
-  searchParams: Record<"subCategoryId" | "page", string | undefined>;
+  searchParams: Record<
+    "subCategoryId" | "page" | "lat" | "lng",
+    string | undefined
+  >;
 }
 
 export default async function Page({
-  searchParams: { subCategoryId, page },
+  searchParams: { subCategoryId, page, lat, lng },
 }: Props) {
   const t = await getTranslations();
-
+  const latitude = lat ?? "0.0";
+  const longitude = lng ?? "0.0";
   if (!subCategoryId) {
     return <ProductsListLoading />;
   }
 
   const products = await fetchProductsBySubCategory(
     subCategoryId,
+    longitude,
+    latitude,
     Number(page || "1")
   );
 

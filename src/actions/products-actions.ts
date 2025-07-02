@@ -54,6 +54,8 @@ export async function fetchSubCategories(categoryId: string) {
 
 export async function fetchProductsBySubCategory(
   subCategoryId: string,
+  longitude: string,
+  latitude: string,
   page = 1
 ) {
   if (!subCategoryId) throw new Error("subCategoryId is required");
@@ -62,8 +64,9 @@ export async function fetchProductsBySubCategory(
     page: String(page),
     limit: String(PRODUCTS_PER_PAGE),
     sort: "new",
+    longitude,
+    latitude,
   });
-
   const res = await getData<{ data: Product[]; meta: { itemCount: number } }>(
     `${endpoints.products.products}?${searchParams.toString()}`
   );
