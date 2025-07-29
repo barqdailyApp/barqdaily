@@ -30,17 +30,17 @@ jobs:
           SERVER_IP: ${{ secrets.SERVER_IP }}
           SERVER_USER: ${{ secrets.SERVER_USER }}
         run: |
-          # Configure SSH key for server access
+          # Save the SSH key
           mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa_new
+          chmod 600 ~/.ssh/id_rsa_new
+      
+          # Add server to known hosts
           ssh-keyscan -H $SERVER_IP >> ~/.ssh/known_hosts
-
-          # SSH into server and run commands
-          ssh $SERVER_USER@$SERVER_IP << 'EOF'
+      
+          # Run remote commands using SSH with the correct key
+          ssh -i ~/.ssh/id_rsa_new $SERVER_USER@$SERVER_IP << 'EOF'
             source ~/.bashrc
-            eval "$(ssh-agent -s)"
-            ssh-add ~/.ssh/id_ed25519
             cd /var/www/store
             git stash
             git checkout main
