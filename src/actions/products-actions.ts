@@ -17,6 +17,8 @@ import {
   FullProduct,
 } from "@/types/products";
 
+import { fetchAddresses } from "./profile-actions";
+
 export async function fetchSections() {
   const sectionRes = await getData<Section[]>(endpoints.products.sections);
   if ("error" in sectionRes) {
@@ -159,10 +161,23 @@ export async function fetchOffers(page = 1) {
 export async function fetchSingleProduct(productId: string) {
   const user = JSON.parse(cookies().get(COOKIES_KEYS.user)?.value || "{}");
 
+  const address = await fetchAddresses();
+  if ("error" in address) {
+    throw new Error(address.error);
+  }
+  const favoriteAddress = address.find((item) => item.is_favorite);
+
+  if (!favoriteAddress) {
+    throw new Error("product not found");
+  }
+
   const res = await getData<FullProduct>(
-    `${endpoints.products.singleProduct}/${productId}?user_id=${user.id || ""}`
+    `${endpoints.products.singleProduct}/${productId}?user_id=${user.id || ""}&latitude=${favoriteAddress.latitude}&longitude=${favoriteAddress.longitude}`
   );
   if ("error" in res) {
+    if (res.status === 404) {
+      throw new Error("product not found");
+    }
     return res;
   }
 
