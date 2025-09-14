@@ -5,7 +5,9 @@ import { cookies } from "next/headers";
 import { endpoints } from "@/utils/endpoints";
 import { postData } from "@/utils/crud-fetch-api";
 
-import { COOKIES_KEYS } from "@/config-global";
+import { COOKIES_KEYS, DEFAULT_ADDRESS } from "@/config-global";
+
+import { Address } from "@/types/profile";
 
 interface RegisterBody {
   phone: string;
@@ -85,3 +87,18 @@ export interface User {
 export type verifyOtpResponse = User & {
   access_token: string;
 };
+
+export async function saveFavAddress(
+  address: Pick<Address, "latitude" | "longitude">
+) {
+  cookies().set(
+    COOKIES_KEYS.favAddress,
+    JSON.stringify({ latitude: address.latitude, longitude: address.longitude })
+  );
+}
+export async function getFavAddress(): Promise<
+  Pick<Address, "latitude" | "longitude">
+> {
+  const cookieAddress = cookies().get(COOKIES_KEYS.favAddress)?.value;
+  return cookieAddress ? JSON.parse(cookieAddress) : DEFAULT_ADDRESS;
+}
