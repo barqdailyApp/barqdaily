@@ -17,7 +17,7 @@ import {
   FullProduct,
 } from "@/types/products";
 
-import { fetchAddresses } from "./profile-actions";
+import { getFavAddress } from "./auth-methods";
 
 export async function fetchSections() {
   const sectionRes = await getData<Section[]>(endpoints.products.sections);
@@ -56,19 +56,20 @@ export async function fetchSubCategories(categoryId: string) {
 
 export async function fetchProductsBySubCategory(
   subCategoryId: string,
-  longitude: string,
-  latitude: string,
   page = 1
 ) {
   if (!subCategoryId) throw new Error("subCategoryId is required");
+  const favAddress = await getFavAddress();
+
   const searchParams = new URLSearchParams({
     category_sub_category_id: subCategoryId,
     page: String(page),
     limit: String(PRODUCTS_PER_PAGE),
     sort: "new",
-    longitude,
-    latitude,
+    longitude: favAddress.longitude,
+    latitude: favAddress.latitude,
   });
+
   const res = await getData<{ data: Product[]; meta: { itemCount: number } }>(
     `${endpoints.products.products}?${searchParams.toString()}`
   );
@@ -85,11 +86,15 @@ export async function fetchProductsBySubCategory(
 }
 
 export async function fetchProductsByBrand(brandId: string, page = 1) {
+  const favAddress = await getFavAddress();
+
   const searchParams = new URLSearchParams({
     brand_id: brandId,
     page: String(page),
     limit: String(PRODUCTS_PER_PAGE),
     sort: "new",
+    longitude: favAddress.longitude,
+    latitude: favAddress.latitude,
   });
   const res = await getData<{ data: Product[]; meta: { itemCount: number } }>(
     `${endpoints.products.products}?${searchParams.toString()}`
@@ -138,10 +143,13 @@ export async function fetchFavoriteProducts(page = 1) {
 }
 
 export async function fetchOffers(page = 1) {
+  const favAddress = await getFavAddress();
   const searchParams = new URLSearchParams({
     page: String(page),
     limit: String(PRODUCTS_PER_PAGE),
     sort: "new",
+    longitude: favAddress.longitude,
+    latitude: favAddress.latitude,
   });
   const res = await getData<{ data: Offer[]; meta: { itemCount: number } }>(
     `${endpoints.products.offers}?${searchParams.toString()}`
@@ -160,19 +168,10 @@ export async function fetchOffers(page = 1) {
 
 export async function fetchSingleProduct(productId: string) {
   const user = JSON.parse(cookies().get(COOKIES_KEYS.user)?.value || "{}");
-
-  const address = await fetchAddresses();
-  if ("error" in address) {
-    throw new Error(address.error);
-  }
-  const favoriteAddress = address.find((item) => item.is_favorite);
-
-  if (!favoriteAddress) {
-    throw new Error("product not found");
-  }
+  const favAddress = await getFavAddress();
 
   const res = await getData<FullProduct>(
-    `${endpoints.products.singleProduct}/${productId}?user_id=${user.id || ""}&latitude=${favoriteAddress.latitude}&longitude=${favoriteAddress.longitude}`
+    `${endpoints.products.singleProduct}/${productId}?user_id=${user.id || ""}&latitude=${favAddress.latitude}&longitude=${favAddress.longitude}`
   );
   if ("error" in res) {
     if (res.status === 404) {
@@ -193,11 +192,14 @@ export async function fetchBrands() {
 }
 
 export async function searchProducts(search: string) {
+  const favAddress = await getFavAddress();
   const searchParams = new URLSearchParams({
     product_name: search,
     page: String(1),
     limit: String(10),
     sort: "new",
+    longitude: favAddress.longitude,
+    latitude: favAddress.latitude,
   });
   const res = await getData<{ data: Product[]; meta: { itemCount: number } }>(
     `${endpoints.products.products}?${searchParams.toString()}`
@@ -211,11 +213,14 @@ export async function searchProducts(search: string) {
 }
 
 export async function fetchProducts(productName: string, page = "1") {
+  const favAddress = await getFavAddress();
   const searchParams = new URLSearchParams({
     product_name: productName,
     page: String(page),
     limit: String(PRODUCTS_PER_PAGE),
     sort: "new",
+    longitude: favAddress.longitude,
+    latitude: favAddress.latitude,
   });
   const res = await getData<{ data: Product[]; meta: { itemCount: number } }>(
     `${endpoints.products.products}?${searchParams.toString()}`

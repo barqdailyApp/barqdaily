@@ -1,5 +1,7 @@
 import { paths } from "@/routes/paths";
 
+import { Address } from "./types/profile";
+
 // API
 // ----------------------------------------------------------------------
 
@@ -16,6 +18,12 @@ export const COOKIES_KEYS = {
   user: "user",
   lang: "NEXT_LOCALE",
   expiryTime: "expiryTime",
+  favAddress: "sammartstore-fav-address",
 };
 
 export const PRODUCTS_PER_PAGE = 15;
+
+export const DEFAULT_ADDRESS: Pick<Address, "latitude" | "longitude"> = {
+  latitude: "15.333699",
+  longitude: "44.222515",
+};
