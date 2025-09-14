@@ -1,5 +1,7 @@
 import { create } from "zustand";
 
+import { saveFavAddress } from "@/actions/auth-methods";
+
 import { Address } from "@/types/profile";
 import { Payment, TimeSlot } from "@/types/cart";
 
@@ -82,7 +84,7 @@ const initialState: InitialState = {
 };
 
 export const usecheckoutStore = create<InitialState & CheckoutStateActions>()(
-  (set) => ({
+  (set, get) => ({
     ...initialState,
     initCheckout: () => set({ ...initialState }),
     setStep: (step) =>
@@ -96,17 +98,19 @@ export const usecheckoutStore = create<InitialState & CheckoutStateActions>()(
       })),
     setChoosenDeliveryType: (deliveryType) =>
       set(() => ({ choosenDeliveryType: deliveryType })),
-    setAddresses: (addresses) =>
-      set((state) => {
-        const newAddresses =
-          typeof addresses === "function"
-            ? addresses(state.addresses)
-            : addresses;
-        return {
-          addresses: newAddresses,
-          choosenAddress: state.choosenAddress || newAddresses[0],
-        };
-      }),
+    setAddresses: (addresses) => {
+      const state = get();
+      const newAddresses =
+        typeof addresses === "function"
+          ? addresses(state.addresses)
+          : addresses;
+      const favAddress = newAddresses.find((address) => address.is_favorite);
+      if (favAddress) saveFavAddress(favAddress);
+      set({
+        addresses: newAddresses,
+        choosenAddress: state.choosenAddress || newAddresses[0],
+      });
+    },
     setChoosenAddress: (address) => set(() => ({ choosenAddress: address })),
 
     setDay: (day) => set(() => ({ day })),

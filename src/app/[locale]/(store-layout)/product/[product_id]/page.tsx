@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 
 import { endpoints } from "@/utils/endpoints";
@@ -20,8 +21,7 @@ export default async function Page({ params: { product_id } }: Props) {
   const product = await fetchSingleProduct(product_id);
 
   if ("error" in product) {
-    console.log(product.error);
-    throw new Error(product.error);
+    notFound();
   }
 
   return <SingleProductView product={product} />;
