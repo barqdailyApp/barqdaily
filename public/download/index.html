@@ -89,6 +89,21 @@
         }
       }
     </style>
+    <script>
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+      const ios = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+      const android = /android/i.test(userAgent);
+
+      if (ios) {
+        // Redirect to App Store
+        window.location.href = "https://apps.apple.com/eg/app/id6502755805";
+      } else if (android) {
+        // Redirect to Play Store
+        window.location.href =
+          "https://play.google.com/store/apps/details?id=com.barqDaily.client";
+      }
+    </script>
   </head>
   <body>
     <div class="container">
