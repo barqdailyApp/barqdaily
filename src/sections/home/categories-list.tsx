@@ -37,11 +37,12 @@ export default function CategoriesList({ categories }: Props) {
             <Card
               sx={(theme) => ({
                 border: `1px solid ${theme.palette.primary.main}`,
-                backgroundColor: theme.palette.primary.lighter,
+                // backgroundColor: theme.palette.primary.lighter,
                 position: "relative",
                 minHeight: "100%",
                 display: "grid",
                 alignContent: "space-between",
+                borderRadius: 2,
               })}
             >
               <Box
@@ -53,10 +54,15 @@ export default function CategoriesList({ categories }: Props) {
               />
               <Typography
                 variant="body2"
-                textAlign="center"
-                py={1.5}
                 display="block"
                 fontWeight={700}
+                sx={{
+                  position: "absolute",
+                  top: 0,
+                  insetInline: 0,
+                  px: 1,
+                  py: 1,
+                }}
               >
                 {item.name}
               </Typography>
