@@ -70,13 +70,13 @@ export default function BrandsSwiper({ brands }: Props) {
               sx={{
                 objectFit: "cover",
                 width: "120px",
-                height: "120px",
+                height: "auto",
                 cursor: "pointer",
               }}
               src={item.logo}
               alt={item.name}
-              width={120}
-              height={120}
+              width={200}
+              height={200}
               onClick={() => router.push(`brand/${item.id}`)}
               component={Image}
             />
