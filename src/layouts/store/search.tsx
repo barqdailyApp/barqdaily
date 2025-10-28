@@ -112,7 +112,6 @@ function SearchInput({
       {...props}
       sx={{
         mx: 1,
-        backgroundColor: "rgba(255, 255, 255, 0.8)",
         borderRadius: "8px",
         "& .MuiFilledInput-root": {
           borderRadius: "8px",
@@ -126,6 +125,13 @@ function SearchInput({
       fullWidth
       InputProps={{
         ...props?.InputProps,
+        sx: {
+          ...props?.InputProps?.sx,
+          backgroundColor: "#fff",
+          "&:hover": {
+            backgroundColor: "#efefef",
+          },
+        },
         endAdornment: (
           <ButtonBase
             onClick={() => onSubmit()}
