@@ -4,7 +4,7 @@ import Stack from "@mui/material/Stack";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import { useTheme } from "@mui/material/styles";
-import { Box, Button, Container, useMediaQuery } from "@mui/material";
+import { Button, Container, useMediaQuery } from "@mui/material";
 
 import { useBoolean } from "@/hooks/use-boolean";
 import { useOffSetTop } from "@/hooks/use-off-set-top";
@@ -83,6 +83,7 @@ export default function StoreHeader() {
         height: HEADER.H_MOBILE + (isSm && openXsScreenSearch.value ? 60 : 0),
         overflow: "hidden",
         borderTop: `solid 1px ${theme.palette.divider}`,
+        borderBottom: `solid 1px transparent`,
         zIndex: theme.zIndex.appBar + 1,
         ...bgBlur({
           color: theme.palette.background.default,
@@ -92,6 +93,7 @@ export default function StoreHeader() {
         }),
         ...(offsetTop && {
           top: 0,
+          borderColor: theme.palette.divider,
         }),
       }}
     >
