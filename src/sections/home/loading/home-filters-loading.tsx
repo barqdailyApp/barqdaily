@@ -1,4 +1,4 @@
-import { Box, Grid, Stack, Skeleton, Container } from "@mui/material";
+import { Box, Stack, Skeleton, Container } from "@mui/material";
 
 export default function HomeFiltersLoading() {
   return (
@@ -20,13 +20,15 @@ export default function HomeFiltersLoading() {
             height={30}
             sx={{ mb: 2, borderRadius: 1.5 }}
           />
-          <Grid container spacing={3} sx={{ pb: 3 }}>
+          <Stack spacing={1} direction="row" flexWrap="wrap">
             {[...Array(10)].map((__, i) => (
-              <Grid item xs={12} sm={6} md={2.4} key={i}>
-                <Skeleton variant="rounded" width="100%" height={200} />
-              </Grid>
+              <Skeleton
+                variant="rounded"
+                width={115}
+                sx={{ aspectRatio: "9/10" }}
+              />
             ))}
-          </Grid>
+          </Stack>
         </Box>
       </Stack>
     </Container>
