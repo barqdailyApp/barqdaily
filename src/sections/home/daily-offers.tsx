@@ -25,7 +25,15 @@ export default function DailyOffers({ offers }: { offers: Offer[] }) {
       }}
     >
       {offers.map((item) => (
-        <Grid item xs={12} sm={6} md={4} lg={3} key={item.product_id}>
+        <Grid
+          item
+          xs={12 / 2}
+          sm={12 / 3}
+          md={12 / 4}
+          lg={12 / 5}
+          xl={12 / 7}
+          key={item.product_id}
+        >
           <ProductCard
             product={item}
             href={`${paths.products}/${item.product_id}`}

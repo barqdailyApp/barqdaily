@@ -100,7 +100,7 @@ export default function BanarsSwiper({ banars }: Props) {
         background: theme.palette.background.neutral,
       })}
     >
-      <Container>
+      <Container maxWidth="lg">
         <Box
           sx={{
             width: "100%",

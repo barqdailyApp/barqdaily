@@ -24,7 +24,7 @@ export const COOKIES_KEYS = {
   favAddress: "sammartstore-fav-address",
 };
 
-export const PRODUCTS_PER_PAGE = 15;
+export const PRODUCTS_PER_PAGE = 35;
 
 export const DEFAULT_ADDRESS: Pick<Address, "latitude" | "longitude"> = {
   latitude: "15.333699",

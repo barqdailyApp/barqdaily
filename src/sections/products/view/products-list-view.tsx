@@ -23,9 +23,11 @@ export default function ProductsListView({ products, pagesCount }: Props) {
         {products.map((item) => (
           <Grid
             item
-            xs={6}
-            md={4}
-            lg={3}
+            xs={12 / 2}
+            sm={12 / 3}
+            md={12 / 4}
+            lg={12 / 5}
+            xl={12 / 7}
             key={item.product_id}
             sx={{ display: "grid", alignItems: "stretch" }}
           >

@@ -7,7 +7,7 @@ import { Offer } from "@/types/products";
 
 export default async function Page() {
   const offers = await getData<{ data: Offer[] }>(
-    `${endpoints.products.offers}?page=1&limit=4&sort=new`
+    `${endpoints.products.offers}?page=1&limit=7&sort=new`
   );
 
   if ("error" in offers) {

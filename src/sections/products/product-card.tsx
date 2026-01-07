@@ -41,6 +41,7 @@ const StyledCard = styled(Card)(({ theme }) => ({
     },
     zIndex: 9,
   },
+  borderRadius: theme.shape.borderRadius,
 }));
 
 export function ProductCard({
@@ -105,11 +106,16 @@ export function ProductCard({
         </Label>
       )}
 
-      <CardContent spacing={1} flexGrow={1} component={Stack}>
-        <Typography variant="h6" component="p">
+      <CardContent
+        spacing={0.5}
+        flexGrow={1}
+        component={Stack}
+        sx={{ p: ".5rem !important", paddingBottom: ".6rem !important" }}
+      >
+        <Typography variant="body1" fontWeight={600} component="p">
           {product.product_name}
         </Typography>
-        <Typography variant="caption">{product.measurement_unit}</Typography>
+        {/* <Typography variant="caption">{product.measurement_unit}</Typography> */}
         <Box flexGrow={1} aria-hidden />
         <Typography fontWeight={600} color="primary" suppressHydrationWarning>
           {offerPrice && (
