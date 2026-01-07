@@ -15,6 +15,7 @@ import {
   Category,
   SubCategory,
   FullProduct,
+  CategoryGroup,
 } from "@/types/products";
 
 import { getFavAddress } from "./auth-methods";
@@ -36,6 +37,20 @@ export async function fetchCategories() {
   const sectionId = sectionRes[0]?.id;
   const categoriesRes = await getData<Category[]>(
     `${endpoints.products.categories(sectionId)}?all=false`
+  );
+  if ("error" in categoriesRes) {
+    return categoriesRes;
+  }
+  return categoriesRes.data;
+}
+
+interface CategoryGroupsResponse {
+  section: Section;
+  section_categories: CategoryGroup[];
+}
+export async function fetchCategoryGroups() {
+  const categoriesRes = await getData<CategoryGroupsResponse>(
+    endpoints.products.categoryGroups
   );
   if ("error" in categoriesRes) {
     return categoriesRes;

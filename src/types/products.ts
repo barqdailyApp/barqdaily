@@ -20,6 +20,12 @@ export interface Category {
   is_active: boolean;
 }
 
+export interface CategoryGroup {
+  id: string;
+  name: string;
+  categories: Category[];
+}
+
 export interface SubCategory {
   id: string;
   sub_category_id: string;

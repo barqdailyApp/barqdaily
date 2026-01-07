@@ -88,7 +88,6 @@ async function apiRequest<TResponse, TBody = undefined>(
     }
 
     const responseData = await response.json();
-
     // Response check after parsing so i can get the error message
     if (!response.ok) {
       const errMsg = Array.isArray(responseData?.message)

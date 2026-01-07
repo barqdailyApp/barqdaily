@@ -1,25 +1,22 @@
-import { fetchBrands, fetchCategories } from "@/actions/products-actions";
+import { fetchBrands, fetchCategoryGroups } from "@/actions/products-actions";
 
 import BrandsSwiper from "@/sections/home/brands-swiper";
-import CategoriesList from "@/sections/home/categories-list";
+import CategoryGroupsList from "@/sections/home/category-groups-list";
+
+import { Brand, CategoryGroup } from "@/types/products";
 
 export default async function Page() {
-  const brands = await fetchBrands();
+  const brandsRes = await fetchBrands();
+  const brands: Brand[] = "error" in brandsRes ? [] : brandsRes;
 
-  if ("error" in brands) {
-    throw new Error(brands.error);
-  }
-
-  const categories = await fetchCategories();
-
-  if ("error" in categories) {
-    throw new Error(categories.error);
-  }
+  const categoryGroups = await fetchCategoryGroups();
+  const groups: CategoryGroup[] =
+    "error" in categoryGroups ? [] : categoryGroups.section_categories;
 
   return (
     <>
       {brands.length > 0 && <BrandsSwiper brands={brands} />}
-      {categories.length > 0 && <CategoriesList categories={categories} />}
+      {groups.length > 0 && <CategoryGroupsList groups={groups} />}
     </>
   );
 }
