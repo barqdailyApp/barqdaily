@@ -1,9 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import { Box, Card, CardMedia, Typography } from "@mui/material";
+import { Card, CardMedia, Typography } from "@mui/material";
 
 import { Category } from "@/types/products";
 
@@ -15,22 +14,18 @@ export default function CategoryCard({ category }: Props) {
   const router = useRouter();
   return (
     <Card
-      sx={(theme) => ({
-        // border: `1px solid ${theme.palette.primary.main}`,
+      sx={{
         position: "relative",
         minHeight: "100%",
         display: "grid",
         alignContent: "space-between",
         borderRadius: 2,
-      })}
+        cursor: "pointer",
+      }}
+      onClick={() => router.push(`/category?categoryId=${category.id}`)}
+      role="button"
+      aria-label={category.name}
     >
-      <Box
-        className="card-clickable-layer"
-        aria-hidden
-        sx={{ position: "absolute", inset: 0, cursor: "pointer" }}
-        href={`/category?categoryId=${category.id}`}
-        component={Link}
-      />
       <Typography
         variant="body2"
         display="block"
@@ -56,7 +51,6 @@ export default function CategoryCard({ category }: Props) {
         }}
         image={category.logo}
         alt={category.name}
-        onClick={() => router.push(`/category?categoryId=${category.id}`)}
       />
     </Card>
   );
