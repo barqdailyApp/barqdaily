@@ -5,8 +5,11 @@ import { Address } from "./types/profile";
 // API
 // ----------------------------------------------------------------------
 
-export const { HOST_API } = process.env;
-export const ASSETS_API = process.env.HOST_DOMAIN;
+export const {
+  NEXT_PUBLIC_HOST_API: HOST_API,
+  NEXT_PUBLIC_TENANT_ID: TENANT_ID,
+  HOST_DOMAIN: ASSETS_API,
+} = process.env;
 
 // ROOT PATH AFTER LOGIN SUCCESSFUL
 export const PATH_AFTER_LOGIN = paths.home; // as '/dashboard'
