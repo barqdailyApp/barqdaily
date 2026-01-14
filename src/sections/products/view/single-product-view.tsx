@@ -4,10 +4,10 @@ import { useTranslations } from "next-intl";
 
 import {
   Box,
+  Card,
   Stack,
   Container,
   Typography,
-  Card,
   CardContent,
 } from "@mui/material";
 
