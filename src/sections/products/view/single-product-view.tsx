@@ -2,7 +2,14 @@
 
 import { useTranslations } from "next-intl";
 
-import { Box, Stack, Container, Typography } from "@mui/material";
+import {
+  Box,
+  Stack,
+  Container,
+  Typography,
+  Card,
+  CardContent,
+} from "@mui/material";
 
 import { useCurrency } from "@/utils/format-number";
 
@@ -10,7 +17,7 @@ import { SECTION_PADDING } from "@/layouts/config-layout";
 
 import Label from "@/components/label";
 
-import IncrementerButton from "@/sections/products/incrementer-button";
+import ProductAddForm from "@/sections/products/product-add-form";
 
 import { FullProduct, ProductMeasurement } from "@/types/products";
 
@@ -34,16 +41,10 @@ export default function SingleProductView({
   const originalPrice = measurement.product_category_price.product_price;
   const finalPrice = offerPrice ?? originalPrice;
 
-  const maxQuantity = Math.min(
-    measurement.warehouse_quantity,
-    measurement.max_order_quantity,
-    ...(measurement.offer?.quantity ? [measurement.offer?.quantity] : [])
-  );
-
   const renderSwiper = <ProductSwiper images={product.product_images} />;
 
   const renderContent = (
-    <Box sx={{ height: "auto", pt: 4 }}>
+    <Box>
       <Typography variant="h4" component="p">
         {product.product_name}
       </Typography>
@@ -72,44 +73,65 @@ export default function SingleProductView({
   );
 
   const renderActions = (
-    <Stack
-      direction="row"
-      alignItems="center"
-      justifyContent="start"
-      spacing={1}
-      pt={1}
-    >
-      <ProductFavButton
-        isFav={product.product_is_fav}
-        productId={product.product_id}
-        sectionId={product.section_id}
-        sx={{ alignSelf: "stretch" }}
-      />
-
-      <IncrementerButton
-        product_id={product.product_id}
-        product_price_id={
-          measurement.product_category_price.product_category_price_id
-        }
-        min_order_quantity={measurement.min_order_quantity}
-        max_order_quantity={maxQuantity}
-        is_quantity_available={product.is_quantity_available}
-      />
+    <Stack spacing={2} pt={1}>
+      <Stack
+        direction="row"
+        alignItems="center"
+        justifyContent="start"
+        spacing={1}
+      >
+        <ProductFavButton
+          isFav={product.product_is_fav}
+          productId={product.product_id}
+          sectionId={product.section_id}
+          sx={{ alignSelf: "stretch" }}
+        />
+      </Stack>
+      {Number(product.product_option_groups?.length) === 0 ? (
+        <ProductAddForm
+          product_category_price_id={
+            measurement.product_category_price.product_category_price_id
+          }
+          is_quantity_available={product.is_quantity_available}
+          optionGroups={product.product_option_groups || []}
+        />
+      ) : null}
     </Stack>
   );
 
   return (
     <Container sx={{ py: SECTION_PADDING }}>
-      <Stack direction={{ md: "row" }} spacing={4}>
+      <Stack direction={{ md: "row" }} spacing={2}>
         <Box flexShrink={0} maxWidth={{ md: "50%" }}>
           {renderSwiper}
         </Box>
 
-        <Box flexGrow={1}>
-          {renderContent}
+        <Stack spacing={2} flexGrow={1}>
+          <Card>
+            <CardContent>
+              {renderContent}
 
-          {renderActions}
-        </Box>
+              {renderActions}
+            </CardContent>
+          </Card>
+
+          {product.product_option_groups?.length > 0 ? (
+            <Card>
+              <CardContent>
+                <Typography variant="h6" gutterBottom>
+                  {t("options")}
+                </Typography>
+                <ProductAddForm
+                  product_category_price_id={
+                    measurement.product_category_price.product_category_price_id
+                  }
+                  is_quantity_available={product.is_quantity_available}
+                  optionGroups={product.product_option_groups || []}
+                />
+              </CardContent>
+            </Card>
+          ) : null}
+        </Stack>
       </Stack>
     </Container>
   );

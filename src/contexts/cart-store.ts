@@ -17,6 +17,7 @@ export interface CartProduct {
   offer_description: string;
   additional_services: any[];
   image: string;
+  options?: { id: string; price: number; name: string }[];
 }
 
 export interface PromoCode {
@@ -100,7 +101,7 @@ export const useCartStore = create<InitialState & CartStateActions>()(
           totalPrice: state.totalPrice - oldProduct.price * oldProduct.quantity,
         };
       }),
-    initProducts: (products) =>
+    initProducts: (products) => {
       set({
         products,
         productsQuantity: products.length,
@@ -108,7 +109,8 @@ export const useCartStore = create<InitialState & CartStateActions>()(
           (acc, product) => acc + product.price * product.quantity,
           0
         ),
-      }),
+      });
+    },
     setMinOrderPrice: (price) => set({ minOrderPrice: price }),
     setDeliveryFee: (fee) => set({ deliveryFee: fee }),
   })

@@ -7,6 +7,7 @@ import {
   Box,
   Card,
   Stack,
+  Button,
   styled,
   CardMedia,
   CardProps,
@@ -14,15 +15,16 @@ import {
   CardContent,
 } from "@mui/material";
 
+import { RouterLink } from "@/routes/components";
+
 import { useCurrency } from "@/utils/format-number";
 
 import { useCartStore } from "@/contexts/cart-store";
 
 import Label from "@/components/label";
+import Iconify from "@/components/iconify";
 
 import { Offer, Product } from "@/types/products";
-
-import IncrementerButton from "./incrementer-button";
 
 interface Props {
   product: Product | Offer;
@@ -58,12 +60,6 @@ export function ProductCard({
   const offerPrice = product.offer_price;
   const originalPrice = product.product_price;
   const finalPrice = offerPrice ?? originalPrice;
-
-  const maxQuantity = Math.min(
-    product.warehouse_quantity,
-    product.max_order_quantity,
-    ...(product.offer_quantity ? [product.offer_quantity] : [])
-  );
 
   const currency = useCurrency();
 
@@ -126,19 +122,18 @@ export function ProductCard({
           {currency(finalPrice)}
         </Typography>
 
-        <Stack direction="row" spacing={1} flexWrap="wrap">
-          <IncrementerButton
-            product_id={product.product_id}
-            product_price_id={product.product_price_id}
-            min_order_quantity={product.min_order_quantity}
-            max_order_quantity={maxQuantity}
-            addButtonProps={{
-              sx: { flexGrow: 1 },
-            }}
-            is_quantity_available={product.is_quantity_available}
-            sx={{ flexGrow: 1 }}
-          />
-        </Stack>
+        <Button
+          component={RouterLink}
+          href={href}
+          variant="contained"
+          color="primary"
+          fullWidth
+          disabled={!product.is_quantity_available}
+          startIcon={<Iconify icon="bxs:cart-alt" />}
+          sx={{ mt: 1 }}
+        >
+          {t("add_to_cart")}
+        </Button>
       </CardContent>
     </StyledCard>
   );

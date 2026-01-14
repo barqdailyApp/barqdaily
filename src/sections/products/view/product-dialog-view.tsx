@@ -16,6 +16,7 @@ import {
   DialogContent,
   LinearProgress,
   DialogContentText,
+  Stack,
 } from "@mui/material";
 
 import { useCurrency } from "@/utils/format-number";
@@ -25,7 +26,7 @@ import { fetchSingleProduct } from "@/actions/products-actions";
 import Label from "@/components/label";
 import Iconify from "@/components/iconify";
 
-import IncrementerButton from "@/sections/products/incrementer-button";
+import ProductAddToCart from "@/sections/products/product-add-form";
 
 import { FullProduct, ProductMeasurement } from "@/types/products";
 
@@ -149,26 +150,27 @@ function ProductDialogContent({
   );
 
   const renderActions = (
-    <DialogActions>
-      <ProductFavButton
-        isFav={product.product_is_fav}
-        productId={product.product_id}
-        sectionId={product.section_id}
-        sx={{ alignSelf: "stretch" }}
-      />
+    <DialogActions
+      sx={{ flexDirection: "column", alignItems: "stretch", gap: 2 }}
+    >
+      <Stack direction="row" alignItems="center" spacing={1}>
+        <ProductFavButton
+          isFav={product.product_is_fav}
+          productId={product.product_id}
+          sectionId={product.section_id}
+          sx={{ alignSelf: "stretch" }}
+        />
+      </Stack>
 
-      <IncrementerButton
+      <ProductAddToCart
         product_id={product.product_id}
-        product_price_id={
+        product_category_price_id={
           measurement.product_category_price.product_category_price_id
         }
         min_order_quantity={measurement.min_order_quantity}
         max_order_quantity={maxQuantity}
         is_quantity_available={product.is_quantity_available}
-        addButtonProps={{
-          sx: { flexGrow: 1 },
-        }}
-        sx={{ flexGrow: 1 }}
+        optionGroups={product.product_option_groups || []}
       />
     </DialogActions>
   );

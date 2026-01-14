@@ -70,8 +70,28 @@ export interface FullProduct {
     is_quantity_available: boolean;
     product_logo: string;
     product_images: string[];
+    product_option_groups: ProductOptionGroup[];
   };
   product_measurements: ProductMeasurement[];
+}
+export interface ProductOptionGroup {
+  id: string;
+  option_group_id: string;
+  name: string;
+  name_en: string;
+  min_selection: number;
+  max_selection: number;
+  order_by: number;
+  options: ProductOption[];
+}
+export interface ProductOption {
+  id: string;
+  option_id: string;
+  name: string;
+  name_en: string;
+  price: string;
+  is_default: boolean;
+  child_groups?: ProductOptionGroup[];
 }
 export interface ProductMeasurement {
   product_measurement_id: string;

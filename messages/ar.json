@@ -135,7 +135,17 @@
       "Product": {
         "add_to_cart": "أضف إلى السلة",
         "description": "الوصف",
-        "no_available": "غير متوفر"
+        "no_available": "غير متوفر",
+        "options": "خيارات المنتج",
+        "Options": {
+          "required": "مطلوب",
+          "default": "افتراضي",
+          "select_at_least": "يرجى اختيار {count} خيار على الأقل",
+          "select_at_least_for": "يرجى اختيار {count} خيار على الأقل لـ {name}",
+          "select_at_most": "يرجى اختيار {count} خيار على الأكثر",
+          "select_at_most_for": "يرجى اختيار {count} خيار على الأكثر لـ {name}",
+          "select_parent_first": "اختر الخيار الأب أولاً"
+        }
       },
       "offers_title": "العروض اليومية",
       "order_again_title": "أطلب مرة أخرى",
@@ -238,6 +248,7 @@
     },
     "Cart": {
       "fast-delivery-time": "40 دقيقة",
+      "view_product": "عرض المنتج",
       "Steps": {
         "cart": "إضافة متنجات",
         "time-location": "الوقت والمكان",

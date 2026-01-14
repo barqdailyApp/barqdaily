@@ -194,7 +194,6 @@ export async function fetchSingleProduct(productId: string) {
     }
     return res;
   }
-
   return res?.data;
 }
 
