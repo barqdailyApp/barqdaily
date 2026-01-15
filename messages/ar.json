@@ -135,6 +135,7 @@
       "Product": {
         "add_to_cart": "أضف إلى السلة",
         "description": "الوصف",
+        "components": "المكونات",
         "no_available": "غير متوفر",
         "options": "خيارات المنتج",
         "Options": {

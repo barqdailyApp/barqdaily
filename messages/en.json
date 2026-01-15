@@ -135,6 +135,7 @@
       "Product": {
         "add_to_cart": "Add to cart",
         "description": "Description",
+        "components": "Components",
         "no_available": "Not available",
         "options": "Product Options",
         "Options": {

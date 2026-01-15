@@ -66,6 +66,20 @@ export default function SingleProductView({
       {!product.is_quantity_available && (
         <Label color="error">{t("no_available")}</Label>
       )}
+      {product.type === "BUNDLE" && product.components?.length ? (
+        <Box mb={1}>
+          <Typography variant="subtitle2" gutterBottom>
+            {t("components")}
+          </Typography>
+          <Stack spacing={0.5}>
+            {product.components.map((component) => (
+              <Typography key={component.component_id} variant="body2">
+                {component.quantity} × {component.component_name}
+              </Typography>
+            ))}
+          </Stack>
+        </Box>
+      ) : null}
       <Typography color="text.disabled">
         {product.product_description}
       </Typography>

@@ -71,6 +71,12 @@ export interface FullProduct {
     product_logo: string;
     product_images: string[];
     product_option_groups: ProductOptionGroup[];
+    type: "SIMPLE" | "BUNDLE";
+    components?: {
+      component_id: string;
+      component_name: string;
+      quantity: number;
+    }[];
   };
   product_measurements: ProductMeasurement[];
 }
