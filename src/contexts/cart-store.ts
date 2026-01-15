@@ -68,9 +68,9 @@ export const useCartStore = create<InitialState & CartStateActions>()(
           if (product.id === newProduct.id) {
             isProductExist = true;
             priceDiff =
-              newProduct.price * newProduct.quantity -
-              product.price * product.quantity;
-            return newProduct;
+              newProduct.original_price * newProduct.quantity -
+              product.original_price * product.quantity;
+            return { ...product, ...newProduct };
           }
           return product;
         });
@@ -85,7 +85,8 @@ export const useCartStore = create<InitialState & CartStateActions>()(
                 products: [...updatedProducts, newProduct],
                 productsQuantity: state.productsQuantity + 1,
                 totalPrice:
-                  state.totalPrice + newProduct.price * newProduct.quantity,
+                  state.totalPrice +
+                  newProduct.original_price * newProduct.quantity,
               }),
         };
       }),
@@ -93,12 +94,13 @@ export const useCartStore = create<InitialState & CartStateActions>()(
       set((state) => {
         const oldProduct = state.products.find(
           (product) => product.id === id
-        ) || { price: 0, quantity: 0 };
+        ) || { original_price: 0, quantity: 0 };
 
         return {
           products: state.products.filter((product) => product.id !== id),
           productsQuantity: state.productsQuantity - 1,
-          totalPrice: state.totalPrice - oldProduct.price * oldProduct.quantity,
+          totalPrice:
+            state.totalPrice - oldProduct.original_price * oldProduct.quantity,
         };
       }),
     initProducts: (products) => {
@@ -106,7 +108,7 @@ export const useCartStore = create<InitialState & CartStateActions>()(
         products,
         productsQuantity: products.length,
         totalPrice: products.reduce(
-          (acc, product) => acc + product.price * product.quantity,
+          (acc, product) => acc + product.original_price * product.quantity,
           0
         ),
       });

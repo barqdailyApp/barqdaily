@@ -64,6 +64,7 @@ const IncrementerButton = forwardRef<HTMLDivElement, Props>(
         if ("error" in res) {
           enqueueSnackbar(res.error, { variant: "error" });
         } else {
+          delete res.options;
           setProduct(res);
         }
         setLoading(false);
@@ -79,6 +80,7 @@ const IncrementerButton = forwardRef<HTMLDivElement, Props>(
         if ("error" in res) {
           enqueueSnackbar(res.error, { variant: "error" });
         } else {
+          delete res.options;
           setProduct(res);
         }
         setLoading(false);
