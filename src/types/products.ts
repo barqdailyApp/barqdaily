@@ -173,3 +173,21 @@ export interface Offer {
   measurement_unit: string;
   cart_products: any;
 }
+
+export interface Collection {
+  id: string;
+  name: string;
+  name_ar: string;
+  in_header: boolean;
+  black_color_view: boolean;
+  image: string;
+  description: string;
+  is_active: boolean;
+  order_by: number;
+}
+
+export interface CollectionWithProducts {
+  collection: Collection;
+  products: Product[];
+  productCount: number;
+}

@@ -13,6 +13,7 @@ export const paths = {
   products: "/product",
   favProducts: "/favorite",
   brands: "/brand",
+  collections: "/collection",
   offers: "/offers",
   orders: "/orders",
   cart: "/cart",

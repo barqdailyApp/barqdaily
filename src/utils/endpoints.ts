@@ -18,6 +18,7 @@ export const endpoints = {
     singleProduct: "product/single-product-client",
     brands: "product/get-brands-client",
     offers: "product/all-products-offers-for-client",
+    collections: "product/get-collections",
     favorite: ({
       productId,
       sectionId,

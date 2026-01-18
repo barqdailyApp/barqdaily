@@ -16,6 +16,7 @@ import {
   SubCategory,
   FullProduct,
   CategoryGroup,
+  CollectionWithProducts,
 } from "@/types/products";
 
 import { getFavAddress } from "./auth-methods";
@@ -178,6 +179,53 @@ export async function fetchOffers(page = 1) {
     pagesCount: Math.ceil(
       (res?.data?.meta?.itemCount || 0) / PRODUCTS_PER_PAGE
     ),
+  };
+}
+
+export async function fetchCollections() {
+  const searchParams = new URLSearchParams({
+    page: '1',
+    limit: "1"
+  });
+  const res = await getData<{ collections: CollectionWithProducts[] }>(
+    `${endpoints.products.collections}?${searchParams.toString()}`
+  );
+
+  if ("error" in res) {
+    return res;
+  }
+
+  return res?.data?.collections;
+}
+
+export async function fetchProductsByCollection(
+  collectionId: string,
+  page = 1,
+  limit = 50
+) {
+  if (!collectionId) throw new Error("collectionId is required");
+  const favAddress = await getFavAddress();
+
+  const searchParams = new URLSearchParams({
+    collection_id: collectionId,
+    page: String(page),
+    limit: String(limit),
+    sort: "new",
+    longitude: favAddress.longitude,
+    latitude: favAddress.latitude,
+  });
+
+  const res = await getData<{ data: Product[]; meta: { itemCount: number } }>(
+    `${endpoints.products.products}?${searchParams.toString()}`
+  );
+
+  if ("error" in res) {
+    return res;
+  }
+
+  return {
+    items: res?.data?.data,
+    pagesCount: Math.ceil((res?.data?.meta?.itemCount || 0) / limit),
   };
 }
 
