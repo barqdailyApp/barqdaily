@@ -87,12 +87,12 @@ export default function SingleProductView({
   );
 
   const renderActions = (
-    <Stack spacing={2} pt={1}>
       <Stack
         direction="row"
         alignItems="center"
         justifyContent="start"
         spacing={1}
+        pt={1}
       >
         <ProductFavButton
           isFav={product.product_is_fav}
@@ -100,8 +100,7 @@ export default function SingleProductView({
           sectionId={product.section_id}
           sx={{ alignSelf: "stretch" }}
         />
-      </Stack>
-      {Number(product.product_option_groups?.length) === 0 ? (
+      {(product.product_option_groups?.length || 0) === 0 ? (
         <ProductAddForm
           product_category_price_id={
             measurement.product_category_price.product_category_price_id
@@ -110,7 +109,7 @@ export default function SingleProductView({
           optionGroups={product.product_option_groups || []}
         />
       ) : null}
-    </Stack>
+      </Stack>
   );
 
   return (
