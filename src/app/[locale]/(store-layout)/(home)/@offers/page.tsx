@@ -13,5 +13,12 @@ export default async function Page() {
   if ("error" in offers) {
     return null;
   }
-  return <DailyOffers offers={offers.data?.data} />;
+
+  const items = offers.data.data;
+
+  if (items.length === 0) {
+    return null;
+  }
+
+  return <DailyOffers offers={items} />;
 }
