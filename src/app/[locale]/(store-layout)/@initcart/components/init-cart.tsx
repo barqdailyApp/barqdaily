@@ -22,7 +22,8 @@ export default function InitCart() {
       const cartRes = await fetchCartProducts();
 
       if ("error" in cartRes) {
-        enqueueSnackbar(cartRes.error, { variant: "error" });
+        if (cartRes.status !== 401)
+          enqueueSnackbar(cartRes.error, { variant: "error" });
       } else {
         initProducts(cartRes);
       }
@@ -30,7 +31,8 @@ export default function InitCart() {
       const sectionRes = await fetchSections();
 
       if ("error" in sectionRes) {
-        enqueueSnackbar(sectionRes.error, { variant: "error" });
+        if (sectionRes.status !== 401)
+          enqueueSnackbar(sectionRes.error, { variant: "error" });
       } else {
         setMinOrderPrice(Number(sectionRes[0].min_order_price));
         setDeliveryFee(Number(sectionRes[0].delivery_price));
@@ -40,7 +42,8 @@ export default function InitCart() {
       const addressesRes = await fetchAddresses();
 
       if ("error" in addressesRes) {
-        enqueueSnackbar(addressesRes.error, { variant: "error" });
+        if (addressesRes.status !== 401)
+          enqueueSnackbar(addressesRes.error, { variant: "error" });
       } else {
         setAddresses(addressesRes);
       }
@@ -48,7 +51,8 @@ export default function InitCart() {
       const paymentsRes = await fetchPayments();
 
       if ("error" in paymentsRes) {
-        enqueueSnackbar(paymentsRes.error, { variant: "error" });
+        if (paymentsRes.status !== 401)
+          enqueueSnackbar(paymentsRes.error, { variant: "error" });
       } else {
         setPayments(paymentsRes);
       }
