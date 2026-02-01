@@ -71,7 +71,11 @@ export function ProductCard({
       <Box
         className="card-clickable-layer"
         aria-hidden
-        sx={{ position: "absolute", inset: 0, cursor: "pointer" }}
+        sx={{
+          position: "absolute",
+          inset: 0,
+          cursor: "pointer",
+        }}
         href={href}
         scroll={false}
         component={Link}
@@ -85,6 +89,7 @@ export function ProductCard({
           aspectRatio: "4/5",
           objectFit: "contain",
           cursor: "pointer",
+          marginTop: 1.5,
         }}
         component="img"
       />
