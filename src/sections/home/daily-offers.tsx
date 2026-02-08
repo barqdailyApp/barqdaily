@@ -45,7 +45,7 @@ export default function DailyOffers({ offers }: { offers: Offer[] }) {
   );
 
   return (
-    <Box bgcolor="background.neutral" py={SECTION_PADDING}>
+    <Box py={SECTION_PADDING}>
       <Container>
         <SectionHeadding titleName="offers_title" href={paths.offers} />
         {renderOffers}
