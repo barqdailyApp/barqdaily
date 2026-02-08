@@ -117,9 +117,9 @@ export default function BrandsSwiper({ brands }: Props) {
 
   return (
     <Box
-      sx={(theme) => ({
+      sx={{
         textAlign: "center",
-      })}
+      }}
     >
       <Container>
         <Box sx={{ width: "100%", position: "relative", py: SECTION_PADDING }}>

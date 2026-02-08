@@ -2,7 +2,7 @@ import { Box, Container, LinearProgress } from "@mui/material";
 
 export default function OffersLoading() {
   return (
-    <Box bgcolor="background.neutral" py={{ xs: 4, sm: 6 }}>
+    <Box py={{ xs: 4, sm: 6 }}>
       <Container>
         <Box
           sx={{
