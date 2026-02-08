@@ -7,13 +7,12 @@ export default function Layout({
   children,
   banars,
   filters,
-  collections,
   offers,
   orderagain: orderAgain,
 }: Props) {
   return (
     <>
-      {banars} {filters} {collections} {offers} {orderAgain} {children}
+      {banars} {filters} {offers} {orderAgain} {children}
     </>
   );
 }
