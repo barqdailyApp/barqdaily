@@ -9,9 +9,5 @@ export default async function CategoriesView() {
   const groups: CategoryGroup[] =
     "error" in categoryGroups ? [] : categoryGroups.section_categories;
 
-  if (groups.length === 0) {
-    return null;
-  }
-
   return <CategoryGroupsList groups={groups} />;
 }

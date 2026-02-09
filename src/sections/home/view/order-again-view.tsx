@@ -8,8 +8,8 @@ export default async function OrderAgainView() {
     `${endpoints.orders.list}?page=1&limit=6&status=DELIVERED`
   );
 
-  if ("error" in orders || orders.data?.data.length === 0) {
-    return null;
-  }
-  return <OrderAgain orders={orders.data?.data} />;
+  const items = "error" in orders ? [] : orders.data?.data;
+
+
+  return <OrderAgain orders={items} />;
 }

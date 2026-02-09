@@ -16,9 +16,6 @@ export default async function OffersView() {
 
   const items = offers.data.data;
 
-  if (items.length === 0) {
-    return null;
-  }
 
   return <DailyOffers offers={items} />;
 }

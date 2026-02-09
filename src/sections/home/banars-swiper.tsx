@@ -32,6 +32,7 @@ interface Props {
 }
 
 export default function BanarsSwiper({ banars }: Props) {
+  console.log("banars", banars);
   const locale = useLocale();
   const { dir } = localesSettings[locale as LocaleType];
 

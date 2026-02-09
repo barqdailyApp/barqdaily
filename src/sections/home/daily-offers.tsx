@@ -13,6 +13,7 @@ import { Offer } from "@/types/products";
 import SectionHeadding from "./components/section-headding";
 
 export default function DailyOffers({ offers }: { offers: Offer[] }) {
+  console.log("offers", offers);
   const renderOffers = (
     <Grid
       container
