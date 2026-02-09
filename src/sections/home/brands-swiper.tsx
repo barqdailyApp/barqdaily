@@ -33,7 +33,6 @@ interface Props {
 }
 
 export default function BrandsSwiper({ brands }: Props) {
-  console.log("brands", brands);
   const router = useRouter();
   const locale = useLocale();
   const { dir } = localesSettings[locale as LocaleType];

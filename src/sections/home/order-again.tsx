@@ -1,5 +1,3 @@
-"use client";
-
 import { Grid, Container } from "@mui/material";
 
 import { paths } from "@/routes/paths";
@@ -10,7 +8,6 @@ import SectionHeadding from "./components/section-headding";
 import OrderAgainProductCard from "./components/order-again-product-card";
 
 export default function OrderAgain({ orders }: { orders: any[] }) {
-  console.log("orders", orders);
   return (
     <Container sx={{ py: SECTION_PADDING }}>
       <SectionHeadding titleName="order_again_title" href={paths.orders} />

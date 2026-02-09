@@ -13,7 +13,6 @@ interface Props {
 }
 
 export default function CategoryGroupsList({ groups }: Props) {
-  console.log("groups", groups);
   return (
     <Container
       sx={{

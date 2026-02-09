@@ -22,6 +22,10 @@ export default async function CollectionsView({
   });
 
   return (
-    <CollectionsList collections={filteredCollections} />
+    <>
+      {filteredCollections.length > 0 && (
+        <CollectionsList collections={filteredCollections} />
+      )}
+    </>
   );
 }

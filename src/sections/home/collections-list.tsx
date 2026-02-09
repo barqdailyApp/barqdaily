@@ -45,7 +45,6 @@ const StyledButton = styled(IconButton)(({ theme }) => ({
 }));
 
 export default function CollectionsList({ collections }: Props) {
-  console.log("collections", collections);
   const t = useTranslations("Pages.Home");
   const locale = useLocale() as LocaleType;
   const dir = useDir();
