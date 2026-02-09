@@ -20,6 +20,12 @@ export interface Category {
   is_active: boolean;
 }
 
+export interface CategoryGroup {
+  id: string;
+  name: string;
+  categories: Category[];
+}
+
 export interface SubCategory {
   id: string;
   sub_category_id: string;
@@ -64,8 +70,34 @@ export interface FullProduct {
     is_quantity_available: boolean;
     product_logo: string;
     product_images: string[];
+    product_option_groups: ProductOptionGroup[];
+    type: "SIMPLE" | "BUNDLE";
+    components?: {
+      component_id: string;
+      component_name: string;
+      quantity: number;
+    }[];
   };
   product_measurements: ProductMeasurement[];
+}
+export interface ProductOptionGroup {
+  id: string;
+  option_group_id: string;
+  name: string;
+  name_en: string;
+  min_selection: number;
+  max_selection: number;
+  order_by: number;
+  options: ProductOption[];
+}
+export interface ProductOption {
+  id: string;
+  option_id: string;
+  name: string;
+  name_en: string;
+  price: string;
+  is_default: boolean;
+  child_groups?: ProductOptionGroup[];
 }
 export interface ProductMeasurement {
   product_measurement_id: string;
@@ -140,4 +172,22 @@ export interface Offer {
   measurement_unit_id: string;
   measurement_unit: string;
   cart_products: any;
+}
+
+export interface Collection {
+  id: string;
+  name: string;
+  name_ar: string;
+  in_header: boolean;
+  black_color_view: boolean;
+  image: string;
+  description: string;
+  is_active: boolean;
+  order_by: number;
+}
+
+export interface CollectionWithProducts {
+  collection: Collection;
+  products: Product[];
+  productCount: number;
 }

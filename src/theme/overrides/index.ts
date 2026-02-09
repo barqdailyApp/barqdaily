@@ -36,6 +36,7 @@ import { dataGrid } from "./components/data-grid";
 import { treeView } from "./components/tree-view";
 import { textField } from "./components/textfield";
 import { accordion } from "./components/accordion";
+import { container } from "./components/container";
 import { typography } from "./components/typography";
 import { pagination } from "./components/pagination";
 import { datePicker } from "./components/date-picker";
@@ -95,7 +96,8 @@ export function componentsOverrides(theme: Theme) {
     autocomplete(theme),
     toggleButton(theme),
     loadingButton(theme),
-    circularStatus(theme)
+    circularStatus(theme),
+    container(theme)
   );
 
   return components;

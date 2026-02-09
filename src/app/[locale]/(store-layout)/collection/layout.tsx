@@ -1,11 +1,11 @@
-import "swiper/css";
-import "swiper/css/pagination";
 import { getTranslations } from "next-intl/server";
+
+import { Container } from "@mui/material";
 
 import { LocaleType } from "@/i18n/config-locale";
 
-export default async function Page() {
-  return null;
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return <Container sx={{ pt: 3 }}>{children}</Container>;
 }
 
 export async function generateMetadata({
@@ -16,6 +16,7 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "Metadata" });
 
   return {
-    title: t("Title.home"),
+    title: t("Title.products"),
   };
 }
+

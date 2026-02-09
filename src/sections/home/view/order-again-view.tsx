@@ -3,7 +3,7 @@ import { getData } from "@/utils/crud-fetch-api";
 
 import OrderAgain from "@/sections/home/order-again";
 
-export default async function Page() {
+export default async function OrderAgainView() {
   const orders = await getData<{ data: any[] }>(
     `${endpoints.orders.list}?page=1&limit=6&status=DELIVERED`
   );

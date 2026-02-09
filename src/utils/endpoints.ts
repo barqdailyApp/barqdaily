@@ -10,6 +10,7 @@ export const endpoints = {
   products: {
     sections: "section",
     categories: (sectionId: string) => `section/${sectionId}/categories`,
+    categoryGroups: "section/client/section-category-group",
     subCategories: (categoryId: string) =>
       `category/${categoryId}/subcategories`,
     products: "product/all-products-for-client",
@@ -17,6 +18,7 @@ export const endpoints = {
     singleProduct: "product/single-product-client",
     brands: "product/get-brands-client",
     offers: "product/all-products-offers-for-client",
+    collections: "product/get-collections",
     favorite: ({
       productId,
       sectionId,

@@ -21,11 +21,14 @@ export async function fetchCartProducts() {
   return res?.data;
 }
 
-export async function addProductToCart(product_category_price_id: string) {
-  const res = await postData<
-    CartProduct,
-    { product_category_price_id: string }
-  >(`${endpoints.cart.add}`, { product_category_price_id });
+export async function addProductToCart(body: {
+  product_category_price_id: string;
+  options: string[];
+}) {
+  const res = await postData<CartProduct, typeof body>(
+    `${endpoints.cart.add}`,
+    body
+  );
 
   if ("error" in res) {
     return res;

@@ -135,7 +135,18 @@
       "Product": {
         "add_to_cart": "Add to cart",
         "description": "Description",
-        "no_available": "Not available"
+        "components": "Components",
+        "no_available": "Not available",
+        "options": "Product Options",
+        "Options": {
+          "required": "required",
+          "default": "Default",
+          "select_at_least": "Please select at least {count} option(s)",
+          "select_at_least_for": "Please select at least {count} option(s) for {name}",
+          "select_at_most": "Please select at most {count} option(s)",
+          "select_at_most_for": "Please select at most {count} option(s) for {name}",
+          "select_parent_first": "Select parent option first"
+        }
       },
       "offers_title": "Daily Offers",
       "order_again_title": "Order Again",
@@ -237,6 +248,7 @@
     },
     "Cart": {
       "fast-delivery-time": "40min",
+      "view_product": "View Product",
       "Steps": {
         "cart": "Adding items",
         "time-location": "Time & Location",

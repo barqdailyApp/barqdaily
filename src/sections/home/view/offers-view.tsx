@@ -5,13 +5,20 @@ import DailyOffers from "@/sections/home/daily-offers";
 
 import { Offer } from "@/types/products";
 
-export default async function Page() {
+export default async function OffersView() {
   const offers = await getData<{ data: Offer[] }>(
-    `${endpoints.products.offers}?page=1&limit=4&sort=new`
+    `${endpoints.products.offers}?page=1&limit=7&sort=new`
   );
 
   if ("error" in offers) {
     return null;
   }
-  return <DailyOffers offers={offers.data?.data} />;
+
+  const items = offers.data.data;
+
+  if (items.length === 0) {
+    return null;
+  }
+
+  return <DailyOffers offers={items} />;
 }

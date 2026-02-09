@@ -15,6 +15,8 @@ import {
   Category,
   SubCategory,
   FullProduct,
+  CategoryGroup,
+  CollectionWithProducts,
 } from "@/types/products";
 
 import { getFavAddress } from "./auth-methods";
@@ -36,6 +38,20 @@ export async function fetchCategories() {
   const sectionId = sectionRes[0]?.id;
   const categoriesRes = await getData<Category[]>(
     `${endpoints.products.categories(sectionId)}?all=false`
+  );
+  if ("error" in categoriesRes) {
+    return categoriesRes;
+  }
+  return categoriesRes.data;
+}
+
+interface CategoryGroupsResponse {
+  section: Section;
+  section_categories: CategoryGroup[];
+}
+export async function fetchCategoryGroups() {
+  const categoriesRes = await getData<CategoryGroupsResponse>(
+    endpoints.products.categoryGroups
   );
   if ("error" in categoriesRes) {
     return categoriesRes;
@@ -166,6 +182,53 @@ export async function fetchOffers(page = 1) {
   };
 }
 
+export async function fetchCollections() {
+  const searchParams = new URLSearchParams({
+    page: '1',
+    limit: "1"
+  });
+  const res = await getData<{ collections: CollectionWithProducts[] }>(
+    `${endpoints.products.collections}?${searchParams.toString()}`
+  );
+
+  if ("error" in res) {
+    return res;
+  }
+
+  return res?.data?.collections;
+}
+
+export async function fetchProductsByCollection(
+  collectionId: string,
+  page = 1,
+  limit = 50
+) {
+  if (!collectionId) throw new Error("collectionId is required");
+  const favAddress = await getFavAddress();
+
+  const searchParams = new URLSearchParams({
+    collection_id: collectionId,
+    page: String(page),
+    limit: String(limit),
+    sort: "new",
+    longitude: favAddress.longitude,
+    latitude: favAddress.latitude,
+  });
+
+  const res = await getData<{ data: Product[]; meta: { itemCount: number } }>(
+    `${endpoints.products.products}?${searchParams.toString()}`
+  );
+
+  if ("error" in res) {
+    return res;
+  }
+
+  return {
+    items: res?.data?.data,
+    pagesCount: Math.ceil((res?.data?.meta?.itemCount || 0) / limit),
+  };
+}
+
 export async function fetchSingleProduct(productId: string) {
   const user = JSON.parse(cookies().get(COOKIES_KEYS.user)?.value || "{}");
   const favAddress = await getFavAddress();
@@ -179,7 +242,6 @@ export async function fetchSingleProduct(productId: string) {
     }
     return res;
   }
-
   return res?.data;
 }
 

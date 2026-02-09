@@ -3,11 +3,10 @@ import { Box, Skeleton, Container } from "@mui/material";
 export default function BannersLoading() {
   return (
     <Box
-      sx={(theme) => ({
-        background: theme.palette.background.neutral,
+      sx={{
         px: 0.5,
         py: 6,
-      })}
+      }}
     >
       <Container>
         <Skeleton
