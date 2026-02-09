@@ -8,6 +8,7 @@ export default async function CategoriesView() {
   const categoryGroups = await fetchCategoryGroups();
   const groups: CategoryGroup[] =
     "error" in categoryGroups ? [] : categoryGroups.section_categories;
+  console.log("categoryGroups", categoryGroups);
 
   return <CategoryGroupsList groups={groups} />;
 }

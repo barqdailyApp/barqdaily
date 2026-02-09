@@ -8,6 +8,7 @@ export default async function OrderAgainView() {
     `${endpoints.orders.list}?page=1&limit=6&status=DELIVERED`
   );
 
+  console.log("orders", orders);
   const items = "error" in orders ? [] : orders.data?.data;
 
 

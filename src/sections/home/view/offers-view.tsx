@@ -10,6 +10,7 @@ export default async function OffersView() {
     `${endpoints.products.offers}?page=1&limit=7&sort=new`
   );
 
+  console.log("offers", offers);
   if ("error" in offers) {
     return null;
   }
