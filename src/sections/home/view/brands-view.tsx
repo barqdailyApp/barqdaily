@@ -7,6 +7,6 @@ import BrandsSwiper from "../brands-swiper";
 export default async function BrandsView() {
   const brandsRes = await fetchBrands();
   const brands: Brand[] = "error" in brandsRes ? [] : brandsRes;
-  console.log("brandsRes", brandsRes);
+
   return <BrandsSwiper brands={brands} />;
 }

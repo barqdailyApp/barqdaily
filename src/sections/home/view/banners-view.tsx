@@ -7,7 +7,6 @@ import BanarsSwiper from "../banars-swiper";
 export default async function BannersView() {
   const banarsRes = await fetchBanars();
   const banars: Banar[] = "error" in banarsRes ? [] : banarsRes;
-  console.log("banarsRes", banarsRes);
 
   return <BanarsSwiper banars={banars} />;
 }
