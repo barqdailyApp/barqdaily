@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Stack, Container, Typography } from "@mui/material";
+import { Box, Grid, Stack, Container, Typography } from "@mui/material";
 
 import { SECTION_PADDING } from "@/layouts/config-layout";
 
@@ -29,13 +29,13 @@ export default function CategoryGroupsList({ groups }: Props) {
               <Typography variant="h6" component="h3" gutterBottom>
                 {name}
               </Typography>
-              <Stack spacing={1} direction="row" flexWrap="wrap">
+              <Grid container spacing={1}>
                 {categories?.map((item, index) => (
-                  <Box width={115} key={index}>
+                  <Grid item xs={4} sm={2} md={12 / 8} lg={1} key={index}>
                     <CategoryCard category={item} />
-                  </Box>
+                  </Grid>
                 ))}
-              </Stack>
+              </Grid>
             </Box>
           ))}
       </Stack>
