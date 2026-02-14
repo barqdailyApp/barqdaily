@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
 import { useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -36,32 +37,48 @@ export default function BrandsSwiper({ brands }: Props) {
   const router = useRouter();
   const locale = useLocale();
   const { dir } = localesSettings[locale as LocaleType];
+  const [slidesPerView, setSlidesPerView] = useState(3);
+  const shouldShowArrows = brands.length > slidesPerView;
 
   const renderSwiper = (
-    <Box px={{ md: 9, lg: 12 }}>
+    <Box px={shouldShowArrows ? 9 : 0}>
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
-        spaceBetween={0}
+        spaceBetween={10}
         slidesPerView={2}
         breakpoints={{
-          600: {
+          450: {
             slidesPerView: 3,
-            spaceBetween: 20,
           },
-          900: {
+          700: {
             slidesPerView: 5,
-            spaceBetween: 40,
+          },
+          1000: {
+            slidesPerView: 7,
           },
           1200: {
-            slidesPerView: 6,
-            spaceBetween: 50,
+            slidesPerView: 9,
           },
         }}
-        loop
+        loop={shouldShowArrows}
         autoplay={{ delay: 3000 }}
         navigation={{
           nextEl: ".brands-next",
           prevEl: ".brands-prev",
+        }}
+        onInit={(swiper) => {
+          const current =
+            typeof swiper.params.slidesPerView === "number"
+              ? swiper.params.slidesPerView
+              : 2;
+          setSlidesPerView(current);
+        }}
+        onBreakpoint={(_, breakpointParams) => {
+          const current =
+            typeof breakpointParams.slidesPerView === "number"
+              ? breakpointParams.slidesPerView
+              : 2;
+          setSlidesPerView(current);
         }}
       >
         {brands?.map((item, index) => (
@@ -69,14 +86,14 @@ export default function BrandsSwiper({ brands }: Props) {
             <Card
               sx={{
                 objectFit: "cover",
-                width: "120px",
+                width: "100%",
                 height: "auto",
                 cursor: "pointer",
               }}
               src={item.logo}
               alt={item.name}
-              width={200}
-              height={200}
+              width={400}
+              height={400}
               onClick={() => router.push(`brand/${item.id}`)}
               component={Image}
             />
@@ -122,9 +139,9 @@ export default function BrandsSwiper({ brands }: Props) {
       }}
     >
       <Container>
-        <Box sx={{ width: "100%", position: "relative", py: SECTION_PADDING }}>
+        <Box sx={{ width: "100%", position: "relative", mb: SECTION_PADDING }}>
           {renderSwiper}
-          {renderButtons}
+          {shouldShowArrows ? renderButtons : null}
         </Box>
       </Container>
     </Box>
