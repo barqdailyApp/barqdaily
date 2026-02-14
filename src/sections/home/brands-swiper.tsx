@@ -41,13 +41,13 @@ export default function BrandsSwiper({ brands }: Props) {
   const shouldShowArrows = brands.length > slidesPerView;
 
   const renderSwiper = (
-    <Box px={shouldShowArrows ? 9 : 0}>
+    <Box px={shouldShowArrows ? { md: 9 } : 0}>
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         spaceBetween={10}
         slidesPerView={2}
         breakpoints={{
-          450: {
+          320: {
             slidesPerView: 3,
           },
           700: {
