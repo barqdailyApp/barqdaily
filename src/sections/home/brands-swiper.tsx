@@ -56,7 +56,7 @@ export default function BrandsSwiper({ brands }: Props) {
         spaceBetween={10}
         slidesPerView={2}
         breakpoints={{
-          320: {
+          420: {
             slidesPerView: 3,
           },
           700: {
