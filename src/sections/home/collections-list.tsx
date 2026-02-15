@@ -37,11 +37,17 @@ const StyledButton = styled(IconButton)(({ theme }) => ({
   height: 48,
   boxShadow: theme.customShadows.card,
   background: theme.palette.background.paper,
+  "&:hover": {
+    background: theme.palette.background.paper,
+    boxShadow: theme.customShadows.primary,
+    transform: "scale(1.05)",
+  },
   border: `1px solid ${theme.palette.primary.light}`,
   [theme.breakpoints.down("md")]: {
     display: "none",
   },
-  transition: "background-color 0.3s ease",
+  transition:
+    "background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease",
 }));
 
 export default function CollectionsList({ collections }: Props) {
@@ -158,7 +164,11 @@ function CollectionRow({
           modules={[Navigation]}
           spaceBetween={12}
           slidesPerView={2}
-          style={{ alignItems: "stretch", paddingInline: 4 }}
+          style={{
+            alignItems: "stretch",
+            paddingInline: 4,
+            overflow: "clip visible",
+          }}
           breakpoints={{
             600: { slidesPerView: 3, spaceBetween: 16 },
             900: { slidesPerView: 4, spaceBetween: 18 },
@@ -191,7 +201,11 @@ function CollectionRow({
           {item.products.map((product) => (
             <SwiperSlide
               key={product.product_id}
-              style={{ height: "auto", alignSelf: "stretch", paddingBlock: 4 }}
+              style={{
+                height: "auto",
+                alignSelf: "stretch",
+                paddingBlock: 4,
+              }}
             >
               <ProductCard
                 product={product}

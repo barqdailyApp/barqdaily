@@ -35,12 +35,11 @@ const StyledCard = styled(Card)(({ theme }) => ({
   position: "relative",
   display: "flex",
   flexDirection: "column",
+  transition: "transform 0.2s ease, box-shadow 0.2s ease",
   "&.selected": { boxShadow: `0px 0px 0px 1px ${theme.palette.primary.main}` },
   "&:hover": {
-    boxShadow: `0px 0px 0px 1px ${theme.palette.primary.main}, 0px 0px 0px 4px ${theme.palette.primary.main}`,
-    "&:has(.card-clickable-layer:active)": {
-      boxShadow: `0px 0px 0px 1px ${theme.palette.primary.main}`,
-    },
+    transform: "scale(1.05)",
+    boxShadow: theme.customShadows.primary,
     zIndex: 9,
   },
   borderRadius: theme.shape.borderRadius,
@@ -53,8 +52,9 @@ export function ProductCard({
 }: Props & CardProps) {
   const t = useTranslations("Pages.Home.Product");
   const products = useCartStore((state) => state.products);
-  const isProductInCart = !!products.find(
-    (item) => item.product_id === product.product_id
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const _isProductInCart = !!products.find(
+    (item) => item.product_id === product.product_id,
   );
 
   const offerPrice = product.offer_price;
@@ -66,7 +66,8 @@ export function ProductCard({
   return (
     <StyledCard
       {...cardProps}
-      className={`${cardProps.className || ""} ${isProductInCart ? "selected" : ""}`}
+      className={cardProps.className}
+      // className={`${cardProps.className || ""} ${isProductInCart ? "selected" : ""}`}
     >
       <Box
         className="card-clickable-layer"
