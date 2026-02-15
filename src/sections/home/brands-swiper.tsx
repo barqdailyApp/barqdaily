@@ -89,6 +89,7 @@ export default function BrandsSwiper({ brands }: Props) {
               : 2;
           setSlidesPerView(current);
         }}
+        style={{ overflow: "clip visible" }}
       >
         {brands?.map((item, index) => (
           <SwiperSlide
