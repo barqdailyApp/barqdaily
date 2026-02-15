@@ -139,7 +139,7 @@ export default function BrandsSwiper({ brands }: Props) {
       }}
     >
       <Container>
-        <Box sx={{ width: "100%", position: "relative", mb: SECTION_PADDING }}>
+        <Box sx={{ width: "100%", position: "relative", py: SECTION_PADDING }}>
           {renderSwiper}
           {shouldShowArrows ? renderButtons : null}
         </Box>

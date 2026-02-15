@@ -5,14 +5,16 @@ import { useLocale } from "next-intl";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 
-import { Box, Stack, styled, Container, IconButton } from "@mui/material";
+import { Box, Stack, styled, IconButton } from "@mui/material";
 
-import { SECTION_PADDING } from "@/layouts/config-layout";
+import { SECTION_PADDING, HEADER } from "@/layouts/config-layout";
 import { LocaleType, localesSettings } from "@/i18n/config-locale";
 
 import Iconify from "@/components/iconify";
 
 import { Banar } from "@/types/banars";
+
+const BANNER_MAX_HEIGHT = `calc(100svh - ${HEADER.H_SIMPLE + HEADER.H_MOBILE}px)`;
 
 const StyledButton = styled(IconButton)(({ theme }) => ({
   width: 60,
@@ -36,10 +38,16 @@ export default function BanarsSwiper({ banars }: Props) {
   const { dir } = localesSettings[locale as LocaleType];
 
   const renderSwiper = (
-    <Box px={{ md: 9, lg: 12 }}>
+    <Box
+      sx={{
+        position: "relative",
+        width: "100%",
+        height: "100%",
+      }}
+    >
       <Swiper
         modules={[Navigation, Autoplay]}
-        spaceBetween={20}
+        spaceBetween={0}
         slidesPerView={1}
         loop
         autoplay={{ delay: 3000 }}
@@ -47,17 +55,38 @@ export default function BanarsSwiper({ banars }: Props) {
           nextEl: ".hero-next",
           prevEl: ".hero-prev",
         }}
-        style={{ borderRadius: "10px" }}
+        style={{
+          height: "100%",
+          // complex but gives border radius to card if it's not full screen
+          borderRadius: `min(10px, calc(100000px * (100svw /  (100svh - ${HEADER.H_SIMPLE + HEADER.H_MOBILE}px) - 36px/19px)))`,
+          width: "100%",
+        }}
       >
         {banars?.map((item, index) => (
-          <SwiperSlide key={index} style={{ overflow: "hidden" }}>
-            <Image
-              src={item.banar}
-              alt=" "
-              width={1920}
-              height={500}
-              style={{ borderRadius: "10px" }}
-            />
+          <SwiperSlide
+            key={index}
+            style={{ overflow: "hidden", height: "100%" }}
+          >
+            <Box
+              sx={{
+                position: "relative",
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Image
+                src={item.banar}
+                alt=" "
+                fill
+                sizes="100vw"
+                style={{
+                  objectFit: "contain",
+                }}
+              />
+            </Box>
           </SwiperSlide>
         ))}
       </Swiper>
@@ -70,10 +99,14 @@ export default function BanarsSwiper({ banars }: Props) {
       justifyContent="space-between"
       sx={{
         position: "absolute",
+        px: 2,
         left: 0,
         top: "50%",
         transform: `translateY(-50%)`,
         width: "100%",
+        zIndex: 10,
+        pointerEvents: "none",
+        "& > *": { pointerEvents: "auto" },
       }}
     >
       <StyledButton className="hero-prev">
@@ -94,19 +127,18 @@ export default function BanarsSwiper({ banars }: Props) {
   );
 
   return (
-    <Box sx={{ textAlign: "center" }}>
-      <Container maxWidth="lg">
-        <Box
-          sx={{
-            width: "100%",
-            position: "relative",
-            py: SECTION_PADDING,
-          }}
-        >
-          {renderSwiper}
-          {renderButtons}
-        </Box>
-      </Container>
+    <Box
+      sx={{
+        position: "relative",
+        // width: "100%",
+        height: "auto",
+        aspectRatio: "36/19",
+        maxHeight: BANNER_MAX_HEIGHT,
+        marginInline: "auto",
+      }}
+    >
+      {renderSwiper}
+      {renderButtons}
     </Box>
   );
 }
