@@ -26,7 +26,7 @@ export default function CategoryGroupsList({ groups }: Props) {
           .filter((group) => group.categories.length > 0)
           .map(({ id, name, categories }) => (
             <Box key={id}>
-              <Typography variant="h3" gutterBottom>
+              <Typography variant="h4" component="h3" gutterBottom>
                 {name}
               </Typography>
               <Grid container spacing={1}>

@@ -90,29 +90,68 @@ function CollectionRow({
 
   return (
     <Box key={collection.id}>
-      <Stack
-        direction="row"
-        spacing={3}
-        justifyContent="space-between"
-        alignItems="center"
-      >
-        <Typography variant="h4" sx={{ textAlign: "start" }}>
-          {name}
-        </Typography>
-        <Link
-          href={href}
-          variant="h6"
-          sx={{ display: "flex", alignItems: "center", gap: 0.25 }}
-          component={RouterLink}
+      <Box>
+        <Stack
+          direction="row"
+          spacing={3}
+          justifyContent="space-between"
+          alignItems="center"
         >
-          {actionLabel}
-          <Iconify
-            icon="weui:arrow-filled"
-            sx={{ transform: dir === "rtl" ? " scaleX(-1)" : "" }}
-            width={24}
+          <Typography variant="h3" sx={{ textAlign: "start" }}>
+            {name}
+          </Typography>
+          <Link
+            href={href}
+            variant="h6"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 0.25,
+              "&:hover": {
+                textDecoration: "underline",
+                textDecorationColor: "primary.light",
+                textDecorationThickness: "2px",
+                textUnderlineOffset: "4px",
+              },
+            }}
+            component={RouterLink}
+          >
+            {actionLabel}
+            <Iconify
+              icon="weui:arrow-filled"
+              sx={{ transform: dir === "rtl" ? " scaleX(-1)" : "" }}
+              width={24}
+            />
+          </Link>
+        </Stack>
+
+        {/* divider */}
+        <Stack
+          direction="row"
+          sx={{
+            width: "100%",
+            mt: 2,
+            height: 4,
+            borderRadius: 0.5,
+            overflow: "hidden",
+          }}
+        >
+          <Box
+            sx={{
+              width: "10%",
+              height: "100%",
+              bgcolor: "#FFD23F",
+            }}
           />
-        </Link>
-      </Stack>
+          <Box
+            sx={{
+              width: "90%",
+              height: "100%",
+              bgcolor: "primary.light",
+            }}
+          />
+        </Stack>
+      </Box>
 
       <Box pt={{ xs: 2, sm: 4 }} sx={{ position: "relative" }}>
         <Swiper
@@ -203,4 +242,3 @@ function CollectionRow({
     </Box>
   );
 }
-
