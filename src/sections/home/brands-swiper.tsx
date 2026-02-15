@@ -1,13 +1,22 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 import { useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 
-import { Box, Card, Stack, styled, Container, IconButton } from "@mui/material";
+import {
+  Box,
+  Card,
+  Stack,
+  styled,
+  Container,
+  CardMedia,
+  IconButton,
+  Typography,
+  CardContent,
+} from "@mui/material";
 
 import { SECTION_PADDING } from "@/layouts/config-layout";
 import { LocaleType, localesSettings } from "@/i18n/config-locale";
@@ -82,21 +91,44 @@ export default function BrandsSwiper({ brands }: Props) {
         }}
       >
         {brands?.map((item, index) => (
-          <SwiperSlide key={index} style={{ paddingBlock: ".75rem" }}>
+          <SwiperSlide
+            key={index}
+            style={{ paddingBlock: ".75rem", height: "auto" }}
+          >
             <Card
-              sx={{
-                objectFit: "cover",
-                width: "100%",
-                height: "auto",
-                cursor: "pointer",
-              }}
-              src={item.logo}
-              alt={item.name}
-              width={400}
-              height={400}
-              onClick={() => router.push(`brand/${item.id}`)}
-              component={Image}
-            />
+              sx={(theme) => ({
+                transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                height: "100%",
+                display: "grid",
+                gridTemplateRows: "auto 1fr",
+                "&:hover": {
+                  transform: "scale(1.05)",
+                  boxShadow: theme.customShadows.primary,
+                },
+                "&:active": {
+                  transform: "scale(0.95)",
+                  boxShadow: theme.customShadows.primary,
+                },
+              })}
+              component="button"
+              onClick={() => router.push(`/brand/${item.id}`)}
+            >
+              <CardMedia
+                sx={{
+                  objectFit: "cover",
+                  width: "100%",
+                  height: "auto",
+                  cursor: "pointer",
+                  mt: 1.5,
+                }}
+                image={item.logo}
+                alt={item.name}
+                component="img"
+              />
+              <CardContent sx={{ display: "flex", alignItems: "center" }}>
+                <Typography variant="h6">{item.name}</Typography>
+              </CardContent>
+            </Card>
           </SwiperSlide>
         ))}
       </Swiper>

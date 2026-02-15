@@ -21,17 +21,17 @@ export default function CategoryGroupsList({ groups }: Props) {
         pb: SECTION_PADDING,
       }}
     >
-      <Stack spacing={3}>
+      <Stack spacing={4}>
         {groups
           .filter((group) => group.categories.length > 0)
           .map(({ id, name, categories }) => (
             <Box key={id}>
-              <Typography variant="h6" component="h3" gutterBottom>
+              <Typography variant="h3" gutterBottom>
                 {name}
               </Typography>
               <Grid container spacing={1}>
                 {categories?.map((item, index) => (
-                  <Grid item xs={4} sm={2} md={12 / 8} lg={1} key={index}>
+                  <Grid item xs={4} sm={2} md={12 / 8} lg={12 / 10} key={index}>
                     <CategoryCard category={item} />
                   </Grid>
                 ))}
