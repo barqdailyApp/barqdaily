@@ -1,5 +1,7 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 import { Box, Grid, Container } from "@mui/material";
 
 import { paths } from "@/routes/paths";
@@ -13,6 +15,8 @@ import { Offer } from "@/types/products";
 import SectionHeadding from "./components/section-headding";
 
 export default function DailyOffers({ offers }: { offers: Offer[] }) {
+  const t = useTranslations("Pages.Home");
+
   const renderOffers = (
     <Grid
       container
@@ -47,7 +51,7 @@ export default function DailyOffers({ offers }: { offers: Offer[] }) {
   return (
     <Box py={SECTION_PADDING}>
       <Container>
-        <SectionHeadding titleName="offers_title" href={paths.offers} />
+        <SectionHeadding titleName={t("offers_title")} href={paths.offers} />
         {renderOffers}
       </Container>
     </Box>

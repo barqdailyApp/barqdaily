@@ -1,23 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import RouterLink from "next/link";
+import { useLocale } from "next-intl";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { useLocale, useTranslations } from "next-intl";
 
-import {
-  Box,
-  Link,
-  Stack,
-  styled,
-  Container,
-  IconButton,
-  Typography,
-} from "@mui/material";
+import { Box, Stack, styled, Container, IconButton } from "@mui/material";
 
 import { paths } from "@/routes/paths";
-import { useDir } from "@/routes/hooks/use-dir";
 
 import { LocaleType } from "@/i18n/config-locale";
 import { SECTION_PADDING } from "@/layouts/config-layout";
@@ -27,6 +17,8 @@ import Iconify from "@/components/iconify";
 import { ProductCard } from "@/sections/products/product-card";
 
 import { CollectionWithProducts } from "@/types/products";
+
+import SectionHeadding from "./components/section-headding";
 
 interface Props {
   collections: CollectionWithProducts[];
@@ -51,9 +43,7 @@ const StyledButton = styled(IconButton)(({ theme }) => ({
 }));
 
 export default function CollectionsList({ collections }: Props) {
-  const t = useTranslations("Pages.Home");
   const locale = useLocale() as LocaleType;
-  const dir = useDir();
 
   return (
     <Box py={SECTION_PADDING}>
@@ -66,8 +56,6 @@ export default function CollectionsList({ collections }: Props) {
                 key={item.collection.id}
                 item={item}
                 locale={locale}
-                dir={dir}
-                actionLabel={t("action")}
               />
             ))}
         </Stack>
@@ -79,13 +67,9 @@ export default function CollectionsList({ collections }: Props) {
 function CollectionRow({
   item,
   locale,
-  dir,
-  actionLabel,
 }: {
   item: CollectionWithProducts;
   locale: LocaleType;
-  dir: "rtl" | "ltr";
-  actionLabel: string;
 }) {
   const { collection } = item;
   const name =
@@ -96,68 +80,7 @@ function CollectionRow({
 
   return (
     <Box key={collection.id}>
-      <Box>
-        <Stack
-          direction="row"
-          spacing={3}
-          justifyContent="space-between"
-          alignItems="center"
-        >
-          <Typography variant="h3" sx={{ textAlign: "start" }}>
-            {name}
-          </Typography>
-          <Link
-            href={href}
-            variant="h6"
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 0.25,
-              "&:hover": {
-                textDecoration: "underline",
-                textDecorationColor: "primary.light",
-                textDecorationThickness: "2px",
-                textUnderlineOffset: "4px",
-              },
-            }}
-            component={RouterLink}
-          >
-            {actionLabel}
-            <Iconify
-              icon="weui:arrow-filled"
-              sx={{ transform: dir === "rtl" ? " scaleX(-1)" : "" }}
-              width={24}
-            />
-          </Link>
-        </Stack>
-
-        {/* divider */}
-        <Stack
-          direction="row"
-          sx={{
-            width: "100%",
-            mt: 2,
-            height: 4,
-            borderRadius: 0.5,
-            overflow: "hidden",
-          }}
-        >
-          <Box
-            sx={{
-              width: "10%",
-              height: "100%",
-              bgcolor: "#FFD23F",
-            }}
-          />
-          <Box
-            sx={{
-              width: "90%",
-              height: "100%",
-              bgcolor: "primary.light",
-            }}
-          />
-        </Stack>
-      </Box>
+      <SectionHeadding titleName={name} href={href} />
 
       <Box pt={{ xs: 2, sm: 4 }} sx={{ position: "relative" }}>
         <Swiper
@@ -236,7 +159,7 @@ function CollectionRow({
             >
               <Iconify
                 width={20}
-                sx={{ transform: dir === "rtl" ? undefined : "scaleX(-1)" }}
+                sx={{ "[dir='ltr'] &": { transform: "scaleX(1)" } }}
                 icon="weui:arrow-filled"
               />
             </StyledButton>
@@ -246,7 +169,7 @@ function CollectionRow({
             >
               <Iconify
                 width={20}
-                sx={{ transform: dir === "rtl" ? "scaleX(-1)" : undefined }}
+                sx={{ "[dir='rtl'] &": { transform: "scaleX(1)" } }}
                 icon="weui:arrow-filled"
               />
             </StyledButton>
