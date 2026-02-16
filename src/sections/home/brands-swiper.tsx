@@ -14,8 +14,6 @@ import {
   Container,
   CardMedia,
   IconButton,
-  Typography,
-  CardContent,
 } from "@mui/material";
 
 import { SECTION_PADDING } from "@/layouts/config-layout";
@@ -48,9 +46,17 @@ export default function BrandsSwiper({ brands }: Props) {
   const { dir } = localesSettings[locale as LocaleType];
   const [slidesPerView, setSlidesPerView] = useState(3);
   const shouldShowArrows = brands.length > slidesPerView;
+  const isCenteredSlides = brands.length < slidesPerView;
 
   const renderSwiper = (
-    <Box px={shouldShowArrows ? { md: 9 } : 0}>
+    <Box
+      px={shouldShowArrows ? { md: 9 } : 0}
+      sx={{
+        "& .swiper-wrapper": {
+          justifyContent: isCenteredSlides ? "center" : undefined,
+        },
+      }}
+    >
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         spaceBetween={10}
@@ -59,14 +65,8 @@ export default function BrandsSwiper({ brands }: Props) {
           420: {
             slidesPerView: 3,
           },
-          700: {
-            slidesPerView: 5,
-          },
           1000: {
-            slidesPerView: 7,
-          },
-          1200: {
-            slidesPerView: 9,
+            slidesPerView: 5,
           },
         }}
         loop={shouldShowArrows}
@@ -120,15 +120,11 @@ export default function BrandsSwiper({ brands }: Props) {
                   width: "100%",
                   height: "auto",
                   cursor: "pointer",
-                  mt: 1.5,
                 }}
                 image={item.logo}
                 alt={item.name}
                 component="img"
               />
-              <CardContent sx={{ display: "flex", alignItems: "center" }}>
-                <Typography variant="h6">{item.name}</Typography>
-              </CardContent>
             </Card>
           </SwiperSlide>
         ))}
