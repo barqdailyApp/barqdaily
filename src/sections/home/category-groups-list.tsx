@@ -31,7 +31,14 @@ export default function CategoryGroupsList({ groups }: Props) {
               </Typography>
               <Grid container spacing={1}>
                 {categories?.map((item, index) => (
-                  <Grid item xs={4} sm={2} md={12 / 8} lg={12 / 10} key={index}>
+                  <Grid
+                    item
+                    xs={12 / 3}
+                    sm={12 / 4}
+                    md={12 / 6}
+                    lg={12 / 8}
+                    key={index}
+                  >
                     <CategoryCard category={item} />
                   </Grid>
                 ))}
