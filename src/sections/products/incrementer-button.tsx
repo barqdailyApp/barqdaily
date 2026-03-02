@@ -62,7 +62,7 @@ const IncrementerButton = forwardRef<HTMLDivElement, Props>(
       if (!product) return;
       (async () => {
         setLoading(true);
-        const res = await updateCartProduct(product.id, quantity + 1);
+        const res = await updateCartProduct(product.id, true);
 
         if ("error" in res) {
           enqueueSnackbar(res.error, { variant: "error" });
@@ -72,13 +72,13 @@ const IncrementerButton = forwardRef<HTMLDivElement, Props>(
         }
         setLoading(false);
       })();
-    }, [enqueueSnackbar, product, quantity, setProduct]);
+    }, [enqueueSnackbar, product, setProduct]);
 
     const handleDecrease = useCallback(() => {
       if (!product) return;
       (async () => {
         setLoading(true);
-        const res = await updateCartProduct(product.id, quantity - 1);
+        const res = await updateCartProduct(product.id, false);
 
         if ("error" in res) {
           enqueueSnackbar(res.error, { variant: "error" });
@@ -88,7 +88,7 @@ const IncrementerButton = forwardRef<HTMLDivElement, Props>(
         }
         setLoading(false);
       })();
-    }, [enqueueSnackbar, product, quantity, setProduct]);
+    }, [enqueueSnackbar, product, setProduct]);
 
     const isVertical = orientation === "vertical";
 
