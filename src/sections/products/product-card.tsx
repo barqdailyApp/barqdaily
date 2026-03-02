@@ -233,29 +233,6 @@ export function ProductCard({
             -{offerPercentage}%
           </Label>
         )}
-
-        {cartProduct && (
-          <Button
-            component={RouterLink}
-            href="/cart"
-            variant="soft"
-            color="primary"
-            size="small"
-            sx={{
-              position: "absolute",
-              top: 6,
-              insetInlineEnd: 6,
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 0.5,
-              zIndex: 1,
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Iconify icon="bxs:cart-alt" width={14} />
-            {t("in_cart")}
-          </Button>
-        )}
       </Box>
 
       <CardContent
