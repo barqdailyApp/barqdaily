@@ -100,8 +100,8 @@ const IncrementerButton = forwardRef<HTMLDivElement, Props>(
         alignItems="center"
         justifyContent="space-between"
         sx={{
-          p: 0.5,
-          width: isVertical ? 40 : 88,
+          p: !isVertical ? 0.5 : 0,
+          width: isVertical ? 30 : 88,
           borderRadius: 1,
           typography: "subtitle2",
           ...sx,

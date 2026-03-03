@@ -51,6 +51,12 @@ const StyledCard = styled(Card)(({ theme }) => ({
     zIndex: 9,
   },
   borderRadius: theme.shape.borderRadius,
+  "& .card-clickable-layer": {
+    zIndex: 2,
+  },
+  "& .non-clickable-layer": {
+    zIndex: 3,
+  },
 }));
 
 export function ProductCard({
@@ -204,7 +210,7 @@ export function ProductCard({
 
   return (
     <StyledCard {...cardProps} className={cardProps.className}>
-      {/* <Box
+      <Box
         className="card-clickable-layer"
         aria-hidden
         sx={{
@@ -215,7 +221,7 @@ export function ProductCard({
         href={href}
         scroll={false}
         component={Link}
-      /> */}
+      />
       <Box position="relative">
         <CardMedia
           src={product.product_logo}
@@ -225,8 +231,8 @@ export function ProductCard({
             aspectRatio: "4/5",
             objectFit: "contain",
             cursor: "pointer",
-            position: "relative",
             marginTop: 1.5,
+            position: "relative",
           }}
           component="img"
         />
@@ -336,6 +342,7 @@ export function ProductCard({
               alignItems: "center",
               justifyContent: "center",
             }}
+            className="non-clickable-layer"
             onClick={(e) => e.stopPropagation()}
           >
             {renderRowControl()}
