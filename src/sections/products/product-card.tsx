@@ -180,7 +180,7 @@ export function ProductCard({
 
   return (
     <StyledCard {...cardProps} className={cardProps.className}>
-      <Box
+      {/* <Box
         className="card-clickable-layer"
         aria-hidden
         sx={{
@@ -191,7 +191,7 @@ export function ProductCard({
         href={href}
         scroll={false}
         component={Link}
-      />
+      /> */}
       <Box position="relative">
         <CardMedia
           src={product.product_logo}
@@ -242,7 +242,6 @@ export function ProductCard({
         sx={{
           p: ".5rem !important",
           paddingBottom: ".6rem !important",
-          display: "block",
         }}
       >
         <Stack
@@ -250,7 +249,7 @@ export function ProductCard({
           alignItems="center"
           justifyContent="space-between"
           gap={1}
-          sx={{ minWidth: 0, minHeight: 0, height: "100%" }}
+          sx={{ flexGrow: 1 }}
         >
           <Stack
             sx={{
