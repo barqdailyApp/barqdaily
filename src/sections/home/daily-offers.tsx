@@ -18,17 +18,8 @@ export default function DailyOffers({ offers }: { offers: Offer[] }) {
   const t = useTranslations("Pages.Home");
 
   const renderOffers = (
-    <Grid
-      container
-      spacing={3}
-      pt={{ xs: 3, sm: 6 }}
-      sx={{
-        "& .MuiGrid-item:nth-of-type(4)": {
-          display: { md: "none", lg: "block" },
-        },
-      }}
-    >
-      {offers.map((item) => (
+    <Grid container spacing={3} pt={{ xs: 3, sm: 6 }}>
+      {offers.map((item, index) => (
         <Grid
           item
           xs={12 / 2}
@@ -37,6 +28,15 @@ export default function DailyOffers({ offers }: { offers: Offer[] }) {
           lg={12 / 5}
           xl={12 / 7}
           key={item.product_id}
+          sx={{
+            display: {
+              xs: index >= 4 ? "none" : "block",
+              sm: index >= 6 ? "none" : "block",
+              md: index >= 8 ? "none" : "block",
+              lg: index >= 5 ? "none" : "block",
+              xl: index >= 7 ? "none" : "block",
+            },
+          }}
         >
           <ProductCard
             product={item}
