@@ -1,5 +1,4 @@
 export const endpoints = {
-  theme: "section/home",
   auth: {
     sendOtp: "auth/send-otp",
     verifyOtp: "auth/verify-otp",

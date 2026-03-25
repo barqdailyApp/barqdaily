@@ -16,11 +16,9 @@ import { RouterLink } from "@/routes/components";
 
 import { useCurrency } from "@/utils/format-number";
 
-import { useCartStore } from "@/contexts/cart-store";
 import { SECTION_PADDING } from "@/layouts/config-layout";
 
 import Label from "@/components/label";
-import Iconify from "@/components/iconify";
 
 import ProductAddForm from "@/sections/products/product-add-form";
 
@@ -38,10 +36,6 @@ export default function SingleProductView({
 }: Props) {
   const t = useTranslations("Pages.Home.Product");
   const currency = useCurrency();
-  const { products } = useCartStore();
-  const isInCart = products.some(
-    (item) => item.product_id === product.product_id,
-  );
 
   const measurement =
     product_measurements.find((item) => item.is_main_unit) ||
@@ -109,19 +103,6 @@ export default function SingleProductView({
         sectionId={product.section_id}
         sx={{ alignSelf: "stretch" }}
       />
-
-      {isInCart && (
-        <Button
-          component={RouterLink}
-          href="/cart"
-          variant="soft"
-          color="primary"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <Iconify icon="bxs:cart-alt" width={14} />
-          {t("in_cart")}
-        </Button>
-      )}
 
       {(product.product_option_groups?.length || 0) === 0 ? (
         <ProductAddForm

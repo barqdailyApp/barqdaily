@@ -22,11 +22,7 @@ import LanguagePopover from "../common/language-popover";
 
 // ----------------------------------------------------------------------
 
-interface Props {
-  logo?: string;
-}
-
-export default function StoreHeader({ logo }: Props) {
+export default function StoreHeader() {
   const theme = useTheme();
 
   const offsetTop = useOffSetTop(HEADER.H_OFFSET);
@@ -37,7 +33,7 @@ export default function StoreHeader({ logo }: Props) {
 
   const renderContent = (
     <>
-      <Logo image={logo} sx={{ marginInlineStart: 0.5, marginInlineEnd: 1 }} />
+      <Logo sx={{ marginInlineStart: 0.5, marginInlineEnd: 1 }} />
 
       {isSm ? (
         <Button

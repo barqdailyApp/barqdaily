@@ -155,30 +155,6 @@ export function ProductCard({
         </Button>
       );
 
-    if (!product.direct_add && authenticated)
-      return (
-        <Button
-          component={RouterLink}
-          href={href}
-          variant="contained"
-          color="primary"
-          size="small"
-          sx={{
-            padding: 0,
-            minWidth: "30px",
-            height: "auto",
-            aspectRatio: "1/1",
-          }}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <Iconify
-            icon="mingcute:right-line"
-            width={20}
-            sx={{ "[dir=rtl] &": { transform: "rotate(180deg)" } }}
-          />
-        </Button>
-      );
-
     if (!cartProduct)
       return (
         <LoadingButton
@@ -262,29 +238,6 @@ export function ProductCard({
           >
             -{offerPercentage}%
           </Label>
-        )}
-
-        {cartProduct && (
-          <Button
-            component={RouterLink}
-            href="/cart"
-            variant="soft"
-            color="primary"
-            size="small"
-            sx={{
-              position: "absolute",
-              top: 6,
-              insetInlineEnd: 6,
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 0.5,
-              zIndex: 1,
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Iconify icon="bxs:cart-alt" width={14} />
-            {t("in_cart")}
-          </Button>
         )}
       </Box>
 

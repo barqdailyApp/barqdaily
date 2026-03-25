@@ -50,17 +50,14 @@ export async function removeCartProduct(cart_product_id: string) {
   return res?.data;
 }
 
-export async function updateCartProduct(
-  cart_product_id: string,
-  quantity: number,
-) {
+export async function updateCartProduct(cart_product_id: string, add: boolean) {
   const res = await editData<
     CartProduct,
     {
       cart_product_id: string;
-      quantity: number;
+      add: boolean;
     }
-  >(endpoints.cart.update, "PUT", { cart_product_id, quantity });
+  >(endpoints.cart.update, "PUT", { cart_product_id, add });
 
   if ("error" in res) {
     return res;

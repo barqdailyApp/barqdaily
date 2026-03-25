@@ -11,10 +11,9 @@ import Copyrights from "../common/copyrights";
 
 type Props = {
   children: React.ReactNode;
-  logo?: string;
 };
 
-export default async function StoreLayout({ children, logo }: Props) {
+export default async function StoreLayout({ children }: Props) {
   return (
     <>
       <StoreHeader logo={logo} />
