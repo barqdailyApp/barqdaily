@@ -16,7 +16,7 @@ import PaymentStep from "../payment-step";
 import OrderSumamry from "../order-summary";
 import TimeLocationStep from "../time-location-step";
 
-export default function Cart() {
+export default function Cart({ balance }: { balance: number }) {
   const t = useTranslations("Pages.Cart");
 
   const { products } = useCartStore();
@@ -40,7 +40,11 @@ export default function Cart() {
     </Stack>
   );
 
-  const stepsElements = [<CartStep />, <TimeLocationStep />, <PaymentStep />];
+  const stepsElements = [
+    <CartStep />,
+    <TimeLocationStep />,
+    <PaymentStep balance={balance} />,
+  ];
 
   if (step >= stepsElements.length) return <DoneStep />;
   if (products.length === 0) return <EmptyView />;
