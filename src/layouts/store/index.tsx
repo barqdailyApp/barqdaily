@@ -16,7 +16,7 @@ type Props = {
 export default async function StoreLayout({ children }: Props) {
   return (
     <>
-      <StoreHeader logo={logo} />
+      <StoreHeader />
       <Box
         sx={{
           display: "grid",
