@@ -5,12 +5,9 @@ import {
   unstable_setRequestLocale,
 } from "next-intl/server";
 
-import { Theme } from "@mui/material";
-
 import ThemeProvider from "@/theme";
 import { primaryFont } from "@/theme/typography";
 import { AuthProvider } from "@/auth/context/jwt";
-import { generatePalette } from "@/theme/generate-palette";
 import LocalizationProvider from "@/i18n/localization-provider";
 import { locales, LocaleType, localesSettings } from "@/i18n/config-locale";
 
