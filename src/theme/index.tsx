@@ -4,8 +4,8 @@ import { useMemo } from "react";
 
 import CssBaseline from "@mui/material/CssBaseline";
 import {
-  Theme,
   Palette,
+  createTheme,
   ThemeProvider as MuiThemeProvider,
 } from "@mui/material/styles";
 
@@ -32,18 +32,19 @@ export default function ThemeProvider({ children }: Props) {
 
   const paletteObj = palette(settings.themeMode) as unknown as Palette;
 
-  const theme = useMemo(
-    () =>
-      ({
-        palette: paletteObj,
-        customShadows: customShadows(settings.themeMode, paletteObj),
-        direction: settings.themeDirection,
-        shadows: shadows(settings.themeMode),
-        shape: { borderRadius: 8 },
-        typography,
-      }) as unknown as Theme,
+  const memoizedTheme = useMemo(
+    () => ({
+      palette: paletteObj,
+      customShadows: customShadows(settings.themeMode, paletteObj),
+      direction: settings.themeDirection,
+      shadows: shadows(settings.themeMode),
+      shape: { borderRadius: 8 },
+      typography,
+    }),
     [paletteObj, settings.themeMode, settings.themeDirection],
   );
+
+  const theme = createTheme(memoizedTheme);
 
   theme.components = componentsOverrides(theme);
 
